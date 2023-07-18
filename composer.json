@@ -1,0 +1,19 @@
+{
+    "name": "user/inventario",
+    "description": "Aplicacion de inventario",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Druiz45",
+            "email": "druiz45@itfip.edu.co"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
