@@ -6,12 +6,19 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "authors": [
         {
             "name": "Druiz45",
             "email": "druiz45@itfip.edu.co"
+        },
+        {
+            "name": "Miguel Ruiz",
+            "email": "mruiz27@itfip.edu.co"
         }
     ],
     "minimum-stability": "stable",

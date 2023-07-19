@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'user/inventario',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'e2027aa144eb2ec5c6e58130c53b0824f072f40c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'user/inventario' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'e2027aa144eb2ec5c6e58130c53b0824f072f40c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
