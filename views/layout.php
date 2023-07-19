@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>...</title>
-
+    <title id="titulo-pagina"> Makfrio <?= setTitle() ?> </title>
+    
     <!-- Bootstrap -->
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -31,6 +31,12 @@
     <link href="./assets/build/css/custom.min.css" rel="stylesheet">
   </head>
 
-    <?= $content ?>
+    <?php require_once $content ?>
+
+<?php 
+    echo "<pre>";
+        print_r(setTitle());
+    echo "</pre>";
+?>
   
 </html>

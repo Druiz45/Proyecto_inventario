@@ -17,7 +17,9 @@ class Response{
     public function send(){
         $view = $this->getView();
 
-        $content = file_get_contents(viewPath($view));
+        // $content = file_get_contents(viewPath($view));
+
+        $content = viewPath($view);
 
         require_once viewPath('layout');
 
