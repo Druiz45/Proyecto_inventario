@@ -29,6 +29,8 @@
 
     <!-- Custom Theme Style -->
     <link href="./assets/build/css/custom.min.css" rel="stylesheet">
+  
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
   </head>
 
     <?php require_once $content ?>

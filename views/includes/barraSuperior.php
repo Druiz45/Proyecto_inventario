@@ -6,21 +6,20 @@
         <nav class="nav navbar-nav">
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt="">John Doe
+                    <a href="" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                        <img src="./assets/images/user.png" alt="">USER
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:;"> Profile</a>
-                        <a class="dropdown-item" href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
-                            <span>Settings</span>
+                        <a class="dropdown-item" href="">Perfil</a>
+                        <a class="dropdown-item" href="">
+                            <span>Ajustes</span>
                         </a>
-                        <a class="dropdown-item" href="javascript:;">Help</a>
-                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                        <a class="dropdown-item" href="">Ayuda</a>
+                        <a class="dropdown-item" href=""><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                     </div>
                 </li>
 
-                <li role="presentation" class="nav-item dropdown open">
+                <!-- <li role="presentation" class="nav-item dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green">6</span>
@@ -83,7 +82,7 @@
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </div>
