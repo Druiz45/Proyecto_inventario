@@ -34,11 +34,5 @@
   </head>
 
     <?php require_once $content ?>
-
-<?php 
-    echo "<pre>";
-        print_r(setTitle());
-    echo "</pre>";
-?>
   
 </html>
