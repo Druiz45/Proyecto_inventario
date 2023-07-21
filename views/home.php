@@ -19,12 +19,7 @@
       <!-- /page content -->
 
       <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          Copyright 2023 © All Rights Reserved. MakFrio <a href="">...</a>
-        </div>
-        <div class="clearfix"></div>
-      </footer>
+      <?php require_once("./../views/includes/footer.php"); ?>
       <!-- /footer content -->
     </div>
   </div>

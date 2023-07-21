@@ -71,7 +71,7 @@ if(!function_exists('getUrl')){
             return "inventario/public";
         }
         else {
-            return "public/";
+            return "public";
         }
     }
 
