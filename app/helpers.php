@@ -76,3 +76,14 @@ if(!function_exists('getUrl')){
     }
 
 }
+
+if(!function_exists('getClass')){
+
+    function getClass($class){
+
+        $clase = explode('App\Http\Controllers\\', $class);
+
+        return $clase[1];
+    }
+
+}

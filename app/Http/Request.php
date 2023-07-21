@@ -70,14 +70,16 @@ class Request{
         $controller = $this->getController();
         $method = $this->getMethod();
 
-        $reponse = call_user_func([
-            new $controller,
-            $method
-        ]);
-
-        // $reponse->send();
-
         try{
+
+            if(!method_exists(new $controller, $method)){
+                throw new Exception('Esta ruta no existe');
+            }
+
+            $reponse = call_user_func([
+                new $controller,
+                $method
+            ]);
 
             if(!$reponse instanceof Response){
                 throw new Exception('No se ha encontrado el recurso');
@@ -89,6 +91,8 @@ class Request{
             echo $e->getMessage();
             die;
         }
+
+        // $reponse->send();
     }
 
 }
