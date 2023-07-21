@@ -62,3 +62,17 @@ if(!function_exists('setTitle')){
     }
 
 }
+
+
+if(!function_exists('getUrl')){
+
+    function getUrl($url){
+        if ($url == "localhost" || $url == "127.0.0.1"){
+            return "inventario/public";
+        }
+        else {
+            return "public/";
+        }
+    }
+
+}
