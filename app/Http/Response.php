@@ -21,7 +21,13 @@ class Response{
 
         $content = viewPath($view);
 
-        require_once viewPath('layout');
+        // echo strip_tags(file_get_contents($content));
+
+        if( empty(strip_tags(file_get_contents($content))) ){
+            require_once $content;
+        }else{
+            require_once viewPath('layout');
+        }
 
         // require_once __DIR__ . "./../../views/layout.php";
     }

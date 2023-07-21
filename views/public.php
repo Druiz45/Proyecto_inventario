@@ -39,12 +39,12 @@
             </div>
         </div>
     </div>
-</body>
-<script>
+    <script>
     // const title = JSON.parse('<?php #json_encode($prueba) ?>');
     // console.log(title);
     // window.addEventListener('DOMContentLoaded', () => {
     //     document.getElementById('titulo-pagina').innerText = title;
     // })
-</script>
-<script src="./assets/build/js/index.js" type="module"></script>
+    </script>
+    <script src="./assets/build/js/index.js" type="module"></script>
+</body>
