@@ -56,10 +56,10 @@
             <div class="menu_section">
                 <h3>Secciones</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-users"></i>Provedores<span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-users"></i>Usuarios<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./">Registrar provedor</a></li>
-                            <li><a href="./">Consultar provedores</a></li>
+                            <li><a href="./">Registrar usuario</a></li>
+                            <li><a href="./">Consultar usuarios</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-location-arrow"></i>Inventario<span class="fa fa-chevron-down"></span></a>

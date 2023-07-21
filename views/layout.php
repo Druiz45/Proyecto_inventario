@@ -41,7 +41,7 @@
     <!-- Custom Theme Style -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/custom.min.css" rel="stylesheet">
   
-    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/logo.png" type="image/x-icon">
   </head>
 
     <?php require_once $content ?>
