@@ -10,4 +10,8 @@ class UsuarioController{
         return view('registrarUsuario');
     }
 
+    public function dataFormRegistar(){
+        return view('viewsModels/modelFormRegistar');
+    }
+
 }
