@@ -6,12 +6,11 @@ namespace App\Http\Controllers;
 class UsuarioController{
 
     public function registrar(){
-        // return new Response('home');
         return view('registrarUsuario');
     }
 
-    public function dataFormRegistar(){
-        return view('viewsModels/modelFormRegistar');
+    public function dataFormRegistrar(){
+        return view('viewsModels/modelFormRegistrar');
     }
 
 }

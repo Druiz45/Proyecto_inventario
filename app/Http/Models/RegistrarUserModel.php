@@ -11,7 +11,7 @@ class RegistrarUserModel{
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $param = 1;
+        $param = 3;
 
         $select = $con->prepare("CALL getPerfiles(?)");
         $select->bindParam(1, $param, PDO::PARAM_INT);
