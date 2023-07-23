@@ -77,10 +77,10 @@
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <select class="select2_single form-control" tabindex="-1">
-                                                    <option value="AK">Seleccione el rol del usuario</option>
-                                                    <option value="HI">Hawaii</option>
-                                                    <option value="CA">California</option>
+                                                <select class="select2_single form-control" tabindex="-1" id="select-perfiles">
+                                                    <option value="">Seleccione el rol del usuario</option>
+                                                    <!-- <option value="HI">Hawaii</option>
+                                                    <option value="CA">California</option> -->
                                                 </select>
                                             </div>
                                         </div>
@@ -106,4 +106,8 @@
         </div>
     </div>
     <?php require_once("./../views/includes/scripts.php"); ?>
+    <script>
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
+    </script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
 </body>
