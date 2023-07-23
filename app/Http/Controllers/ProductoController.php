@@ -10,4 +10,9 @@ class ProductoController{
         return view('registrarProducto');
     }
 
+    public function consultar(){
+        // return new Response('home');
+        return view('consultarProducto');
+    }
+
 }

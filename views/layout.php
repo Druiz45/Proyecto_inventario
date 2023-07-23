@@ -10,6 +10,7 @@
     <title id="titulo-pagina"> Makfrio <?= setTitle() ?> </title>
     
     <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -37,6 +38,13 @@
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/custom.min.css" rel="stylesheet">
