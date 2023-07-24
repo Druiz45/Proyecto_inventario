@@ -17,4 +17,8 @@ class UsuarioController{
         return view('viewsModels/modelFormRegistrar');
     }
 
+    public function create(){
+        return view('viewCrud/usuario/create');
+    }
+
 }

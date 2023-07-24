@@ -26,58 +26,58 @@
                                 </div>
                                 <div class="x_content">
                                     <br />
-                                    <form class="form-label-left input_mask align-items-center">
+                                    <form class="form-label-left input_mask align-items-center" id="form-create-user">
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombres">
+                                                <input type="text" class="form-control has-feedback-left" id="nombres" name="nombres" placeholder="Nombres">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Apellidos">
+                                                <input type="text" class="form-control has-feedback-left" id="apellidos" name="apellidos"  placeholder="Apellidos">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Documento">
+                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento"  placeholder="Documento">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="email" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Email">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Celular">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Direccion">
+                                                <input type="email" class="form-control has-feedback-left" id="email" name="email"  placeholder="Email">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Contraseña">
+                                                <input type="text" class="form-control has-feedback-left" id="celular" name="celular"  placeholder="Celular">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Confirmar Contraseña">
+                                                <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion"  placeholder="Direccion">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <select class="select2_single form-control" tabindex="-1" id="select-perfiles">
+                                                <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
+                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
+                                                <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
+                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row align-items-center justify-content-center">
+                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
+                                                <select class="select2_single form-control" tabindex="-1" id="select-perfiles" name="select-perfiles">
                                                     <option value="">Seleccione el rol del usuario</option>
                                                     <!-- <option value="HI">Hawaii</option>
                                                     <option value="CA">California</option> -->

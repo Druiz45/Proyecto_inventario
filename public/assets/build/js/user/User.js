@@ -1,8 +1,9 @@
 export class User{
 
-  constructor(nombre = "") {
-    this.nombre = nombre;
-  }
+  // constructor(nombre = "", apellidos = "", documento = "", email = "", celular = "", direccion = "", pass = "", confirmPass = "") {
+  //   this.nombre = nombre;
+  //   this.apellidos = apellidos;
+  // }
 
     login() {
 
@@ -51,6 +52,24 @@ export class User{
         }
         // select.innerHTML = '';
         select.appendChild(opciones);
+
+      }
+
+      saveUser(url){
+
+        const formCreateUser = document.getElementById('form-create-user');
+        const formData = new FormData(formCreateUser);
+        formCreateUser.addEventListener('submit', (e) =>{
+          e.preventDefault();
+          fetch(`/${url}/usuario/create`,{
+            method: "POST",
+            body: formData
+          })
+          .then(respuesta => respuesta.json())
+          .then(data =>{
+              console.log(data);
+          })
+        });
 
       }
 

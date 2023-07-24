@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Models\RegistrarUserModel;
+use App\Http\Models\UsuarioModel;
 
-$data = new RegistrarUserModel();
+$data = new UsuarioModel();
+
 $data->getPerfiles();
 
 ?>
