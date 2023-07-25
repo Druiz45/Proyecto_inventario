@@ -15,3 +15,5 @@ $usuario = new UsuarioModel(
 );
 
 $usuario->createUser();
+
+?>

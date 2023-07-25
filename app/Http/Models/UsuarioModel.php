@@ -76,7 +76,7 @@ class UsuarioModel{
 
             }
 
-            echo json_encode($_POST);
+            echo json_encode("Usuario registrado exitosamente!");
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
