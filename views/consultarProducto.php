@@ -6,7 +6,6 @@
             <!-- top navigation -->
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
-
             <!-- page content -->
             <div class="right_col" role="main">
             <div class="col-md-12 col-sm-12 ">

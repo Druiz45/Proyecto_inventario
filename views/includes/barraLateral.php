@@ -22,10 +22,10 @@
             <div class="menu_section">
                 <h3>Secciones</h3>
                 <ul class="nav side-menu">
-                    <li><a href=""><i class="fa fa-home"></i>Home</a></li>
+                    <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/home"><i class="fa fa-home"></i>Home</a></li>
                     <li><a><i class="fa fa-openid"></i>Pedidos<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./">Registrar pedido</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/registrar">Registrar pedido</a></li>
                             <li><a href="./">Consultar pedidos</a></li>
                         </ul>
                     </li>
@@ -38,7 +38,7 @@
                     </li>
                     <li><a><i class="fa fa-spinner"></i>Gastos<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./">Registrar gasto</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/registrar">Registrar gasto</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-bars"></i>Ingresos<span class="fa fa-chevron-down"></span></a>
@@ -58,14 +58,14 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-users"></i>Usuarios<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./">Registrar usuario</a></li>
-                            <li><a href="./">Consultar usuarios</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/registrar">Registrar usuario</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/consultar">Consultar usuarios</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-location-arrow"></i>Inventario<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                        <li><a href="./">Registrar producto</a></li>
-                            <li><a href="./">Consultar productos</a></li>
+                        <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/registrar">Registrar producto</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar productos</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-star-half-o"></i>Ventas<span class="fa fa-chevron-down"></span></a>

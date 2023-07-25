@@ -87,4 +87,44 @@ class UsuarioModel{
 
     }
 
+    public function decrypt($message,$encryption_key){
+        $key = hex2bin($encryption_key);
+        $message = base64_decode($message);
+        $nonceSize = openssl_cipher_iv_length('aes-256-ctr');
+        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
+        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
+        $plaintext= openssl_decrypt(
+          $ciphertext,
+          'aes-256-ctr',
+          $key,
+          OPENSSL_RAW_DATA,
+          $nonce
+        );
+        return $plaintext;
+    }
+
+    public function encrypt(){
+        $key = hex2bin($this->getStrPar());
+        $nonceSize = openssl_cipher_iv_length('aes-256-ctr');
+        $nonce = openssl_random_pseudo_bytes($nonceSize);
+        $ciphertext = openssl_encrypt(
+          $this->pass,
+          'aes-256-ctr',
+          $key,
+          OPENSSL_RAW_DATA,
+          $nonce
+          );
+        $this->pass=base64_encode($nonce.$ciphertext);
+    }
+
+    public function getStrPar() {
+        if (strlen($this->documento)%2 == 0) {
+          $strPar = $this->documento."*";
+        }
+        else {
+            $strPar = $this->documento."*?";
+        }
+      return $strPar;
+    }
+
 }
