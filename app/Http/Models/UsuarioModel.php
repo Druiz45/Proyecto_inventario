@@ -127,4 +127,19 @@ class UsuarioModel{
       return $strPar;
     }
 
+    public function validateData(){
+        try {
+            
+            if( !trim($this->nombres) ){
+
+                throw new Exception("Porfavor complete todos los campos");
+
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
 }
