@@ -122,7 +122,7 @@ class UsuarioModel{
           $strPar = $this->documento."*";
         }
         else {
-            $strPar = $this->documento."*?";
+            $strPar = $this->documento."**";
         }
       return $strPar;
     }

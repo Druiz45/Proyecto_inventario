@@ -67,10 +67,52 @@ export class User{
           })
           .then(respuesta => respuesta.json())
           .then(data =>{
-              console.log(data);
+            console.log(data);
               formCreateUser.reset();
           })
         });
+
+      }
+
+      validateFormData(){
+
+        const inputNombre = document.getElementById("nombres");
+        const inputApellido = document.getElementById("apellidos");
+        const inputDocumento = document.getElementById("documento");
+
+        validateName(inputNombre);
+        validateName(inputApellido);
+        validateDoc(inputDocumento);
+        function validateName(input){
+
+          input.addEventListener("keypress", (e) => {
+
+            const tecla = e.key;
+            // const textoIngresado = inputNombre.value;
+            const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/;
+          
+            if (!patron.test(tecla) || !e.key === "Backspace" || !e.key === "Delete") {
+              e.preventDefault();
+            }
+  
+          });
+
+        }
+
+        function validateDoc(input){
+
+          input.addEventListener("keypress", (e) => {
+
+            const tecla = e.key;
+            // const textoIngresado = inputNombre.value;
+            const patron = !/^\d$/;
+          
+            if (!patron.test(tecla) || !e.key === "Backspace" || !e.key === "Delete") {
+              e.preventDefault();
+            }
+  
+          });
+        }
 
       }
 

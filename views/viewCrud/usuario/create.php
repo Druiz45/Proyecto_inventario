@@ -14,6 +14,7 @@ $usuario = new UsuarioModel(
     $_POST['confirmPass'],
 );
 
+$usuario->validateData();
 $usuario->createUser();
 
 ?>
