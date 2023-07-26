@@ -1,5 +1,5 @@
 import { User } from "./user/User.js";
 
-const USER = new User();
+const user = new User();
 
-USER.login(url);
+user.login(url);

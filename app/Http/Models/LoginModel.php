@@ -59,7 +59,6 @@ class LoginModel extends UsuarioModel {
     }
 
     public function iniciarSesion($pass){
-        session_start();
         try {
             
             if ($this->pass!=$pass){
@@ -70,7 +69,7 @@ class LoginModel extends UsuarioModel {
             $_SESSION["pass"]=$this->passEncrypt;
             $_SESSION["user"]=$this->usuario;
             $_SESSION["idUser"]=$this->idUser;
-            echo json_encode("home");
+            echo json_encode(["home"]);
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
