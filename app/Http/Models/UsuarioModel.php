@@ -119,7 +119,7 @@ class UsuarioModel{
 
             $select->closeCursor();
 
-            if(!$select || !$select->rowCount() > 0){
+            if(!$select){
 
                 throw new Exception("Error al consultar los usuarios");
 
