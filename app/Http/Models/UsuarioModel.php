@@ -90,11 +90,13 @@ class UsuarioModel{
     public function getUsers(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
-
+        
+        $a=$_SESSION["idUser"];
         try {
             $param=3;
-            $select = $con->prepare("CALL getUsers(?)");
+            $select = $con->prepare("CALL getUsers(?,?)");
             $select->bindParam(1, $param, PDO::PARAM_INT);
+            $select->bindParam(2, $a, PDO::PARAM_INT);
             $select->execute();
 
             $usuarios=$select->fetchAll(PDO::FETCH_ASSOC);

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
 
@@ -9,8 +12,8 @@
                 <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/logo.png" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
-                <span>Bienvenido</span>
-                <h2>USER</h2>
+                <span>Bienvenido a MakFrio</span>
+                <h2><?= $_SESSION["user"] ?></h2>
             </div>
         </div>
         <!-- /menu profile quick info -->

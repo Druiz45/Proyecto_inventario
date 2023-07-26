@@ -11,13 +11,17 @@ class LoginModel extends UsuarioModel {
     protected $pass;
     protected $email;
     protected $passEncrypt;
+    protected $usuario;
+    protected $idUser;
 
-    public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = ""){
+    public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "", $idUser = ""){
         
         $this->documento = $documento;
         $this->pass = $pass;
         $this->email = $email;
         $this->passEncrypt = $passEncrypt;
+        $this->usuario = $usuario;
+        $this->idUser = $idUser;
 
     }
 
@@ -44,6 +48,8 @@ class LoginModel extends UsuarioModel {
             $this->documento=$dataSesion[0]["documento"];
             $this->passEncrypt=$dataSesion[0]["clave"];
             $this->pass=$dataSesion[0]["clave"];
+            $this->usuario=$dataSesion[0]["usuario"];
+            $this->idUser=$dataSesion[0]["id"];
             $this->decryptPass();
 
         } catch (Exception $e) {
@@ -62,6 +68,8 @@ class LoginModel extends UsuarioModel {
     
             $_SESSION["documento"]=$this->documento;
             $_SESSION["pass"]=$this->passEncrypt;
+            $_SESSION["user"]=$this->usuario;
+            $_SESSION["idUser"]=$this->idUser;
             echo json_encode("home");
 
         } catch (Exception $e) {

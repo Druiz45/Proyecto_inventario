@@ -1,17 +1,15 @@
-<?php 
-
-use App\Http\Models\UsuarioModel;
-$i=1;
-$user=new UsuarioModel();
-$rows=$user->getUsers();
-
-?>
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
 
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
+            <?php 
+              use App\Http\Models\UsuarioModel;
+              $i=1;
+              $user=new UsuarioModel();
+              $rows=$user->getUsers();
+            ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
 
