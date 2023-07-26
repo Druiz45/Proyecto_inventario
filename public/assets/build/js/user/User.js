@@ -91,7 +91,7 @@ export class User{
             // const textoIngresado = inputNombre.value;
             const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/;
           
-            if (!patron.test(tecla) || !e.key === "Backspace" || !e.key === "Delete") {
+            if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete") {
               e.preventDefault();
             }
   
@@ -103,13 +103,15 @@ export class User{
 
           input.addEventListener("keypress", (e) => {
 
-            const tecla = e.key;
-            // const textoIngresado = inputNombre.value;
-            const patron = !/^\d$/;
-          
-            if (!patron.test(tecla) || !e.key === "Backspace" || !e.key === "Delete") {
-              e.preventDefault();
-            }
+            // setTimeout(() => {
+
+              const tecla = e.key;
+              
+              if (isNaN(tecla) ||  tecla.trim() === "") {
+                e.preventDefault();
+              }
+                    
+            // }, 100);
   
           });
         }
