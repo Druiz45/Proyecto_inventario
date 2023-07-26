@@ -78,10 +78,17 @@ export class User{
         const inputNombre = document.getElementById("nombres");
         const inputApellido = document.getElementById("apellidos");
         const inputDocumento = document.getElementById("documento");
+        const inputEmail = document.getElementById("email");
+        const inputCelular = document.getElementById("celular");
+        const inputDireccion = document.getElementById("direccion");
 
         validateName(inputNombre);
         validateName(inputApellido);
         validateDoc(inputDocumento);
+        validateEmail(inputEmail);
+        validatePhone(inputCelular);
+        validateAddress();
+
         function validateName(input){
 
           input.addEventListener("keypress", (e) => {
@@ -113,6 +120,52 @@ export class User{
             // }, 100);
   
           });
+        }
+
+        function validateEmail(input){
+
+          input.addEventListener("keypress", (e) => {
+
+            const tecla = e.key;
+            // const textoIngresado = inputNombre.value;
+            const patron = /^[a-zA-Z0-9._%+-@]$/;
+          
+            if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete") {
+              e.preventDefault();
+            }
+  
+          });
+          
+        }
+
+        function validatePhone(input){
+
+          input.addEventListener("keypress", (e) => {
+
+            const tecla = e.key;
+              
+            if (isNaN(tecla) ||  tecla.trim() === "") {
+              e.preventDefault();
+            }
+  
+          });
+          
+        }
+
+        function validateAddress(input){
+
+          input.addEventListener("keypress", (e) => {
+
+            const tecla = e.key;
+            // const textoIngresado = inputNombre.value;
+            const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s-]+$/;
+          
+            if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete") {
+              e.preventDefault();
+            }
+  
+          });
+
         }
 
       }
