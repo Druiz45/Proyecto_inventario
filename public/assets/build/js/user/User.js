@@ -5,21 +5,20 @@ export class User{
   //   this.apellidos = apellidos;
   // }
 
-    login() {
+    login(url) {
 
         const formLogin = document.getElementById('form-login');
 
-        const formData = new FormData(formLogin);
-
         formLogin.addEventListener('submit', (e) =>{
             e.preventDefault();
-            fetch("./home/user", {
+            const formData = new FormData(formLogin);
+            fetch(`/${url}/index/login`, {
               method: "POST",
               body: formData
             })
             .then(respuesta => respuesta.json())
             .then(data => {
-              console.log(data)
+              window.location.assign(`/${url}/${data}`);
             })
         });
 
@@ -116,8 +115,17 @@ export class User{
 
       }
 
-      logOut() {
-
+      logOut(url) {
+        const logOut = document.getElementById('logOut');
+        logOut.addEventListener('click', (e) =>{
+            e.preventDefault();
+            fetch(`/${url}/usuario/logOut`, {
+            })
+            .then(respuesta => respuesta.json())
+            .then(data => {
+              window.location.assign(`/${url}/${data}`);
+            })
+        });
       }
 
 

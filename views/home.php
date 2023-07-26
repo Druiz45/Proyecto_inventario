@@ -24,4 +24,8 @@
     </div>
   </div>
   <?php require_once("./../views/includes/scripts.php"); ?>
+  <script>
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
+    </script>
+     <script src="./assets/build/js/user/index.js" type="module"></script>
 </body>

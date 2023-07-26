@@ -15,6 +15,7 @@ $usuario = new UsuarioModel(
 );
 
 $usuario->validateData();
+$usuario->encryptPass();
 $usuario->createUser();
 
 ?>

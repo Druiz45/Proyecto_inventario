@@ -9,10 +9,10 @@
                     <form id="form-login">
                         <h1>Inicio de sesion</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Username"/>
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password"/>
+                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password"/>
                         </div>
                         <div>
                             <button class="btn btn-dark" type="submit">Iniciar sesion</button>
@@ -40,11 +40,7 @@
         </div>
     </div>
     <script>
-    // const title = JSON.parse('<?php #json_encode($prueba) ?>');
-    // console.log(title);
-    // window.addEventListener('DOMContentLoaded', () => {
-    //     document.getElementById('titulo-pagina').innerText = title;
-    // })
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="./assets/build/js/index.js" type="module"></script>
 </body>
