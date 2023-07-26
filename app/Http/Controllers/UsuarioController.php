@@ -24,4 +24,8 @@ class UsuarioController{
     public function logOut(){
         return view('viewsModels/modelLogOut');
     }
+
+    public function getUsers(){
+        return view('viewCrud/usuario/read');
+    }
 }
