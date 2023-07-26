@@ -87,12 +87,12 @@ class UsuarioModel{
 
     }
 
-    public function decrypt($message,$encryption_key){
-        $key = hex2bin($encryption_key);
-        $message = base64_decode($message);
+    public function decrypt(){
+        $key = hex2bin($this->getStrPar());
+        $this->pass = base64_decode($this->pass);
         $nonceSize = openssl_cipher_iv_length('aes-256-ctr');
-        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
-        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
+        $nonce = mb_substr($this->pass, 0, $nonceSize, '8bit');
+        $ciphertext = mb_substr($this->pass, $nonceSize, null, '8bit');
         $plaintext= openssl_decrypt(
           $ciphertext,
           'aes-256-ctr',
@@ -100,10 +100,10 @@ class UsuarioModel{
           OPENSSL_RAW_DATA,
           $nonce
         );
-        return $plaintext;
+        $this->pass=$plaintext;
     }
 
-    public function encrypt(){
+    public function encryptPass(){
         $key = hex2bin($this->getStrPar());
         $nonceSize = openssl_cipher_iv_length('aes-256-ctr');
         $nonce = openssl_random_pseudo_bytes($nonceSize);
@@ -114,15 +114,21 @@ class UsuarioModel{
           OPENSSL_RAW_DATA,
           $nonce
           );
-        $this->pass=base64_encode($nonce.$ciphertext);
+       $this->pass=base64_encode($nonce.$ciphertext);
+    }
+
+    public function logOut(){
+        session_start();
+        session_destroy();
+        echo json_encode("./");
     }
 
     public function getStrPar() {
-        if (strlen($this->documento)%2 == 0) {
-          $strPar = $this->documento."*";
+        if (strlen($this->documento)%2 != 0) {
+          $strPar = $this->documento."a";
         }
         else {
-            $strPar = $this->documento."**";
+            $strPar = $this->documento."ab";
         }
       return $strPar;
     }

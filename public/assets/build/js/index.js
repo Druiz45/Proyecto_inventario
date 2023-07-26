@@ -2,4 +2,4 @@ import { User } from "./user/User.js";
 
 const USER = new User();
 
-USER.login();
+USER.login(url);

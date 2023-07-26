@@ -21,4 +21,7 @@ class UsuarioController{
         return view('viewCrud/usuario/create');
     }
 
+    public function logOut(){
+        return view('viewsModels/modelLogOut');
+    }
 }

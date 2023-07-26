@@ -15,7 +15,7 @@
                             <span>Ajustes</span>
                         </a>
                         <a class="dropdown-item" href="">Ayuda</a>
-                        <a class="dropdown-item" href=""><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
+                        <a class="dropdown-item" id="logOut"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesion</a>
                     </div>
                 </li>
 

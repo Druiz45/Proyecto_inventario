@@ -10,4 +10,9 @@ class IndexController{
         return view('public');
     }
 
+    public function login(){
+        // return new Response('public');
+        return view('viewsModels/modelLogin');
+    }
+
 }
