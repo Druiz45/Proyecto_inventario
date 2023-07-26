@@ -63,7 +63,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row align-items-center justify-content-center">
+                                        <!-- <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
@@ -73,7 +73,7 @@
                                                 <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">

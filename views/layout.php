@@ -45,6 +45,7 @@
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/sweetAlert.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/custom.min.css" rel="stylesheet">

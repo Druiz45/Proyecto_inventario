@@ -10,8 +10,8 @@ $usuario = new UsuarioModel(
     $_POST['email'],
     $_POST['celular'],
     $_POST['direccion'],
-    $_POST['pass'],
-    $_POST['confirmPass'],
+    // $_POST['pass'],
+    // $_POST['confirmPass'],
 );
 
 $usuario->validateData();

@@ -15,9 +15,9 @@ class UsuarioModel{
     protected $celular;
     protected $direccion;
     protected $pass;
-    protected $confirmPass;
+    // protected $confirmPass;
 
-    public function __construct($nombres = "", $apellidos = "", $documento = "", $perfil = "", $email = "", $celular = "", $direccion = "", $pass = "", $confirmPass = ""){
+    public function __construct($nombres = "", $apellidos = "", $documento = "", $perfil = "", $email = "", $celular = "", $direccion = ""){
         
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -26,8 +26,8 @@ class UsuarioModel{
         $this->email = $email;
         $this->celular = $celular;
         $this->direccion = $direccion;
-        $this->pass = $pass;
-        $this->confirmPass = $confirmPass;
+        $this->pass = $documento;
+        // $this->confirmPass = $confirmPass;
 
     }
 
@@ -48,6 +48,22 @@ class UsuarioModel{
 
         echo json_encode($registros);
 
+    }
+
+    public function validateData(){
+        try {
+            
+            if( !trim($this->nombres) || !trim($this->apellidos) || !trim($this->documento) || !trim($this->perfil) 
+                || !trim($this->email) || !trim($this->celular) || !trim($this->direccion)){
+
+                throw new Exception("Porfavor complete todos los campos");
+
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
     }
 
     public function createUser(){
@@ -158,21 +174,6 @@ class UsuarioModel{
             $strPar = $this->documento."ab";
         }
       return $strPar;
-    }
-
-    public function validateData(){
-        try {
-            
-            if( !trim($this->nombres) ){
-
-                throw new Exception("Porfavor complete todos los campos");
-
-            }
-
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
     }
 
 }
