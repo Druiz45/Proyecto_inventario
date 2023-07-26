@@ -67,6 +67,11 @@ export class User{
           .then(respuesta => respuesta.json())
           .then(data =>{
             console.log(data);
+            Swal.fire(
+              'Good job!',
+              'You clicked the button!',
+              'success'
+            )
               formCreateUser.reset();
           })
         });
@@ -87,7 +92,7 @@ export class User{
         validateDoc(inputDocumento);
         validateEmail(inputEmail);
         validatePhone(inputCelular);
-        validateAddress();
+        validateAddress(inputDireccion);
 
         function validateName(input){
 

@@ -73,3 +73,4 @@
 
  <!-- Custom Theme Scripts -->
  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/custom.min.js"></script>
+ <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/sweetAlert.js"></script>
