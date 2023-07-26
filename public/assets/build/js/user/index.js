@@ -6,3 +6,7 @@ user.getDataFormCreate(url);
 user.validateFormData();
 user.saveUser(url);
 user.logOut(url);
+
+setTimeout(function() {
+    console.clear();
+  }, 10);
