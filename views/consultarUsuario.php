@@ -1,3 +1,11 @@
+<?php 
+
+use App\Http\Models\UsuarioModel;
+$i=1;
+$user=new UsuarioModel();
+$rows=$user->getUsers();
+
+?>
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
@@ -44,37 +52,28 @@
                           <th>Direccion</th>
                           <th>Empresa</th>
                           <th>Nit</th>
+                          <th>Pefil</th>
                           <th>Ultima sesion</th>
                           <th>Fecha de creacion</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>Edinburgh</td>
-                        </tr>
-                        <tr>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                          <td>Edinburgh</td>
-                        </tr>
+                      <tbody id="tbody">
+                        <?php foreach($rows as $row): ?>
+                          <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= $row["nombres"] ?></td>
+                            <td><?= $row["apellidos"] ?></td>
+                            <td><?= $row["documento"] ?></td>
+                            <td><?= $row["telefono"] ?></td>
+                            <td><?= $row["email"] ?></td>
+                            <td><?= $row["direccion"] ?></td>
+                            <td><?= $row["empresa"] == null ? "No Aplica": $row["empresa"] ?></td>
+                            <td><?= $row["nit"] == null ? "No Aplica": $row["nit"] ?></td>
+                            <td><?= $row["perfil"] ?></td>
+                            <td><?= $row["ultimoLog"] == null ? "Nunca": $row["ultimoLog"] ?></td>
+                            <td><?= $row["fecha"] ?></td>
+                          </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                   </div>
@@ -92,4 +91,8 @@
         </div>
     </div>
     <?php require_once("./../views/includes/scripts.php"); ?>
+    <script>
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
+    </script>
+     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
 </body>

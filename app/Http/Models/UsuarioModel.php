@@ -87,7 +87,34 @@ class UsuarioModel{
 
     }
 
-    public function decrypt(){
+    public function getUsers(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+            $param=3;
+            $select = $con->prepare("CALL getUsers(?)");
+            $select->bindParam(1, $param, PDO::PARAM_INT);
+            $select->execute();
+
+            $usuarios=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+
+                throw new Exception("Error al consultar los usuarios");
+
+            }
+            return ($usuarios);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function decryptPass(){
         $key = hex2bin($this->getStrPar());
         $this->pass = base64_decode($this->pass);
         $nonceSize = openssl_cipher_iv_length('aes-256-ctr');

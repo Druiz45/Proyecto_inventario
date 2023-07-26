@@ -44,7 +44,7 @@ class LoginModel extends UsuarioModel {
             $this->documento=$dataSesion[0]["documento"];
             $this->passEncrypt=$dataSesion[0]["clave"];
             $this->pass=$dataSesion[0]["clave"];
-            $this->decrypt();
+            $this->decryptPass();
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());

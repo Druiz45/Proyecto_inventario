@@ -183,6 +183,37 @@ export class User{
         });
       }
 
-
+      setUsers() {
+        const tbody = document.getElementById('tbody');
+        window.addEventListener('DOMContentLoaded', () => {
+          fetch(`/${url}/usuario/getUsers`, {
+          })
+            .then(respuesta => respuesta.json())
+            .then(data => {
+              let i = 0;
+              const tr = document.createElement('tr');
+              for (const usuario of data) {
+                // const td = document.createElement('td');
+                // td.textContent = usuario.nombres;
+                // tr.appendChild(td);
+                i++;
+                tbody.innerHTML+=`<tr>
+                  <td>${i}</td>
+                  <td>${usuario.nombres}</td>
+                  <td>${usuario.apellidos}</td>
+                  <td>${usuario.documento}</td>
+                  <td>${usuario.telefono}</td>
+                  <td>${usuario.email}</td>
+                  <td>${usuario.direccion}</td>
+                  <td>${usuario.empresa}</td>
+                  <td>${usuario.nit}</td>
+                  <td>${usuario.ultimoLog}</td>
+                  <td>${usuario.fecha}</td>
+                </tr>`;
+              }
+              tbody.appendChild(tr);
+            })
+        });
+      }
 
 }
