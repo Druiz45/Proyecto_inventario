@@ -20,8 +20,8 @@ export class User {
         .then(data => {
           if (Array.isArray(data)) {
             window.location.assign(`/${url}/${data[0]}`);
-          }else if(data == "Porfavor Complete los campos"){
-            
+          } else if (data == "Porfavor Complete los campos") {
+
             Swal.fire({
               icon: 'warning',
               title: data,
@@ -85,21 +85,21 @@ export class User {
         })
           .then(respuesta => respuesta.json())
           .then(data => {
-            if(data == "Usuario registrado exitosamente!"){
+            if (data == "Usuario registrado exitosamente!") {
               Swal.fire({
                 icon: 'success',
                 title: data,
                 // text: data,
               })
               formCreateUser.reset();
-            }else if(data == "ERROR AL REGISTAR EL USUARIO"){
+            } else if (data == "ERROR AL REGISTAR EL USUARIO") {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: data,
               })
               formCreateUser.reset();
-            }else{
+            } else {
               Swal.fire({
                 icon: 'warning',
                 title: data,
@@ -155,7 +155,9 @@ export class User {
 
           const tecla = e.key;
 
-          if (isNaN(tecla) || tecla.trim() === "") {
+          const docIngresado = input.value;
+
+          if (isNaN(tecla) || tecla.trim() === "" || docIngresado.length == 12) {
             e.preventDefault();
           }
 
@@ -170,9 +172,11 @@ export class User {
 
           const tecla = e.key;
           // const textoIngresado = inputNombre.value;
-          const patron = /^[a-zA-Z0-9._%+-@]$/;
+          const patron = /^[a-zA-Z0-9._%+-@]+$/;
 
-          if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete") {
+          const emailIngresado = input.value;
+
+          if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete" || emailIngresado.length > 100) {
             e.preventDefault();
           }
 
@@ -186,7 +190,9 @@ export class User {
 
           const tecla = e.key;
 
-          if (isNaN(tecla) || tecla.trim() === "") {
+          const celularIngresado = input.value;
+
+          if (isNaN(tecla) || tecla.trim() === "" || celularIngresado.length == 10) {
             e.preventDefault();
           }
 
@@ -200,9 +206,11 @@ export class User {
 
           const tecla = e.key;
           // const textoIngresado = inputNombre.value;
-          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s-]+$/;
+          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s0-9-]+$/;
 
-          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete") {
+          const direccionIngresada = input.value;
+
+          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || direccionIngresada.length == 100) {
             e.preventDefault();
           }
 
@@ -217,12 +225,26 @@ export class User {
     const logOut = document.getElementById('logOut');
     logOut.addEventListener('click', (e) => {
       e.preventDefault();
-      fetch(`/${url}/usuario/logOut`, {
+      Swal.fire({
+        title: '¿Esta seguro de que desea cerrar sesion?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Si',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`/${url}/usuario/logOut`, {
+
+          })
+          .then(respuesta => respuesta.json())
+          .then(data => {
+              window.location.assign(`/${url}/${data}`);
+            })
+        }
       })
-        .then(respuesta => respuesta.json())
-        .then(data => {
-          window.location.assign(`/${url}/${data}`);
-        })
     });
   }
 

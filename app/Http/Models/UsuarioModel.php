@@ -82,6 +82,40 @@ class UsuarioModel{
 
             }
 
+            if( !filter_var($this->email, FILTER_VALIDATE_EMAIL) ){
+
+                throw new Exception("Este correo no es valido");
+
+            }
+
+            if(strlen($this->email) > 100) {
+                throw new Exception("El correo electrónico supera los 100 caracteres permitidos.");
+            }
+
+            $pattern = "/^[0-9]{10,10}+$/";
+
+            if( !preg_match($pattern, trim($this->celular)) ){
+
+                throw new Exception("El teléfono contiene caracteres no numéricos");
+
+            }
+
+            $pattern = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s0-9-]{1,100}+$/";
+
+            if( !preg_match($pattern, trim($this->direccion)) ){
+
+                throw new Exception("La direccion contine caracteres no permitidos");
+
+            }
+
+            $pattern = "/^[0-9]{1,1}+$/";
+
+            if( !preg_match($pattern, trim($this->perfil)) ){
+
+                throw new Exception("El perfil seleccionado para este usuario no es valido");
+
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
