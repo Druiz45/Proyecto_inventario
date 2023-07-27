@@ -28,4 +28,8 @@ class UsuarioController{
     public function getUsers(){
         return view('viewCrud/usuario/read');
     }
+
+    public function perfil(){
+        return view('perfil');
+    }
 }

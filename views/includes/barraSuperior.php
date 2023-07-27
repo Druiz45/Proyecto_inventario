@@ -10,7 +10,7 @@
                         <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/user.png" alt=""><?= $_SESSION["user"] ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="">Perfil</a>
+                        <a class="dropdown-item" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/perfil">Perfil</a>
                         <a class="dropdown-item" href="">
                             <span>Ajustes</span>
                         </a>
