@@ -26,10 +26,17 @@ class LoginModel extends UsuarioModel {
     }
 
     public function getDataSesion(){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
 
         try {
+
+            if(!trim($_POST['email']) && !trim($_POST['pass'])){
+
+                throw new Exception("Porfavor Complete los campos");
+
+            }
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
             
             $select = $con->prepare("CALL getDataSesion(?)");
             $select->bindParam(1, $this->email, PDO::PARAM_STR);

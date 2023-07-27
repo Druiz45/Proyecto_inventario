@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/sweetAlert.js"></script>
     <script>
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>

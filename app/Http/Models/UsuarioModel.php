@@ -60,6 +60,28 @@ class UsuarioModel{
 
             }
 
+            $pattern = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{3,50}+$/";
+
+            if( !preg_match($pattern, trim($this->nombres)) ){
+
+                throw new Exception("Los nombres deben de contener minimo 3 y maximo 50 caracteres, no se permiten numeros o caracteres especiales");
+
+            }
+
+            if( !preg_match($pattern, trim($this->apellidos)) ){
+
+                throw new Exception("Los apellidos deben de contener minimo 3 y maximo 50 caracteres, no se permiten numeros o caracteres especiales");
+
+            }
+
+            $pattern = "/^[0-9]{6,12}+$/";
+
+            if( !preg_match($pattern, trim($this->documento)) ){
+
+                throw new Exception("Los documento deben de contener solo numeros, un minimo de 6 y maximo 12");
+
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

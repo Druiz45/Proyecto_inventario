@@ -20,9 +20,21 @@ export class User {
         .then(data => {
           if (Array.isArray(data)) {
             window.location.assign(`/${url}/${data[0]}`);
+          }else if(data == "Porfavor Complete los campos"){
+            
+            Swal.fire({
+              icon: 'warning',
+              title: data,
+              // text: data,
+            })
+
           }
           else {
-            alert(data);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: data,
+            })
           }
         })
     });
@@ -73,13 +85,27 @@ export class User {
         })
           .then(respuesta => respuesta.json())
           .then(data => {
-            console.log(data);
-            Swal.fire(
-              'Good job!',
-              'You clicked the button!',
-              'success'
-            )
-            formCreateUser.reset();
+            if(data == "Usuario registrado exitosamente!"){
+              Swal.fire({
+                icon: 'success',
+                title: data,
+                // text: data,
+              })
+              formCreateUser.reset();
+            }else if(data == "ERROR AL REGISTAR EL USUARIO"){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data,
+              })
+              formCreateUser.reset();
+            }else{
+              Swal.fire({
+                icon: 'warning',
+                title: data,
+                // text: data,
+              })
+            }
           })
       });
     }
@@ -109,11 +135,12 @@ export class User {
         input.addEventListener("keypress", (e) => {
 
           const tecla = e.key;
-          // const textoIngresado = inputNombre.value;
-          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s-]+$/;
+          const textoIngresado = input.value;
+          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
-          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete") {
+          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || textoIngresado.length == 50) {
             e.preventDefault();
+            input.value = textoIngresado.substring(0, 50);
           }
 
         });
