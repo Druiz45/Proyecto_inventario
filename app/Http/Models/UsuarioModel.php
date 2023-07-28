@@ -208,12 +208,17 @@ class UsuarioModel{
             $update->bindParam(7, $this->direccion, PDO::PARAM_STR);
             $update->execute();
 
-            if(!$update || !$update->rowCount() > 0){
-                $update->closeCursor();
+            $update->closeCursor();
+
+            if(!$update){
                 throw new Exception("Ha ocurrido un error al intentar actualizar");
             }
-    
-            $update->closeCursor();
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se han realizado cambios");
+            }
+
+            $_SESSION['user'] = $this->nombres;
     
             echo json_encode("Sus datos se han actualizado corretamente!");
             

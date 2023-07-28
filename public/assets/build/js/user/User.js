@@ -64,7 +64,7 @@ export class User {
       })
         .then(respuesta => respuesta.json())
         .then(data => {
-          console.log(data);
+          // console.log(data);
           this.setDataFormUpdate(data);
         })
     });
@@ -165,6 +165,7 @@ export class User {
                 title: data,
                 // text: data,
               })
+              document.getElementById('span-perfil').innerText = form.get('nombres');
               // formCreateUser.reset();
             } else if (data == "Ha ocurrido un error al intentar actualizar") {
               Swal.fire({
