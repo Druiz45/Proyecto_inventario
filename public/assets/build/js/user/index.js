@@ -8,6 +8,6 @@ user.saveUser(url);
 user.logOut(url);
 user.getDataFormUpdate(url);
 
-setTimeout(function() {
-    console.clear();
-  }, 10);
+// setTimeout(function() {
+//     console.clear();
+//   }, 10);

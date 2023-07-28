@@ -15,4 +15,14 @@ class ProductoController{
         return view('consultarProducto');
     }
 
+    public function save(){
+        // return new Response('home');
+        return view('viewCrud/producto/save');
+    }
+
+    public function getCategorias(){
+        // return new Response('home');
+        return view('viewsModels/modelCategoria');
+    }
+
 }

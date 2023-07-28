@@ -17,27 +17,26 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Nuevo Producto<small>Informacion del producto</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <br />
-                                    <form class="form-label-left input_mask">
+                    <form class="form-label-left input_mask" id="formProducto">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Nuevo Producto<small>Informacion del producto</small></h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
+
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre de producto">
+                                                <input type="text" class="form-control has-feedback-left" id="producto" name="producto" placeholder="Nombre de producto">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
-                                                <select class="select2_single form-control" tabindex="-1">
-                                                    <option value="AK">Alaska</option>
-                                                    <option value="HI">Hawaii</option>
-                                                    <option value="CA">California</option>
+                                                <select class="select2_single form-control" id="categoria" name="categoria" tabindex="-1">
+                                                    <option value="">Seleccione la Categoria</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -53,34 +52,35 @@
                                                 <button type="submit" class="btn btn-success">Registrar Producto</button>
                                             </div>
                                         </div>
-                                    </form>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Producto<small>Imagen del producto</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="form-group row">
-                                        <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                            <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/user.png" width="375" height="260">
-                                        </div>
+                            <div class="col-md-4">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Producto<small>Imagen del producto</small></h2>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="ln_solid">
-                                        <br>
-                                        <div class="form-group">
-                                            <div class="col-md-12 col-sm-12">
-                                                <textarea class="resizable_textarea form-control" placeholder="Descripcion..."></textarea>
+                                    <div class="x_content">
+                                        <div class="form-group row">
+                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
+                                                <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/user.png" width="300" height="200">
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid">
+                                            <br>
+                                            <div class="form-group">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <textarea class="resizable_textarea form-control" id="descripcion" name="descripcion" placeholder="Descripcion..."></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- /page content -->
@@ -95,4 +95,5 @@
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/index.js" type="module"></script>
 </body>

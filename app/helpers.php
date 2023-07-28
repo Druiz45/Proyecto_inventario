@@ -88,36 +88,24 @@ if(!function_exists('getClass')){
 
 }
 
-if(!function_exists('verificarLogin')){
-    function verificarLogin(){
-        try {
-            
-            if (!isset($_SESSION["idUser"])){
-                throw new Exception();
-            }
-
-        } catch (Exception) {
+if(!function_exists('validateLogin')){
+    function validateLogin(){
+        
+        if (!isset($_SESSION["idUser"])){
             header("Location: /".getUrl($_SERVER['SERVER_NAME'])."");
             die;
         }
-        
-    }
 
+    }
 }
 
-if(!function_exists('verificarSesion')){
-    function verificarSesion(){
-        try {
-            
-            if (isset($_SESSION["idUser"])){
-                throw new Exception();
-            }
-
-        } catch (Exception) {
+if(!function_exists('validateLogOut')){
+    function validateLogOut(){
+         
+        if (isset($_SESSION["idUser"])){
             header("Location: ./home");
             die;
         }
         
     }
-
 }
