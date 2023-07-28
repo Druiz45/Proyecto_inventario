@@ -81,10 +81,4 @@
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/index.js" type="module"></script>
-    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/prueba.js"></script>
-    <!-- <script>
-      function mifuncion(id){
-        console.log(id);
-      }
-    </script> -->
 </body>

@@ -5,7 +5,7 @@ export class Producto {
         formProducto.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(formProducto);
-            fetch(`/${url}/producto/save`, {
+            fetch(`/${url}/producto/create`, {
                 method: "POST",
                 body: formData
             })
@@ -137,6 +137,10 @@ export class Producto {
         //   }
 
         }
+
+    }
+
+    mifuncion(){
 
     }
 
