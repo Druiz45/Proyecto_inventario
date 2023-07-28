@@ -5,9 +5,9 @@ const producto = new Producto();
 producto.getCategorias(url);
 producto.validateFormData();
 producto.saveProducto(url);
-producto.mifuncion();
+// producto.mifuncion();
 
-// setTimeout(function() {
-//     console.clear();
-//   }, 10);
+setTimeout(function() {
+    console.clear();
+  }, 10);
 

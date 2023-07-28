@@ -2,56 +2,62 @@ export class Producto {
 
     saveProducto(url) {
         const formProducto = document.getElementById('formProducto');
-        formProducto.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(formProducto);
-            fetch(`/${url}/producto/save`, {
-                method: "POST",
-                body: formData
-            })
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    if (Array.isArray(data)) {
-                        Swal.fire({
-                            icon: `${data[1]}`,
-                            title: `${data[0]}`,
-                            confirmButtonText: 'Aceptar',
-                            text: ``,
-                        })
+        if(formProducto){
 
-                        formProducto.reset();
-                    }
-                    else if(data == "Error al registrar producto"){
-                        Swal.fire({
-                            icon: `error`,
-                            title: `${data}`,
-                            // text: ``,
-                        })
-                    }
-                    else{
-                        Swal.fire({
-                            icon: `warning`,
-                            title: `${data}`,
-                            // text: ``,
-                        })
-                    }
+            formProducto.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(formProducto);
+                fetch(`/${url}/producto/create`, {
+                    method: "POST",
+                    body: formData
                 })
-        });
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            Swal.fire({
+                                icon: `${data[1]}`,
+                                title: `${data[0]}`,
+                                confirmButtonText: 'Aceptar',
+                                text: ``,
+                            })
+    
+                            formProducto.reset();
+                        }
+                        else if(data == "Error al registrar producto"){
+                            Swal.fire({
+                                icon: `error`,
+                                title: `${data}`,
+                                // text: ``,
+                            })
+                        }
+                        else{
+                            Swal.fire({
+                                icon: `warning`,
+                                title: `${data}`,
+                                // text: ``,
+                            })
+                        }
+                    })
+            });
+
+        }
 
     }
 
     getCategorias(url) {
         const categoria = document.getElementById("categoria");
-        window.addEventListener('DOMContentLoaded', () => {
-            fetch(`/${url}/producto/getCategorias`, {
-            })
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    for (const info of data) {
-                        categoria.innerHTML += `<option value="${info.id}">${info.categoria}</option>`;
-                    }
+        if(categoria){
+            window.addEventListener('DOMContentLoaded', () => {
+                fetch(`/${url}/producto/getCategorias`, {
                 })
-        });
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        for (const info of data) {
+                            categoria.innerHTML += `<option value="${info.id}">${info.categoria}</option>`;
+                        }
+                    })
+            });
+        }
     }
 
     validateFormData(){
