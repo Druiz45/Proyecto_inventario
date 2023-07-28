@@ -22,6 +22,5 @@
             "email": "mruiz27@itfip.edu.co"
         }
     ],
-    "minimum-stability": "stable",
-    "require": {}
+    "minimum-stability": "stable"
 }

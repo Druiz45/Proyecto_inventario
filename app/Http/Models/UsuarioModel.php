@@ -163,12 +163,12 @@ class UsuarioModel{
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
-        $a=$_SESSION["idUser"];
+        $idUser=$_SESSION["idUser"];
         try {
             $param=3;
             $select = $con->prepare("CALL getUsers(?,?)");
             $select->bindParam(1, $param, PDO::PARAM_INT);
-            $select->bindParam(2, $a, PDO::PARAM_INT);
+            $select->bindParam(2, $idUser, PDO::PARAM_INT);
             $select->execute();
 
             $usuarios=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -205,10 +205,10 @@ class UsuarioModel{
             $update->bindParam(4, $this->apellidos, PDO::PARAM_STR);
             $update->bindParam(5, $this->email, PDO::PARAM_STR);
             $update->bindParam(6, $this->celular, PDO::PARAM_STR);
-            $update->bindParam(7, $this->direccion, PDO::PARAM_INT);
+            $update->bindParam(7, $this->direccion, PDO::PARAM_STR);
             $update->execute();
 
-            if(!$update || $update->rowCount() > 0){
+            if(!$update || !$update->rowCount() > 0){
                 $update->closeCursor();
                 throw new Exception("Ha ocurrido un error al intentar actualizar");
             }

@@ -50,11 +50,11 @@
                       </li>
 
                       <li>
-                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-ultimo-log">Ultimo inicio de sesion:</span>
+                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-ultimo-log">Ultimo inicio de sesion: <?= getFecha($_SESSION['ultimoLog']) ?></span>
                       </li>
 
                       <li>
-                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-fecha-creacion">Fecha de creacion:</span>
+                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-fecha-creacion">Fecha de creacion: <?= getFecha($_SESSION['fechaCreacion']) ?></span>
                       </li>
                     </ul>
 

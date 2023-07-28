@@ -70,8 +70,8 @@
                             <td><?= $row["nit"] == null ? "No Aplica": $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
                             <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-                            <td><?= $row["ultimoLog"] == null ? "Nunca": $row["ultimoLog"] ?></td>
-                            <td><?= $row["fecha"] ?></td>
+                            <td><?= $row["ultimoLog"] == null ? "Nunca": getFecha($row["ultimoLog"]) ?></td>
+                            <td><?= getFecha($row["fecha"]) ?></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>

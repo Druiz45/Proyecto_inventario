@@ -14,9 +14,11 @@ class LoginModel extends UsuarioModel {
     protected $usuario;
     protected $idUser;
     protected $idPerfil;
+    protected $ultimoLog;
+    protected $fechaCreacion;
 
     public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "",
-    $idUser = "", $idPerfil = "",){
+    $idUser = "", $idPerfil = "", $ultimoLog = "", $fechaCreacion = ""){
         
         $this->documento = $documento;
         $this->pass = $pass;
@@ -25,6 +27,8 @@ class LoginModel extends UsuarioModel {
         $this->usuario = $usuario;
         $this->idUser = $idUser;
         $this->idPerfil = $idPerfil;
+        $this->ultimoLog = $ultimoLog;
+        $this->fechaCreacion = $fechaCreacion;
 
     }
 
@@ -61,6 +65,8 @@ class LoginModel extends UsuarioModel {
             $this->usuario=$dataSesion[0]["usuario"];
             $this->idUser=$dataSesion[0]["id"];
             $this->idPerfil=$dataSesion[0]["idPerfil"];
+            $this->ultimoLog=$dataSesion[0]['ultimo_log'];
+            $this->fechaCreacion=$dataSesion[0]['fecha_creacion'];
             $this->decryptPass();
 
         } catch (Exception $e) {
@@ -105,6 +111,8 @@ class LoginModel extends UsuarioModel {
             $_SESSION["user"]=$this->usuario;
             $_SESSION["idUser"]=$this->idUser;
             $_SESSION["idPerfil"]=$this->idPerfil;
+            $_SESSION['ultimoLog']=$this->ultimoLog;
+            $_SESSION['fechaCreacion']=$this->fechaCreacion;
 
             $this->setUltimoLog();
 

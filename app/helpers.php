@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Response;
+use Carbon\Carbon;
 
 if(!function_exists('view')){
 
@@ -84,6 +85,22 @@ if(!function_exists('getClass')){
         $clase = explode('App\Http\Controllers\\', $class);
 
         return $clase[1];
+    }
+
+}
+
+if(!function_exists('getFecha')){
+
+    function getFecha($date){
+
+        date_default_timezone_set('America/Bogota');
+        setlocale(LC_TIME, "spanish");
+
+        // setlocale(LC_TIME, 'es_ES.UTF-8');
+        $fechaObjeto = strtotime($date);
+        $fechaFormateada = utf8_encode(strftime('%A %d de %B de %Y a las %I:%M %p', $fechaObjeto));
+        
+        return $fechaFormateada;
     }
 
 }

@@ -144,10 +144,55 @@ export class User {
 
   }
 
+  updateUser(url){
+
+    const formUpdateUser = document.getElementById('form-update-user');
+
+    if(formUpdateUser){
+
+      formUpdateUser.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = new FormData(formUpdateUser);
+        fetch(`/${url}/usuario/update`, {
+          method: "POST",
+          body: form
+        })
+          .then(respuesta => respuesta.json())
+          .then(data => {
+            if (data == "Sus datos se han actualizado corretamente!") {
+              Swal.fire({
+                icon: 'success',
+                title: data,
+                // text: data,
+              })
+              // formCreateUser.reset();
+            } else if (data == "Ha ocurrido un error al intentar actualizar") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data,
+              })
+              // formCreateUser.reset();
+            } else {
+              Swal.fire({
+                icon: 'warning',
+                title: data,
+                // text: data,
+              })
+              // console.log(data);
+            }
+          })
+      });
+      
+    }
+
+  }
+
   validateFormData() {
     const formCreateUser = document.getElementById('form-create-user');
+    const formUpdateUser = document.getElementById('form-update-user');
 
-    if (formCreateUser) {
+    if (formCreateUser || formUpdateUser) {
       const inputNombre = document.getElementById("nombres");
       const inputApellido = document.getElementById("apellidos");
       const inputDocumento = document.getElementById("documento");
