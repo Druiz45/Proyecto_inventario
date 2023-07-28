@@ -18,13 +18,19 @@ export class Producto {
                             confirmButtonText: 'Aceptar',
                             text: ``,
                         })
-                        const producto = document.getElementById("producto").value = "";
-                        categoria.value="";
-                        const descripcion = document.getElementById("descripcion").value = "";
+
+                        formProducto.reset();
                     }
-                    else {
+                    else if(data == "Error al registrar producto"){
                         Swal.fire({
                             icon: `error`,
+                            title: `${data}`,
+                            // text: ``,
+                        })
+                    }
+                    else{
+                        Swal.fire({
+                            icon: `warning`,
                             title: `${data}`,
                             // text: ``,
                         })
@@ -46,6 +52,92 @@ export class Producto {
                     }
                 })
         });
+    }
+
+    validateFormData(){
+
+        const formCreateProduct = document.getElementById('formProducto');
+    
+        if (formCreateProduct) {
+          const inputProducto = document.getElementById("producto");
+          const inputDescricion = document.getElementById("descripcion");
+    
+          validateNameProducto(inputProducto);
+          validateDescriptionProduct(inputDescricion);
+    
+          function validateNameProducto(input) {
+    
+            input.addEventListener("keypress", (e) => {
+    
+            //   const tecla = e.key;
+              const textoIngresado = input.value;
+            //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    
+              if (textoIngresado.length == 25) {
+                e.preventDefault();
+                input.value = textoIngresado.substring(0, 25);
+              }
+    
+            });
+    
+          }
+
+          function validateDescriptionProduct(input) {
+    
+            input.addEventListener("keypress", (e) => {
+    
+            //   const tecla = e.key;
+              const textoIngresado = input.value;
+            //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    
+              if (textoIngresado.length == 100) {
+                e.preventDefault();
+                input.value = textoIngresado.substring(0, 100);
+              }
+    
+            });
+    
+          }
+    
+        //   function validateDoc(input) {
+    
+        //     input.addEventListener("keypress", (e) => {
+    
+        //       // setTimeout(() => {
+    
+        //       const tecla = e.key;
+    
+        //       const docIngresado = input.value;
+    
+        //       if (isNaN(tecla) || tecla.trim() === "" || docIngresado.length == 12) {
+        //         e.preventDefault();
+        //       }
+    
+        //       // }, 100);
+    
+        //     });
+        //   }
+    
+        //   function validateEmail(input) {
+    
+        //     input.addEventListener("keypress", (e) => {
+    
+        //       const tecla = e.key;
+        //       // const textoIngresado = inputNombre.value;
+        //       const patron = /^[a-zA-Z0-9._%+-@]+$/;
+    
+        //       const emailIngresado = input.value;
+    
+        //       if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete" || emailIngresado.length > 100) {
+        //         e.preventDefault();
+        //       }
+    
+        //     });
+    
+        //   }
+
+        }
+
     }
 
 }

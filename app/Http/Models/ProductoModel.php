@@ -19,6 +19,40 @@ class ProductoModel{
 
     }
 
+
+    public function validateData(){
+
+        try {
+                        
+            if( !trim($this->nombreProducto) || !trim($this->idCategoria) || !trim($this->descripcion)){
+
+                throw new Exception("Porfavor complete todos los campos");
+
+            }
+
+            $pattern = "/^[0-9]{1,1}+$/";
+
+            if( !preg_match($pattern, trim($this->idCategoria)) ){
+
+                throw new Exception("La categoria seleccionada no es valida");
+
+            }
+
+            $pattern = "/^.{1,100}+$/";
+
+            if( !preg_match($pattern, trim($this->descripcion)) ){
+
+                throw new Exception("La descripcion puede contener un maximo de 100 carasteres");
+
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
     public function saveProducto(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -32,7 +66,7 @@ class ProductoModel{
 
             $insert->closeCursor();
 
-            if(!$insert){
+            if(!$insert || !$insert->rowCount() > 0){
 
                 throw new Exception("Error al registrar producto");
 

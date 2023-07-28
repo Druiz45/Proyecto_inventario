@@ -8,6 +8,8 @@ $producto = new ProductoModel(
     $_POST["descripcion"],
 );
 
+$producto->validateData();
+
 $producto->saveProducto();
 
 
