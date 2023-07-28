@@ -17,7 +17,7 @@ class UsuarioModel{
     protected $pass;
     // protected $confirmPass;
 
-    public function __construct($nombres = "", $apellidos = "", $documento = "", $perfil = "", $email = "", $celular = "", $direccion = ""){
+    public function __construct($nombres = "", $apellidos = "", $documento = "",  $email = "", $celular = "", $direccion = "", $perfil = ""){
         
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -186,6 +186,70 @@ class UsuarioModel{
             echo json_encode($e->getMessage());
             die;
         }
+    }
+
+
+    public function updateUser(){
+
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+    
+            $idUser = $_SESSION['idUser'];
+    
+            $update = $con->prepare("CALL updateUser(?,?,?,?,?,?,?)");
+            $update->bindParam(1, $idUser, PDO::PARAM_INT);
+            $update->bindParam(2, $this->documento, PDO::PARAM_STR);
+            $update->bindParam(3, $this->nombres, PDO::PARAM_STR);
+            $update->bindParam(4, $this->apellidos, PDO::PARAM_STR);
+            $update->bindParam(5, $this->email, PDO::PARAM_STR);
+            $update->bindParam(6, $this->celular, PDO::PARAM_STR);
+            $update->bindParam(7, $this->direccion, PDO::PARAM_INT);
+            $update->execute();
+
+            if(!$update || $update->rowCount() > 0){
+                $update->closeCursor();
+                throw new Exception("Ha ocurrido un error al intentar actualizar");
+            }
+    
+            $update->closeCursor();
+    
+            echo json_encode("Sus datos se han actualizado corretamente!");
+            
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+        }
+
+    }
+
+    public function getDataUserLog(){
+
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+    
+            $idUser = $_SESSION['idUser'];
+    
+            $select = $con->prepare("CALL getDataUserLog(?)");
+            $select->bindParam(1, $idUser, PDO::PARAM_INT);
+            $select->execute();
+    
+            $registros = $select->fetchAll(PDO::FETCH_ASSOC);
+    
+            $select->closeCursor();
+    
+            if(!$select || !$select->rowCount() > 0){
+                throw new Exception("Eror");
+            }
+    
+            echo json_encode($registros);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+        }
+
     }
 
     public function decryptPass(){

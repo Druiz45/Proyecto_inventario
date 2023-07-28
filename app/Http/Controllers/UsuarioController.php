@@ -21,6 +21,14 @@ class UsuarioController{
         return view('viewCrud/usuario/create');
     }
 
+    public function dataFormUpdate(){
+        return view('viewsModels/modelFormUpdate');
+    }
+
+    public function update(){
+        return view('viewCrud/usuario/update');
+    }
+
     public function logOut(){
         return view('viewsModels/modelLogOut');
     }

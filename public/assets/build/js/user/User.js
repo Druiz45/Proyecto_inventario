@@ -56,6 +56,21 @@ export class User {
 
   }
 
+  getDataFormUpdate(url) {
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch(`/${url}/usuario/dataFormUpdate`, {
+        method: "POST",
+      })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+          console.log(data);
+          this.setDataFormUpdate(data);
+        })
+    });
+
+  }
+
   setDataFormCreate(data) {
     const select = document.getElementById('select-perfiles');
     if (select) {
@@ -69,6 +84,23 @@ export class User {
       }
       // select.innerHTML = '';
       select.appendChild(opciones);
+    }
+
+  }
+
+  setDataFormUpdate(data) {
+    const formUpdateUser = document.getElementById('form-update-user');
+    if (formUpdateUser) {
+
+      document.getElementById('nombres').value = data[0].nombres;
+      document.getElementById('apellidos').value = data[0].apellidos;
+      document.getElementById('documento').value = data[0].documento;
+      document.getElementById('email').value = data[0].email;
+      document.getElementById('celular').value = data[0].telefono;
+      document.getElementById('direccion').value = data[0].direccion;
+
+      document.getElementById('info-perfil').innerText += ` ${data[0].perfil_nombre}`;
+      
     }
 
   }

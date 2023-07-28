@@ -46,15 +46,15 @@
 
                     <ul class="list-unstyled user_data">
                       <li>
-                        <i class="fa fa-map-marker user-profile-icon"></i> Perfil:
+                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-perfil">Perfil:</span>
                       </li>
 
                       <li>
-                        <i class="fa fa-map-marker user-profile-icon"></i> Ultimo inicio:
+                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-ultimo-log">Ultimo inicio de sesion:</span>
                       </li>
 
                       <li>
-                        <i class="fa fa-map-marker user-profile-icon"></i> Fecha de creacion:
+                        <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-fecha-creacion">Fecha de creacion:</span>
                       </li>
                     </ul>
 
@@ -87,7 +87,7 @@
                                     </div>
                                   </div>
                                   <div class="ln_solid"></div>
-                                  <form class="form-label-left input_mask align-items-center" id="form-create-user">
+                                  <form class="form-label-left input_mask align-items-center" id="form-update-user">
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="nombres" name="nombres" placeholder="Nombres">
