@@ -87,3 +87,37 @@ if(!function_exists('getClass')){
     }
 
 }
+
+if(!function_exists('verificarLogin')){
+    function verificarLogin(){
+        try {
+            
+            if (!isset($_SESSION["idUser"])){
+                throw new Exception();
+            }
+
+        } catch (Exception) {
+            header("Location: /".getUrl($_SERVER['SERVER_NAME'])."");
+            die;
+        }
+        
+    }
+
+}
+
+if(!function_exists('verificarSesion')){
+    function verificarSesion(){
+        try {
+            
+            if (isset($_SESSION["idUser"])){
+                throw new Exception();
+            }
+
+        } catch (Exception) {
+            header("Location: ./home");
+            die;
+        }
+        
+    }
+
+}

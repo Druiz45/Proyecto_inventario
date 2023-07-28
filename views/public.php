@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    verificarSesion();
+?>
 <body class="login">
     <div>
         <a class="hiddenanchor" id="signup"></a>

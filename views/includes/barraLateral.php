@@ -1,5 +1,6 @@
 <?php
     session_start();
+    verificarLogin();
 ?>
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
@@ -59,12 +60,14 @@
             <div class="menu_section">
                 <h3>Secciones</h3>
                 <ul class="nav side-menu">
+                    <?php if ($_SESSION["idPerfil"]==3): ?>
                     <li><a><i class="fa fa-users"></i>Usuarios<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/registrar">Registrar usuario</a></li>
                             <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/consultar">Consultar usuarios</a></li>
                         </ul>
                     </li>
+                    <?php endif; ?>
                     <li><a><i class="fa fa-location-arrow"></i>Inventario<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                         <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/registrar">Registrar producto</a></li>

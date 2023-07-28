@@ -19,7 +19,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Informacion de usuarios<small>Usuarios</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    <!-- <ul class="nav navbar-right panel_toolbox">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -27,7 +27,7 @@
                             <a class="dropdown-item" href="#">Settings 2</a>
                           </div>
                       </li>
-                    </ul>
+                    </ul> -->
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -51,6 +51,7 @@
                           <th>Empresa</th>
                           <th>Nit</th>
                           <th>Pefil</th>
+                          <th>Operaciones</th>
                           <th>Ultima sesion</th>
                           <th>Fecha de creacion</th>
                         </tr>
@@ -68,6 +69,7 @@
                             <td><?= $row["empresa"] == null ? "No Aplica": $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica": $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
+                            <td><button type="button" class="btn btn-danger">Eliminar</button></td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca": $row["ultimoLog"] ?></td>
                             <td><?= $row["fecha"] ?></td>
                           </tr>

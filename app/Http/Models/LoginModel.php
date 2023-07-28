@@ -13,8 +13,10 @@ class LoginModel extends UsuarioModel {
     protected $passEncrypt;
     protected $usuario;
     protected $idUser;
+    protected $idPerfil;
 
-    public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "", $idUser = ""){
+    public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "",
+    $idUser = "", $idPerfil = "",){
         
         $this->documento = $documento;
         $this->pass = $pass;
@@ -22,6 +24,7 @@ class LoginModel extends UsuarioModel {
         $this->passEncrypt = $passEncrypt;
         $this->usuario = $usuario;
         $this->idUser = $idUser;
+        $this->idPerfil = $idPerfil;
 
     }
 
@@ -57,7 +60,32 @@ class LoginModel extends UsuarioModel {
             $this->pass=$dataSesion[0]["clave"];
             $this->usuario=$dataSesion[0]["usuario"];
             $this->idUser=$dataSesion[0]["id"];
+            $this->idPerfil=$dataSesion[0]["idPerfil"];
             $this->decryptPass();
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function setUltimoLog(){
+        try {
+        
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+            
+            $update = $con->prepare("CALL setUltimoLog(?)");
+            $update->bindParam(1, $this->idUser, PDO::PARAM_STR);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+
+                throw new Exception("No se pudo actualizar la sesion");
+
+            }
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
@@ -76,6 +104,10 @@ class LoginModel extends UsuarioModel {
             $_SESSION["pass"]=$this->passEncrypt;
             $_SESSION["user"]=$this->usuario;
             $_SESSION["idUser"]=$this->idUser;
+            $_SESSION["idPerfil"]=$this->idPerfil;
+
+            $this->setUltimoLog();
+
             echo json_encode(["home"]);
 
         } catch (Exception $e) {
