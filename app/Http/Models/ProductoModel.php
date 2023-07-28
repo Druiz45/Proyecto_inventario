@@ -73,4 +73,31 @@ class ProductoModel{
         }
     }
 
+    public function getProductos(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        $n=1;
+        try {
+            $select = $con->prepare("CALL getProductos(?)");
+            $select->bindParam(1, $n, PDO::PARAM_STR);
+            $select->execute();
+
+            $productos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+
+                throw new Exception("Error al mostrar categorias");
+
+            }
+
+            return ($productos);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
 }

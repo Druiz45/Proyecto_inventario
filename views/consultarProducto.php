@@ -4,6 +4,12 @@
 
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
+            <?php 
+              use App\Http\Models\ProductoModel;
+              $i=1;
+              $producto=new ProductoModel();
+              $rows=$producto->getProductos();
+            ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
             <!-- page content -->
@@ -39,23 +45,20 @@
                           <th>Categoria</th>
                           <th>Descripcion</th>
                           <th>Fecha</th>
+                          <th>Operaciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Tiger</td>
-                          <td>Nixon</td>
-                          <td>System Architect</td>
-                          <td>Edinburgh</td>
-                          <td>61</td>
-                        </tr>
-                        <tr>
-                          <td>Garrett</td>
-                          <td>Winters</td>
-                          <td>Accountant</td>
-                          <td>Tokyo</td>
-                          <td>63</td>
-                        </tr>
+                      <?php foreach($rows as $row): ?>
+                          <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= $row["producto"] ?></td>
+                            <td><?= $row["categoria"] ?></td>
+                            <td><?= $row["descripcion"] ?></td>
+                            <td><?= getFecha($row["fecha"]) ?></td>
+                            <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info" onclick="return mifuncion(<?= $row['id'] ?>)">Editar</button></td>
+                          </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                   </div>
@@ -73,4 +76,15 @@
         </div>
     </div>
     <?php require_once("./../views/includes/scripts.php"); ?>
+    <script>
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
+    </script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/prueba.js"></script>
+    <!-- <script>
+      function mifuncion(id){
+        console.log(id);
+      }
+    </script> -->
 </body>
