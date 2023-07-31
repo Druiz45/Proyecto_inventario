@@ -50,7 +50,7 @@ class LoginModel extends UsuarioModel {
             $select->execute();
     
             $dataSesion=$select->fetchAll(PDO::FETCH_ASSOC);
-
+           
             $select->closeCursor();
 
             if(!$select || !$select->rowCount() > 0){
@@ -76,6 +76,7 @@ class LoginModel extends UsuarioModel {
     }
 
     public function setUltimoLog(){
+    
         try {
         
             $pdo = new Conexion();
@@ -100,6 +101,7 @@ class LoginModel extends UsuarioModel {
     }
 
     public function iniciarSesion($pass){
+        
         try {
             
             if ($this->pass!=$pass){

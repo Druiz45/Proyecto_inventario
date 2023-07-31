@@ -1,7 +1,7 @@
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
-
+      
       <?php require_once("./../views/includes/barraLateral.php"); ?>
 
       <!-- top navigation -->

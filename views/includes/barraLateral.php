@@ -74,12 +74,6 @@
                             <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar productos</a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-star-half-o"></i>Ventas<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                        <li><a href="./">Registrar venta</a></li>
-                            <li><a href="./">Consultar ventas</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
