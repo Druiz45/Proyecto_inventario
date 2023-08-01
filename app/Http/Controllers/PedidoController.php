@@ -10,4 +10,8 @@ class PedidoController{
         return view('registrarPedido');
     }
 
+    public function getDataFormRegistrar(){
+        return view('viewsModels/modelPedido/formCreate');
+    }
+
 }

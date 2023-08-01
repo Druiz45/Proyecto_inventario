@@ -32,7 +32,7 @@
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombre" name="nombre" placeholder="Nombre del producto">
+                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
