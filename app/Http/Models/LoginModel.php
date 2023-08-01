@@ -16,8 +16,9 @@ class LoginModel extends UsuarioModel {
     protected $idPerfil;
     protected $ultimoLog;
     protected $fechaCreacion;
+    protected $getPass;
 
-    public function __construct($email = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "",
+    public function __construct($email = "", $getPass = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "",
     $idUser = "", $idPerfil = "", $ultimoLog = "", $fechaCreacion = ""){
         
         $this->documento = $documento;
@@ -29,6 +30,7 @@ class LoginModel extends UsuarioModel {
         $this->idPerfil = $idPerfil;
         $this->ultimoLog = $ultimoLog;
         $this->fechaCreacion = $fechaCreacion;
+        $this->getPass = $getPass;
 
     }
 
@@ -36,7 +38,7 @@ class LoginModel extends UsuarioModel {
 
         try {
 
-            if(!trim($_POST['email']) && !trim($_POST['pass'])){
+            if(!trim($this->email) && !trim($this->getPass)){
 
                 throw new Exception("Porfavor Complete los campos");
 
@@ -100,21 +102,21 @@ class LoginModel extends UsuarioModel {
         }
     }
 
-    public function iniciarSesion($pass){
+    public function iniciarSesion(){
         
         try {
             
-            if ($this->pass!=$pass){
+            if ($this->pass != $this->getPass){
                 throw new Exception("La contraseña no coincide");
             }
     
-            $_SESSION["documento"]=$this->documento;
-            $_SESSION["pass"]=$this->passEncrypt;
-            $_SESSION["user"]=$this->usuario;
-            $_SESSION["idUser"]=$this->idUser;
-            $_SESSION["idPerfil"]=$this->idPerfil;
-            $_SESSION['ultimoLog']=$this->ultimoLog;
-            $_SESSION['fechaCreacion']=$this->fechaCreacion;
+            $_SESSION["documento"] = $this->documento;
+            $_SESSION["pass"] = $this->passEncrypt;
+            $_SESSION["user"] = $this->usuario;
+            $_SESSION["idUser"] = $this->idUser;
+            $_SESSION["idPerfil"] = $this->idPerfil;
+            $_SESSION['ultimoLog'] = $this->ultimoLog;
+            $_SESSION['fechaCreacion'] = $this->fechaCreacion;
 
             $this->setUltimoLog();
 

@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Models\LoginModel;
 session_start();
-$sesion = new LoginModel($_POST['email']);
+
+use App\Http\Models\LoginModel;
+
+$sesion = new LoginModel($_POST['email'], $_POST['pass']);
 $sesion->getDataSesion();
-$sesion->iniciarSesion($_POST['pass']);
+$sesion->iniciarSesion();
 
 ?>
