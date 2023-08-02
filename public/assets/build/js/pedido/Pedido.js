@@ -1,3 +1,5 @@
+import { validateDoc } from "./../user/User.js";
+import { validateNameProducto } from "./../producto/Producto.js";
 export class Pedido {
 
     getDataFormCreate() {
@@ -67,4 +69,111 @@ export class Pedido {
 
     }
 
+    validateFormData() {
+
+        const formCreatePedido = document.getElementById('form-create-pedido');
+
+        if (formCreatePedido) {
+
+            const documento = document.getElementById('documento');
+            const nombreProducto = document.getElementById('nombreProducto');
+            const abonoProducto = document.getElementById('abonoProducto');
+
+            validateDoc(documento);
+            validateNameProducto(nombreProducto);
+            validateAbonoProducto(abonoProducto);
+        }
+
+    }
+
+    create() {
+        const formCreatePedido = document.getElementById('form-create-pedido');
+
+        if (formCreatePedido) {
+
+            formCreatePedido.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(formCreatePedido);
+                fetch(`/${url}/pedido/create`, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        if (data == "Usuario registrado exitosamente!") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data,
+                                // text: data,
+                            })
+                            formCreateUser.reset();
+                        } else if (data == "ERROR AL REGISTAR EL USUARIO") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: data,
+                            })
+                            formCreateUser.reset();
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: data,
+                                // text: data,
+                            })
+                        }
+                    })
+            })
+
+        }
+
+    }
+
+}
+
+function validateAbonoProducto(input) {
+
+    input.addEventListener("keypress", (e) => {
+
+        // setTimeout(() => {
+
+        // // let a = numero.value.replace(/[^\d,-]/g, ''); // Eliminar cualquier caracter no numérico, excepto '-' y '.'
+        // let b = parseInt(a);
+        // numero.value = number_format(b, 0, '.', '.');
+
+        const tecla = e.key;
+        let valorProducto = input.value;
+
+        if (isNaN(tecla) || tecla.trim() === "" || valorProducto.length == 11) {
+            e.preventDefault();
+        } else {
+
+            input.addEventListener("input", () => {
+                if (input.value.trim() != "" && input.value != "$") {
+                    valorProducto = input.value.replace(/[^\d,-]/g, '');
+                    const valorParseado = parseInt(valorProducto);
+            
+                    input.value = "$"+number_format(valorParseado, 0, '.', '.');
+                }
+            });
+
+        }
+
+
+        // }, 100);
+
+    });
+}
+
+// numero.addEventListener("input", () => {
+
+// })
+
+function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
+    number = parseInt(number.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
+    const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
+
+    const regex = /\B(?=(\d{3})+(?!\d))/g;
+    const formattedIntegerPart = integerPart.replace(regex, thousandsSep);
+
+    return decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
 }

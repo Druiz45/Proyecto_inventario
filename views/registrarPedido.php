@@ -17,7 +17,7 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <form class="form-label-left input_mask" id="formProducto">
+                    <form class="form-label-left input_mask" id="form-create-pedido">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="x_panel">
@@ -28,11 +28,11 @@
                                     <div class="x_content">
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del cliente">
+                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del cliente" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto">
+                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
@@ -52,7 +52,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row">
                                             <div class="col-md-8 col-sm-8  offset-md-0">
-                                                <button type="submit" class="btn btn-success">Registrar pedido</button>
+                                                <button type="submit" class="btn btn-success" id="btn-registrar-pedido">Registrar pedido</button>
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="x_content">
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
-                                            <input type="text" class="form-control has-feedback-left" id="producto" name="producto" placeholder="Abono inicial">
+                                            <input type="text" class="form-control has-feedback-left" id="abonoProducto" name="abonoProducto" placeholder="Abono inicial" autocomplete="off">
                                             <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                         </div>
                                     </div>

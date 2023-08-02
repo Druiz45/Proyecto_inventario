@@ -14,4 +14,8 @@ class PedidoController{
         return view('viewsModels/modelPedido/formCreate');
     }
 
+    public function create(){
+        return view('viewCrud/pedido/create');
+    }
+
 }

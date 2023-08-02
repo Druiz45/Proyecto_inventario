@@ -9,10 +9,66 @@ class PedidoModel{
 
     protected $documento;
     protected $nombreProducto;
+    protected $cliente;
+    protected $producto;
+    protected $abono;
 
-    public function __construct($documento, $nombreProducto){
+    public function __construct($documento, $nombreProducto, $cliente = "", $producto = "", $abono = ""){
         $this->documento=$documento;
         $this->nombreProducto=$nombreProducto;
+        $this->cliente = $cliente;
+        $this->producto = $producto;
+        $this->abono = $abono;
+    }
+
+    public function validateData(){
+
+        try {
+
+            // if( !trim($this->documento) || !trim($this->nombreProducto) ){
+
+            //     throw new Exception("Porfavor complete todos los campos");
+
+            // }
+
+            // $pattern = "/^[0-9]{6,12}+$/";
+
+            // if( !preg_match($pattern, trim($this->documento)) ){
+
+            //     throw new Exception("Los documentos deben de contener solo numeros, un minimo de 6 y maximo 12");
+
+            // }
+
+            $pattern = "/^[0-9]{1,5}+$/";
+
+            if( !preg_match($pattern, trim($this->cliente)) ){
+
+                throw new Exception("Porfavor revise el cliente seleccionado");
+
+            }
+
+            $pattern = "/^[0-9]{1,4}+$/";
+
+            if( !preg_match($pattern, trim($this->producto)) ){
+
+                throw new Exception("Porfavor revise el producto seleccionado");
+
+            }
+
+            $this->abono = str_replace(['.','$'],"",$this->abono);
+
+            $pattern = "/^[0-9]{1,8}+$/";
+
+            if( !preg_match($pattern, trim($this->abono)) ){
+
+                throw new Exception("El valor del abono no es valido");
+
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+        }
+
     }
 
    public function getInfoFormCreate() {
