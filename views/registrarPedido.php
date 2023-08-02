@@ -40,12 +40,12 @@
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="cliente" name="cliente" tabindex="-1">
-                                                    
+
                                                 </select>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="producto" name="producto" tabindex="-1">
-                                                  
+
                                                 </select>
                                             </div>
                                         </div>
@@ -61,13 +61,19 @@
                             <div class="col-md-4">
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Abono<small>Cantidad de abono</small></h2>
+                                        <h2>Abono y Anotacion</h2>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
                                             <input type="text" class="form-control has-feedback-left" id="producto" name="producto" placeholder="Abono inicial">
                                             <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <div class="col-md-12 col-sm-12">
+                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion:"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
