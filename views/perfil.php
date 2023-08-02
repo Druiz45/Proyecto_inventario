@@ -56,6 +56,11 @@
                       <li>
                         <i class="fa fa-map-marker user-profile-icon"></i> <span id="info-fecha-creacion">Fecha de creacion: <?= getFecha($_SESSION['fechaCreacion']) ?></span>
                       </li>
+                      <li class="media event">
+                        <div class="media-body">
+                          <a class="title" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/editPass">Actualizar Contraseña</a>
+                        </div>
+                      </li>
                     </ul>
 
                     <br />

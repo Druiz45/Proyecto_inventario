@@ -100,7 +100,7 @@ export class User {
       document.getElementById('direccion').value = data[0].direccion;
 
       document.getElementById('info-perfil').innerText += ` ${data[0].perfil_nombre}`;
-      
+
     }
 
   }
@@ -144,11 +144,11 @@ export class User {
 
   }
 
-  updateUser(url){
+  updateUser(url) {
 
     const formUpdateUser = document.getElementById('form-update-user');
 
-    if(formUpdateUser){
+    if (formUpdateUser) {
 
       formUpdateUser.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -184,7 +184,7 @@ export class User {
             }
           })
       });
-      
+
     }
 
   }
@@ -317,8 +317,8 @@ export class User {
           fetch(`/${url}/usuario/logOut`, {
 
           })
-          .then(respuesta => respuesta.json())
-          .then(data => {
+            .then(respuesta => respuesta.json())
+            .then(data => {
               window.location.assign(`/${url}/${data}`);
             })
         }
@@ -357,6 +357,25 @@ export class User {
           tbody.appendChild(tr);
         })
     });
+  }
+
+  updatePass() {
+    const formPass = document.getElementById("formPass");
+    if (formPass) {
+      formPass.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = new FormData(formPass);
+        fetch(`/${url}/usuario/updatePass`, {
+          method: "POST",
+          body: form
+        })
+          .then(respuesta => respuesta.json())
+          .then(data => {
+            
+          })
+      });
+    }
+
   }
 
 }

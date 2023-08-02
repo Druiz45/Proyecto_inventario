@@ -40,4 +40,12 @@ class UsuarioController{
     public function perfil(){
         return view('perfil');
     }
+
+    public function editPass(){
+        return view('updatePass');
+    }
+
+    public function updatePass(){
+        return view('viewCrud/usuario/updatePass');
+    }
 }
