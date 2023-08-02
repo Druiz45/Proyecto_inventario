@@ -225,24 +225,7 @@ export class User {
 
       }
 
-      function validateDoc(input) {
 
-        input.addEventListener("keypress", (e) => {
-
-          // setTimeout(() => {
-
-          const tecla = e.key;
-
-          const docIngresado = input.value;
-
-          if (isNaN(tecla) || tecla.trim() === "" || docIngresado.length == 12) {
-            e.preventDefault();
-          }
-
-          // }, 100);
-
-        });
-      }
 
       function validateEmail(input) {
 
@@ -379,3 +362,24 @@ export class User {
   }
 
 }
+
+export function validateDoc(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    // setTimeout(() => {
+
+    const tecla = e.key;
+
+    const docIngresado = input.value;
+
+    if (isNaN(tecla) || tecla.trim() === "" || docIngresado.length == 12) {
+      e.preventDefault();
+    }
+
+    // }, 100);
+
+  });
+  
+}
+

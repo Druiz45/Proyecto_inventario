@@ -70,23 +70,6 @@ export class Producto {
     
           validateNameProducto(inputProducto);
           validateDescriptionProduct(inputDescricion);
-    
-          function validateNameProducto(input) {
-    
-            input.addEventListener("keypress", (e) => {
-    
-            //   const tecla = e.key;
-              const textoIngresado = input.value;
-            //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-    
-              if (textoIngresado.length == 25) {
-                e.preventDefault();
-                input.value = textoIngresado.substring(0, 25);
-              }
-    
-            });
-    
-          }
 
           function validateDescriptionProduct(input) {
     
@@ -149,5 +132,22 @@ export class Producto {
     mifuncion(){
 
     }
+
+}
+
+export function validateNameProducto(input) {
+    
+  input.addEventListener("keypress", (e) => {
+
+  //   const tecla = e.key;
+    const textoIngresado = input.value;
+  //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
+    if (textoIngresado.length == 25) {
+      e.preventDefault();
+      input.value = textoIngresado.substring(0, 25);
+    }
+
+  });
 
 }
