@@ -34,19 +34,19 @@
                                     <form class="form-label-left input_mask align-items-center" id="formPass">
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="" name="" placeholder="Nueva constraseña">
+                                                <input type="password" class="form-control has-feedback-left" id="newPass" name="newPass" placeholder="Nueva constraseña">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="" name="" placeholder="Confirmar nueva contraseña">
+                                                <input type="password" class="form-control has-feedback-left" id="newPassConfirm" name="newPassConfirm" placeholder="Confirmar nueva contraseña">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="" name="" placeholder="Contraseña actual">
+                                                <input type="password" class="form-control has-feedback-left" id="passActual" name="passActual" placeholder="Contraseña actual">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>

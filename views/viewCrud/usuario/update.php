@@ -11,7 +11,8 @@ $usuario = new UsuarioModel(
     $_POST['email'],
     $_POST['celular'],
     $_POST['direccion'],
-    $_SESSION['idPerfil'],   
+    $_SESSION["idPerfil"],
+    isset($_POST["pass"]) ? $_POST["pass"]: "",   
 );
 $usuario->validateData();
 $usuario->updateUser();

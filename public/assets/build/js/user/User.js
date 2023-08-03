@@ -354,6 +354,25 @@ export class User {
         })
           .then(respuesta => respuesta.json())
           .then(data => {
+            if (Array.isArray(data)) {
+              Swal.fire({
+                icon: data[1],
+                text: data[0],
+              })
+              formPass.reset();
+            }
+            else if (data=="Error"){
+              Swal.fire({
+                icon: "error",
+                text: "Error al actualizar la contraseña",
+              })
+            }
+            else {
+              Swal.fire({
+                icon: "warning",
+                text: data,
+              })
+            }
             
           })
       });

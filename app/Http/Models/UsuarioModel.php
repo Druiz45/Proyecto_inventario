@@ -17,9 +17,12 @@ class UsuarioModel
     protected $celular;
     protected $direccion;
     protected $pass;
-    // protected $confirmPass;
+    protected $newPass; 
+    protected $newPassConfirm; 
+    protected $passActual;
 
-    public function __construct($nombres = "", $apellidos = "", $documento = "",  $perfil = "",  $email = "", $celular = "", $direccion = "",){
+    public function __construct($nombres = "", $apellidos = "", $documento = "",  $email = "", $celular = "",
+    $direccion = "", $perfil = "", $pass = "", $newPass = "", $newPassConfirm = "", $passActual = "",){
 
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -28,8 +31,10 @@ class UsuarioModel
         $this->email = $email;
         $this->celular = $celular;
         $this->direccion = $direccion;
-        $this->pass = $documento;
-        // $this->confirmPass = $confirmPass;
+        $this->pass = $pass;
+        $this->newPass = $newPass;
+        $this->newPassConfirm = $newPassConfirm; 
+        $this->passActual = $passActual;
 
     }
 
@@ -213,11 +218,11 @@ class UsuarioModel
             echo json_encode("Sus datos se han actualizado corretamente!");
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
+            die;
         }
     }
 
     public function getDataUserLog(){
-
         try {
 
             $pdo = new Conexion();
@@ -234,12 +239,13 @@ class UsuarioModel
             $select->closeCursor();
 
             if (!$select || !$select->rowCount() > 0) {
-                throw new Exception("Eror");
+                throw new Exception("Error");
             }
 
             echo json_encode($registros);
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
+            die;
         }
     }
 
@@ -294,5 +300,56 @@ class UsuarioModel
             $strPar = $this->documento . "ab";
         }
         return $strPar;
+    }
+
+    public function updatePass(){
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+
+            $idUser = $_SESSION['idUser'];
+            $this->pass=$this->newPass;
+            $this->encryptPass();
+
+            $update = $con->prepare("CALL updatePass(?,?)");
+            $update->bindParam(1, $idUser, PDO::PARAM_INT);
+            $update->bindParam(2, $this->pass, PDO::PARAM_STR);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if (!$update || !$update->rowCount() > 0) {
+                throw new Exception("Error");
+            }
+
+            echo json_encode(["Contraseña actualizada", "success"]);
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function validateNewPass(){
+        try {
+
+            if (!trim($this->newPass) || !trim($this->newPassConfirm) || !trim($this->passActual)){
+                throw new Exception("Completa los campos");
+            }
+
+            $this->decryptPass();
+
+            if ($this->passActual!=$this->pass) {
+                throw new Exception("La contraseña actual no corresponde");
+            }
+
+            if ($this->newPass!=$this->newPassConfirm) {
+                throw new Exception("La contraseña de confirmacion es distintan");
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
     }
 }
