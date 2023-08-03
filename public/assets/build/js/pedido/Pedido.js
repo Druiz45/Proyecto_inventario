@@ -49,11 +49,13 @@ export class Pedido {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
+                        console.log(data);
                         if (Array.isArray(data)) {
                             producto.innerHTML = `<option value="">Seleccione el producto</option>`;
                             for (const info of data) {
                                 producto.innerHTML += `<option value="${info.id}">${info.producto}</option>`;
                             }
+                            this.getPrecio(producto, data);
                         }
                         else {
                             producto.innerHTML = `<option value="">${data}</option>`;
@@ -86,6 +88,16 @@ export class Pedido {
             validateAnotacion(anotacion);
         }
 
+    }
+
+    getPrecio(producto, data){
+        producto.addEventListener('input', () => {
+
+            if(producto.value.trim() != ""){
+                console.log(producto.selectedIndex-1+"\n"+data[producto.selectedIndex-1].precio);
+            }
+
+        })
     }
 
     savePedido() {
