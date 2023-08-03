@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <span class="form-control has-feedback-left">Valor del producto: $1.900.000</span>
+                                                <span class="form-control has-feedback-left" id="valor-producto">Valor del producto: $1.900.000</span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
