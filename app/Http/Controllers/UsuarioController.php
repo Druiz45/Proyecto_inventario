@@ -14,7 +14,7 @@ class UsuarioController{
     }
 
     public function dataFormRegistrar(){
-        return view('viewsModels/modelFormRegistrar');
+        return view('viewsModels/modelUser/formCreate');
     }
 
     public function create(){
@@ -22,7 +22,7 @@ class UsuarioController{
     }
 
     public function dataFormUpdate(){
-        return view('viewsModels/modelFormUpdate');
+        return view('viewsModels/modelUser/formUpdate');
     }
 
     public function update(){
@@ -30,7 +30,7 @@ class UsuarioController{
     }
 
     public function logOut(){
-        return view('viewsModels/modelLogOut');
+        return view('viewsModels/modelLogOut/logOut');
     }
 
     public function getUsers(){

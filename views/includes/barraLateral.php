@@ -30,7 +30,7 @@
                     <li><a><i class="fa fa-openid"></i>Pedidos<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/registrar">Registrar pedido</a></li>
-                            <li><a href="./">Consultar pedidos</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar">Consultar pedidos</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-outdent"></i>Compras<span class="fa fa-chevron-down"></span></a>

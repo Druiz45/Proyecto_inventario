@@ -18,4 +18,8 @@ class PedidoController{
         return view('viewCrud/pedido/create');
     }
 
+    public function consultar(){
+        return view('consultarPedido');
+    }
+
 }

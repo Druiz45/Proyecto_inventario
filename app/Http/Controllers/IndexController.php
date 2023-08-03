@@ -12,7 +12,7 @@ class IndexController{
 
     public function login(){
         // return new Response('public');
-        return view('viewsModels/modelLogin');
+        return view('viewsModels/modelLogin/login');
     }
 
 }

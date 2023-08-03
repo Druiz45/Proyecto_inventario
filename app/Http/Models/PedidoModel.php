@@ -14,7 +14,7 @@ class PedidoModel{
     protected $abono;
     protected $anotacion;
 
-    public function __construct($documento, $nombreProducto, $cliente = "", $producto = "", $abono = "", $anotacion = ""){
+    public function __construct($documento="", $nombreProducto="", $cliente = "", $producto = "", $abono = "", $anotacion = ""){
         $this->documento=$documento;
         $this->nombreProducto=$nombreProducto;
         $this->cliente = $cliente;

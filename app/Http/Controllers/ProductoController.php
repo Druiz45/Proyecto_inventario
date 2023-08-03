@@ -19,7 +19,7 @@ class ProductoController{
     }
 
     public function getCategorias(){
-        return view('viewsModels/modelCategoria');
+        return view('viewsModels/modelProducto/formCreate');
     }
 
      public function getProductos(){
