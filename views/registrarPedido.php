@@ -72,7 +72,7 @@
                                         <br>
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12">
-                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion:"></textarea>
+                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)"></textarea>
                                             </div>
                                         </div>
                                     </div>

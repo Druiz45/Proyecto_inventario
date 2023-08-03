@@ -4,4 +4,4 @@ const pedido=new Pedido();
 
 pedido.validateFormData();
 pedido.getDataFormCreate();
-pedido.create();
+pedido.savePedido();

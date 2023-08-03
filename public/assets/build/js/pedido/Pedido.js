@@ -78,15 +78,17 @@ export class Pedido {
             const documento = document.getElementById('documento');
             const nombreProducto = document.getElementById('nombreProducto');
             const abonoProducto = document.getElementById('abonoProducto');
+            const anotacion = document.getElementById('anotacion');
 
             validateDoc(documento);
             validateNameProducto(nombreProducto);
             validateAbonoProducto(abonoProducto);
+            validateAnotacion(anotacion);
         }
 
     }
 
-    create() {
+    savePedido() {
         const formCreatePedido = document.getElementById('form-create-pedido');
 
         if (formCreatePedido) {
@@ -167,6 +169,23 @@ function validateAbonoProducto(input) {
 // numero.addEventListener("input", () => {
 
 // })
+
+function validateAnotacion(input){
+
+    input.addEventListener("keypress", (e) => {
+    
+        //   const tecla = e.key;
+          const textoIngresado = input.value;
+        //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
+          if (textoIngresado.length == 100) {
+            e.preventDefault();
+            input.value = textoIngresado.substring(0, 100);
+          }
+
+        });
+    
+}
 
 function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
     number = parseInt(number.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada

@@ -12,13 +12,15 @@ class PedidoModel{
     protected $cliente;
     protected $producto;
     protected $abono;
+    protected $anotacion;
 
-    public function __construct($documento, $nombreProducto, $cliente = "", $producto = "", $abono = ""){
+    public function __construct($documento, $nombreProducto, $cliente = "", $producto = "", $abono = "", $anotacion = ""){
         $this->documento=$documento;
         $this->nombreProducto=$nombreProducto;
         $this->cliente = $cliente;
         $this->producto = $producto;
         $this->abono = $abono;
+        $this->anotacion = $anotacion;
     }
 
     public function validateData(){
@@ -65,10 +67,47 @@ class PedidoModel{
 
             }
 
+            $pattern = "/^.{1,100}+$/";
+
+            if( !preg_match($pattern, trim($this->anotacion)) ){
+
+                throw new Exception("La descripcion puede contener un maximo de 100 carasteres");
+
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
         }
 
+    }
+
+    public function saveProducto(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $vendedor = $_SESSION['idUser'];
+        
+        try {
+            $insert = $con->prepare("CALL createPedido(?,?,?)");
+            $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
+            $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if(!$insert || !$insert->rowCount() > 0){
+
+                throw new Exception("Error al registrar producto");
+
+            }
+
+            echo json_encode(["Producto registrado", "success"]);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
     }
 
    public function getInfoFormCreate() {
