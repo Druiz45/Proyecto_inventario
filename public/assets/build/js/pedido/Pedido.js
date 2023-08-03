@@ -8,6 +8,7 @@ export class Pedido {
         const cliente = document.getElementById("cliente");
         const nombreProducto = document.getElementById("nombreProducto");
         const producto = document.getElementById("producto");
+        const spanValorProducto = document.getElementById('valor-producto');
 
         documento.addEventListener("input", () => {
             if (documento.value.trim() != "") {
@@ -55,7 +56,7 @@ export class Pedido {
                             for (const info of data) {
                                 producto.innerHTML += `<option value="${info.id}">${info.producto}</option>`;
                             }
-                            this.getPrecio(producto, data);
+                            this.getPrecio(producto, data, spanValorProducto);
                         }
                         else {
                             producto.innerHTML = `<option value="">${data}</option>`;
@@ -90,11 +91,12 @@ export class Pedido {
 
     }
 
-    getPrecio(producto, data){
+    getPrecio(producto, data, spanValorProducto){
         producto.addEventListener('input', () => {
 
             if(producto.value.trim() != ""){
-                console.log(producto.selectedIndex-1+"\n"+data[producto.selectedIndex-1].precio);
+                const indice = (producto.selectedIndex-1);
+                spanValorProducto.innerText = data[indice].precio;
             }
 
         })
