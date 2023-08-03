@@ -27,23 +27,24 @@
                                     </div>
                                     <div class="x_content">
                                         <br />
-
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="producto" name="producto" placeholder="Nombre de producto">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
-
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <select class="select2_single form-control" id="categoria" name="categoria" tabindex="-1">
                                                     <option value="">Seleccione la Categoria</option>
                                                 </select>
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                 <input type="file" class="btn" id="inputSuccess5">
+                                            </div>
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
+                                                <input type="text" class="form-control has-feedback-left" id="valorProducto" name="valorProducto" placeholder="Valor del producto">
+                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
@@ -52,7 +53,6 @@
                                                 <button type="submit" class="btn btn-success">Registrar Producto</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

@@ -347,6 +347,12 @@ class UsuarioModel
                 throw new Exception("La contraseña de confirmacion es distintan");
             }
 
+            $patron = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#.$($)$-$_])[A-Za-z\d$@$!%*?&#.$($)$-$_]{8,15}$/';
+
+            if (!preg_match($patron, $this->newPass)) {
+                throw new Exception("La nueva contraseña debe contener de 10 a 15 caracteres, al menos una letra mayúscula y una minuscula, un caracter especial, un numero y ningun espacio en blanco.");
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

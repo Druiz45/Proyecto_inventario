@@ -10,7 +10,7 @@
     <title id="titulo-pagina"> Makfrio <?= setTitle() ?> </title>
     
     <!-- Bootstrap -->
-    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">

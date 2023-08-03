@@ -10,12 +10,14 @@ class ProductoModel{
     protected $nombreProducto; 
     protected $idCategoria; 
     protected $descripcion;
+    protected $valorProducto;
 
-    public function __construct($nombreProducto = "", $idCategoria = "", $descripcion = "",){
+    public function __construct($nombreProducto = "", $idCategoria = "", $descripcion = "", $valorProducto = ""){
         
        $this->nombreProducto=$nombreProducto;
        $this->idCategoria=$idCategoria;
        $this->descripcion=$descripcion;
+       $this->valorProducto=$valorProducto;
 
     }
 
@@ -24,7 +26,8 @@ class ProductoModel{
 
         try {
                         
-            if( !trim($this->nombreProducto) || !trim($this->idCategoria) || !trim($this->descripcion)){
+            if(!trim($this->nombreProducto) || !trim($this->idCategoria) || !trim($this->descripcion)
+            || !trim($this->valorProducto)){
 
                 throw new Exception("Porfavor complete todos los campos");
 
@@ -58,10 +61,11 @@ class ProductoModel{
         $con = $pdo->conexion();
         
         try {
-            $insert = $con->prepare("CALL saveProducto(?,?,?)");
+            $insert = $con->prepare("CALL saveProducto(?,?,?,?)");
             $insert->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
             $insert->bindParam(2, $this->idCategoria, PDO::PARAM_INT);
             $insert->bindParam(3, $this->descripcion, PDO::PARAM_STR);
+            $insert->bindParam(4, $this->valorProducto, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();

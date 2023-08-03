@@ -36,17 +36,19 @@
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="cliente" name="cliente" tabindex="-1">
-
                                                 </select>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="producto" name="producto" tabindex="-1">
-
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center justify-content-center">
+                                            <div class="col-md-5 col-sm-6  form-group has-feedback">
+                                                <span class="form-control has-feedback-left">Valor del producto: $1.900.000</span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>

@@ -52,12 +52,25 @@ export class Producto {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        for (const info of data) {
-                            categoria.innerHTML += `<option value="${info.id}">${info.categoria}</option>`;
-                        }
+                        this.setCategorias(data, categoria);
                     })
             });
         }
+    }
+
+    setCategorias(data, categoria){
+
+      const opciones = document.createDocumentFragment();
+
+      for (const info of data) {
+        const option = document.createElement('option');
+        option.value = info.id;
+        option.textContent = info.categoria;
+        opciones.appendChild(option);
+      }
+      
+      categoria.appendChild(opciones);
+      
     }
 
     validateFormData(){
