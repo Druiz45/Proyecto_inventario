@@ -80,9 +80,11 @@ export class Producto {
         if (formCreateProduct) {
           const inputProducto = document.getElementById("producto");
           const inputDescricion = document.getElementById("descripcion");
+          const inputPrecio = document.getElementById("valorProducto");
     
           validateNameProducto(inputProducto);
           validateDescriptionProduct(inputDescricion);
+          validatePrecio(inputPrecio);
 
           function validateDescriptionProduct(input) {
     
@@ -163,4 +165,48 @@ export function validateNameProducto(input) {
 
   });
 
+}
+
+function validatePrecio(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+      // setTimeout(() => {
+
+      // // let a = numero.value.replace(/[^\d,-]/g, ''); // Eliminar cualquier caracter no numérico, excepto '-' y '.'
+      // let b = parseInt(a);
+      // numero.value = number_format(b, 0, '.', '.');
+
+      const tecla = e.key;
+      let valorProducto = input.value;
+
+      if (isNaN(tecla) || tecla.trim() === "" || valorProducto.length == 11) {
+          e.preventDefault();
+      } else {
+
+          input.addEventListener("input", () => {
+              if (input.value.trim() != "" && input.value != "$") {
+                  valorProducto = input.value.replace(/[^\d,-]/g, '');
+                  const valorParseado = parseInt(valorProducto);
+          
+                  input.value = "$"+number_format(valorParseado, 0, '.', '.');
+              }
+          });
+
+      }
+
+
+      // }, 100);
+
+  });
+}
+
+function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
+  number = parseInt(number.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
+  const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
+
+  const regex = /\B(?=(\d{3})+(?!\d))/g;
+  const formattedIntegerPart = integerPart.replace(regex, thousandsSep);
+
+  return decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
 }
