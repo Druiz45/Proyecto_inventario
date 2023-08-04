@@ -41,6 +41,14 @@ class ProductoModel{
 
             }
 
+            $pattern = "/^[0-9]{2,8}+$/";
+
+            if( !preg_match($pattern, trim($this->valorProducto)) ){
+
+                throw new Exception("El valor del producto no es valido");
+
+            }
+
             $pattern = "/^.{1,100}+$/";
 
             if( !preg_match($pattern, trim($this->descripcion)) ){

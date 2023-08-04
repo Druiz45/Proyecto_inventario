@@ -65,7 +65,7 @@
                                     <div class="x_content">
                                         <div class="form-group row">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/user.png" width="300" height="200">
+                                                <img src="https://mastercajasltda.com/wp-content/uploads/2019/10/mc__0021_CAJA-50-X-50-2.jpg" width="300" height="200">
                                             </div>
                                         </div>
                                         <div class="ln_solid">

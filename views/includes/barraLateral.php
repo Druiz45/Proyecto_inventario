@@ -35,7 +35,7 @@
                     </li>
                     <li><a><i class="fa fa-outdent"></i>Compras<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="./">Registrar orden de compra</a></li>
+                            <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/registrar">Registrar orden de compra</a></li>
                             <li><a href="./">Consultar ordenes de compra</a></li>
                             <li><a href="./">Registrar Pago a orden de compra</a></li>
                         </ul>
@@ -68,7 +68,7 @@
                         </ul>
                     </li>
                     <?php endif; ?>
-                    <li><a><i class="fa fa-location-arrow"></i>Inventario<span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-location-arrow"></i>Producto<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                         <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/registrar">Registrar producto</a></li>
                             <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar productos</a></li>

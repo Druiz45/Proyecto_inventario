@@ -8,7 +8,7 @@
         use App\Http\Models\PedidoModel;
         $i = 1;
         $pedido = new PedidoModel();
-        $rows = $pedido->getPedidos()
+        $rows = $pedido->getPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -45,33 +45,33 @@
                           <th>Producto</th>
                           <th>Cliente</th>
                           <th>Vendedor</th>
-                          <th>Valor del producto</th>
-                          <th>Abono total</th>
-                          <th>Anotacion</th>
-                          <th>Estado de aprobacion</th>
-                          <th>Estado del pedido</th>
-                          <th>Comision paga</th>
-                          <th>Valor de la comision</th>
                           <th>Fecha limite</th>
+                          <th>Comision</th>
+                          <th>Estado del pedido</th>
+                          <th>Estado de aprobacion</th>
+                          <th>Anotacion</th>
+                          <th>Abono total</th>
+                          <th>Valor comision</th>
+                          <th>Valor del producto</th>
                           <th>Fecha del pedio</th>
                           <th>Operaciones</th>
                         </tr>
                       </thead>
                       <tbody id="tbody">
-                        <?php foreach ($rows as $row) : ?>
+                        <?php foreach ($rows as $row): ?>
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
-                            <td><?= $row["valorTotal"] ?></td>
-                            <td><?= $row["abonoTotal"] ?></td>
+                            <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
+                            <td><?= $row["comisionPaga"] == 0 ? "En espera" : "Paga" ?></td>
+                            <td><?= $row["estadoPedido"] == 0 ? "Pendiente" : ($row["estadoPedido"] == 1 ? "Entregado" : "Anulado")  ?></td>
+                            <td><?= $row["estadoAprobacion"] == 0 ? "En espera" : ($row["estadoPedido"] == 1 ? "Aprobado" : "Anulado") ?></td>
                             <td><?= $row["anotacion"] ?></td>
-                            <td><?= $row["estadoAprobacion"] ?></td>
-                            <td><?= $row["estadoPedido"] ?></td>
-                            <td><?= $row["comisionPaga"] ?></td>
+                            <td><?= $row["abonoTotal"] ?></td>
                             <td><?= $row["valorComision"] ?></td>
-                            <td><?= getFecha($row["fechaLimite"]) ?></td>
+                            <td><?= $row["valorTotal"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
                           </tr>

@@ -237,13 +237,20 @@ class PedidoModel{
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $idUser=$_SESSION["idUser"];
-        $idPerfil=$_SESSION["idPerfil"];
-
         try {
-            $select = $con->prepare("CALL getPedidos(?,?)");
-            $select->bindParam(1, $idUser, PDO::PARAM_INT);
-            $select->bindParam(2, $$idPerfil, PDO::PARAM_INT);
+            $idUser=$_SESSION["idUser"];
+            $idPerfil=$_SESSION["idPerfil"];
+
+            if ($idPerfil==1){
+                $select = $con->prepare("CALL getPedidosVendedor(?,?)");
+                $select->bindParam(1, $idUser, PDO::PARAM_INT);
+                $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            }
+            else if ($idPerfil==3){
+                $select = $con->prepare("CALL getPedidos(?)");
+                $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            }
+
             $select->execute();
 
             $pedidos=$select->fetchAll(PDO::FETCH_ASSOC);

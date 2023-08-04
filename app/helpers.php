@@ -105,6 +105,22 @@ if(!function_exists('getFecha')){
 
 }
 
+if(!function_exists('getFechaSinHora')){
+
+    function getFechaSinHora($date){
+
+        date_default_timezone_set('America/Bogota');
+        setlocale(LC_TIME, "spanish");
+
+        // setlocale(LC_TIME, 'es_ES.UTF-8');
+        $fechaObjeto = strtotime($date);
+        $fechaFormateada = utf8_encode(strftime('%A %d de %B de %Y', $fechaObjeto));
+        
+        return $fechaFormateada;
+    }
+
+}
+
 if(!function_exists('validateLogin')){
     function validateLogin(){
         

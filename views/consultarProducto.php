@@ -42,6 +42,7 @@
                         <tr>
                           <th>#</th>
                           <th>Producto</th>
+                          <th>Precio</th>
                           <th>Categoria</th>
                           <th>Descripcion</th>
                           <th>Fecha</th>
@@ -53,6 +54,7 @@
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= $row["producto"] ?></td>
+                            <td><?= $row["precio"] ?></td>
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
