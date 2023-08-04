@@ -18,6 +18,10 @@ class ProductoController{
         return view('viewCrud/producto/create');
     }
 
+    public function delete(){
+        return view('viewCrud/producto/delete');
+    }
+
     public function getCategorias(){
         return view('viewsModels/modelProducto/formCreate');
     }

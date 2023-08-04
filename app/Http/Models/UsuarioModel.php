@@ -222,6 +222,43 @@ class UsuarioModel
         }
     }
 
+
+    public function actualizarEstadoUser($userToUpdate, $estado){
+
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+
+            // $idUser = $_SESSION['idUser'];
+            $idPerfil = $_SESSION['idPerfil'];
+            $state = $estado == "deshabilitar" ? 0 : 1;
+
+            $update = $con->prepare("CALL updateEstadoUser(?,?,?)");
+            $update->bindParam(1, $userToUpdate, PDO::PARAM_INT);
+            $update->bindParam(2, $state, PDO::PARAM_INT);
+            $update->bindParam(3, $idPerfil, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if (!$update) {
+                throw new Exception("Ha ocurrido un error al intentar Eliminar");
+            }
+
+            if (!$update->rowCount() > 0) {
+                throw new Exception("No se han Eliminado registros");
+            }
+
+            echo json_encode("El usuario se elimino correctamente");
+            
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
     public function getDataUserLog(){
         try {
 

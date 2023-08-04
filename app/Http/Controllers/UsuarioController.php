@@ -48,4 +48,8 @@ class UsuarioController{
     public function updatePass(){
         return view('viewCrud/usuario/updatePass');
     }
+
+    public function delete(){
+        return view('viewCrud/usuario/delete');
+    }
 }
