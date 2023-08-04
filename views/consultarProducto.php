@@ -56,7 +56,7 @@
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info" onclick="return mifuncion(<?= $row['id'] ?>)">Editar</button></td>
+                            <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
