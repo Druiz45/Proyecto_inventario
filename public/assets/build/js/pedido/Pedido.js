@@ -96,7 +96,9 @@ export class Pedido {
 
             if(producto.value.trim() != ""){
                 const indice = (producto.selectedIndex-1);
-                spanValorProducto.innerText = data[indice].precio;
+                spanValorProducto.innerText = `Valor del producto: ${data[indice].precio}`;
+            }else{
+                spanValorProducto.innerText = "";
             }
 
         })
@@ -116,21 +118,24 @@ export class Pedido {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        if (data == "Usuario registrado exitosamente!") {
+                        if (data == "Pedido registrado con exito!") {
                             Swal.fire({
                                 icon: 'success',
                                 title: data,
                                 // text: data,
                             })
-                            formCreateUser.reset();
-                        } else if (data == "ERROR AL REGISTAR EL USUARIO") {
+                            formCreatePedido.reset();
+                            document.getElementById('valor-producto').innerText = "Valor del producto:";
+                        } else if (data == "Error al registrar el pedido") {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',
                                 text: data,
                             })
-                            formCreateUser.reset();
+                            formCreatePedido.reset();
+                            document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
+                            console.log(data);
                             Swal.fire({
                                 icon: 'warning',
                                 title: data,

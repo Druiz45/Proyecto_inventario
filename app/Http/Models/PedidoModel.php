@@ -13,14 +13,16 @@ class PedidoModel{
     protected $producto;
     protected $abono;
     protected $anotacion;
+    protected $fechaLimite;
 
-    public function __construct($documento="", $nombreProducto="", $cliente = "", $producto = "", $abono = "", $anotacion = ""){
+    public function __construct($documento="", $nombreProducto="", $cliente="", $producto="", $abono="", $anotacion="", $fechaLimite=""){
         $this->documento=$documento;
         $this->nombreProducto=$nombreProducto;
         $this->cliente = $cliente;
         $this->producto = $producto;
         $this->abono = $abono;
         $this->anotacion = $anotacion;
+        $this->fechaLimite = $fechaLimite;
     }
 
     public function validateData(){
@@ -67,45 +69,94 @@ class PedidoModel{
 
             }
 
-            $pattern = "/^.{1,100}+$/";
+            $timeStamp = strtotime($this->fechaLimite);
+
+            if(!$timeStamp){
+                throw new Exception("La fecha no es valida");
+            }
+
+            $fecha_convertida = date('Y-m-d', $timeStamp);
+
+            if($fecha_convertida != $this->fechaLimite){
+
+                throw new Exception("La fecha no es valida");
+
+            }
+
+            $pattern = "/^.{0,100}+$/";
 
             if( !preg_match($pattern, trim($this->anotacion)) ){
 
-                throw new Exception("La descripcion puede contener un maximo de 100 carasteres");
+                throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
 
             }
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
+            die;
         }
 
     }
 
-    public function saveProducto(){
+    public function savePedido(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
+        $dataProducto = $this->getDataProducto();
         $vendedor = $_SESSION['idUser'];
         
         try {
-            $insert = $con->prepare("CALL createPedido(?,?,?)");
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->bindParam(4, $dataProducto[0]['precio'], PDO::PARAM_INT);
+            $insert->bindParam(5, $this->abono, PDO::PARAM_INT);
+            $insert->bindParam(6, $this->anotacion, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->fechaLimite, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
 
             if(!$insert || !$insert->rowCount() > 0){
 
-                throw new Exception("Error al registrar producto");
+                throw new Exception("Error al registrar el pedido");
 
             }
 
-            echo json_encode(["Producto registrado", "success"]);
+            echo json_encode("Pedido registrado con exito!");
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getDataProducto(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        
+        try {
+            $select = $con->prepare("CALL getDataProducto(?)");
+            $select->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $select->execute();
+
+            $row = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+
+                throw new Exception("No se encontro el producto");
+
+            }
+
+            return $row;
+
+        } catch (Exception $e) {
+                return [];
             die;
         }
     }

@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <span class="form-control has-feedback-left" id="valor-producto">Valor del producto: $1.900.000</span>
+                                                <span class="form-control has-feedback-left" id="valor-producto">Valor del producto:</span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
@@ -72,6 +72,11 @@
                                             <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                         </div>
                                         <br>
+                                        <div class="col-md-12 col-sm-6  form-group has-feedback">
+                                            <label for="fecha-limite">Fecha limite de entrega: </label>
+                                            <input type="date" class="form-control has-feedback-left" id="fecha-limite" name="fecha-limite" autocomplete="off">
+                                            <!-- <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span> -->
+                                        </div>
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12">
                                                 <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)"></textarea>
