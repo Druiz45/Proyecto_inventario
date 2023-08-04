@@ -17,7 +17,7 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <form class="form-label-left input_mask" id="formCompra">
+                    <form class="form-label-left input_mask" id="formCreateCompra">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="x_panel">
@@ -102,5 +102,5 @@
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/compra/index.js" type="module"></script>
 </body>
