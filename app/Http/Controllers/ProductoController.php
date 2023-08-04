@@ -22,12 +22,24 @@ class ProductoController{
         return view('viewCrud/producto/delete');
     }
 
+    public function editar(){
+        return view('editarProducto');
+    }
+
+    public function update(){
+        return view('viewCrud/producto/update');
+    }
+
     public function getCategorias(){
         return view('viewsModels/modelProducto/formCreate');
     }
 
      public function getProductos(){
         return view('viewCrud/producto/read');
+    }
+
+    public function getDataFormUpdate(){
+        return view('viewsModels/modelProducto/formUpdate');
     }
 
 
