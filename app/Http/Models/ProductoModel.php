@@ -126,7 +126,7 @@ class ProductoModel{
 
             if(!$select || !$select->rowCount() > 0){
 
-                throw new Exception("Error al mostrar categorias");
+                throw new Exception("Error");
 
             }
 

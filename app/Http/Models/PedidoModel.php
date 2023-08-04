@@ -182,4 +182,33 @@ class PedidoModel{
         }
    }
 
+   public function getPedidos(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idUser=$_SESSION["idUser"];
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $select = $con->prepare("CALL getPedidos(?,?)");
+            $select->bindParam(1, $idUser, PDO::PARAM_INT);
+            $select->bindParam(2, $$idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $pedidos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            return $pedidos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+   }
+
 }
