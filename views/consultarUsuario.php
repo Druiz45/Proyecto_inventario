@@ -69,7 +69,7 @@
                             <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
-                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button></a></td>
+                            <td><a><button type="button" class="btn btn-danger" onclick="return deshabilitar(<?= $row['id'] ?>)">Deshabilitar</button></a></td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                           </tr>
@@ -96,7 +96,7 @@
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
   <script>
-    function eliminar(usuario) {
+    function deshabilitar(usuario) {
 
       Swal.fire({
         title: '¿Esta seguro de deshabilitar este usuario?',
