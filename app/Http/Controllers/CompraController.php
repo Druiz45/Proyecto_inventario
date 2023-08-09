@@ -16,4 +16,8 @@ class CompraController{
         return view('viewCrud/compra/create');
     }
 
+    public function consultar(){
+        return view('consultarCompra');
+    }
+
 }
