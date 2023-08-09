@@ -4,4 +4,4 @@ use App\Http\Models\ProductoModel;
 
 $producto = new ProductoModel();
 
-$producto->getDataProductoForId($_GET['producto']);
+$producto->getDataProductoForId($_POST['producto']);

@@ -71,7 +71,7 @@
                             <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
-                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Elimiar</button></a></td>
+                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">DesHabilitar</button></a></td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                           </tr>

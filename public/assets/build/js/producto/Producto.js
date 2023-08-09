@@ -44,19 +44,21 @@ export class Producto {
 
   }
 
-  updatePodructo(url) {
+  updatePodructo(url, numProducto) {
     const formUpdateProducto = document.getElementById('form-update-producto');
     if (formUpdateProducto) {
 
       formUpdateProducto.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(formUpdateProducto);
+        formData.append('numProducto', numProducto);
         fetch(`/${url}/producto/update`, {
           method: "POST",
           body: formData
         })
           .then(respuesta => respuesta.json())
           .then(data => {
+            // console.log(data);
             if (Array.isArray(data)) {
               Swal.fire({
                 icon: `${data[1]}`,
@@ -64,10 +66,8 @@ export class Producto {
                 confirmButtonText: 'Aceptar',
                 text: ``,
               })
-
-              formProducto.reset();
             }
-            else if (data == "Error al registrar producto") {
+            else if (data == "Ha ocurrido un error al intentar actualizar") {
               Swal.fire({
                 icon: `error`,
                 title: `${data}`,
@@ -102,13 +102,17 @@ export class Producto {
     }
   }
 
-  getDataFormUpdate() {
+  getDataFormUpdate(url, numProducto) {
 
     const formUpdateProduct = document.getElementById('form-update-producto');
 
     if (formUpdateProduct) {
-      window.addEventListener('DOMContentLoaded', () => {
+      const formData = new FormData();
+      formData.append('producto', numProducto);
+      window.addEventListener('load', () => {
         fetch(`/${url}/producto/getDataFormUpdate`, {
+          method: "POST",
+          body: formData
         })
           .then(respuesta => respuesta.json())
           .then(data => {

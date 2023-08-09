@@ -41,6 +41,8 @@ class ProductoModel{
 
             }
 
+            $this->valorProducto = str_replace(['.','$'],"",$this->valorProducto);
+
             $pattern = "/^[0-9]{2,8}+$/";
 
             if( !preg_match($pattern, trim($this->valorProducto)) ){
@@ -128,34 +130,36 @@ class ProductoModel{
 
     }
 
-    public function updateProducto(){
+    public function updateProducto($idProducto){
 
         try {
 
-            // $pdo = new Conexion();
-            // $con = $pdo->conexion();
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
 
-            // // $idUser = $_SESSION['idUser'];
-            // $idPerfil = $_SESSION['idPerfil'];
+            // $idUser = $_SESSION['idUser'];
+            // // $idPerfil = $_SESSION['idPerfil'];
             // $state = $estado == "deshabilitar" ? 0 : 1;
 
-            // $update = $con->prepare("CALL updateEstadoProducto(?,?,?)");
-            // $update->bindParam(1, $state, PDO::PARAM_INT);
-            // $update->bindParam(2, $producto, PDO::PARAM_INT);
-            // $update->bindParam(3, $idPerfil, PDO::PARAM_INT);
-            // $update->execute();
+            $update = $con->prepare("CALL updateProducto(?,?,?,?,?)");
+            $update->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
+            $update->bindParam(2, $this->valorProducto, PDO::PARAM_INT);
+            $update->bindParam(3, $this->descripcion, PDO::PARAM_STR);
+            $update->bindParam(4, $this->idCategoria, PDO::PARAM_INT);
+            $update->bindParam(5, $idProducto, PDO::PARAM_INT);
+            $update->execute();
 
-            // $update->closeCursor();
+            $update->closeCursor();
 
-            // if (!$update) {
-            //     throw new Exception("Ha ocurrido un error al intentar Eliminar");
-            // }
+            if (!$update) {
+                throw new Exception("Ha ocurrido un error al intentar actualizar");
+            }
 
-            // if (!$update->rowCount() > 0) {
-            //     throw new Exception("No se han Eliminado registros");
-            // }
+            if (!$update->rowCount() > 0) {
+                throw new Exception("No se han hecho cambios");
+            }
 
-            // echo json_encode("El producto se elimino correctamente");
+            echo json_encode(["El producto se actualizo correctamente", "success"]);
             
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
