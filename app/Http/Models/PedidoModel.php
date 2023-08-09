@@ -173,7 +173,7 @@ class PedidoModel{
                 echo json_encode($this->getClienteForDoc());
             }
             elseif ($this->nombreProducto!="vacio") {
-                echo json_encode($this->getUserForProduct());
+                echo json_encode($this->getProductForCoincidencia());
             }
 
         } catch (Exception $e) {
@@ -208,12 +208,12 @@ class PedidoModel{
         }
    }
 
-   public function getUserForProduct(){
+   public function getProductForCoincidencia(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
         try {
-            $select = $con->prepare("CALL getProductForName(?)");
+            $select = $con->prepare("CALL getProductForCoincidencia(?)");
             $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
             $select->execute();
 

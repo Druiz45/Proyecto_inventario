@@ -97,7 +97,7 @@ export class Pedido {
 
             if(producto.value.trim() != ""){
                 const indice = (producto.selectedIndex-1);
-                spanValorProducto.innerText = `Valor del producto: ${data[indice].precio}`;
+                spanValorProducto.innerText = `Valor del producto: $${number_format(data[indice].precio)}`;
             }else{
                 spanValorProducto.innerText = "";
             }

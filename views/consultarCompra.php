@@ -42,7 +42,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <?php if ($_SESSION["idPerfil"]==3 || $_SESSION["idPerfil"]==1): ?>
+                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
                                                         <th>Proveedor</th>
                                                     <?php endif; ?>
                                                     <th>Vendedor</th>
@@ -52,17 +52,17 @@
                                                     <th>Anotacion</th>
                                                     <th>Fecha limite</th>
                                                     <th>Estado orden</th>
-                                                    <?php if ($_SESSION["idPerfil"]==3 || $_SESSION["idPerfil"]==1): ?>
+                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
                                                         <th>Fecha del pedido</th>
+                                                        <th>Operaciones</th>
                                                     <?php endif; ?>
-                                                    <th>Operaciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
                                                 <?php foreach ($rows as $row) : ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]==3 || $_SESSION["idPerfil"]==1): ?>
+                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
                                                             <td><?= $row["proveedor"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
@@ -72,10 +72,10 @@
                                                         <td><?= $row["anotacion"] ?></td>
                                                         <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
                                                         <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Pagado" : "Entregado") ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]==3 || $_SESSION["idPerfil"]==1): ?>
+                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
+                                                            <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
                                                         <?php endif; ?>
-                                                        <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
