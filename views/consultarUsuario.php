@@ -69,7 +69,11 @@
                             <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
-                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button></a></td>
+                            <td>
+                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
+                              <?php else: ?> <button type="button" class="btn btn-success" onclick="return habilitar(<?= $row['id'] ?>)">Habilitar</button>
+                              <?php endif; ?>
+                            </td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                           </tr>
