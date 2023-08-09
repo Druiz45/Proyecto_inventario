@@ -58,7 +58,8 @@
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
+                            <td><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Eliminar</button>
+                            <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
