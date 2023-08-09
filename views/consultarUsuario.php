@@ -70,7 +70,7 @@
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
                             <td>
-                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
+                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return deshabilitar(<?= $row['id'] ?>)">Deshabilitar</button>
                               <?php else: ?> <button type="button" class="btn btn-success" onclick="return habilitar(<?= $row['id'] ?>)">Habilitar</button>
                               <?php endif; ?>
                             </td>
@@ -100,7 +100,7 @@
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
   <script>
-    function eliminar(usuario) {
+    function deshabilitar(usuario) {
 
       Swal.fire({
         title: '¿Esta seguro de deshabilitar este usuario?',
