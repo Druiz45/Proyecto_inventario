@@ -5,12 +5,10 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-
-      use App\Http\Models\UsuarioModel;
-
-      $i = 1;
-      $user = new UsuarioModel();
-      $rows = $user->getUsers();
+        use App\Http\Models\UsuarioModel;
+        $i = 1;
+        $user = new UsuarioModel();
+        $rows = $user->getUsers();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->

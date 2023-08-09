@@ -1,5 +1,6 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto } from "./../producto/Producto.js";
+import { number_format } from "./../producto/Producto.js";
 export class Pedido {
 
     getDataFormCreate() {
@@ -189,7 +190,7 @@ function validateAbonoProducto(input) {
 
 // })
 
-function validateAnotacion(input){
+export function validateAnotacion(input){
 
     input.addEventListener("keypress", (e) => {
     
@@ -206,12 +207,3 @@ function validateAnotacion(input){
     
 }
 
-function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
-    number = parseInt(number.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
-    const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
-
-    const regex = /\B(?=(\d{3})+(?!\d))/g;
-    const formattedIntegerPart = integerPart.replace(regex, thousandsSep);
-
-    return decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
-}

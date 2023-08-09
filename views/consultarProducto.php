@@ -5,12 +5,10 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-
-      use App\Http\Models\ProductoModel;
-
-      $i = 1;
-      $producto = new ProductoModel();
-      $rows = $producto->getProductos();
+        use App\Http\Models\ProductoModel;
+        $i = 1;
+        $producto = new ProductoModel();
+        $rows = $producto->getProductos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->

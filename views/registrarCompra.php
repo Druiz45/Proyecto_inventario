@@ -22,13 +22,13 @@
                             <div class="col-md-8">
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Informacion orde de compra</h2>
+                                        <h2>Informacion orden de compra</h2>
                                             <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del provedor" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del proveedor" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <select disabled class="select2_single form-control" id="provedor" name="provedor" tabindex="-1">
+                                                <select disabled class="select2_single form-control" id="proveedor" name="proveedor" tabindex="-1">
                                                 </select>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
@@ -55,7 +55,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row">
                                             <div class="col-md-8 col-sm-8  offset-md-0">
-                                                <button type="submit" class="btn btn-success" id="btn-registrar-pedido">Registrar pedido</button>
+                                                <button type="submit" class="btn btn-success">Registrar pedido</button>
                                             </div>
                                         </div>
                                     </div>
@@ -74,8 +74,8 @@
                                         </div>
                                         <br>
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
-                                            <label for="fecha-limite">Fecha limite de entrega: </label>
-                                            <input type="date" class="form-control has-feedback-left" id="fecha-limite" name="fecha-limite" autocomplete="off">
+                                            <label for="fechaLimite">Fecha limite de entrega: </label>
+                                            <input type="date" class="form-control has-feedback-left" id="fechaLimite" name="fechaLimite" autocomplete="off">
                                             <!-- <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span> -->
                                         </div>
                                         <div class="form-group">

@@ -167,7 +167,7 @@ export function validateNameProducto(input) {
 
 }
 
-function validatePrecio(input) {
+export function validatePrecio(input) {
 
   input.addEventListener("keypress", (e) => {
 
@@ -201,7 +201,7 @@ function validatePrecio(input) {
   });
 }
 
-function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
+export function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
   number = parseInt(number.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
   const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
 

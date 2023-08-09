@@ -26,8 +26,7 @@ class ProductoModel{
 
         try {
                         
-            if(!trim($this->nombreProducto) || !trim($this->idCategoria) || !trim($this->descripcion)
-            || !trim($this->valorProducto)){
+            if(!trim($this->nombreProducto) || !trim($this->idCategoria) || !trim($this->valorProducto)){
 
                 throw new Exception("Porfavor complete todos los campos");
 
@@ -41,6 +40,8 @@ class ProductoModel{
 
             }
 
+            $this->valorProducto = str_replace(['.','$'],"",$this->valorProducto);
+
             $pattern = "/^[0-9]{2,8}+$/";
 
             if( !preg_match($pattern, trim($this->valorProducto)) ){
@@ -49,7 +50,7 @@ class ProductoModel{
 
             }
 
-            $pattern = "/^.{1,100}+$/";
+            $pattern = "/^.{0,100}+$/";
 
             if( !preg_match($pattern, trim($this->descripcion)) ){
 

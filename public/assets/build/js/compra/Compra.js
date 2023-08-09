@@ -1,16 +1,19 @@
+import { validateDoc } from "./../user/User.js";
+import { validateNameProducto } from "./../producto/Producto.js";
+import { validatePrecio } from "./../producto/Producto.js";
+import { validateAnotacion } from "./../pedido/Pedido.js";
 export class Compra {
 
     getDataFormCreate() {
 
         const documento = document.getElementById("documento");
-        const provedor = document.getElementById("provedor");
+        const proveedor = document.getElementById("proveedor");
         const nombreProducto = document.getElementById("nombreProducto");
         const producto = document.getElementById("producto");
-        const spanValorProducto = document.getElementById('valor-producto');
 
         documento.addEventListener("input", () => {
             if (documento.value.trim() != "") {
-                provedor.disabled = false;
+                proveedor.disabled = false;
                 const formData = new FormData();
                 formData.append("documento", documento.value);
                 fetch(`/${url}/compra/getDataFormRegistrar`, {
@@ -20,19 +23,19 @@ export class Compra {
                     .then(respuesta => respuesta.json())
                     .then(data => {
                         if (Array.isArray(data)) {
-                            provedor.innerHTML = `<option value="">Seleccione el provedor</option>`;
+                            proveedor.innerHTML = `<option value="">Seleccione el proveedor</option>`;
                             for (const info of data) {
-                                provedor.innerHTML += `<option value="${info.id}">${info.provedor}</option>`;
+                                proveedor.innerHTML += `<option value="${info.id}">${info.provedor}</option>`;
                             }
                         }
                         else {
-                            provedor.innerHTML = `<option value="">${data}</option>`;
+                            proveedor.innerHTML = `<option value="">${data}</option>`;
                         }
                     })
             }
             else {
-                provedor.disabled = true;
-                provedor.innerHTML = `<option value=""></option>`;
+                proveedor.disabled = true;
+                proveedor.innerHTML = `<option value=""></option>`;
             }
 
         })
@@ -69,7 +72,7 @@ export class Compra {
     }
 
     saveCompra() {
-        const formCreateCompra = document.getElementById('formCreateCompra');
+        // const formCreateCompra = document.getElementById('formCreateCompra');
 
         if (formCreateCompra) {
 
@@ -82,28 +85,22 @@ export class Compra {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        if (data == "Pedido registrado con exito!") {
+                        if (Array.isArray(data)) {
                             Swal.fire({
-                                icon: 'success',
-                                title: data,
-                                // text: data,
+                                icon: data[1],
+                                text: data[0],
                             })
-                            formCreatePedido.reset();
-                            document.getElementById('valor-producto').innerText = "Valor del producto:";
-                        } else if (data == "Error al registrar el pedido") {
+                            formCreateCompra.reset();
+                        } else if (data == "Error") {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
-                                text: data,
+                                text: "Error al registrar la compra",
                             })
-                            formCreatePedido.reset();
-                            document.getElementById('valor-producto').innerText = "Valor del producto:";
+                            formCreateCompra.reset();
                         } else {
-                            console.log(data);
                             Swal.fire({
                                 icon: 'warning',
-                                title: data,
-                                // text: data,
+                                text: data,
                             })
                         }
                     })
@@ -113,4 +110,27 @@ export class Compra {
 
     }
 
+    validateFormData() {
+
+        const formCreateCompra = document.getElementById('formCreateCompra');
+
+        if (formCreateCompra) {
+
+            // const documento = document.getElementById('documento');
+            // const nombreProducto = document.getElementById('nombreProducto');
+            const abonoProducto = document.getElementById('abonoProducto');
+            const anotacion = document.getElementById('anotacion');
+            const valorProducto = document.getElementById("valorProducto");
+
+            validateDoc(documento);
+            validateNameProducto(nombreProducto);
+            validatePrecio(abonoProducto);
+            validateAnotacion(anotacion);
+            validatePrecio(valorProducto);
+        }
+
+    }
+
 }
+
+
