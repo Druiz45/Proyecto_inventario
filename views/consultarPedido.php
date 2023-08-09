@@ -69,11 +69,11 @@
                             <td><?= $row["estadoPedido"] == 0 ? "Pendiente" : ($row["estadoPedido"] == 1 ? "Entregado" : "Anulado")  ?></td>
                             <td><?= $row["estadoAprobacion"] == 0 ? "En espera" : ($row["estadoPedido"] == 1 ? "Aprobado" : "Anulado") ?></td>
                             <td><?= $row["anotacion"] ?></td>
-                            <td><?= $row["abonoTotal"] ?></td>
-                            <td><?= $row["valorComision"] ?></td>
-                            <td><?= $row["valorTotal"] ?></td>
+                            <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
+                            <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
+                            <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td><button type="button" class="btn btn-danger">Eliminar</button><button type="button" class="btn btn-info">Editar</button></td>
+                            <td> <button type="button" class="btn btn-danger">Eliminar</button> <button type="button" class="btn btn-info">Editar</button> </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>

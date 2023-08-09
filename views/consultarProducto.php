@@ -54,11 +54,11 @@
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= $row["producto"] ?></td>
-                            <td><?= $row["precio"] ?></td>
+                            <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Eliminar</button>
+                            <td><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
                             <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a></td>
                           </tr>
                         <?php endforeach; ?>
@@ -88,7 +88,7 @@
     function eliminar(producto) {
 
       Swal.fire({
-        title: '¿Esta seguro de eliminar este producto?',
+        title: '¿Esta seguro de deshabilitar este producto?',
         // text: "You won't be able to revert this!",
         // icon: 'warning',
         showCancelButton: true,
@@ -110,7 +110,7 @@
             })
             .then(respuesta => respuesta.json())
             .then(data => {
-              if (data == "El producto se elimino correctamente") {
+              if (data == "El producto se deshabilito correctamente") {
                 Swal.fire({
                   icon: 'success',
                   title: data,
@@ -119,7 +119,7 @@
                   location.reload();
                 })
 
-              } else if (data == "Ha ocurrido un error al intentar Eliminar") {
+              } else if (data == "Ha ocurrido un error al intentar habilitar") {
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',

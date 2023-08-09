@@ -69,7 +69,7 @@
                             <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
-                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">DesHabilitar</button></a></td>
+                            <td><a><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button></a></td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                           </tr>
@@ -99,7 +99,7 @@
     function eliminar(usuario) {
 
       Swal.fire({
-        title: '¿Esta seguro de eliminar este registro?',
+        title: '¿Esta seguro de deshabilitar este usuario?',
         // text: "You won't be able to revert this!",
         // icon: 'warning',
         showCancelButton: true,
@@ -120,7 +120,7 @@
         })
           .then(respuesta => respuesta.json())
           .then(data => {
-            if (data == "El usuario se elimino correctamente") {
+            if (data == "El usuario se dehabilito correctamente") {
               Swal.fire({
                 icon: 'success',
                 title: data,
@@ -129,7 +129,7 @@
                 location.reload();
               })
 
-            } else if (data == "Ha ocurrido un error al intentar Eliminar") {
+            } else if (data == "Ha ocurrido un error al intentar deshabilitar") {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

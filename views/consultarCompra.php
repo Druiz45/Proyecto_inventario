@@ -67,8 +67,8 @@
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
-                                                        <td><?= $row["valor"] ?></td>
-                                                        <td><?= $row["abono"] ?></td>
+                                                        <td><?= "$".number_format($row["valor"] , 0, '.', '.') ?></td>
+                                                        <td><?= "$".number_format($row["abono"] , 0, '.', '.') ?></td>
                                                         <td><?= $row["anotacion"] ?></td>
                                                         <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
                                                         <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Pagado" : "Entregado") ?></td>
