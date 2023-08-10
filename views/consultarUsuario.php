@@ -70,8 +70,8 @@
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
                             <td>
-                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return deshabilitar(<?= $row['id'] ?>)">Deshabilitar</button>
-                              <?php else: ?> <button type="button" class="btn btn-success" onclick="return habilitar(<?= $row['id'] ?>)">Habilitar</button>
+                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return deshabilitar(<?= $row['id'] ?>, 0)">Deshabilitar</button>
+                              <?php else: ?> <button type="button" class="btn btn-success" onclick="return deshabilitar(<?= $row['id'] ?>, 1)">Habilitar</button>
                               <?php endif; ?>
                             </td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
@@ -100,10 +100,13 @@
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
   <script>
-    function deshabilitar(usuario) {
+    function deshabilitar(usuario, updateMessage) {
+
+      let messagePost = updateMessage == 0 ? 'deshabilitar' : 'habilitar';
+      let message = updateMessage == 0 ? 'deshabilito' : 'habilito';
 
       Swal.fire({
-        title: '¿Esta seguro de deshabilitar este usuario?',
+        title: `¿Esta seguro de ${messagePost} este usuario?`,
         // text: "You won't be able to revert this!",
         // icon: 'warning',
         showCancelButton: true,
@@ -117,14 +120,14 @@
           // window.location = JSON.parse('<?php #json_encode("/" . getUrl($_SERVER['SERVER_NAME']) . "/usuario/delete") ?>');
           const formData = new FormData();
           formData.append('usuario', usuario);
-          formData.append('estado', "deshabilitar");
+          formData.append('estado', messagePost);
           fetch(`/${url}/usuario/delete`, {
           method: "POST",
           body: formData
         })
           .then(respuesta => respuesta.json())
           .then(data => {
-            if (data == "El usuario se dehabilito correctamente") {
+            if (data == `El usuario se ${message} correctamente`) {
               Swal.fire({
                 icon: 'success',
                 title: data,
@@ -133,7 +136,7 @@
                 location.reload();
               })
 
-            } else if (data == "Ha ocurrido un error al intentar deshabilitar") {
+            } else if (data == `Ha ocurrido un error al intentar ${messagePost}`) {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
