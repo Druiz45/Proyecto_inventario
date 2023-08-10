@@ -102,7 +102,7 @@ class PedidoModel{
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $dataProducto = $this->getDataProducto();
+        $precio = $this->getDataProducto();
         $vendedor = $_SESSION['idUser'];
         
         try {
@@ -110,7 +110,7 @@ class PedidoModel{
             $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
-            $insert->bindParam(4, $dataProducto[0]['precio'], PDO::PARAM_INT);
+            $insert->bindParam(4, $precio, PDO::PARAM_INT);
             $insert->bindParam(5, $this->abono, PDO::PARAM_INT);
             $insert->bindParam(6, $this->anotacion, PDO::PARAM_STR);
             $insert->bindParam(7, $this->fechaLimite, PDO::PARAM_STR);
@@ -125,6 +125,40 @@ class PedidoModel{
             }
 
             echo json_encode("Pedido registrado con exito!");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updatePedido($idPedido){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $precio = $this->getDataProducto();
+        
+        try {
+            $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?)");
+            $update->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $update->bindParam(2, $this->cliente, PDO::PARAM_INT);
+            $update->bindParam(3, $precio, PDO::PARAM_INT);
+            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
+            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
+            $update->bindParam(6, $idPedido, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("Error al actualizar el pedido");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se hicieron cambios");
+            }
+
+            echo json_encode("Pedido actualizado con exito!");
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
@@ -153,7 +187,7 @@ class PedidoModel{
 
             }
 
-            return $row;
+            return $row[0]['precio'];
 
         } catch (Exception $e) {
                 return [];
@@ -268,5 +302,33 @@ class PedidoModel{
             die;
         }
    }
+
+   public function getPedido($idPedido){
+    $pdo = new Conexion();
+    $con = $pdo->conexion();
+
+    try {
+        $idPerfil=$_SESSION["idPerfil"];
+
+        $select = $con->prepare("CALL getPedido(?,?)");
+        $select->bindParam(1, $idPedido, PDO::PARAM_INT);
+        $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+        $select->execute();
+
+        $pedido=$select->fetchAll(PDO::FETCH_ASSOC);
+
+        $select->closeCursor();
+
+        if(!$select){
+            throw new Exception("Error");
+        }
+
+        echo json_encode($pedido);
+
+    } catch (Exception $e) {
+        echo json_encode($e->getMessage());
+        die;
+    }
+}
 
 }

@@ -22,4 +22,16 @@ class PedidoController{
         return view('consultarPedido');
     }
 
+    public function editar(){
+        return view('editarPedido');
+    }
+
+    public function getDataFormUpdate(){
+        return view('viewsModels/modelPedido/formUpdate');
+    }
+
+    public function update(){
+        return view('viewCrud/pedido/update');
+    }
+
 }

@@ -73,7 +73,7 @@
                             <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td> <button type="button" class="btn btn-danger">Eliminar</button> <button type="button" class="btn btn-info">Editar</button> </td>
+                            <td> <button type="button" class="btn btn-danger">Eliminar</button> <a href="./editar/?pedido=<?= $row["id"]?>"><button type="button" class="btn btn-info">Editar</button></a> </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
