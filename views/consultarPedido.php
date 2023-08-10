@@ -66,8 +66,8 @@
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
                             <td><?= $row["comisionPaga"] == 0 ? "En espera" : "Paga" ?></td>
-                            <td><?= $row["estadoPedido"] == 0 ? "Pendiente" : ($row["estadoPedido"] == 1 ? "Entregado" : "Anulado")  ?></td>
-                            <td><?= $row["estadoAprobacion"] == 0 ? "En espera" : ($row["estadoPedido"] == 1 ? "Aprobado" : "Anulado") ?></td>
+                            <td><?= $row["estadoPedido"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Entregado" : "Anulado")  ?></td>
+                            <td><?= $row["estadoAprobacion"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Aprobado" : "No aprobado") ?></td>
                             <td><?= $row["anotacion"] ?></td>
                             <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
