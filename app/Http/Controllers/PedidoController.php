@@ -34,4 +34,16 @@ class PedidoController{
         return view('viewCrud/pedido/update');
     }
 
+    public function cambiarEstado(){
+        return view('viewCrud/pedido/updateEstado');
+    }
+
+    public function cambiarAprobacion(){
+        return view('viewCrud/pedido/updateAprobacion');
+    }
+
+    public function pagarComision(){
+        return view('viewCrud/pedido/updatePagoComision');
+    }
+
 }

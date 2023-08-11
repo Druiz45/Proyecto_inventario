@@ -95,15 +95,12 @@ export class Pedido {
                                 icon: 'success',
                                 title: data,
                             })
-                            formUpdatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else if (data == "Error al actualizar el pedido") {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
                                 text: data,
                             })
-                            formUpdatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
                             console.log(data);
@@ -217,7 +214,6 @@ export class Pedido {
                         } else if (data == "Error al registrar el pedido") {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
                                 text: data,
                             })
                             formCreatePedido.reset();

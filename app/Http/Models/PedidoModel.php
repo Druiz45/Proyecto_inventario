@@ -166,6 +166,85 @@ class PedidoModel{
         }
     }
 
+    public function updateAprobacion($estado, $idPedido){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $aprobacion = ($estado=="aprobado") ? 2 : 3;
+        
+        try {
+            $update = $con->prepare("CALL updateAprobacionPedido(?,?)");
+            $update->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $update->bindParam(2, $aprobacion, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update || !$update->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+            echo json_encode("pedido");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updatePagoComision($idPedido){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $update = $con->prepare("CALL updatePagoComision(?)");
+            $update->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("error");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("La comision ya se encuentra pagada");
+            }
+
+            echo json_encode("pedido");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updateEstado($estado, $idPedido){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $estate = ($estado=="entregado") ? 2 : 3;
+        
+        try {
+            $update = $con->prepare("CALL updateEstadoPedido(?,?)");
+            $update->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $update->bindParam(2, $estate, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update || !$update->rowCount() > 0){
+                throw new Exception("error ");
+            }
+
+            echo json_encode("pedido");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
     public function getDataProducto(){
 
         $pdo = new Conexion();

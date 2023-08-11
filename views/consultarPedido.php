@@ -65,15 +65,24 @@
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
-                            <td><?= $row["comisionPaga"] == 0 ? "En espera" : "Paga" ?></td>
+                            <td><?= $row["comisionPaga"] == 0 ? "En espera" : "Pagada" ?></td>
                             <td><?= $row["estadoPedido"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Entregado" : "Anulado")  ?></td>
-                            <td><?= $row["estadoAprobacion"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Aprobado" : "No aprobado") ?></td>
+                            <td><?= $row["estadoAprobacion"] == 1 ? "En espera" : ($row["estadoAprobacion"] == 2 ? "Aprobado" : "No aprobado") ?></td>
                             <td><?= $row["anotacion"] ?></td>
                             <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td> <button type="button" class="btn btn-danger">Eliminar</button> <a href="./editar/?pedido=<?= $row["id"]?>"><button type="button" class="btn btn-info">Editar</button></a> </td>
+                            <td>
+                            <?php if ($row["estadoPedido"]==1): ?>
+                              <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>)">Aprobacion</button>
+                              <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Estado</button>
+                              <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                            <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2): ?>
+                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', )">Comision</button>
+                            <?php endif; ?>
+                            <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>)">Abonos</button>
+                            </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -97,4 +106,5 @@
     const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/pedido/operaciones.js"></script>
 </body>
