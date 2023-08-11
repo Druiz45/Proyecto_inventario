@@ -42,6 +42,12 @@ validateLogin();
                         </li>
                     <?php endif; ?>
                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                        <li><a><i class="fa fa-user"></i>Clientes<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/cliente/registrar">Registrar Cliente</a></li>
+                                <!-- <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/cliente/consultar">Consultar usuarios</a></li> -->
+                            </ul>
+                        </li>
                         <li><a><i class="fa fa-shopping-cart"></i>Pedidos<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/registrar">Registrar pedido</a></li>

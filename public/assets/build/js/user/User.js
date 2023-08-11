@@ -208,76 +208,6 @@ export class User {
       validatePhone(inputCelular);
       validateAddress(inputDireccion);
 
-      function validateName(input) {
-
-        input.addEventListener("keypress", (e) => {
-
-          const tecla = e.key;
-          const textoIngresado = input.value;
-          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-
-          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || textoIngresado.length == 50) {
-            e.preventDefault();
-            input.value = textoIngresado.substring(0, 50);
-          }
-
-        });
-
-      }
-
-
-
-      function validateEmail(input) {
-
-        input.addEventListener("keypress", (e) => {
-
-          const tecla = e.key;
-          // const textoIngresado = inputNombre.value;
-          const patron = /^[a-zA-Z0-9._%+-@]+$/;
-
-          const emailIngresado = input.value;
-
-          if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete" || emailIngresado.length > 100) {
-            e.preventDefault();
-          }
-
-        });
-
-      }
-
-      function validatePhone(input) {
-
-        input.addEventListener("keypress", (e) => {
-
-          const tecla = e.key;
-
-          const celularIngresado = input.value;
-
-          if (isNaN(tecla) || tecla.trim() === "" || celularIngresado.length == 10) {
-            e.preventDefault();
-          }
-
-        });
-
-      }
-
-      function validateAddress(input) {
-
-        input.addEventListener("keypress", (e) => {
-
-          const tecla = e.key;
-          // const textoIngresado = inputNombre.value;
-          const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s0-9-]+$/;
-
-          const direccionIngresada = input.value;
-
-          if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || direccionIngresada.length == 100) {
-            e.preventDefault();
-          }
-
-        });
-
-      }
     }
 
   }
@@ -379,6 +309,77 @@ export class User {
     }
 
   }
+
+}
+
+export function validateName(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    const tecla = e.key;
+    const textoIngresado = input.value;
+    const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
+    if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || textoIngresado.length == 50) {
+      e.preventDefault();
+      input.value = textoIngresado.substring(0, 50);
+    }
+
+  });
+
+}
+
+
+
+export function validateEmail(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    const tecla = e.key;
+    // const textoIngresado = inputNombre.value;
+    const patron = /^[a-zA-Z0-9._%+-@]+$/;
+
+    const emailIngresado = input.value;
+
+    if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete" || emailIngresado.length > 100) {
+      e.preventDefault();
+    }
+
+  });
+
+}
+
+export function validatePhone(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    const tecla = e.key;
+
+    const celularIngresado = input.value;
+
+    if (isNaN(tecla) || tecla.trim() === "" || celularIngresado.length == 10) {
+      e.preventDefault();
+    }
+
+  });
+
+}
+
+export function validateAddress(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    const tecla = e.key;
+    // const textoIngresado = inputNombre.value;
+    const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s0-9-]+$/;
+
+    const direccionIngresada = input.value;
+
+    if (!patron.test(tecla) || !tecla === "Backspace" || !tecla === "Delete" || direccionIngresada.length == 100) {
+      e.preventDefault();
+    }
+
+  });
 
 }
 
