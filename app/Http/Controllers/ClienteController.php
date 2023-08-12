@@ -12,4 +12,12 @@ class ClienteController{
         return view('viewCrud/cliente/create');
     }
 
+    public function consultar(){
+        return view('consultarClientes');
+    }
+
+    public function delete(){
+        return view('viewCrud/cliente/delete');
+    }
+
 }

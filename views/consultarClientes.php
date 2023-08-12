@@ -5,10 +5,10 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\UsuarioModel;
+        use App\Http\Models\ClienteModel;
         $i = 1;
-        $user = new UsuarioModel();
-        $rows = $user->getUsers();
+        $user = new ClienteModel();
+        $rows = $user->getClientes();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -18,7 +18,7 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Informacion de usuarios<small>Usuarios</small></h2>
+              <h2>Informacion de los clientes<small>Clientes</small></h2>
               <!-- <ul class="nav navbar-right panel_toolbox">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -48,11 +48,7 @@
                           <th>Celular</th>
                           <th>Email</th>
                           <th>Direccion</th>
-                          <th>Empresa</th>
-                          <th>Nit</th>
-                          <th>Pefil</th>
                           <th>Operaciones</th>
-                          <th>Ultima sesion</th>
                           <th>Fecha de creacion</th>
                         </tr>
                       </thead>
@@ -66,16 +62,13 @@
                             <td><?= $row["telefono"] ?></td>
                             <td><?= $row["email"] ?></td>
                             <td><?= $row["direccion"] ?></td>
-                            <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
-                            <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
-                            <td><?= $row["perfil"] ?></td>
                             <td>
                               <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>, 0)">Deshabilitar</button>
                               <?php else: ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)">Habilitar</button>
                               <?php endif; ?>
+                              <a href="./editar/?cliente=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
                             </td>
-                            <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
-                            <td><?= getFecha($row["fecha"]) ?></td>
+                            <td><?= getFecha($row["fecha_sys"]) ?></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -98,61 +91,6 @@
   <script>
     const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
   </script>
-  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-  <script>
-    function updateEstado(usuario, updateMessage) {
-
-      let messagePost = updateMessage == 0 ? 'deshabilitar' : 'habilitar';
-      let message = updateMessage == 0 ? 'deshabilito' : 'habilito';
-
-      Swal.fire({
-        title: `¿Esta seguro de ${messagePost} este usuario?`,
-        // text: "You won't be able to revert this!",
-        // icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si',
-        confirmButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        cancelButtonColor: '#3085d6',
-
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // window.location = JSON.parse('<?php #json_encode("/" . getUrl($_SERVER['SERVER_NAME']) . "/usuario/delete") ?>');
-          const formData = new FormData();
-          formData.append('usuario', usuario);
-          formData.append('estado', messagePost);
-          fetch(`/${url}/usuario/delete`, {
-          method: "POST",
-          body: formData
-        })
-          .then(respuesta => respuesta.json())
-          .then(data => {
-            if (data == `El usuario se ${message} correctamente`) {
-              Swal.fire({
-                icon: 'success',
-                title: data,
-                // text: data,
-              }).then(() =>{
-                location.reload();
-              })
-
-            } else if (data == `Ha ocurrido un error al intentar ${messagePost}`) {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: data,
-              })
-
-            } else {
-              Swal.fire({
-                icon: 'warning',
-                title: data,
-                // text: data,
-              })
-            }
-          })
-        }
-      })
-    }
-  </script>
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/cliente/index.js" type="module"></script>
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/cliente/operaciones.js"></script>
 </body>

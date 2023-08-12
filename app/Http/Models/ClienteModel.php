@@ -57,6 +57,32 @@ class ClienteModel{
 
     }
 
+    public function getClientes(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        // $idUser = $_SESSION["idUser"];
+        $idPerfil = $_SESSION['idPerfil'];
+        try {
+            $select = $con->prepare("CALL getClientes(?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+
+                throw new Exception("Error al consultar los clientes");
+            }
+            return ($clientes);
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
     public function validateData(){
 
         try {
@@ -111,6 +137,45 @@ class ClienteModel{
                 throw new Exception("La direccion contine caracteres no permitidos");
             }
 
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
+    public function actualizarEstadoCliente($clienteToUpdate, $estado){
+
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+
+            // $idUser = $_SESSION['idUser'];
+            $idPerfil = $_SESSION['idPerfil'];
+            $state = $estado == "deshabilitar" ? 0 : 1;
+            $message = $estado == "deshabilitar" ? "deshabilito" : "habilito";
+
+            $errorMessage = $estado == "deshabilitar" ? "deshabilitado" : "habilitado";
+
+            $update = $con->prepare("CALL updateEstadoCliente(?,?,?)");
+            $update->bindParam(1, $clienteToUpdate, PDO::PARAM_INT);
+            $update->bindParam(2, $state, PDO::PARAM_INT);
+            $update->bindParam(3, $idPerfil, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if (!$update) {
+                throw new Exception("Ha ocurrido un error al intentar $estado");
+            }
+
+            if (!$update->rowCount() > 0) {
+                throw new Exception("No se $errorMessage clientes");
+            }
+
+            echo json_encode("El cliente se $message correctamente");
+            
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

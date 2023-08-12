@@ -161,10 +161,10 @@ class UsuarioModel
         $con = $pdo->conexion();
 
         $idUser = $_SESSION["idUser"];
+        $idPerfil = $_SESSION['idPerfil'];
         try {
-            $param = 3;
             $select = $con->prepare("CALL getUsers(?,?)");
-            $select->bindParam(1, $param, PDO::PARAM_INT);
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
             $select->bindParam(2, $idUser, PDO::PARAM_INT);
             $select->execute();
 
