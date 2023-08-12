@@ -50,8 +50,9 @@
                           <th>Estado del pedido</th>
                           <th>Estado de aprobacion</th>
                           <th>Anotacion</th>
-                          <th>Abono total</th>
                           <th>Valor comision</th>
+                          <th>Abono total</th>
+                          <th>Valor restante</th>
                           <th>Valor del producto</th>
                           <th>Fecha del pedio</th>
                           <th>Operaciones</th>
@@ -69,19 +70,20 @@
                             <td><?= $row["estadoPedido"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Entregado" : "Anulado")  ?></td>
                             <td><?= $row["estadoAprobacion"] == 1 ? "En espera" : ($row["estadoAprobacion"] == 2 ? "Aprobado" : "No aprobado") ?></td>
                             <td><?= $row["anotacion"] ?></td>
-                            <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
+                            <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
+                            <td><?= "$".number_format(($row["valorTotal"]-$row["abonoTotal"]) , 0, '.', '.') ?></td>
                             <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
                             <?php if ($row["estadoPedido"]==1): ?>
-                              <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>)">Aprobacion</button>
-                              <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Estado</button>
                               <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                              <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row["estadoAprobacion"] ?>)">Aprobacion</button>
+                              <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Estado</button>
                             <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2): ?>
                                 <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', )">Comision</button>
                             <?php endif; ?>
-                            <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>)">Abonos</button>
+                            <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row["valorTotal"]-$row["abonoTotal"]) ?>)">Abonos</button>
                             </td>
                           </tr>
                         <?php endforeach; ?>

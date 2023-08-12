@@ -1,8 +1,12 @@
-function abonos(pedido, estado, aprobacion) {
-    let botonAbonar = false;
+function abonos(pedido, estado, aprobacion, restante) {
+    let botonAbonar=false;
     if (estado == 1 && aprobacion == 2) {
         botonAbonar = true;
     }
+    if (restante==0){
+        botonAbonar=false;
+    }
+    
     Swal.fire({
         icon: 'question',
         title: `¿Que desea hacer?`,
@@ -30,7 +34,6 @@ function abonos(pedido, estado, aprobacion) {
                     })
                 }
             } else if (result.isDenied) {
-
                 Swal.fire({
                     icon: 'question',
                     title: `¿Cuánto desea abonar?`,
@@ -42,47 +45,35 @@ function abonos(pedido, estado, aprobacion) {
                     confirmButtonText: 'Abonar',
                     inputAttributes: {
                         // Agregar el evento oninput
-                        oninput: "number_format(this, 0, '.', '.')"
+                        oninput: "number_format(this)",
+                        style: 'text-align: center;'
                       }
                 }).then((result) => {
-                    
-                    
-                    // if (result.isConfirmed) {
-                    //     const inputValue = result.value;
-
-                    //     // Convertir el valor a número
-                    //     const numericValue = parseFloat(inputValue.replace(',', '')); // Eliminar comas si las hay
-
-                    //     if (!isNaN(numericValue)) {
-                    //         // Formatear el número usando Intl.NumberFormat
-                    //         const formattedValue = new Intl.NumberFormat('es-ES', {
-                    //             style: 'currency',
-                    //             currency: 'EUR'
-                    //         }).format(numericValue);
-
-                    //         Swal.fire(`Usted ha abonado: ${formattedValue}`);
-                    //     } else {
-                    //         Swal.fire('Ingrese un valor numérico válido.');
-                    //     }
-                    // }
-                    
+                    if (result.isConfirmed) {
+                        if (result.value.replace(/[.$]/g, "")<=restante){
+                            abonar(result.value, pedido);
+                        }
+                        else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: "La cantidad de abono supera el precio maximo",
+                            })
+                        }  
+                    }
                 });
-
-
             }
         })
 }
 
-  function number_format(number, decimals = 0, decPoint = '.', thousandsSep = '.') {
-    valor = number.value.replace(/[^\d,-]/g, '');
+  function number_format(input, decimals = 0, decPoint = '.', thousandsSep = '.') {
+    valor = input.value.replace(/[^\d,-]/g, '');
     const valorParseado = parseInt(valor);
     number = parseInt(valorParseado.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
     const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
-  
     const regex = /\B(?=(\d{3})+(?!\d))/g;
     const formattedIntegerPart = integerPart.replace(regex, thousandsSep);
-  
-    number.value=decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
+    input.value="$";
+    input.value+=decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
   }
 
 function pagarComision(pedido, vendedor) {
@@ -105,7 +96,14 @@ function pagarComision(pedido, vendedor) {
         })
 }
 
-function aprobacion(pedido) {
+function aprobacion(pedido, aprobacion) {
+    let noAprobar=true, aprobar=true;
+    if (aprobacion==2){
+        aprobar=false;
+    }
+    else if (aprobacion==3){
+        noAprobar=false;
+    }
     Swal.fire({
         icon: 'question',
         title: `¿Que desea hacer?`,
@@ -114,10 +112,11 @@ function aprobacion(pedido) {
         cancelButtonColor: '#4A4A4A',
         cancelButtonText: 'Calcelar',
 
+        showConfirmButton: aprobar,
         confirmButtonColor: '#00794B',
         confirmButtonText: 'Aprobar',
 
-        showDenyButton: true,
+        showDenyButton: noAprobar,
         denyButtonText: 'No aprobar',
         denyButtonColor: '#A20000',
     })
@@ -226,6 +225,38 @@ function pagar(pedido) {
                 Swal.fire({
                     icon: 'error',
                     text: "Error al pagar la comision",
+                })
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: data,
+                })
+            }
+        })
+}
+
+function abonar(abono, pedido) {
+    console.log(abono);
+    const formData = new FormData();
+    formData.append("pedido", pedido);
+    formData.append("abono", abono);
+    fetch(`/${url}/abono/abonarPedido`, {
+        method: "POST",
+        body: formData
+    })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            if (data == "exito") {
+                Swal.fire({
+                    icon: 'success',
+                    title: `Abono exitoso`,
+                }).then(() => {
+                    location.reload();
+                })
+            } else if (data == "error") {
+                Swal.fire({
+                    icon: 'error',
+                    text: "Error al hacer el abono",
                 })
             } else {
                 Swal.fire({

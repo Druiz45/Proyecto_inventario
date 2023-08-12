@@ -5,7 +5,7 @@ use config\Conexion;
 use PDO;
 use Exception;
 
-class PedidoModel{
+class PedidoModel extends AbonoModel{
 
     protected $documento;
     protected $nombreProducto;
@@ -14,8 +14,10 @@ class PedidoModel{
     protected $abono;
     protected $anotacion;
     protected $fechaLimite;
+    protected $pedido;
 
-    public function __construct($documento="", $nombreProducto="", $cliente="", $producto="", $abono="", $anotacion="", $fechaLimite=""){
+    public function __construct($documento="", $nombreProducto="", $cliente="", $producto="", $abono="",
+    $anotacion="", $fechaLimite="", $pedido=""){
         $this->documento=$documento;
         $this->nombreProducto=$nombreProducto;
         $this->cliente = $cliente;
@@ -23,25 +25,12 @@ class PedidoModel{
         $this->abono = $abono;
         $this->anotacion = $anotacion;
         $this->fechaLimite = $fechaLimite;
+        $this->pedido = $pedido;
     }
 
     public function validateData(){
 
         try {
-
-            // if( !trim($this->documento) || !trim($this->nombreProducto) ){
-
-            //     throw new Exception("Porfavor complete todos los campos");
-
-            // }
-
-            // $pattern = "/^[0-9]{6,12}+$/";
-
-            // if( !preg_match($pattern, trim($this->documento)) ){
-
-            //     throw new Exception("Los documentos deben de contener solo numeros, un minimo de 6 y maximo 12");
-
-            // }
 
             $pattern = "/^[0-9]{1,5}+$/";
 
@@ -98,6 +87,31 @@ class PedidoModel{
 
     }
 
+    public function createAbonoPedido(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $vendedor=$this->getDataVendedor();
+
+        try {
+            $insert = $con->prepare("CALL createAbono(?,?,?)");
+            $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
+            $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if(!$insert || !$insert->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+        } catch (Exception $e) {
+            echo json_encode("error");
+            die;
+        }
+    }
+
     public function savePedido(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -106,23 +120,24 @@ class PedidoModel{
         $vendedor = $_SESSION['idUser'];
         
         try {
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?)");
             $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
             $insert->bindParam(4, $precio, PDO::PARAM_INT);
-            $insert->bindParam(5, $this->abono, PDO::PARAM_INT);
-            $insert->bindParam(6, $this->anotacion, PDO::PARAM_STR);
-            $insert->bindParam(7, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
-
+            
             if(!$insert || !$insert->rowCount() > 0){
-
                 throw new Exception("Error al registrar el pedido");
-
             }
+
+            $this->pedido = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
+
+            $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
 
