@@ -24,15 +24,7 @@ function abonos(pedido, estado, aprobacion, restante) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                if (estado == 1) {
-                    window.location.assign("");
-                }
-                else {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: "No es posible hacer abonos",
-                    })
-                }
+                window.location.assign(`../abono/consultar/?pedido=${pedido}`);
             } else if (result.isDenied) {
                 Swal.fire({
                     icon: 'question',
@@ -50,15 +42,19 @@ function abonos(pedido, estado, aprobacion, restante) {
                       }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        if (result.value.replace(/[.$]/g, "")<=restante){
+                        try {
+
+                            if (result.value.replace(/[.$]/g, "")>restante) {
+                                throw new Error("La cantidad de abono supera el precio maximo");
+                            }
+        
                             abonar(result.value, pedido);
-                        }
-                        else{
+                        } catch (error) {
                             Swal.fire({
                                 icon: 'error',
-                                title: "La cantidad de abono supera el precio maximo",
+                                title: error.message,
                             })
-                        }  
+                        }
                     }
                 });
             }
@@ -129,7 +125,7 @@ function aprobacion(pedido, aprobacion) {
         })
 }
 
-function estado(pedido, aprobacion) {
+function estado(pedido, aprobacion, restante) {
 
     Swal.fire({
         icon: 'question',
@@ -148,15 +144,23 @@ function estado(pedido, aprobacion) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                if (aprobacion == 2) {
-                    updateEstate(pedido, "entregado", "cambiarEstado");
-                }
-                else {
+                
+                try {
+                    if (aprobacion!=2) {
+                        throw new Error("No es posible cambiar el estado del pedido a entregado sin antes haberlo aprobado");
+                    }
+                    if (restante!=0){
+                        throw new Error("No es posible entregar el producto sin antes pagarlo por completo");
+                    }
+
+                   updateEstate(pedido, "entregado", "cambiarEstado");
+                } catch (error) {
                     Swal.fire({
                         icon: 'warning',
-                        title: "No es posible cambiar el estado del pedido a entregado sin antes haberlo aprobado",
+                        title: error.message,
                     })
                 }
+                   
             } else if (result.isDenied) {
                 updateEstate(pedido, "anulado", "cambiarEstado");
             }

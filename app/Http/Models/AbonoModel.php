@@ -21,7 +21,7 @@ class AbonoModel{
         
         $this->abono = str_replace(['.','$'],"",$this->abono);
 
-        $vendedor=$this->getDataVendedor();
+        $vendedor=$_SESSION["idUser"];
 
         try {
             $insert = $con->prepare("CALL createAbono(?,?,?)");
@@ -44,16 +44,16 @@ class AbonoModel{
         }
     }
 
-    public function getDataVendedor(){
+    public function getAbonos($pedido){
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
-            $select = $con->prepare("CALL getVendedor(?)");
-            $select->bindParam(1, $this->pedido, PDO::PARAM_INT);
+            $select = $con->prepare("CALL getAbonos(?)");
+            $select->bindParam(1, $pedido, PDO::PARAM_INT);
             $select->execute();
 
-            $dataVendedor=$select->fetchAll(PDO::FETCH_ASSOC);
+            $abonos=$select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
@@ -61,10 +61,10 @@ class AbonoModel{
                 throw new Exception("error");
             }
 
-            return $dataVendedor[0]["id"];
+            return $abonos;
 
         } catch (Exception $e) {
-            return ["error"];
+            return [];
             die;
         }
     }

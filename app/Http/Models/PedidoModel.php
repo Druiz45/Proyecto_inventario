@@ -5,7 +5,7 @@ use config\Conexion;
 use PDO;
 use Exception;
 
-class PedidoModel extends AbonoModel{
+class PedidoModel {
 
     protected $documento;
     protected $nombreProducto;
@@ -90,8 +90,8 @@ class PedidoModel extends AbonoModel{
     public function createAbonoPedido(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
-
-        $vendedor=$this->getDataVendedor();
+        
+        $vendedor=$_SESSION["idUser"];
 
         try {
             $insert = $con->prepare("CALL createAbono(?,?,?)");

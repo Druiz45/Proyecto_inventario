@@ -76,14 +76,23 @@
                             <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
-                            <?php if ($row["estadoPedido"]==1): ?>
-                              <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
-                              <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row["estadoAprobacion"] ?>)">Aprobacion</button>
-                              <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Estado</button>
-                            <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2): ?>
-                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', )">Comision</button>
-                            <?php endif; ?>
-                            <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row["valorTotal"]-$row["abonoTotal"]) ?>)">Abonos</button>
+
+                              <?php if ($row["estadoPedido"]==1): ?>
+                                
+                                <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                
+                                <?php if ($_SESSION["idPerfil"]==3): ?>
+                                  <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row["estadoAprobacion"] ?>)">Aprobacion</button>
+                                <?php endif; ?>
+
+                                <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row["valorTotal"]-$row["abonoTotal"]) ?>)">Estado</button>
+
+                              <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2 && $_SESSION["idPerfil"]==3): ?>
+                                  <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', )">Comision</button>
+                              <?php endif; ?>
+
+                              <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row["valorTotal"]-$row["abonoTotal"]) ?>)">Abonos</button>
+
                             </td>
                           </tr>
                         <?php endforeach; ?>
