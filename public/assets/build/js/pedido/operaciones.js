@@ -244,7 +244,7 @@ function abonar(abono, pedido) {
     const formData = new FormData();
     formData.append("pedido", pedido);
     formData.append("abono", abono);
-    fetch(`/${url}/abono/abonarPedido`, {
+    fetch(`/${url}/abono/create`, {
         method: "POST",
         body: formData
     })

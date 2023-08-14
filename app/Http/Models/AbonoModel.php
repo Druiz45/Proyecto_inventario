@@ -15,11 +15,31 @@ class AbonoModel{
         $this->pedido = $pedido;
     }
 
+    public function validateData(){
+        try {
+           
+            $this->abono = str_replace(['.','$'],"",$this->abono);
+
+            $pattern = "/^[0-9]{1,8}+$/";
+            if( !preg_match($pattern, trim($this->abono)) ){
+                throw new Exception("El valor del abono no es valido");
+            }
+
+            $pattern = "/^[0-9]{1,4}+$/";
+            if( !preg_match($pattern, trim($this->pedido)) ){
+                throw new Exception("El pedido no es valido");
+            }
+        
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
     public function createAbono(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        
-        $this->abono = str_replace(['.','$'],"",$this->abono);
 
         $vendedor=$_SESSION["idUser"];
 

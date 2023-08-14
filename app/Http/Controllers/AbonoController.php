@@ -8,8 +8,8 @@ class AbonoController{
         return view('consultarAbonos');
     }
 
-    public function abonarPedido(){
-        return view('viewCrud/abono/createAbono');
+    public function create(){
+        return view('viewCrud/abono/create');
     }
 
 }

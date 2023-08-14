@@ -181,7 +181,31 @@ class PedidoModel {
         }
     }
 
-    public function updateAprobacion($estado, $idPedido){
+    public function validateDataEstado($estado, $pedido){
+
+        $estate = ($estado=="aprobado") ? 2 : 3;
+
+        $mensaje = ($estado=="aprobado") ? "La aprobacion no es valida" : "El estado no es valido";
+
+        try {
+
+            $pattern = "/^[0-9]{1,1}+$/";
+            if(!preg_match($pattern, trim($estate)) ){
+                throw new Exception($mensaje);
+            }
+
+            $pattern = "/^[0-9]{1,6}+$/";
+            if(!preg_match($pattern, trim($pedido)) ){
+                throw new Exception("El pedido no es valido");
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updateAprobacion($estado, $pedido){
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
@@ -189,7 +213,7 @@ class PedidoModel {
         
         try {
             $update = $con->prepare("CALL updateAprobacionPedido(?,?)");
-            $update->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $update->bindParam(1, $pedido, PDO::PARAM_INT);
             $update->bindParam(2, $aprobacion, PDO::PARAM_INT);
             $update->execute();
 
@@ -223,7 +247,7 @@ class PedidoModel {
             }
 
             if(!$update->rowCount() > 0){
-                throw new Exception("La comision ya se encuentra pagada");
+                throw new Exception("No se ha realizado ningun cambio en el estado del pago");
             }
 
             echo json_encode("pedido");

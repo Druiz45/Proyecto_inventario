@@ -18,7 +18,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Informacion de pedidos<small>Pedidos</small></h2>
+                            <h2>Informacion orden de compra<small>Ordenes de compra</small></h2>
                             <!-- <ul class="nav navbar-right panel_toolbox">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>

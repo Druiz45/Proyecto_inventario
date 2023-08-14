@@ -53,7 +53,7 @@
                             <td><?= $i++ ?></td>
                             <td><?= "$".number_format($row["abono"] , 0, '.', '.') ?></td>
                             <td><?= $row["vendedor"] ?></td>
-                            <td><?= $row["fecha_sys"] ?></td>
+                            <td><?= getFecha($row["fecha_sys"]); ?></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>

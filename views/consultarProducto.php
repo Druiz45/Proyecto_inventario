@@ -58,8 +58,13 @@
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
-                            <td><button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
-                            <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a></td>
+                            <td>
+                              <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
+                              <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                              <?php if ($row["estado_inventario"]==0): ?>
+                                <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= $row['producto'] ?>')">Añadir a inventario</button>
+                              <?php endif; ?>
+                            </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -83,59 +88,6 @@
     const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/index.js" type="module"></script>
-  <script>
-    function eliminar(producto) {
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/operaciones.js"></script>
 
-      Swal.fire({
-        title: '¿Esta seguro de deshabilitar este producto?',
-        // text: "You won't be able to revert this!",
-        // icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si',
-        confirmButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        cancelButtonColor: '#3085d6',
-
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // window.location = JSON.parse('<?php #json_encode("/" . getUrl($_SERVER['SERVER_NAME']) . "/usuario/delete") 
-                                            ?>');
-          const formData = new FormData();
-          formData.append('producto', producto);
-          formData.append('estado', "deshabilitar");
-          fetch(`/${url}/producto/delete`, {
-              method: "POST",
-              body: formData
-            })
-            .then(respuesta => respuesta.json())
-            .then(data => {
-              if (data == "El producto se deshabilito correctamente") {
-                Swal.fire({
-                  icon: 'success',
-                  title: data,
-                  // text: data,
-                }).then(() => {
-                  location.reload();
-                })
-
-              } else if (data == "Ha ocurrido un error al intentar habilitar") {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: data,
-                })
-
-              } else {
-                Swal.fire({
-                  icon: 'warning',
-                  title: data,
-                  // text: data,
-                })
-              }
-            })
-        }
-      })
-    }
-  </script>
 </body>

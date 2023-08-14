@@ -76,6 +76,11 @@ validateLogin();
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar productos</a></li>
                             </ul>
                         </li>
+                        <li><a><i class="fa fa-cubes"></i>Inventario<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar inventario</a></li>
+                            </ul>
+                        </li>
                     <?php endif; ?>
                     <?php if ($_SESSION["idPerfil"] == 2) : ?>
                         <li><a><i class="fa fa-outdent"></i>Compras<span class="fa fa-chevron-down"></span></a>
