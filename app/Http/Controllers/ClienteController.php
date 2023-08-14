@@ -20,4 +20,16 @@ class ClienteController{
         return view('viewCrud/cliente/delete');
     }
 
+    public function editar(){
+        return view('editarCliente');
+    }
+
+    public function update(){
+        return view('viewCrud/cliente/update'); 
+    }
+
+    public function dataFormUpdate(){
+        return view('viewsModels/modelCliente/formUpdate');
+    }
+
 }

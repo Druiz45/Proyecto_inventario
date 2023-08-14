@@ -26,63 +26,6 @@ class ClienteModel{
         
     }
 
-    public function createCliente(){
-
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-
-        try {
-
-            $insert = $con->prepare("CALL createCliente(?,?,?,?,?,?)");
-            $insert->bindParam(1, $this->documento, PDO::PARAM_STR);
-            $insert->bindParam(2, $this->nombres, PDO::PARAM_STR);
-            $insert->bindParam(3, $this->apellidos, PDO::PARAM_STR);
-            $insert->bindParam(4, $this->email, PDO::PARAM_STR);
-            $insert->bindParam(5, $this->celular, PDO::PARAM_STR);
-            $insert->bindParam(6, $this->direccion, PDO::PARAM_STR);
-            $insert->execute();
-
-            $insert->closeCursor();
-
-            if (!$insert || !$insert->rowCount() > 0) {
-
-                throw new Exception("ERROR AL REGISTAR EL CLIENTE");
-            }
-
-            echo json_encode("Cliente registrado exitosamente!");
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-
-    }
-
-    public function getClientes(){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-
-        // $idUser = $_SESSION["idUser"];
-        $idPerfil = $_SESSION['idPerfil'];
-        try {
-            $select = $con->prepare("CALL getClientes(?)");
-            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
-            $select->execute();
-
-            $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
-
-            $select->closeCursor();
-
-            if (!$select) {
-
-                throw new Exception("Error al consultar los clientes");
-            }
-            return ($clientes);
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-    }
-
     public function validateData(){
 
         try {
@@ -143,6 +86,132 @@ class ClienteModel{
         }
 
     }
+
+    public function createCliente(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $insert = $con->prepare("CALL createCliente(?,?,?,?,?,?)");
+            $insert->bindParam(1, $this->documento, PDO::PARAM_STR);
+            $insert->bindParam(2, $this->nombres, PDO::PARAM_STR);
+            $insert->bindParam(3, $this->apellidos, PDO::PARAM_STR);
+            $insert->bindParam(4, $this->email, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->celular, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->direccion, PDO::PARAM_STR);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if (!$insert || !$insert->rowCount() > 0) {
+
+                throw new Exception("ERROR AL REGISTAR EL CLIENTE");
+            }
+
+            echo json_encode("Cliente registrado exitosamente!");
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
+    public function updateCliente($cliente){
+
+        try {
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+
+            // $idUser = $_SESSION['idUser'];
+            $idPerfil = $_SESSION['idPerfil'];
+
+            $update = $con->prepare("CALL updateCliente(?,?,?,?,?,?,?,?)");
+            $update->bindParam(1, $this->documento, PDO::PARAM_STR);
+            $update->bindParam(2, $this->nombres, PDO::PARAM_STR);
+            $update->bindParam(3, $this->apellidos, PDO::PARAM_STR);
+            $update->bindParam(4, $this->email, PDO::PARAM_STR);
+            $update->bindParam(5, $this->celular, PDO::PARAM_STR);
+            $update->bindParam(6, $this->direccion, PDO::PARAM_STR);
+            $update->bindParam(7, $cliente, PDO::PARAM_INT);
+            $update->bindParam(8, $idPerfil, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if (!$update) {
+                throw new Exception("Ha ocurrido un error al intentar actualizar");
+            }
+
+            if (!$update->rowCount() > 0) {
+                throw new Exception("No se han realizado cambios");
+            }
+
+            echo json_encode("Los datos del cliente se han actualizado corretamente!");
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getClientes(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        // $idUser = $_SESSION["idUser"];
+        $idPerfil = $_SESSION['idPerfil'];
+        try {
+            $select = $con->prepare("CALL getClientes(?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+
+                throw new Exception("Error al consultar los clientes");
+            }
+            return ($clientes);
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getDataClienteToUpdate($idCliente){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        // $idUser = $_SESSION["idUser"];
+        $idPerfil = $_SESSION['idPerfil'];
+        try {
+            $select = $con->prepare("CALL getDataClienteToUpdate(?,?)");
+            $select->bindParam(1, $idCliente, PDO::PARAM_INT);
+            $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $dataCliente = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+
+                throw new Exception("Error al consultar los datos del cliente");
+            }
+            echo json_encode($dataCliente);
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
+
 
     public function actualizarEstadoCliente($clienteToUpdate, $estado){
 
