@@ -10,7 +10,7 @@ class InventarioModel{
     protected $producto;
     protected $stock;
 
-    public function __construct($producto = "", $stock = ""){
+    public function __construct($stock = "", $producto = ""){
         $this->producto = $producto;
         $this->stock = $stock;
     }
@@ -47,7 +47,60 @@ class InventarioModel{
             echo json_encode("error");
             die;
         }
+    }
 
+    public function updateEstateInventario(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $update = $con->prepare("CALL updateEstateInventario(?,?)");
+            $update->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $update->bindParam(2, $this->producto, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update || !$update->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode("error");
+            die;
+        }
+    }
+
+    public function getInventario(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $idPefil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL getInventario(?)");
+            $select->bindParam(1, $idPefil, PDO::PARAM_INT);
+            $select->execute();
+
+            $inventario=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+                throw new Exception("error");
+            }
+            
+            return $inventario;
+
+        } catch (Exception $e) {
+            return [];
+            die;
+        }
     }
 
 }

@@ -45,6 +45,7 @@
                           <th>Precio</th>
                           <th>Categoria</th>
                           <th>Descripcion</th>
+                          <th>Inventario</th>
                           <th>Fecha</th>
                           <th>Operaciones</th>
                         </tr>
@@ -57,6 +58,7 @@
                             <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
                             <td><?= $row["categoria"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
+                            <td><?= $row["estado_inventario"]==0 ? "Sin añadir" : "Añadido" ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
                               <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>

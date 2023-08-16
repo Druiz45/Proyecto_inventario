@@ -70,7 +70,7 @@ validateLogin();
                                 <li><a href="./">Consultar ingresos</a></li>
                             </ul>
                         </li>
-                        <li><a><i class="fa fa-cubes"></i>Producto<span class="fa fa-chevron-down"></span></a>
+                        <li><a><i class="fa fa-archive"></i>Producto<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/registrar">Registrar producto</a></li>
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar productos</a></li>
@@ -78,7 +78,7 @@ validateLogin();
                         </li>
                         <li><a><i class="fa fa-cubes"></i>Inventario<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/producto/consultar">Consultar inventario</a></li>
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/inventario/consultar">Consultar inventario</a></li>
                             </ul>
                         </li>
                     <?php endif; ?>

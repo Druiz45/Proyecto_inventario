@@ -55,7 +55,7 @@ class CompraModel{
     $con = $pdo->conexion();
     
     try {
-        $select = $con->prepare("CALL getProductForName(?)");
+        $select = $con->prepare("CALL getProductForCoincidencia(?)");
         $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
         $select->execute();
 
@@ -76,7 +76,6 @@ class CompraModel{
 }
 
     public function getProvedoresForDoc(){
-
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
@@ -100,6 +99,62 @@ class CompraModel{
             die;
         }
 
+    }
+
+    public function updateCompra(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?)");
+            $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
+            $update->bindParam(2, $this->producto, PDO::PARAM_INT);
+            $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
+            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
+            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("error");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se hicieron cambios");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getCompra($compra){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $select = $con->prepare("CALL getCompra(?)");
+            $select->bindParam(1, $compra, PDO::PARAM_STR);
+            $select->execute();
+
+            $compra=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+                throw new Exception("No encontrado");
+            }
+
+            echo json_encode($compra);
+
+        } catch (Exception $e) {
+            json_encode($e->getMessage());
+            die;
+        }
     }
 
     public function validateDataCompra(){
