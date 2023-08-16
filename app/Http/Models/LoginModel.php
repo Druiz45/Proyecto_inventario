@@ -18,18 +18,18 @@ class LoginModel extends UsuarioModel {
     protected $fechaCreacion;
     protected $getPass;
 
-    public function __construct($email = "", $getPass = "", $documento = "", $pass = "", $passEncrypt = "", $usuario = "",
-    $idUser = "", $idPerfil = "", $ultimoLog = "", $fechaCreacion = ""){
+    public function __construct($email = "", $getPass = "", /*$documento = "", $pass = "", $passEncrypt = "", $usuario = "",
+    $idUser = "", $idPerfil = "", $ultimoLog = "", $fechaCreacion = ""*/){
         
-        $this->documento = $documento;
-        $this->pass = $pass;
+        // $this->documento = $documento;
+        // $this->pass = $pass;
         $this->email = $email;
-        $this->passEncrypt = $passEncrypt;
-        $this->usuario = $usuario;
-        $this->idUser = $idUser;
-        $this->idPerfil = $idPerfil;
-        $this->ultimoLog = $ultimoLog;
-        $this->fechaCreacion = $fechaCreacion;
+        // $this->passEncrypt = $passEncrypt;
+        // $this->usuario = $usuario;
+        // $this->idUser = $idUser;
+        // $this->idPerfil = $idPerfil;
+        // $this->ultimoLog = $ultimoLog;
+        // $this->fechaCreacion = $fechaCreacion;
         $this->getPass = $getPass;
 
     }
