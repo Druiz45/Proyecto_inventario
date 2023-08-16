@@ -10,4 +10,9 @@ class CategoriaController{
         return view('consultarCategoria');
     }
 
+    public function update(){
+        // return new Response('public');
+        return view('viewCrud/categoria/update');
+    }
+
 }

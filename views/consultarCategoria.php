@@ -54,10 +54,10 @@
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= $row["categoria"] ?></td>
-                            <td><?= getFecha($row["fecha"]) ?></td>
+                            <td><?= getFecha($row["fecha_sys"]) ?></td>
                             <td>
-                              <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
-                              <a href="./editar/?categoria=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                              <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>)">Deshabilitar</button>
+                              <button type="button" class="btn btn-info" onclick="return editar('<?= $row['categoria'] ?>', <?= $row['id'] ?>)">Editar</button>
                             </td>
                           </tr>
                         <?php endforeach; ?>
@@ -78,10 +78,11 @@
     </div>
   </div>
   <?php require_once("./../views/includes/scripts.php"); ?>
-  <!-- <script>
+  <script>
     const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/operaciones.js"></script> -->
+  <!-- <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/operaciones.js"></script> -->
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/categoria/operaciones.js"></script>
 
 </body>
