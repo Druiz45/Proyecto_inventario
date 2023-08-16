@@ -5,10 +5,10 @@
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
             <?php
-                use App\Http\Models\CompraModel;
+                use App\Http\Models\InventarioModel;
                 $i = 1;
-                $compra = new CompraModel();
-                $rows = $compra->getCompras();
+                $inventario = new InventarioModel();
+                $rows = $inventario->getInventario();
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -18,7 +18,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Informacion orden de compra<small>Ordenes de compra</small></h2>
+                            <h2>Informacion de inventario<small>Inventario</small></h2>
                             <!-- <ul class="nav navbar-right panel_toolbox">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -42,45 +42,18 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
-                                                        <th>Proveedor</th>
-                                                    <?php endif; ?>
-                                                    <th>Vendedor</th>
-                                                    <th>Producto</th>
-                                                    <th>Valor producto</th>
-                                                    <th>Valor compra</th>
-                                                    <th>Abono</th>
-                                                    <th>Anotacion</th>
-                                                    <th>Fecha limite</th>
-                                                    <th>Estado orden</th>
-                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
-                                                        <th>Fecha del pedido</th>
-                                                        <th>Operaciones</th>
-                                                    <?php endif; ?>
+                                                    <th>Produco</th>
+                                                    <th>Stock</th>
+                                                    <th>Fecha</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
                                                 <?php foreach ($rows as $row) : ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
-                                                            <td><?= $row["proveedor"] ?></td>
-                                                        <?php endif; ?>
-                                                        <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
-                                                        <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
-                                                        <td><?= "$".number_format($row["valor"] , 0, '.', '.') ?></td>
-                                                        <td><?= "$".number_format($row["abono"] , 0, '.', '.') ?></td>
-                                                        <td><?= $row["anotacion"] ?></td>
-                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
-                                                        <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Recibido" : "Pagado") ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
-                                                            <td><?= getFecha($row["fecha_sys"]) ?></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-danger">Eliminar</button>
-                                                               <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
-                                                            </td>
-                                                        <?php endif; ?>
+                                                        <td><?= $row["stock"] ?></td>
+                                                        <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

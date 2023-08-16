@@ -10,4 +10,6 @@ $inventario->validateData();
 
 $inventario->create();
 
+$inventario->updateEstateInventario();
+
 ?>

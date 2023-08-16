@@ -75,19 +75,18 @@ function agregarInventario(producto, nombre) {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        if (data == "El producto se deshabilito correctamente") {
+                        if (data=="exito") {
                             Swal.fire({
                                 icon: 'success',
-                                title: data,
+                                title: "Añadido a inventario",
                             }).then(() => {
                                 location.reload();
                             })
 
-                        } else if (data == "Ha ocurrido un error al intentar habilitar") {
+                        } else if (data == "error") {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
-                                text: data,
+                                text: "Error al añadir al inventario",
                             })
 
                         } else {
