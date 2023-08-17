@@ -1,5 +1,4 @@
 <?php
-    session_start();
     validateLogOut();
 ?>
 <body class="login">

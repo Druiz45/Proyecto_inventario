@@ -1,5 +1,4 @@
 <?php
-session_start();
 validateLogin();
 ?>
 <div class="col-md-3 left_col">
