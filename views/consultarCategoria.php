@@ -6,11 +6,11 @@
       <!-- top navigation -->
       <?php
 
-    use App\Http\Models\CategoriaModel;
-    
-        $i = 1;
-        $categorias = new CategoriaModel();
-        $rows = $categorias->getCategorias();
+      use App\Http\Models\CategoriaModel;
+
+      $i = 1;
+      $categorias = new CategoriaModel();
+      $rows = $categorias->getCategorias();
 
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
@@ -39,7 +39,6 @@
                     <!-- <p class="text-muted font-13 m-b-30">
                       Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
                     </p> -->
-
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -63,6 +62,11 @@
                         <?php endforeach; ?>
                       </tbody>
                     </table>
+                    <!-- <div class="form-group row align-items-center justify-content-center"> -->
+                    <div class="col-md-3 col-sm-6  form-group has-feedback">
+                      <button type="button" class="btn btn-success" id="btn-crear-categoria">Añadir</button>
+                    </div>
+                    <!-- </div> -->
                   </div>
                 </div>
               </div>
@@ -82,7 +86,7 @@
     const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
   </script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-  <!-- <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/producto/operaciones.js"></script> -->
+  <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/categoria/index.js" type="module"></script>
   <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/categoria/operaciones.js"></script>
 
 </body>

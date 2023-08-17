@@ -14,6 +14,58 @@ class CategoriaModel{
         $this->nombre = $nombre;
     }
 
+    public function validateData(){
+
+        try {
+                        
+            if( !trim($this->nombre) ){
+
+                throw new Exception("El nombre de la categoria no puede ser vacio");
+
+            }
+
+            $pattern = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]{1,50}$/";
+
+            if( !preg_match($pattern, trim($this->nombre)) ){
+
+                throw new Exception("El nombre de la categoria no puede pasar de 50 caracteres");
+
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
+    public function createCategoria(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $insert = $con->prepare("CALL createCategoria(?)");
+            $insert->bindParam(1, $this->nombre, PDO::PARAM_STR);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if(!$insert || !$insert->rowCount() > 0){
+
+                throw new Exception("Error al registrar la categoria");
+
+            }
+
+            echo json_encode("Categoria registrada");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
     public function getCategorias(){
 
         try {
