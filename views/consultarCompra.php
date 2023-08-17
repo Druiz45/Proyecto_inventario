@@ -5,10 +5,12 @@
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
             <?php
-                use App\Http\Models\CompraModel;
-                $i = 1;
-                $compra = new CompraModel();
-                $rows = $compra->getCompras();
+
+            use App\Http\Models\CompraModel;
+
+            $i = 1;
+            $compra = new CompraModel();
+            $rows = $compra->getCompras();
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -42,7 +44,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
+                                                    <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                         <th>Proveedor</th>
                                                     <?php endif; ?>
                                                     <th>Vendedor</th>
@@ -53,7 +55,7 @@
                                                     <th>Anotacion</th>
                                                     <th>Fecha limite</th>
                                                     <th>Estado orden</th>
-                                                    <?php if ($_SESSION["idPerfil"]!=2): ?>
+                                                    <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                         <th>Fecha del pedido</th>
                                                         <th>Operaciones</th>
                                                     <?php endif; ?>
@@ -63,22 +65,30 @@
                                                 <?php foreach ($rows as $row) : ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
+                                                        <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= $row["proveedor"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
-                                                        <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
-                                                        <td><?= "$".number_format($row["valor"] , 0, '.', '.') ?></td>
-                                                        <td><?= "$".number_format($row["abono"] , 0, '.', '.') ?></td>
+                                                        <td><?= "$" . number_format($row["precio"], 0, '.', '.') ?></td>
+                                                        <td><?= "$" . number_format($row["valor"], 0, '.', '.') ?></td>
+                                                        <td><?= "$" . number_format($row["abono"], 0, '.', '.') ?></td>
                                                         <td><?= $row["anotacion"] ?></td>
                                                         <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
-                                                        <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Recibido" : "Pagado") ?></td>
-                                                        <?php if ($_SESSION["idPerfil"]!=2): ?>
+                                                        <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Recibido" : ($row["estado_orden"] == 3 ? "Pagado" : "Anulado")) ?></td>
+                                                        <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-danger">Eliminar</button>
-                                                               <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                                                <?php if ($row['estado_orden']==3) : ?>
+                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-success">Recibir</button>
+                                                                <?php endif; ?>
+                                                                
+                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>)" class="btn btn-dark">Abonos</button>
+
+                                                                <?php if ($row['estado_orden']==1) : ?>
+                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>
+                                                                    <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                                                <?php endif; ?>
                                                             </td>
                                                         <?php endif; ?>
                                                     </tr>
@@ -104,4 +114,5 @@
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/compra/operaciones.js"></script>
 </body>

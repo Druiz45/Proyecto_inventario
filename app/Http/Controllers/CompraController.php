@@ -24,6 +24,10 @@ class CompraController{
         return view('consultarCompra');
     }
 
+    public function updateEstate(){
+        return view('viewCrud/compra/updateEstado');
+    }
+
     public function edit(){
         return view('editarCompra');
     }

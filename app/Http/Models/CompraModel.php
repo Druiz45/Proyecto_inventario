@@ -101,17 +101,48 @@ class CompraModel{
 
     }
 
-    public function updateCompra(){
+    public function updateEstate($estado, $compra){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $estate = ($estado == "Recibir") ? 2 : (($estado == "Pagar") ? 3 : 4);
+
+        try {
+            $update = $con->prepare("CALL updateEstateCompra(?,?)");
+            $update->bindParam(1, $estate, PDO::PARAM_INT);
+            $update->bindParam(2, $compra, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("error");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se hicieron cambios");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updateCompra($compra){
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
         try {
-            $update = $con->prepare("CALL updateCompra(?,?,?,?,?)");
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?)");
             $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
             $update->bindParam(2, $this->producto, PDO::PARAM_INT);
             $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
             $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
             $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
+            $update->bindParam(6, $compra, PDO::PARAM_INT);
             $update->execute();
 
             $update->closeCursor();

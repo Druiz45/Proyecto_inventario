@@ -103,6 +103,7 @@ class ProductoModel{
             // $idUser = $_SESSION['idUser'];
             $idPerfil = $_SESSION['idPerfil'];
             $state = $estado == "deshabilitar" ? 0 : 1;
+            $mensaje = $estado == "deshabilitar" ? "deshabilito" : "habilito";
 
             $update = $con->prepare("CALL updateEstadoProducto(?,?,?)");
             $update->bindParam(1, $state, PDO::PARAM_INT);
@@ -113,14 +114,14 @@ class ProductoModel{
             $update->closeCursor();
 
             if (!$update) {
-                throw new Exception("Ha ocurrido un error al intentar Eliminar");
+                throw new Exception("Ha ocurrido un error");
             }
 
             if (!$update->rowCount() > 0) {
-                throw new Exception("No se han Eliminado registros");
+                throw new Exception("No se $mensaje ningun producto");
             }
 
-            echo json_encode("El producto se elimino correctamente");
+            echo json_encode("El producto se $mensaje correctamente");
             
         } catch (Exception $e) {
             echo json_encode($e->getMessage());

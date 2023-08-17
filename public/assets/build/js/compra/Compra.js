@@ -187,7 +187,7 @@ export class Compra {
                 const gets = window.location.search;
                 const params = new URLSearchParams(gets);
                 const compra = params.get('compra');
-                formData.append("pedido", compra);
+                formData.append("compra", compra);
                 fetch(`/${url}/compra/update`, {
                     method: "POST",
                     body: formData

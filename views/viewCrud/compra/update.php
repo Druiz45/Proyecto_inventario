@@ -17,6 +17,6 @@ $compra = new CompraModel(
 
 $compra->validateDataCompra();
 
-$compra->updateCompra();
+$compra->updateCompra($_POST["compra"]);
 
 ?>

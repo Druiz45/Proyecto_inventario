@@ -1,6 +1,6 @@
-function eliminar(producto) {
+function eliminar(producto, estado, mensaje) {
     Swal.fire({
-        title: '¿Esta seguro de deshabilitar este producto?',
+        title: `¿Esta seguro de ${estado} este producto?`,
         showCancelButton: true,
         confirmButtonText: 'Si',
         confirmButtonColor: '#d33',
@@ -11,14 +11,14 @@ function eliminar(producto) {
         if (result.isConfirmed) {
             const formData = new FormData();
             formData.append('producto', producto);
-            formData.append('estado', "deshabilitar");
+            formData.append('estado', estado);
             fetch(`/${url}/producto/delete`, {
                 method: "POST",
                 body: formData
             })
                 .then(respuesta => respuesta.json())
                 .then(data => {
-                    if (data == "El producto se deshabilito correctamente") {
+                    if (data == `El producto se ${mensaje} correctamente`) {
                         Swal.fire({
                             icon: 'success',
                             title: data,
@@ -26,7 +26,7 @@ function eliminar(producto) {
                             location.reload();
                         })
 
-                    } else if (data == "Ha ocurrido un error al intentar habilitar") {
+                    } else if (data == `Ha ocurrido un error`) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',

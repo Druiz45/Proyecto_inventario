@@ -61,7 +61,11 @@
                             <td><?= $row["estado_inventario"]==0 ? "Sin añadir" : "Añadido" ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
-                              <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>)">Deshabilitar</button>
+                              <?php if ($row["estado"]==1): ?>
+                                <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>, 'deshabilitar', 'deshabilito')">Deshabilitar</button>
+                              <?php else: ?>
+                                <button type="button" class="btn btn-success" onclick="return eliminar(<?= $row['id'] ?>, 'habilitar', 'habilito')">Habilitar</button>
+                              <?php endif; ?>
                               <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
                               <?php if ($row["estado_inventario"]==0): ?>
                                 <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= $row['producto'] ?>')">Añadir a inventario</button>

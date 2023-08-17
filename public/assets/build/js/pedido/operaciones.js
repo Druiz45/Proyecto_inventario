@@ -132,8 +132,8 @@ function estado(pedido, aprobacion, restante) {
         title: `¿Que desea hacer?`,
 
         showCancelButton: true,
-        cancelButtonColor: '#A9A9A9',
-        cancelButtonText: 'Calcelar',
+        cancelButtonColor: '#4A4A4A',
+        cancelButtonText: 'Cancelar',
 
         confirmButtonColor: '#00794B',
         confirmButtonText: 'Entregar',
@@ -174,7 +174,7 @@ function updateEstate(pedido, mensaje, ruta) {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#3085d6',
         cancelButtonText: 'Cancelar',
-        cancelButtonColor: '#d33',
+        cancelButtonColor: '#4A4A4A',
     }).then((result) => {
         if (result.isConfirmed) {
             const formData = new FormData();
@@ -240,7 +240,6 @@ function pagar(pedido) {
 }
 
 function abonar(abono, pedido) {
-    console.log(abono);
     const formData = new FormData();
     formData.append("pedido", pedido);
     formData.append("abono", abono);
