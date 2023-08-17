@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+// session_start();
 
 use App\Http\Models\CategoriaModel;
 
@@ -7,5 +8,5 @@ $categoria = new CategoriaModel(
     $_POST['nombre-categoria'],
 );
 $categoria->validateData();
-$categoria->updateCategoria($_POST['num-categoria']);
+$categoria->createCategoria();
 // echo json_encode($_POST['nombre-categoria']);
