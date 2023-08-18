@@ -3,7 +3,6 @@ validateLogin();
 ?>
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
-
         <div class="clearfix"></div>
 
         <!-- menu profile quick info -->

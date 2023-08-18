@@ -1,4 +1,9 @@
-function abonos(compra) {
+function abonos(compra, restante) {
+    let botonAbonar=true;
+    if (restante==0){
+        botonAbonar=false;
+    }
+
     Swal.fire({
         icon: 'question',
         title: `¿Que desea hacer?`,
@@ -10,13 +15,13 @@ function abonos(compra) {
         confirmButtonColor: '#00B16E',
         confirmButtonText: 'Consultar abonos',
 
-        showDenyButton: true,
+        showDenyButton: botonAbonar,
         denyButtonText: 'Abonar',
         denyButtonColor: '#0067AE',
     })
         .then((result) => {
             if (result.isConfirmed) {
-                window.location.assign(`../abono/consultar/?pedido=${pedido}`);
+                window.location.assign(`../abonoCompra/consultar/?compra=${compra}`);
             } else if (result.isDenied) {
                 Swal.fire({
                     icon: 'question',
@@ -35,11 +40,11 @@ function abonos(compra) {
                     if (result.isConfirmed) {
                         try {
 
-                            // if (result.value.replace(/[.$]/g, "") > restante) {
-                            //     throw new Error("La cantidad de abono supera el precio maximo");
-                            // }
+                            if (result.value.replace(/[.$]/g, "") > restante) {
+                                throw new Error("La cantidad de abono supera el precio maximo");
+                            }
 
-                            abonar(compra, result.value);
+                            abonar(compra, result.value, restante);
                         } catch (error) {
                             Swal.fire({
                                 icon: 'error',
@@ -52,10 +57,11 @@ function abonos(compra) {
         })
 }
 
-function abonar(compra, abono) {
+function abonar(compra, abono, restante) {
     const formData = new FormData();
     formData.append("compra", compra);
     formData.append("abono", abono);
+    formData.append("restante", restante);
     fetch(`/${url}/AbonoCompra/create`, {
         method: "POST",
         body: formData
@@ -65,14 +71,14 @@ function abonar(compra, abono) {
             if (data == "exito") {
                 Swal.fire({
                     icon: 'success',
-                    title: `El estado de la compra a cambiado a ${mensaje}`,
+                    title: `Abono registrado`,
                 }).then(() => {
                     location.reload();
                 })
             } else if (data == "error") {
                 Swal.fire({
                     icon: 'error',
-                    text: "Error al cambiar el estado de la compra",
+                    text: "Error al registrar el abono",
                 })
             } else {
                 Swal.fire({

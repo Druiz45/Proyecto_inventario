@@ -83,7 +83,7 @@
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-success">Recibir</button>
                                                                 <?php endif; ?>
                                                                 
-                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>)" class="btn btn-dark">Abonos</button>
+                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor']-$row['abono']) ?>)" class="btn btn-dark">Abonos</button>
 
                                                                 <?php if ($row['estado_orden']==1) : ?>
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>

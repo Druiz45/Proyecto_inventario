@@ -8,4 +8,8 @@ class AbonoCompraController{
         return view('viewCrud/abonoCompra/create');
     }
 
+    public function consultar(){
+        return view('consultarAbonosCompra');
+    }
+
 }

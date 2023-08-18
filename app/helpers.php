@@ -3,8 +3,6 @@
 use App\Http\Response;
 use Carbon\Carbon;
 
-// session_start();
-
 if(!function_exists('view')){
 
     function view($view){
@@ -125,7 +123,6 @@ if(!function_exists('getFechaSinHora')){
 
 if(!function_exists('validateLogin')){
     function validateLogin(){
-        session_start();
         if (!isset($_SESSION["idUser"])){
             header("Location: /".getUrl($_SERVER['SERVER_NAME'])."");
             die;
@@ -136,7 +133,6 @@ if(!function_exists('validateLogin')){
 
 if(!function_exists('validateLogOut')){
     function validateLogOut(){
-        session_start();
         if (isset($_SESSION["idUser"])){
             header("Location: ./home");
             die;
