@@ -5,11 +5,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "config\\": "config/"
         },
         "files": [
-            "app/helpers.php",
-            "config/Conexion.php"
+            "app/helpers.php"
         ]
     },
     "authors": [

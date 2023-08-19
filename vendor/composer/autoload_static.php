@@ -8,10 +8,13 @@ class ComposerStaticInit7e681cb50e45a6e157d68954e911a1c5
 {
     public static $files = array (
         'f0fee759b67a75b65d998419e7f7e9ad' => __DIR__ . '/../..' . '/app/helpers.php',
-        '677a8ea6e4898276dc10f716044e3608' => __DIR__ . '/../..' . '/config/Conexion.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'config\\' => 7,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -19,6 +22,10 @@ class ComposerStaticInit7e681cb50e45a6e157d68954e911a1c5
     );
 
     public static $prefixDirsPsr4 = array (
+        'config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
