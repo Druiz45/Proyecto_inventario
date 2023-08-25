@@ -66,6 +66,7 @@ validateLogin();
                         <li><a><i class="fa fa-arrow-circle-up"></i>Gastos<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/registrar">Registrar gasto</a></li>
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/consultar">Consultar gastos</a></li>
                             </ul>
                         </li>
                         <li><a><i class="fa fa-arrow-circle-down"></i>Ingresos<span class="fa fa-chevron-down"></span></a>

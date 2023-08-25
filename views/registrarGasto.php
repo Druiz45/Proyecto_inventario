@@ -17,27 +17,25 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Nuevo Gasto<small>Informacion del gasto</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <br />
-                                    <form class="form-label-left input_mask">
+                    <form class="form-label-left input_mask" id="formCreateGasto">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Nuevo Gasto<small>Informacion del gasto</small></h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <br />
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre de producto">
+                                                <input type="text" class="form-control has-feedback-left" id="valorGasto" name="valorGasto" placeholder="Valor del gasto">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
-                                                <select class="select2_single form-control" tabindex="-1">
-                                                    <option value="AK">Alaska</option>
-                                                    <option value="HI">Hawaii</option>
-                                                    <option value="CA">California</option>
+                                                <select class="select2_single form-control" id="tipoGasto" name="tipoGasto" tabindex="-1">
+                                                    <option value="AK">Seleccione el tipo de gasto</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -47,26 +45,26 @@
                                                 <button type="submit" class="btn btn-success">Registrar Gasto</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Descripcion<small>Descripcion del Gasto</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="form-group">
-                                        <div class="col-md-12 col-sm-12">
-                                            <textarea class="resizable_textarea form-control" placeholder="Descripcion..."></textarea>
+                            <div class="col-md-4">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Descripcion del Gasto</h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <div class="form-group">
+                                            <div class="col-md-12 col-sm-12">
+                                                <textarea class="resizable_textarea form-control" id="descripcion" name="descripcion" placeholder="Descripcion..."></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- /page content -->
@@ -77,4 +75,9 @@
         </div>
     </div>
     <?php require_once("./../views/includes/scripts.php"); ?>
+    <script>
+        const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
+    </script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/gasto/index.js" type="module"></script>
 </body>
