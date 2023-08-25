@@ -140,3 +140,116 @@ if(!function_exists('validateLogOut')){
         
     }
 }
+
+if(!function_exists('numberFormat')){
+
+    function numberFormat($numero){
+
+        return "$".number_format($numero , 0, '.', '.');
+    }
+
+}
+
+if(!function_exists('getEstadoComision')){
+
+    function getEstadoComision($estadoComision){
+
+        if($estadoComision == 0){
+            $estado = "En espera";
+            $fondo = "#B1B1B1";
+        }else{
+            $estado = "Pagada";
+            $fondo = "#00A016";
+        }
+
+        $infoEstadoComision = [
+            'estado' => $estado,
+            'fondo' => $fondo,
+        ];
+
+        return $infoEstadoComision;
+
+    }
+
+}
+
+if(!function_exists('getEstadoPedido')){
+
+    function getEstadoPedido($estadoPedido){
+
+        if($estadoPedido == 1){
+            $estado = "En espera";
+            $fondo = "#B1B1B1";
+        }elseif($estadoPedido == 2){
+            $estado = "Entregado";
+            $fondo = "#00A016";
+        }else{
+            $estado = "Anulado";
+            $fondo = "#ED0505";
+        }
+
+        $infoEstadoPedido = [
+            'estado' => $estado,
+            'fondo' => $fondo,
+        ];
+
+        return $infoEstadoPedido;
+
+    }
+
+}
+
+if(!function_exists('getEstadoAprobacionPedido')){
+
+    function getEstadoAprobacionPedido($estadoAprobacion){
+
+        if($estadoAprobacion == 1){
+            $estado = "En espera";
+            $fondo = "#B1B1B1";
+        }elseif($estadoAprobacion == 2){
+            $estado = "Aprobado";
+            $fondo = "#00A016";
+        }else{
+            $estado = "No aprobado";
+            $fondo = "#ED0505";
+        }
+
+        $infoEstadoAprobacion = [
+            'estado' => $estado,
+            'fondo' => $fondo,
+        ];
+
+        return $infoEstadoAprobacion;
+
+    }
+
+}
+
+if(!function_exists('getEstadoOrdenCompra')){
+
+    function getEstadoOrdenCompra($estadoOrdenCompra){
+
+        if($estadoOrdenCompra == 1){
+            $estado = "Pendiente";
+            $fondo = "#B1B1B1";
+        }elseif($estadoOrdenCompra == 2){
+            $estado = "Recibido";
+            $fondo = "#00A016";
+        }elseif($estadoOrdenCompra == 3){
+            $estado = "Pagado";
+            $fondo = "#DED700";
+        }else{
+            $estado = "Anulado";
+            $fondo = "#ED0505";
+        }
+
+        $infoEstadoAprobacion = [
+            'estado' => $estado,
+            'fondo' => $fondo,
+        ];
+
+        return $infoEstadoAprobacion;
+
+    }
+
+}

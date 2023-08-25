@@ -63,6 +63,9 @@
                                             </thead>
                                             <tbody id="tbody">
                                                 <?php foreach ($rows as $row) : ?>
+                                                    <?php
+                                                          $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
+                                                    ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
@@ -70,12 +73,12 @@
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
-                                                        <td><?= "$" . number_format($row["precio"], 0, '.', '.') ?></td>
-                                                        <td><?= "$" . number_format($row["valor"], 0, '.', '.') ?></td>
-                                                        <td><?= "$" . number_format($row["abono"], 0, '.', '.') ?></td>
+                                                        <td><?= numberFormat($row["precio"]) ?></td>
+                                                        <td><?= numberFormat($row["valor"]) ?></td>
+                                                        <td><?= numberFormat($row["abono"]) ?></td>
                                                         <td><?= $row["anotacion"] ?></td>
                                                         <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
-                                                        <td><?= $row["estado_orden"] == 1 ? "Pendiente" : ($row["estado_orden"] == 2 ? "Recibido" : ($row["estado_orden"] == 3 ? "Pagado" : "Anulado")) ?></td>
+                                                        <td bgcolor="<?= $infoEstadoOrdenDeCompra['fondo'] ?>"><?= $infoEstadoOrdenDeCompra['estado'] ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                             <td>

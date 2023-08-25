@@ -60,20 +60,25 @@
                       </thead>
                       <tbody id="tbody">
                         <?php foreach ($rows as $row): ?>
+                          <?php 
+                            $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
+                            $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]); 
+                            $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
+                          ?>
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
-                            <td><?= $row["comisionPaga"] == 0 ? "En espera" : "Pagada" ?></td>
-                            <td><?= $row["estadoPedido"] == 1 ? "En espera" : ($row["estadoPedido"] == 2 ? "Entregado" : "Anulado")  ?></td>
-                            <td><?= $row["estadoAprobacion"] == 1 ? "En espera" : ($row["estadoAprobacion"] == 2 ? "Aprobado" : "No aprobado") ?></td>
+                            <td bgcolor="<?= $infoEstadoComision['fondo'] ?>"> <?= $infoEstadoComision['estado'] ?> </td>
+                            <td bgcolor="<?= $infoEstadoPedido['fondo'] ?>"> <?= $infoEstadoPedido['estado'] ?> </td>
+                            <td bgcolor="<?= $infoEstadoAprobacionPedido['fondo'] ?>"> <?= $infoEstadoAprobacionPedido['estado'] ?> </td>
                             <td><?= $row["anotacion"] ?></td>
-                            <td><?= "$".number_format($row["valorComision"] , 0, '.', '.') ?></td>
-                            <td><?= "$".number_format($row["abonoTotal"] , 0, '.', '.') ?></td>
-                            <td><?= "$".number_format(($row["valorTotal"]-$row["abonoTotal"]) , 0, '.', '.') ?></td>
-                            <td><?= "$".number_format($row["valorTotal"] , 0, '.', '.') ?></td>
+                            <td><?= numberFormat($row["valorComision"]) ?></td>
+                            <td><?= numberFormat($row["abonoTotal"]) ?></td>
+                            <td><?= numberFormat($row["valor_restante"]) ?></td>
+                            <td><?= numberFormat($row["valorTotal"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
 
