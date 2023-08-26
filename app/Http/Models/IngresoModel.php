@@ -5,15 +5,15 @@ use config\Conexion;
 use PDO;
 use Exception;
 
-class GastoModel{
+class IngresoModel{
 
-    protected $valorGasto;
-    protected $tipoGasto;
+    protected $valorIngreso;
+    protected $tipoIngreso;
     protected $descripcion;
 
-    public function __construct($valorGasto="", $tipoGasto="", $descripcion=""){
-        $this->valorGasto = $valorGasto;
-        $this->tipoGasto = $tipoGasto;
+    public function __construct($valorIngreso="", $tipoIngreso="", $descripcion=""){
+        $this->valorIngreso = $valorIngreso;
+        $this->tipoIngreso = $tipoIngreso;
         $this->descripcion = $descripcion;
     }
 
@@ -21,7 +21,7 @@ class GastoModel{
 
         try {
                         
-            if(!trim($this->valorGasto) || !trim($this->tipoGasto) || !trim($this->descripcion)){
+            if(!trim($this->valorIngreso) || !trim($this->tipoIngreso) || !trim($this->descripcion)){
 
                 throw new Exception("Porfavor complete todos los campos");
 
@@ -29,19 +29,19 @@ class GastoModel{
 
             $pattern = "/^[0-9]{1,2}+$/";
 
-            if( !preg_match($pattern, trim($this->tipoGasto)) ){
+            if( !preg_match($pattern, trim($this->tipoIngreso)) ){
 
-                throw new Exception("El tipo de gasto seleccionado no es valido");
+                throw new Exception("El tipo de ingreso seleccionado no es valido");
 
             }
 
-            $this->valorGasto = str_replace(['.','$'],"",$this->valorGasto);
+            $this->valorIngreso = str_replace(['.','$'],"",$this->valorIngreso);
 
             $pattern = "/^[0-9]{2,8}+$/";
 
-            if( !preg_match($pattern, trim($this->valorGasto)) ){
+            if( !preg_match($pattern, trim($this->valorIngreso)) ){
 
-                throw new Exception("El valor del gasto no es valido");
+                throw new Exception("El valor del ingreso no es valido");
 
             }
 
@@ -67,11 +67,11 @@ class GastoModel{
         $idPerfil=$_SESSION["idPerfil"];
 
         try {
-            $select = $con->prepare("CALL getTiposGasto(?)");
+            $select = $con->prepare("CALL getTiposIngreso(?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
             $select->execute();
 
-            $gastos=$select->fetchAll(PDO::FETCH_ASSOC);
+            $ingresos=$select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
@@ -83,7 +83,7 @@ class GastoModel{
                 throw new Exception("No se encontraron resultados");
             }
 
-            echo json_encode($gastos);
+            echo json_encode($ingresos);
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
@@ -91,7 +91,7 @@ class GastoModel{
         }
     }
 
-    public function getGastos(){
+    public function getIngresos(){
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -99,11 +99,11 @@ class GastoModel{
         $idPerfil=$_SESSION["idPerfil"];
 
         try {
-            $select = $con->prepare("CALL getGastos(?)");
+            $select = $con->prepare("CALL getIngresos(?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
             $select->execute();
 
-            $gastos=$select->fetchAll(PDO::FETCH_ASSOC);
+            $ingresos=$select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
@@ -115,7 +115,7 @@ class GastoModel{
                 throw new Exception("No se encontraron resultados");
             }
 
-            return $gastos;
+            return $ingresos;
 
         } catch (Exception $e) {
             return $e->getMessage();
@@ -124,17 +124,17 @@ class GastoModel{
 
     }
 
-    public function createGasto(){
+    public function createIngreso(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         $idUser=$_SESSION["idUser"];
 
         try {
-            $insert = $con->prepare("CALL createGasto(?,?,?,?)");
+            $insert = $con->prepare("CALL createIngreso(?,?,?,?)");
             $insert->bindParam(1, $idUser, PDO::PARAM_INT);
-            $insert->bindParam(2, $this->tipoGasto, PDO::PARAM_INT);
-            $insert->bindParam(3, $this->valorGasto, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->tipoIngreso, PDO::PARAM_INT);
+            $insert->bindParam(3, $this->valorIngreso, PDO::PARAM_INT);
             $insert->bindParam(4, $this->descripcion, PDO::PARAM_STR);
             $insert->execute();
 

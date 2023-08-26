@@ -71,7 +71,8 @@ validateLogin();
                         </li>
                         <li><a><i class="fa fa-arrow-circle-down"></i>Ingresos<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="./">Consultar ingresos</a></li>
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/ingreso/registrar">Registrar ingreso</a></li>
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/ingreso/consultar">Consultar ingresos</a></li>
                             </ul>
                         </li>
                         <li><a><i class="fa fa-archive"></i>Producto<span class="fa fa-chevron-down"></span></a>

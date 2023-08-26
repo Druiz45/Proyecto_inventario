@@ -5,10 +5,10 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\GastoModel;
+        use App\Http\Models\IngresoModel;
         $i = 1;
-        $gasto = new GastoModel();
-        $gastos = $gasto->getGastos();
+        $ingreso = new IngresoModel();
+        $ingresos = $ingreso->getIngresos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -17,7 +17,7 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Informacion de gastos<small>Gastos</small></h2>
+              <h2>Informacion de ingresos<small>Ingresos</small></h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -50,11 +50,11 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($gastos as $row) : ?>
+                        <?php foreach ($ingresos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
-                            <td><?= $row["tipoGasto"] ?></td>
+                            <td><?= $row["tipoIngreso"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= $row["usuario"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
