@@ -1,3 +1,4 @@
+import { validatePrecio, validateDescription } from "../producto/Producto.js";
 export class Gasto {
 
     getDataFormCreate(url) {
@@ -26,6 +27,20 @@ export class Gasto {
             }
             // select.innerHTML = '';
             selectGastos.appendChild(opciones);
+        }
+
+    }
+
+    validateFormData(){
+
+        const formCreateGasto = document.getElementById('formCreateGasto');
+
+        if(formCreateGasto){
+            const valorGasto = document.getElementById('valorGasto');
+            const descripcionGasto = document.getElementById('descripcion');
+            validatePrecio(valorGasto);
+            validateDescription(descripcionGasto);
+
         }
 
     }

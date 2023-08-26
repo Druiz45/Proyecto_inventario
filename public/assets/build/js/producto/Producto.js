@@ -164,68 +164,10 @@ export class Producto {
       const inputPrecio = document.getElementById("valorProducto");
 
       validateNameProducto(inputProducto);
-      validateDescriptionProduct(inputDescricion);
+      validateDescription(inputDescricion);
       validatePrecio(inputPrecio);
 
-      function validateDescriptionProduct(input) {
-
-        input.addEventListener("keypress", (e) => {
-
-          //   const tecla = e.key;
-          const textoIngresado = input.value;
-          //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-
-          if (textoIngresado.length == 100) {
-            e.preventDefault();
-            input.value = textoIngresado.substring(0, 100);
-          }
-
-        });
-
-      }
-
-      //   function validateDoc(input) {
-
-      //     input.addEventListener("keypress", (e) => {
-
-      //       // setTimeout(() => {
-
-      //       const tecla = e.key;
-
-      //       const docIngresado = input.value;
-
-      //       if (isNaN(tecla) || tecla.trim() === "" || docIngresado.length == 12) {
-      //         e.preventDefault();
-      //       }
-
-      //       // }, 100);
-
-      //     });
-      //   }
-
-      //   function validateEmail(input) {
-
-      //     input.addEventListener("keypress", (e) => {
-
-      //       const tecla = e.key;
-      //       // const textoIngresado = inputNombre.value;
-      //       const patron = /^[a-zA-Z0-9._%+-@]+$/;
-
-      //       const emailIngresado = input.value;
-
-      //       if (!patron.test(tecla) || tecla === "Backspace" || !tecla === "Delete" || emailIngresado.length > 100) {
-      //         e.preventDefault();
-      //       }
-
-      //     });
-
-      //   }
-
     }
-
-  }
-
-  mifuncion() {
 
   }
 
@@ -242,6 +184,23 @@ export function validateNameProducto(input) {
     if (textoIngresado.length == 25) {
       e.preventDefault();
       input.value = textoIngresado.substring(0, 25);
+    }
+
+  });
+
+}
+
+export function validateDescription(input) {
+
+  input.addEventListener("keypress", (e) => {
+
+    //   const tecla = e.key;
+    const textoIngresado = input.value;
+    //   const patron = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+
+    if (textoIngresado.length == 100) {
+      e.preventDefault();
+      input.value = textoIngresado.substring(0, 100);
     }
 
   });

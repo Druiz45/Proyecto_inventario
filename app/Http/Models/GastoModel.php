@@ -17,6 +17,49 @@ class GastoModel{
         $this->descripcion = $descripcion;
     }
 
+    public function validateData(){
+
+        try {
+                        
+            if(!trim($this->valorGasto) || !trim($this->tipoGasto) || !trim($this->descripcion)){
+
+                throw new Exception("Porfavor complete todos los campos");
+
+            }
+
+            $pattern = "/^[0-9]{1,2}+$/";
+
+            if( !preg_match($pattern, trim($this->tipoGasto)) ){
+
+                throw new Exception("El tipo de gasto seleccionado no es valido");
+
+            }
+
+            $this->valorGasto = str_replace(['.','$'],"",$this->valorGasto);
+
+            $pattern = "/^[0-9]{2,8}+$/";
+
+            if( !preg_match($pattern, trim($this->valorGasto)) ){
+
+                throw new Exception("El valor del producto no es valido");
+
+            }
+
+            $pattern = "/^.{0,100}+$/";
+
+            if( !preg_match($pattern, trim($this->descripcion)) ){
+
+                throw new Exception("La descripcion puede contener un maximo de 100 carasteres");
+
+            }
+            
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
     public function getInfoFormCreate(){
         $pdo = new Conexion();
         $con = $pdo->conexion();

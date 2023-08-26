@@ -10,6 +10,8 @@ $gasto = new GastoModel(
     isset($_POST["descripcion"]) ? $_POST["descripcion"]: "",
 );
 
+$gasto->validateData();
+
 $gasto->createGasto();
 
 ?>
