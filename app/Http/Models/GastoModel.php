@@ -67,7 +67,7 @@ class GastoModel{
         $idPerfil=$_SESSION["idPerfil"];
 
         try {
-            $select = $con->prepare("CALL getGastos(?)");
+            $select = $con->prepare("CALL getTipoGasto(?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
             $select->execute();
 
@@ -89,6 +89,39 @@ class GastoModel{
             echo json_encode($e->getMessage());
             die;
         }
+    }
+
+    public function getGastos(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $select = $con->prepare("CALL getGastos(?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $gastos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("error");
+            }
+
+            if(!$select->rowCount() > 0){
+                throw new Exception("No se encontraron resultados");
+            }
+
+            return $gastos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+
     }
 
     public function createGasto(){

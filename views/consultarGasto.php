@@ -5,10 +5,10 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\ProductoModel;
+        use App\Http\Models\GastoModel;
         $i = 1;
-        $producto = new ProductoModel();
-        $rows = $producto->getProductos();
+        $gasto = new GastoModel();
+        $gastos = $gasto->getGastos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -41,26 +41,22 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Producto</th>
+                          <th>Tipo de gasto</th>
                           <th>Precio</th>
-                          <th>Categoria</th>
                           <th>Descripcion</th>
-                          <th>Inventario</th>
                           <th>Fecha</th>
                           <th>Operaciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($rows as $row) : ?>
+                        <?php foreach ($gastos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= $row["producto"] ?></td>
-                            <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
-                            <td><?= $row["categoria"] ?></td>
+                            <td><?= $row["id_tipo_gasto"] ?></td>
+                            <td><?= numberFormat($row["valor"]) ?></td>
                             <td><?= $row["descripcion"] ?></td>
-                            <td><?= $row["estado_inventario"]==0 ? "Sin añadir" : "Añadido" ?></td>
-                            <td><?= getFecha($row["fecha"]) ?></td>
-                            <td>
+                            <td><?= getFecha($row["fecha_sys"]) ?></td>
+                            <!-- <td>
                               <?php if ($row["estado"]==1): ?>
                                 <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>, 'deshabilitar', 'deshabilito')">Deshabilitar</button>
                               <?php else: ?>
@@ -70,7 +66,7 @@
                               <?php if ($row["estado_inventario"]==0): ?>
                                 <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= $row['producto'] ?>')">Añadir a inventario</button>
                               <?php endif; ?>
-                            </td>
+                            </td> -->
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
