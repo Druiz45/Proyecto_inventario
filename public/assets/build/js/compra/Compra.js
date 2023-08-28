@@ -1,23 +1,23 @@
 import { validateDoc } from "./../user/User.js";
-import { validateNameProducto } from "./../producto/Producto.js";
-import { validatePrecio } from "./../producto/Producto.js";
-import { validateAnotacion } from "./../pedido/Pedido.js";
-import { number_format } from "./../producto/Producto.js";
+import { validateNameProducto, validatePrecio, number_format  } from "./../producto/Producto.js";
+import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
 
 export class Compra {
 
     getDataFormCreate() {
+        getClienteForDoc();
+        getProductForCoincidencia();
+        this.getProveedorForDoc();
+    }
 
-        const documento = document.getElementById("documento");
+    getProveedorForDoc(){
+        const docProveedor = document.getElementById("docProveedor");
         const proveedor = document.getElementById("proveedor");
-        const nombreProducto = document.getElementById("nombreProducto");
-        const producto = document.getElementById("producto");
-
-        documento.addEventListener("input", () => {
-            if (documento.value.trim() != "") {
+        docProveedor.addEventListener("input", () => {
+            if (docProveedor.value.trim() != "") {
                 proveedor.disabled = false;
                 const formData = new FormData();
-                formData.append("documento", documento.value);
+                formData.append("docProveedor", docProveedor.value);
                 fetch(`/${url}/compra/getDataFormRegistrar`, {
                     method: "POST",
                     body: formData
@@ -41,36 +41,6 @@ export class Compra {
             }
 
         })
-
-        nombreProducto.addEventListener("input", () => {
-            if (nombreProducto.value.trim() != "") {
-                producto.disabled = false;
-                const formData = new FormData();
-                formData.append("nombreProducto", nombreProducto.value);
-                fetch(`/${url}/compra/getDataFormRegistrar`, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        if (Array.isArray(data)) {
-                            producto.innerHTML = `<option value="">Seleccione el producto</option>`;
-                            for (const info of data) {
-                                producto.innerHTML += `<option value="${info.id}">${info.producto}</option>`;
-                            }
-                        }
-                        else {
-                            producto.innerHTML = `<option value="">${data}</option>`;
-                        }
-                    })
-            }
-            else {
-                producto.disabled = true;
-                producto.innerHTML = `<option value=""></option>`;
-            }
-
-        })
-
     }
 
     saveCompra() {
@@ -118,13 +88,15 @@ export class Compra {
 
         if (formCreateCompra) {
 
-            // const documento = document.getElementById('documento');
+            const docProveedor = document.getElementById('docProveedor');
+            const docCliente = document.getElementById('docCliente');
             // const nombreProducto = document.getElementById('nombreProducto');
             const abonoProducto = document.getElementById('abonoProducto');
             const anotacion = document.getElementById('anotacion');
             const valorProducto = document.getElementById("valorProducto");
 
-            validateDoc(documento);
+            validateDoc(docProveedor);
+            validateDoc(docCliente);
             validateNameProducto(nombreProducto);
             validatePrecio(abonoProducto);
             validateAnotacion(anotacion);
@@ -162,8 +134,8 @@ export class Compra {
         const anotacion = document.getElementById("anotacion");
         const valorProducto=document.getElementById("valorProducto");
         validatePrecio(valorProducto);
-        documento.value = data[0].documento;
-        documento.dispatchEvent(new Event('input', { bubbles: true }));
+        docProveedor.value = data[0].docProveedor;
+        docProveedor.dispatchEvent(new Event('input', { bubbles: true }));
         setTimeout(() => {
             proveedor.value = data[0].id_proveedor;
         }, 100);

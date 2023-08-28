@@ -46,11 +46,14 @@
                                                     <th>#</th>
                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                         <th>Proveedor</th>
+                                                        <th>Cliente</th>
                                                     <?php endif; ?>
                                                     <th>Vendedor</th>
                                                     <th>Producto</th>
-                                                    <th>Valor producto</th>
-                                                    <th>Valor compra</th>
+                                                    <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                                                        <th>Se vendera por</th>
+                                                    <?php endif; ?>
+                                                    <th>Se compro por</th>
                                                     <th>Abono</th>
                                                     <th>Anotacion</th>
                                                     <th>Fecha limite</th>
@@ -70,10 +73,13 @@
                                                         <td><?= $i++ ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= $row["proveedor"] ?></td>
+                                                            <td><?= $row["cliente"]==0 ? "No Aplica" : $row["cliente"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
-                                                        <td><?= numberFormat($row["precio"]) ?></td>
+                                                        <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                                                            <td><?= numberFormat($row["precio"]) ?></td>
+                                                        <?php endif; ?>
                                                         <td><?= numberFormat($row["valor"]) ?></td>
                                                         <td><?= numberFormat($row["abono"]) ?></td>
                                                         <td><?= $row["anotacion"] ?></td>

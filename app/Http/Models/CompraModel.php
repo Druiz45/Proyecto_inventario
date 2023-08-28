@@ -5,7 +5,7 @@ use config\Conexion;
 use PDO;
 use Exception;
 
-class CompraModel{
+class CompraModel extends PedidoModel{
 
     protected $documento;
     protected $nombreProducto;
@@ -15,9 +15,11 @@ class CompraModel{
     protected $abonoProducto;
     protected $fechaLimite;
     protected $anotacion;
+    protected $cliente;
+    protected $compra;
 
     public function __construct($documento = "", $nombreProducto = "", $proveedor = "", $producto = "",
-    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = ""){
+    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = "", $cliente="", $compra=""){
         $this->documento = $documento;
         $this->nombreProducto = $nombreProducto;
         $this->proveedor = $proveedor;
@@ -26,6 +28,82 @@ class CompraModel{
         $this->abonoProducto = $abonoProducto;
         $this->fechaLimite = $fechaLimite;
         $this->anotacion = $anotacion;
+        $this->cliente = $cliente;
+        $this->compra = $compra;
+    }
+
+    public function validateDataCompra(){
+        try {
+
+            if($this->proveedor=="vacio" || $this->producto=="vacio" || $this->valorProducto=="vacio" ||
+            $this->abonoProducto=="vacio" ||  $this->fechaLimite=="vacio" || $this->anotacion=="vacio"){
+
+                throw new Exception("Porfavor complete los campos");
+
+            }
+
+            $pattern = "/^[0-9]{1,5}+$/";
+
+            if( !preg_match($pattern, trim($this->proveedor)) ){
+
+                throw new Exception("Porfavor revise el proveedor seleccionado");
+
+            }
+
+            $pattern = "/^[0-9]{1,4}+$/";
+
+            if( !preg_match($pattern, trim($this->producto)) ){
+
+                throw new Exception("Porfavor revise el producto seleccionado");
+
+            }
+
+            $this->abonoProducto = str_replace(['.','$'],"",$this->abonoProducto);
+
+            $pattern = "/^[0-9]{1,8}+$/";
+
+            if( !preg_match($pattern, trim($this->abonoProducto)) ){
+
+                throw new Exception("El valor del abono no es valido");
+
+            }
+
+            $timeStamp = strtotime($this->fechaLimite);
+
+            if(!$timeStamp){
+                throw new Exception("La fecha no es valida");
+            }
+
+            $fecha_convertida = date('Y-m-d', $timeStamp);
+
+            if($fecha_convertida != $this->fechaLimite){
+
+                throw new Exception("La fecha no es valida");
+
+            }
+
+            $pattern = "/^.{0,100}+$/";
+
+            if( !preg_match($pattern, trim($this->anotacion)) ){
+
+                throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
+
+            }
+
+            $this->valorProducto = str_replace(['.','$'],"",$this->valorProducto);
+
+            $pattern = "/^[0-9]{1,8}+$/";
+
+            if( !preg_match($pattern, trim($this->valorProducto)) ){
+
+                throw new Exception("El valor del producto no es valido");
+
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
     }
 
     public function getInfoFormCreate() {
@@ -40,7 +118,7 @@ class CompraModel{
                 echo json_encode($this->getProvedoresForDoc());
             }
             elseif ($this->nombreProducto!="vacio") {
-                echo json_encode($this->getUserForProduct());
+                echo json_encode($this->getProductForCoincidencia());
             }
 
         } catch (Exception $e) {
@@ -49,31 +127,6 @@ class CompraModel{
         }
 
    }
-
-   public function getUserForProduct(){
-    $pdo = new Conexion();
-    $con = $pdo->conexion();
-    
-    try {
-        $select = $con->prepare("CALL getProductForCoincidencia(?)");
-        $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
-        $select->execute();
-
-        $products=$select->fetchAll(PDO::FETCH_ASSOC);
-
-        $select->closeCursor();
-
-        if(!$select || !$select->rowCount() > 0){
-            throw new Exception("No se encontraron productos");
-        }
-
-        return ($products);
-
-    } catch (Exception $e) {
-        return ($e->getMessage());
-        die;
-    }
-}
 
     public function getProvedoresForDoc(){
         $pdo = new Conexion();
@@ -188,79 +241,31 @@ class CompraModel{
         }
     }
 
-    public function validateDataCompra(){
+    public function createAbonoCompra(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        $user=$_SESSION["idUser"];
+    
         try {
-
-            if($this->proveedor=="vacio" || $this->producto=="vacio" || $this->valorProducto=="vacio" ||
-            $this->abonoProducto=="vacio" ||  $this->fechaLimite=="vacio" || $this->anotacion=="vacio"){
-
-                throw new Exception("Porfavor complete los campos");
-
+            $insert = $con->prepare("CALL createAbonoCompra(?,?,?)");
+            $insert->bindParam(1, $this->abonoProducto, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->compra, PDO::PARAM_INT);
+            $insert->bindParam(3, $user, PDO::PARAM_INT);
+            $insert->execute();
+    
+            $insert->closeCursor();
+    
+            if(!$insert || !$insert->rowCount() > 0){
+                throw new Exception("error");
             }
-
-            $pattern = "/^[0-9]{1,5}+$/";
-
-            if( !preg_match($pattern, trim($this->proveedor)) ){
-
-                throw new Exception("Porfavor revise el proveedor seleccionado");
-
-            }
-
-            $pattern = "/^[0-9]{1,4}+$/";
-
-            if( !preg_match($pattern, trim($this->producto)) ){
-
-                throw new Exception("Porfavor revise el producto seleccionado");
-
-            }
-
-            $this->abonoProducto = str_replace(['.','$'],"",$this->abonoProducto);
-
-            $pattern = "/^[0-9]{1,8}+$/";
-
-            if( !preg_match($pattern, trim($this->abonoProducto)) ){
-
-                throw new Exception("El valor del abono no es valido");
-
-            }
-
-            $timeStamp = strtotime($this->fechaLimite);
-
-            if(!$timeStamp){
-                throw new Exception("La fecha no es valida");
-            }
-
-            $fecha_convertida = date('Y-m-d', $timeStamp);
-
-            if($fecha_convertida != $this->fechaLimite){
-
-                throw new Exception("La fecha no es valida");
-
-            }
-
-            $pattern = "/^.{0,100}+$/";
-
-            if( !preg_match($pattern, trim($this->anotacion)) ){
-
-                throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
-
-            }
-
-            $this->valorProducto = str_replace(['.','$'],"",$this->valorProducto);
-
-            $pattern = "/^[0-9]{1,8}+$/";
-
-            if( !preg_match($pattern, trim($this->valorProducto)) ){
-
-                throw new Exception("El valor del producto no es valido");
-
-            }
-
+            
+    
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
-    }
+       }
 
     public function saveCompra(){
         $pdo = new Conexion();
@@ -274,18 +279,20 @@ class CompraModel{
             $insert->bindParam(2, $this->proveedor, PDO::PARAM_INT);
             $insert->bindParam(3, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(4, $this->valorProducto, PDO::PARAM_INT);
-            $insert->bindParam(5, $this->abonoProducto, PDO::PARAM_INT);
-            $insert->bindParam(6, $this->anotacion, PDO::PARAM_STR);
-            $insert->bindParam(7, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->cliente, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
 
             if(!$insert || !$insert->rowCount() > 0){
-
                 throw new Exception("Error");
-
             }
+
+            $this->compra = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
+
+            $this->createAbonoCompra();
 
             echo json_encode(["Compra registrada con exito", "success"]);
 

@@ -27,22 +27,30 @@
                                     </div>
                                     <div class="x_content">
                                         <div class="form-group row">
-                                            <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del proveedor" autocomplete="off">
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
+                                                <input type="text" class="form-control has-feedback-left" id="docProveedor" name="docProveedor" placeholder="Documento del proveedor" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
-                                            <div class="col-md-5 col-sm-6  form-group has-feedback">
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" autocomplete="off">
+                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
+                                                <input type="text" class="form-control has-feedback-left" id="docCliente" name="docCliente" placeholder="Documento del cliente" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-md-5 col-sm-6  form-group has-feedback">
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="proveedor" name="proveedor" tabindex="-1">
                                                 </select>
                                             </div>
-                                            <div class="col-md-5 col-sm-6  form-group has-feedback">
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <select disabled class="select2_single form-control" id="producto" name="producto" tabindex="-1">
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6  form-group has-feedback">
+                                                <select disabled class="select2_single form-control" id="cliente" name="cliente" tabindex="-1">
                                                 </select>
                                             </div>
                                         </div>
