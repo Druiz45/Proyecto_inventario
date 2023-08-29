@@ -56,12 +56,12 @@ class AbonoCompraModel extends CompraModel{
         if(!$insert || !$insert->rowCount() > 0){
             throw new Exception("error");
         }
+
         if (($restante-$this->abono)==0){
-            $this->updateEstate("Pagar", $this->compra);
+            $this->updateEstate("Pagar", $this->compra, false);
         }
-        else{
-            echo json_encode("exito");
-        }
+     
+        echo json_encode("exito");
 
     } catch (Exception $e) {
         echo json_encode($e->getMessage());

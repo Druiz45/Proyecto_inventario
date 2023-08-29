@@ -154,7 +154,7 @@ class CompraModel extends PedidoModel{
 
     }
 
-    public function updateEstate($estado, $compra){
+    public function updateEstate($estado, $compra, $mensaje=true){
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
@@ -176,7 +176,9 @@ class CompraModel extends PedidoModel{
                 throw new Exception("No se hicieron cambios");
             }
 
-            echo json_encode("exito");
+            if ($mensaje){
+                echo json_encode("exito");
+            }
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
@@ -259,7 +261,10 @@ class CompraModel extends PedidoModel{
             if(!$insert || !$insert->rowCount() > 0){
                 throw new Exception("error");
             }
-            
+
+            if ($this->abonoProducto==$this->valorProducto){
+                $this->updateEstate("Pagar", $this->compra, false);
+            }
     
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
