@@ -57,7 +57,7 @@ validateLogin();
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar">Consultar pedidos</a></li>
                             </ul>
                         </li>
-                        <li><a><i class="fa fa-truck"></i>Compras<span class="fa fa-chevron-down"></span></a>
+                        <li><a><i class="fa fa-truck"></i>Ordenes de compra<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/registrar">Registrar orden de compra</a></li>
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/consultar">Consultar ordenes de compra</a></li>
@@ -88,7 +88,7 @@ validateLogin();
                         </li>
                     <?php endif; ?>
                     <?php if ($_SESSION["idPerfil"] == 2) : ?>
-                        <li><a><i class="fa fa-outdent"></i>Compras<span class="fa fa-chevron-down"></span></a>
+                        <li><a><i class="fa fa-outdent"></i>Ordenes de compra<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/consultar">Mis ordenes de compra</a></li>
                             </ul>

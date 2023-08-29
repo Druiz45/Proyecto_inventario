@@ -1,7 +1,7 @@
 function abonos(compra, restante) {
-    let botonAbonar=true;
-    if (restante==0){
-        botonAbonar=false;
+    let botonAbonar = true;
+    if (restante == 0) {
+        botonAbonar = false;
     }
 
     Swal.fire({
@@ -146,4 +146,34 @@ function updateEstate(compra, estado, mensaje) {
                     })
             }
         });
+}
+
+function agregarAlStock(producto) {
+    const formData = new FormData();
+    formData.append("producto", producto);
+    fetch(`/${url}/Inventario/agregarAStock`, {
+        method: "POST",
+        body: formData
+    })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            if (data == "exito") {
+                Swal.fire({
+                    icon: 'success',
+                    title: `Se ha añadido una existencia al stock de este producto`,
+                }).then(() => {
+                    location.reload();
+                })
+            } else if (data == "error") {
+                Swal.fire({
+                    icon: 'error',
+                    text: "Ha ocurrido un error al intentar actualizar el stock de este producto",
+                })
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: data,
+                })
+            }
+        })
 }

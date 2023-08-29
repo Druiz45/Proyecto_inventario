@@ -12,5 +12,9 @@ class InventarioController{
         return view('viewCrud/inventario/create');
     }
 
+    public function agregarAStock(){
+        return view('viewCrud/inventario/updateStock');
+    }
+
 
 }

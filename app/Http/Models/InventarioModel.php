@@ -103,4 +103,32 @@ class InventarioModel{
         }
     }
 
+    public function updateStock(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $update = $con->prepare("CALL updateStock(?)");
+            $update->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $update->execute();
+
+            // $inventario=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $update->closeCursor();
+
+            if(!$update || !$update->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
 }

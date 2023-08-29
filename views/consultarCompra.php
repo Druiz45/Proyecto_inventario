@@ -64,7 +64,7 @@
                                             <tbody id="tbody">
                                                 <?php foreach ($rows as $row) : ?>
                                                     <?php
-                                                          $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
+                                                    $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
                                                     ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
@@ -82,15 +82,18 @@
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                             <td>
-                                                                <?php if ($row['estado_orden']==3) : ?>
+                                                                <?php if ($row['estado_orden'] == 3) : ?>
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-success">Recibir</button>
                                                                 <?php endif; ?>
-                                                                
-                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor']-$row['abono']) ?>)" class="btn btn-dark">Abonos</button>
 
-                                                                <?php if ($row['estado_orden']==1) : ?>
+                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor'] - $row['abono']) ?>)" class="btn btn-dark">Abonos</button>
+
+                                                                <?php if ($row['estado_orden'] == 1) : ?>
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>
                                                                     <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                                                <?php endif; ?>
+                                                                <?php if ($row['estado_orden'] == 2): ?>
+                                                                    <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>')">Añadir al stock</button>
                                                                 <?php endif; ?>
                                                             </td>
                                                         <?php endif; ?>
