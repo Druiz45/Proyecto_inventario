@@ -5,71 +5,8 @@ export class Pedido {
 
     getDataFormCreate() {
 
-        const documento = document.getElementById("documento");
-        const cliente = document.getElementById("cliente");
-        const nombreProducto = document.getElementById("nombreProducto");
-        const producto = document.getElementById("producto");
-        const spanValorProducto = document.getElementById('valor-producto');
-
-        documento.addEventListener("input", () => {
-            if (documento.value.trim() != "") {
-                cliente.disabled = false;
-                const formData = new FormData();
-                formData.append("documento", documento.value);
-                fetch(`/${url}/pedido/getDataFormRegistrar`, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        if (Array.isArray(data)) {
-                            cliente.innerHTML = `<option value="">Seleccione el cliente</option>`;
-                            for (const info of data) {
-                                cliente.innerHTML += `<option value="${info.id}">${info.cliente}</option>`;
-                            }
-                        }
-                        else {
-                            cliente.innerHTML = `<option value="">${data}</option>`;
-                        }
-                    })
-            }
-            else {
-                cliente.disabled = true;
-                cliente.innerHTML = `<option value=""></option>`;
-            }
-
-        })
-
-        nombreProducto.addEventListener("input", () => {
-            if (nombreProducto.value.trim() != "") {
-                producto.disabled = false;
-                spanValorProducto.innerText = "Valor del producto:";
-                const formData = new FormData();
-                formData.append("nombreProducto", nombreProducto.value);
-                fetch(`/${url}/pedido/getDataFormRegistrar`, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(respuesta => respuesta.json())
-                    .then(data => {
-                        if (Array.isArray(data)) {
-                            producto.innerHTML = `<option value="">Seleccione el producto</option>`;
-                            for (const info of data) {
-                                producto.innerHTML += `<option value="${info.id}">${info.producto}</option>`;
-                            }
-                            this.getPrecio(producto, data, spanValorProducto);
-                        }
-                        else {
-                            producto.innerHTML = `<option value="">${data}</option>`;
-                        }
-                    })
-            }
-            else {
-                producto.disabled = true;
-                producto.innerHTML = `<option value=""></option>`;
-            }
-
-        })
+        getClienteForDoc();
+        getProductForCoincidencia();
 
     }
 
@@ -121,12 +58,12 @@ export class Pedido {
 
         if (formCreatePedido) {
 
-            const documento = document.getElementById('documento');
+            const docCliente = document.getElementById('docCliente');
             const nombreProducto = document.getElementById('nombreProducto');
             const abonoProducto = document.getElementById('abonoProducto');
             const anotacion = document.getElementById('anotacion');
 
-            validateDoc(documento);
+            validateDoc(docCliente);
             validateNameProducto(nombreProducto);
             validateAbonoProducto(abonoProducto);
             validateAnotacion(anotacion);
@@ -161,8 +98,8 @@ export class Pedido {
         const spanValorProducto = document.getElementById('valor-producto');
         const fechaLimite = document.getElementById("fecha-limite");
         const anotacion = document.getElementById("anotacion");
-        documento.value = data[0].documento;
-        documento.dispatchEvent(new Event('input', { bubbles: true }));
+        docCliente.value = data[0].docCliente;
+        docCliente.dispatchEvent(new Event('input', { bubbles: true }));
         setTimeout(() => {
             cliente.value = data[0].id_cliente;
         }, 100);
@@ -290,3 +227,76 @@ export function validateAnotacion(input) {
 
 }
 
+export function getProductForCoincidencia(){
+    const pedido=new Pedido();
+    const nombreProducto = document.getElementById("nombreProducto");
+    const producto = document.getElementById("producto");
+    const spanValorProducto = document.getElementById('valor-producto');
+    nombreProducto.addEventListener("input", () => {
+        if (nombreProducto.value.trim() != "") {
+            producto.disabled = false;
+            if (spanValorProducto) {
+                spanValorProducto.innerText = "Valor del producto:";
+            }
+            const formData = new FormData();
+            formData.append("nombreProducto", nombreProducto.value);
+            fetch(`/${url}/pedido/getDataFormRegistrar`, {
+                method: "POST",
+                body: formData
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        producto.innerHTML = `<option value="">Seleccione el producto</option>`;
+                        for (const info of data) {
+                            producto.innerHTML += `<option value="${info.id}">${info.producto}</option>`;
+                        }
+                        if (spanValorProducto) {
+                            pedido.getPrecio(producto, data, spanValorProducto);
+                        }
+                    }
+                    else {
+                        producto.innerHTML = `<option value="">${data}</option>`;
+                    }
+                })
+        }
+        else {
+            producto.disabled = true;
+            producto.innerHTML = `<option value=""></option>`;
+        }
+
+    })
+}
+
+export function getClienteForDoc(){
+    const docCliente = document.getElementById("docCliente");
+    const cliente = document.getElementById("cliente");
+    docCliente.addEventListener("input", () => {
+        if (docCliente.value.trim() != "") {
+            cliente.disabled = false;
+            const formData = new FormData();
+            formData.append("docCliente", docCliente.value);
+            fetch(`/${url}/pedido/getDataFormRegistrar`, {
+                method: "POST",
+                body: formData
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        cliente.innerHTML = `<option value="">Seleccione el cliente</option>`;
+                        for (const info of data) {
+                            cliente.innerHTML += `<option value="${info.id}">${info.cliente}</option>`;
+                        }
+                    }
+                    else {
+                        cliente.innerHTML = `<option value="">${data}</option>`;
+                    }
+                })
+        }
+        else {
+            cliente.disabled = true;
+            cliente.innerHTML = `<option value=""></option>`;
+        }
+
+    })
+}

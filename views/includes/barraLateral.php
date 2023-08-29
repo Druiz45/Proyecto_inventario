@@ -38,7 +38,7 @@ validateLogin();
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/consultar">Consultar usuarios</a></li>
                             </ul>
                         </li>
-                        <li><a><i class="fa fa-users"></i>Categorias<span class="fa fa-chevron-down"></span></a>
+                        <li><a><i class="fa fa-sort-amount-asc"></i>Categorias<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/categoria/consultar">Consultar categorias</a></li>
                             </ul>

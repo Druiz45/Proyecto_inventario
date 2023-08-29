@@ -5,7 +5,7 @@ use config\Conexion;
 use PDO;
 use Exception;
 
-class CompraModel{
+class CompraModel extends PedidoModel{
 
     protected $documento;
     protected $nombreProducto;
@@ -15,9 +15,11 @@ class CompraModel{
     protected $abonoProducto;
     protected $fechaLimite;
     protected $anotacion;
+    protected $cliente;
+    protected $compra;
 
     public function __construct($documento = "", $nombreProducto = "", $proveedor = "", $producto = "",
-    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = ""){
+    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = "", $cliente="", $compra=""){
         $this->documento = $documento;
         $this->nombreProducto = $nombreProducto;
         $this->proveedor = $proveedor;
@@ -26,166 +28,8 @@ class CompraModel{
         $this->abonoProducto = $abonoProducto;
         $this->fechaLimite = $fechaLimite;
         $this->anotacion = $anotacion;
-    }
-
-    public function getInfoFormCreate() {
-
-        try {
-
-            if(!trim($this->documento) || !trim($this->nombreProducto)){
-                throw new Exception("No hay resultados");
-            }
-
-            if ($this->documento!="vacio"){
-                echo json_encode($this->getProvedoresForDoc());
-            }
-            elseif ($this->nombreProducto!="vacio") {
-                echo json_encode($this->getUserForProduct());
-            }
-
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-
-   }
-
-   public function getUserForProduct(){
-    $pdo = new Conexion();
-    $con = $pdo->conexion();
-    
-    try {
-        $select = $con->prepare("CALL getProductForCoincidencia(?)");
-        $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
-        $select->execute();
-
-        $products=$select->fetchAll(PDO::FETCH_ASSOC);
-
-        $select->closeCursor();
-
-        if(!$select || !$select->rowCount() > 0){
-            throw new Exception("No se encontraron productos");
-        }
-
-        return ($products);
-
-    } catch (Exception $e) {
-        return ($e->getMessage());
-        die;
-    }
-}
-
-    public function getProvedoresForDoc(){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-        
-        try {
-            $select = $con->prepare("CALL getProvedoresForDoc(?)");
-            $select->bindParam(1, $this->documento, PDO::PARAM_STR);
-            $select->execute();
-
-            $provedores=$select->fetchAll(PDO::FETCH_ASSOC);
-
-            $select->closeCursor();
-
-            if(!$select || !$select->rowCount() > 0){
-                throw new Exception("No se encontraron provedores");
-            }
-
-            return ($provedores);
-
-        } catch (Exception $e) {
-            return ($e->getMessage());
-            die;
-        }
-
-    }
-
-    public function updateEstate($estado, $compra){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-
-        $estate = ($estado == "Recibir") ? 2 : (($estado == "Pagar") ? 3 : 4);
-
-        try {
-            $update = $con->prepare("CALL updateEstateCompra(?,?)");
-            $update->bindParam(1, $estate, PDO::PARAM_INT);
-            $update->bindParam(2, $compra, PDO::PARAM_INT);
-            $update->execute();
-
-            $update->closeCursor();
-
-            if(!$update){
-                throw new Exception("error");
-            }
-
-            if(!$update->rowCount() > 0){
-                throw new Exception("No se hicieron cambios");
-            }
-
-            echo json_encode("exito");
-
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-    }
-
-    public function updateCompra($compra){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-        
-        try {
-            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?)");
-            $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
-            $update->bindParam(2, $this->producto, PDO::PARAM_INT);
-            $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
-            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
-            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-            $update->bindParam(6, $compra, PDO::PARAM_INT);
-            $update->execute();
-
-            $update->closeCursor();
-
-            if(!$update){
-                throw new Exception("error");
-            }
-
-            if(!$update->rowCount() > 0){
-                throw new Exception("No se hicieron cambios");
-            }
-
-            echo json_encode("exito");
-
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-    }
-
-    public function getCompra($compra){
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-        
-        try {
-            $select = $con->prepare("CALL getCompra(?)");
-            $select->bindParam(1, $compra, PDO::PARAM_STR);
-            $select->execute();
-
-            $compra=$select->fetchAll(PDO::FETCH_ASSOC);
-
-            $select->closeCursor();
-
-            if(!$select || !$select->rowCount() > 0){
-                throw new Exception("No encontrado");
-            }
-
-            echo json_encode($compra);
-
-        } catch (Exception $e) {
-            json_encode($e->getMessage());
-            die;
-        }
+        $this->cliente = $cliente;
+        $this->compra = $compra;
     }
 
     public function validateDataCompra(){
@@ -262,6 +106,172 @@ class CompraModel{
         }
     }
 
+    public function getInfoFormCreate() {
+
+        try {
+
+            if(!trim($this->documento) || !trim($this->nombreProducto)){
+                throw new Exception("No hay resultados");
+            }
+
+            if ($this->documento!="vacio"){
+                echo json_encode($this->getProvedoresForDoc());
+            }
+            elseif ($this->nombreProducto!="vacio") {
+                echo json_encode($this->getProductForCoincidencia());
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+   }
+
+    public function getProvedoresForDoc(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $select = $con->prepare("CALL getProvedoresForDoc(?)");
+            $select->bindParam(1, $this->documento, PDO::PARAM_STR);
+            $select->execute();
+
+            $provedores=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+                throw new Exception("No se encontraron provedores");
+            }
+
+            return ($provedores);
+
+        } catch (Exception $e) {
+            return ($e->getMessage());
+            die;
+        }
+
+    }
+
+    public function updateEstate($estado, $compra, $mensaje=true){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $estate = ($estado == "Recibir") ? 2 : (($estado == "Pagar") ? 3 : 4);
+
+        try {
+            $update = $con->prepare("CALL updateEstateCompra(?,?)");
+            $update->bindParam(1, $estate, PDO::PARAM_INT);
+            $update->bindParam(2, $compra, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("error");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se hicieron cambios");
+            }
+
+            if ($mensaje){
+                echo json_encode("exito");
+            }
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updateCompra($compra){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?)");
+            $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
+            $update->bindParam(2, $this->producto, PDO::PARAM_INT);
+            $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
+            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
+            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
+            $update->bindParam(6, $compra, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("error");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se hicieron cambios");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getCompra($compra){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        try {
+            $select = $con->prepare("CALL getCompra(?)");
+            $select->bindParam(1, $compra, PDO::PARAM_STR);
+            $select->execute();
+
+            $compra=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select || !$select->rowCount() > 0){
+                throw new Exception("No encontrado");
+            }
+
+            echo json_encode($compra);
+
+        } catch (Exception $e) {
+            json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function createAbonoCompra(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+        
+        $user=$_SESSION["idUser"];
+    
+        try {
+            $insert = $con->prepare("CALL createAbonoCompra(?,?,?)");
+            $insert->bindParam(1, $this->abonoProducto, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->compra, PDO::PARAM_INT);
+            $insert->bindParam(3, $user, PDO::PARAM_INT);
+            $insert->execute();
+    
+            $insert->closeCursor();
+    
+            if(!$insert || !$insert->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+            if ($this->abonoProducto==$this->valorProducto){
+                $this->updateEstate("Pagar", $this->compra, false);
+            }
+    
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+       }
+
     public function saveCompra(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -274,18 +284,20 @@ class CompraModel{
             $insert->bindParam(2, $this->proveedor, PDO::PARAM_INT);
             $insert->bindParam(3, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(4, $this->valorProducto, PDO::PARAM_INT);
-            $insert->bindParam(5, $this->abonoProducto, PDO::PARAM_INT);
-            $insert->bindParam(6, $this->anotacion, PDO::PARAM_STR);
-            $insert->bindParam(7, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->cliente, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
 
             if(!$insert || !$insert->rowCount() > 0){
-
                 throw new Exception("Error");
-
             }
+
+            $this->compra = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
+
+            $this->createAbonoCompra();
 
             echo json_encode(["Compra registrada con exito", "success"]);
 
