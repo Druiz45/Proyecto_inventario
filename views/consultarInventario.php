@@ -5,10 +5,12 @@
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
             <?php
-                use App\Http\Models\InventarioModel;
-                $i = 1;
-                $inventario = new InventarioModel();
-                $rows = $inventario->getInventario();
+
+            use App\Http\Models\InventarioModel;
+
+            $i = 1;
+            $inventario = new InventarioModel();
+            $rows = $inventario->getInventario();
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -45,6 +47,7 @@
                                                     <th>Produco</th>
                                                     <th>Stock</th>
                                                     <th>Fecha</th>
+                                                    <th>Operaciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
@@ -54,6 +57,7 @@
                                                         <td><?= $row["producto"] ?></td>
                                                         <td><?= $row["stock"] ?></td>
                                                         <td><?= getFecha($row["fecha_sys"]) ?></td>
+                                                        <td> <button type="button" class="btn btn-primary" onclick="return editarProductoInventario('<?= $row['stock'] ?>', '<?= $row['id'] ?>')">Editar</button> </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
@@ -77,4 +81,5 @@
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/inventario/operaciones.js"></script>
 </body>

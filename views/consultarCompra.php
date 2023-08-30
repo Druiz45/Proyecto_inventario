@@ -98,8 +98,10 @@
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>
                                                                     <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
                                                                 <?php endif; ?>
-                                                                <?php if ($row['estado_orden'] == 2): ?>
-                                                                    <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>')">Añadir al stock</button>
+                                                                <?php if($row['estado_inventario'] != 1): ?>
+                                                                    <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>
+                                                                <?php elseif ($row['estado_orden'] == 2 && $row['agregado_stock'] == 0): ?>
+                                                                    <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>', '<?= $row['id'] ?>')">Añadir al stock</button>
                                                                 <?php endif; ?>
                                                             </td>
                                                         <?php endif; ?>

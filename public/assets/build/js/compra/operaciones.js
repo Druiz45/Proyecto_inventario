@@ -148,32 +148,49 @@ function updateEstate(compra, estado, mensaje) {
         });
 }
 
-function agregarAlStock(producto) {
+function agregarAlStock(producto, ordenCompra) {
+
     const formData = new FormData();
     formData.append("producto", producto);
-    fetch(`/${url}/Inventario/agregarAStock`, {
-        method: "POST",
-        body: formData
+    formData.append("ordenCompra", ordenCompra);
+
+    Swal.fire({
+        title: '¿Esta seguro de añadir esta orden de compra al stock?',
+        // text: "You won't be able to revert this!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            fetch(`/${url}/Inventario/agregarAStock`, {
+                method: "POST",
+                body: formData
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    if (data == "exito") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: `Se ha añadido una existencia al stock de este producto`,
+                        }).then(() => {
+                            location.reload();
+                        })
+                    } else if (data == "error") {
+                        Swal.fire({
+                            icon: 'error',
+                            text: "Ha ocurrido un error al intentar actualizar el stock de este producto",
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: data,
+                        })
+                    }
+                })
+        }
     })
-        .then(respuesta => respuesta.json())
-        .then(data => {
-            if (data == "exito") {
-                Swal.fire({
-                    icon: 'success',
-                    title: `Se ha añadido una existencia al stock de este producto`,
-                }).then(() => {
-                    location.reload();
-                })
-            } else if (data == "error") {
-                Swal.fire({
-                    icon: 'error',
-                    text: "Ha ocurrido un error al intentar actualizar el stock de este producto",
-                })
-            } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: data,
-                })
-            }
-        })
 }

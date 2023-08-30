@@ -68,7 +68,7 @@
                               <?php endif; ?>
                               <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
                               <?php if ($row["estado_inventario"]==0): ?>
-                                <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= $row['producto'] ?>')">Añadir a inventario</button>
+                                <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= htmlspecialchars($row['producto']) ?>')">Añadir a inventario</button>
                               <?php endif; ?>
                             </td>
                           </tr>

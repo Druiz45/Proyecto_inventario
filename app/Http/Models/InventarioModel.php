@@ -49,6 +49,39 @@ class InventarioModel{
         }
     }
 
+    public function update($stock, $idInventario){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $update = $con->prepare("CALL updateInventario(?,?)");
+            $update->bindParam(1, $stock, PDO::PARAM_INT);
+            $update->bindParam(2, $idInventario, PDO::PARAM_INT);
+            $update->execute();
+
+            // $inventario=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $update->closeCursor();
+
+            if(!$update){
+                throw new Exception("Ha ocurrido un error al intentar actualizar el stock de este producto");
+            }
+
+            if(!$update->rowCount() > 0){
+                throw new Exception("No se han realizado cambios en el stock de este producto");
+            }
+
+            echo json_encode("El stock se actualizo correctamente");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
     public function updateEstateInventario(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -103,15 +136,16 @@ class InventarioModel{
         }
     }
 
-    public function updateStock(){
+    public function updateStock($ordenCompra){
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
 
-            $update = $con->prepare("CALL updateStock(?)");
+            $update = $con->prepare("CALL updateStock(?,?)");
             $update->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $update->bindParam(2, $ordenCompra, PDO::PARAM_INT);
             $update->execute();
 
             // $inventario=$select->fetchAll(PDO::FETCH_ASSOC);

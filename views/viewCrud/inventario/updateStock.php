@@ -6,4 +6,4 @@ use App\Http\Models\InventarioModel;
 
 $inventario = new InventarioModel(0, $_POST['producto']);
 
-$inventario->updateStock();
+$inventario->updateStock($_POST['ordenCompra']);
