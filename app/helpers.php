@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Response;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 
 if(!function_exists('view')){
 
@@ -93,6 +93,10 @@ if(!function_exists('getFecha')){
 
     function getFecha($date){
 
+        $hora = substr($date, 11, 2);
+
+        $estadoDia = $hora >= 0 && $hora <= 11 ? 'a.m.':'p.m';
+
         date_default_timezone_set('America/Bogota');
         setlocale(LC_TIME, "spanish");
 
@@ -100,7 +104,7 @@ if(!function_exists('getFecha')){
         $fechaObjeto = strtotime($date);
         $fechaFormateada = utf8_encode(strftime('%A %d de %B de %Y a las %I:%M %p', $fechaObjeto));
         
-        return $fechaFormateada;
+        return $fechaFormateada." ".$estadoDia;
     }
 
 }

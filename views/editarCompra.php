@@ -28,7 +28,7 @@
                                     <div class="x_content">
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento del proveedor" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="docProveedor" name="docProveedor" placeholder="Documento del proveedor" autocomplete="off">
                                                 <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">

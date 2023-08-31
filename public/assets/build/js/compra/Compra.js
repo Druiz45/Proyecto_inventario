@@ -134,7 +134,7 @@ export class Compra {
         const anotacion = document.getElementById("anotacion");
         const valorProducto=document.getElementById("valorProducto");
         validatePrecio(valorProducto);
-        docProveedor.value = data[0].docProveedor;
+        docProveedor.value = data[0].documento;
         docProveedor.dispatchEvent(new Event('input', { bubbles: true }));
         setTimeout(() => {
             proveedor.value = data[0].id_proveedor;

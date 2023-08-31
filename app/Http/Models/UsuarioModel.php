@@ -148,8 +148,11 @@ class UsuarioModel
 
             echo json_encode("Usuario registrado exitosamente!");
         } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
+            if ($e->getCode() == 23000) {
+                echo "Error: El valor ya existe en la base de datos.";
+            }else{
+                echo json_encode($e->getMessage());
+            }
         }
 
         // echo json_encode($registros);

@@ -98,7 +98,7 @@ export class Pedido {
         const spanValorProducto = document.getElementById('valor-producto');
         const fechaLimite = document.getElementById("fecha-limite");
         const anotacion = document.getElementById("anotacion");
-        docCliente.value = data[0].docCliente;
+        docCliente.value = data[0].documento;
         docCliente.dispatchEvent(new Event('input', { bubbles: true }));
         setTimeout(() => {
             cliente.value = data[0].id_cliente;
@@ -227,8 +227,8 @@ export function validateAnotacion(input) {
 
 }
 
-export function getProductForCoincidencia(){
-    const pedido=new Pedido();
+export function getProductForCoincidencia() {
+    const pedido = new Pedido();
     const nombreProducto = document.getElementById("nombreProducto");
     const producto = document.getElementById("producto");
     const spanValorProducto = document.getElementById('valor-producto');
@@ -268,35 +268,41 @@ export function getProductForCoincidencia(){
     })
 }
 
-export function getClienteForDoc(){
-    const docCliente = document.getElementById("docCliente");
-    const cliente = document.getElementById("cliente");
-    docCliente.addEventListener("input", () => {
-        if (docCliente.value.trim() != "") {
-            cliente.disabled = false;
-            const formData = new FormData();
-            formData.append("docCliente", docCliente.value);
-            fetch(`/${url}/pedido/getDataFormRegistrar`, {
-                method: "POST",
-                body: formData
-            })
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    if (Array.isArray(data)) {
-                        cliente.innerHTML = `<option value="">Seleccione el cliente</option>`;
-                        for (const info of data) {
-                            cliente.innerHTML += `<option value="${info.id}">${info.cliente}</option>`;
-                        }
-                    }
-                    else {
-                        cliente.innerHTML = `<option value="">${data}</option>`;
-                    }
-                })
-        }
-        else {
-            cliente.disabled = true;
-            cliente.innerHTML = `<option value=""></option>`;
-        }
+export function getClienteForDoc() {
+    const formUpdateCompra = document.getElementById('formUpdateCompra');
+    if (!formUpdateCompra) {
 
-    })
+        const docCliente = document.getElementById("docCliente");
+        const cliente = document.getElementById("cliente");
+        docCliente.addEventListener("input", () => {
+            if (docCliente.value.trim() != "") {
+                cliente.disabled = false;
+                const formData = new FormData();
+                formData.append("docCliente", docCliente.value);
+                fetch(`/${url}/pedido/getDataFormRegistrar`, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            cliente.innerHTML = `<option value="">Seleccione el cliente</option>`;
+                            for (const info of data) {
+                                cliente.innerHTML += `<option value="${info.id}">${info.cliente}</option>`;
+                            }
+                        }
+                        else {
+                            cliente.innerHTML = `<option value="">${data}</option>`;
+                        }
+                    })
+            }
+            else {
+                cliente.disabled = true;
+                cliente.innerHTML = `<option value=""></option>`;
+            }
+
+        })
+
+    }
+
 }
