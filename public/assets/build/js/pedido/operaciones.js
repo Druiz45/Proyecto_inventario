@@ -72,7 +72,7 @@ function abonos(pedido, estado, aprobacion, restante) {
     input.value+=decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
   }
 
-function pagarComision(pedido, vendedor) {
+function pagarComision(pedido, vendedor, numVendedor, valorComision) {
     Swal.fire({
         icon: 'question',
         title: `¿Desea pagar la comision al vendedor ${vendedor}?`,
@@ -87,7 +87,7 @@ function pagarComision(pedido, vendedor) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                pagar(pedido);
+                pagar(pedido, numVendedor, valorComision);
             }
         })
 }
@@ -209,9 +209,11 @@ function updateEstate(pedido, mensaje, ruta) {
     })
 }
 
-function pagar(pedido) {
+function pagar(pedido, numVendedor, valorComision) {
     const formData = new FormData();
     formData.append("pedido", pedido);
+    formData.append('numVendedor', numVendedor);
+    formData.append('valorComision', valorComision);
     fetch(`/${url}/pedido/pagarComision`, {
         method: "POST",
         body: formData

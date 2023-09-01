@@ -93,7 +93,7 @@
                                 <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal']-$row['abonoTotal']) ?>)">Estado</button>
 
                               <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2 && $_SESSION["idPerfil"]==3): ?>
-                                  <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', )">Comision</button>
+                                  <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)">Comision</button>
                               <?php endif; ?>
 
                               <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal']-$row['abonoTotal']) ?>)">Abonos</button>

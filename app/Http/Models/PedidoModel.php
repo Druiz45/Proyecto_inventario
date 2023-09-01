@@ -231,7 +231,7 @@ class PedidoModel {
         }
     }
 
-    public function updatePagoComision($idPedido){
+    public function updatePagoComision($idPedido, ComisionModel $comision){
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
@@ -241,6 +241,8 @@ class PedidoModel {
             $update->execute();
 
             $update->closeCursor();
+
+            $comision->create();
 
             if(!$update){
                 throw new Exception("error");
