@@ -17,6 +17,7 @@ class LoginModel extends UsuarioModel {
     protected $ultimoLog;
     protected $fechaCreacion;
     protected $getPass;
+    protected $estado;
 
     public function __construct($email = "", $getPass = "", /*$documento = "", $pass = "", $passEncrypt = "", $usuario = "",
     $idUser = "", $idPerfil = "", $ultimoLog = "", $fechaCreacion = ""*/){
@@ -69,6 +70,7 @@ class LoginModel extends UsuarioModel {
             $this->idPerfil=$dataSesion[0]["idPerfil"];
             $this->ultimoLog=$dataSesion[0]['ultimo_log'];
             $this->fechaCreacion=$dataSesion[0]['fecha_creacion'];
+            $this->estado=$dataSesion[0]['estado'];
             $this->decryptPass();
 
         } catch (Exception $e) {
@@ -108,6 +110,10 @@ class LoginModel extends UsuarioModel {
             
             if ($this->pass != $this->getPass){
                 throw new Exception("La contraseña no coincide");
+            }
+
+            if ($this->estado != 1){
+                throw new Exception("Este usuario esta deshabilitado");
             }
     
             $_SESSION["documento"] = $this->documento;

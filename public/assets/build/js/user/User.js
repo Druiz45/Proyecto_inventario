@@ -88,6 +88,32 @@ export class User {
 
   }
 
+  eventInputsHidden(){
+    const formCreate = document.getElementById('form-create-user')
+
+    if(formCreate){
+
+      const select = document.getElementById('select-perfiles');
+      const nombreEmpresa = document.getElementById('nombre-empresa');
+      const nitEmpresa = document.getElementById('nit-empresa');
+      const inputHidden = document.getElementById('input-hidden');
+
+      select.addEventListener('input', () => {
+
+        if(select.value == 2){
+          inputHidden.hidden = false;
+          nombreEmpresa.disabled = false;
+          nitEmpresa.disabled = false;
+        }else{
+          inputHidden.hidden = true;
+          nombreEmpresa.disabled = true;
+          nitEmpresa.disabled = true;
+        }
+
+      })
+    }
+  }
+
   setDataFormUpdate(data) {
     const formUpdateUser = document.getElementById('form-update-user');
     if (formUpdateUser) {

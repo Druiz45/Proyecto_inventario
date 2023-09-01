@@ -63,17 +63,17 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="form-group row align-items-center justify-content-center">
+                                        <div class="form-group row align-items-center justify-content-center" id="input-hidden" hidden>
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
+                                                <input type="text" class="form-control has-feedback-left" id="nombre-empresa" name="nombre-empresa"  placeholder="Nombre de empresa" disabled>
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
+                                                <input type="text" class="form-control has-feedback-left" id="nit-empresa" name="nit-empresa" placeholder="Nit de la empresa" disabled>
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">

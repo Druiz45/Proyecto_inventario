@@ -20,9 +20,12 @@ class UsuarioModel
     protected $newPass; 
     protected $newPassConfirm; 
     protected $passActual;
+    protected $nombreEmpresa;
+    protected $nitEmpresa;
 
     public function __construct($nombres = "", $apellidos = "", $documento = "",  $email = "", $celular = "",
-    $direccion = "", $perfil = "", $pass = "", $newPass = "", $newPassConfirm = "", $passActual = "",){
+    $direccion = "", $perfil = "", $pass = "", $nombreEmpresa = null, $nitEmpresa = null,
+    /*$newPass = "", $newPassConfirm = "", $passActual = "",*/){
 
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -32,9 +35,11 @@ class UsuarioModel
         $this->celular = $celular;
         $this->direccion = $direccion;
         $this->pass = $pass;
-        $this->newPass = $newPass;
-        $this->newPassConfirm = $newPassConfirm; 
-        $this->passActual = $passActual;
+        $this->nombreEmpresa = $nombreEmpresa;
+        $this->nitEmpresa = $nitEmpresa;
+        // $this->newPass = $newPass;
+        // $this->newPassConfirm = $newPassConfirm; 
+        // $this->passActual = $passActual;
 
     }
 
@@ -58,13 +63,19 @@ class UsuarioModel
 
     public function validateData(){
         try {
-
+            
             if (
                 !trim($this->nombres) || !trim($this->apellidos) || !trim($this->documento) || !trim($this->perfil)
                 || !trim($this->email) || !trim($this->celular) || !trim($this->direccion)
             ) {
 
                 throw new Exception("Porfavor complete todos los campos");
+            }
+
+            if(isset($_POST['nombre-empresa']) && isset($_POST['nit-empresa'])){
+                if(!trim($this->nombreEmpresa) || !trim($this->nitEmpresa)){
+                    throw new Exception("Porfavor complete todos los campos");
+                }
             }
 
             $pattern = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{3,50}+$/";
@@ -128,7 +139,7 @@ class UsuarioModel
 
         try {
 
-            $insert = $con->prepare("CALL createUser(?,?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createUser(?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->documento, PDO::PARAM_STR);
             $insert->bindParam(2, $this->perfil, PDO::PARAM_INT);
             $insert->bindParam(3, $this->nombres, PDO::PARAM_STR);
@@ -137,6 +148,8 @@ class UsuarioModel
             $insert->bindParam(6, $this->celular, PDO::PARAM_STR);
             $insert->bindParam(7, $this->direccion, PDO::PARAM_STR);
             $insert->bindParam(8, $this->pass, PDO::PARAM_STR);
+            $insert->bindParam(9, $this->nombreEmpresa, PDO::PARAM_STR);
+            $insert->bindParam(10, $this->nitEmpresa, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
