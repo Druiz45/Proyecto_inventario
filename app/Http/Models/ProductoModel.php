@@ -174,7 +174,7 @@ class ProductoModel{
         $n=1;
         try {
             $select = $con->prepare("CALL getCategorias(?)");
-            $select->bindParam(1, $n, PDO::PARAM_STR);
+            $select->bindParam(1, $n, PDO::PARAM_INT);
             $select->execute();
 
             $categorias=$select->fetchAll(PDO::FETCH_ASSOC);
