@@ -29,7 +29,7 @@ validateLogin();
                     <?php if ($_SESSION["idPerfil"] == 3) : ?>
                         <li><a><i class="fa fa-briefcase"></i>Cartera<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
-                                <li><a href="./">Consultar cartera</a></li>
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/cartera/consultar">Consultar cartera</a></li>
                             </ul>
                         </li>
                         <li><a><i class="fa fa-users"></i>Usuarios<span class="fa fa-chevron-down"></span></a>
