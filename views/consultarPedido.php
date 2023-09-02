@@ -42,6 +42,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Codigo pedido</th>
                           <th>Producto</th>
                           <th>Cliente</th>
                           <th>Vendedor</th>
@@ -67,6 +68,7 @@
                           ?>
                           <tr>
                             <td><?= $i++ ?></td>
+                            <td><?= base64_encode($row["id"]).bin2hex($row["id"]) ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>

@@ -141,7 +141,6 @@ if(!function_exists('validateLogOut')){
             header("Location: ./home");
             die;
         }
-        
     }
 }
 

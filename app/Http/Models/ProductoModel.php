@@ -169,12 +169,15 @@ class ProductoModel{
     }
 
     public function getCategorias(){
+
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        $n=1;
+        
+        $variable=2;
+
         try {
             $select = $con->prepare("CALL getCategorias(?)");
-            $select->bindParam(1, $n, PDO::PARAM_INT);
+            $select->bindParam(1, $variable, PDO::PARAM_INT);
             $select->execute();
 
             $categorias=$select->fetchAll(PDO::FETCH_ASSOC);

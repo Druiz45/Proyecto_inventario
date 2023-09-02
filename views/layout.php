@@ -52,8 +52,8 @@
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/custom.min.css" rel="stylesheet">
   
     <link rel="shortcut icon" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/logo.png" type="image/x-icon">
-  </head>
+  </head> 
 
-    <?php require_once $content ?>
+  <?php require_once $content ?>
   
 </html>

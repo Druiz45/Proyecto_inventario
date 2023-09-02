@@ -1,5 +1,5 @@
 <?php
-    validateLogOut();
+   validateLogOut();
 ?>
 <body class="login">
     <div>

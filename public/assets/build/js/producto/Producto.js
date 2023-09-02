@@ -96,6 +96,7 @@ export class Producto {
         })
           .then(respuesta => respuesta.json())
           .then(data => {
+            console.log(data);
             this.setCategorias(data, categoria);
           })
       });

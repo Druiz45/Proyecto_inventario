@@ -6,4 +6,3 @@ $producto = new ProductoModel();
 
 $producto->getCategorias();
 
-?>

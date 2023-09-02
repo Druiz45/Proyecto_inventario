@@ -1,5 +1,5 @@
 <?php
-validateLogin();
+    validateLogin();
 ?>
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
@@ -45,6 +45,11 @@ validateLogin();
                         </li>
                     <?php endif; ?>
                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                        <li><a><i class="fa fa-external-link-square"></i>Comisiones<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/comision/consultar">Consultar comisiones</a></li>
+                            </ul>
+                        </li>
                         <li><a><i class="fa fa-user"></i>Clientes<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/cliente/registrar">Registrar cliente</a></li>

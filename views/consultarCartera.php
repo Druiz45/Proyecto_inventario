@@ -19,7 +19,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Informacion de pedidos<small>Pedidos</small></h2>
+                            <h2>Informacion de cartera<small>Cartera</small></h2>
                             <!-- <ul class="nav navbar-right panel_toolbox">
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
@@ -43,15 +43,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Producto</th>
-                                                    <th>Cliente</th>
-                                                    <th>Vendedor</th>
-                                                    <th>Fecha limite</th>
-                                                    <th>Abono total</th>
+                                                    <th>Codigo pedido</th>
                                                     <th>Valor restante</th>
-                                                    <th>Valor del producto</th>
-                                                    <th>Fecha del pedio</th>
-                                                    <th>Operaciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
@@ -59,17 +52,8 @@
                                                     <?php $valorAdeudado+=$row["valor_restante"] ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
-                                                        <td><?= $row["producto"] ?></td>
-                                                        <td><?= $row["cliente"] ?></td>
-                                                        <td><?= $row["vendedor"] ?></td>
-                                                        <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
-                                                        <td><?= numberFormat($row["abonoTotal"]) ?></td>
+                                                        <td><?= base64_encode($row["id"]).bin2hex($row["id"]) ?></td>
                                                         <td><?= numberFormat($row["valor_restante"]) ?></td>
-                                                        <td><?= numberFormat($row["valorTotal"]) ?></td>
-                                                        <td><?= getFecha($row["fecha"]) ?></td>
-                                                        <td>
-
-                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

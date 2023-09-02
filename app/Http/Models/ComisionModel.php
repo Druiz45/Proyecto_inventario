@@ -13,7 +13,7 @@ class ComisionModel{
     protected $valorComision;
     protected $pedido;
 
-    public function __construct($vendedor, $usuarioRegistrador, $valorComision, $pedido){
+    public function __construct($vendedor="", $usuarioRegistrador="", $valorComision="", $pedido=""){
         
         $this->vendedor = $vendedor;
         $this->usuarioRegistrador = $usuarioRegistrador;
@@ -49,6 +49,34 @@ class ComisionModel{
             die;
         }
 
+    }
+
+    public function getComisiones(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL getComisiones(?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $comisiones=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select || !$select->rowCount() > 0) {
+                throw new Exception("No hay comisiones para mostrar");
+            }
+
+            return $comisiones;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
     }
 
 }
