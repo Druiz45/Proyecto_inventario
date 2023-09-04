@@ -7,9 +7,11 @@
             <?php
                 use App\Http\Models\carteraModel;
                 $i = 1;
-                $valorAdeudado=0;
                 $cartera = new carteraModel();
                 $rows = $cartera->getCartera();
+                // $valorAdeudado=0;
+                $valorAdeudado=$rows[count($rows)-1]['valor_restante'];
+                // print_r($rows);
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -49,12 +51,14 @@
                                             </thead>
                                             <tbody id="tbody">
                                                 <?php foreach ($rows as $row) : ?>
-                                                    <?php $valorAdeudado+=$row["valor_restante"] ?>
+                                                    <?php #$valorAdeudado+=$row["valor_restante"] ?>
+                                                    <?php if($row['id'] != null): ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
                                                         <td><?= base64_encode($row["id"]).bin2hex($row["id"]) ?></td>
                                                         <td><?= numberFormat($row["valor_restante"]) ?></td>
                                                     </tr>
+                                                    <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>

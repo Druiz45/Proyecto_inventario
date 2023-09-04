@@ -32,6 +32,11 @@
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/cartera/consultar">Consultar cartera</a></li>
                             </ul>
                         </li>
+                        <li><a><i class="fa fa-briefcase"></i>Caja<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/caja/consultar">Consultar caja</a></li>
+                            </ul>
+                        </li>
                         <li><a><i class="fa fa-users"></i>Usuarios<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/usuario/registrar">Registrar usuario</a></li>
