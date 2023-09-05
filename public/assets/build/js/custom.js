@@ -2531,7 +2531,6 @@ function init_DataTables() {
     });
 
     $('#datatable-responsive').DataTable();
-
     $('#datatable-scroller').DataTable({
         ajax: "js/datatables/json/scroller-demo.json",
         deferRender: true,
@@ -2561,6 +2560,65 @@ function init_DataTables() {
     TableManageButtons.init();
 
 };
+
+function init_DataTablesForSecondTable() {
+    console.log('run_datatables');
+    if (typeof ($.fn.DataTable) === 'undefined') { return; }
+    console.log('init_DataTables');
+
+    var handleDataTableButtons = function () {
+        if ($("#datatable2-responsive2").length) {
+            $("#datatable2-responsive2").DataTable({
+                dom: "Blfrtip",
+                buttons: [
+                    {
+                        extend: "copy",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "csv",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "excel",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "print",
+                        className: "btn-sm"
+                    },
+                ],
+                responsive: true
+            });
+        }
+    };
+
+    TableManageButtons = function () {
+        "use strict";
+        return {
+            init: function () {
+                handleDataTableButtons();
+            }
+        };
+    }();
+
+    // Puedes mantener las demás configuraciones aquí
+    // ...
+
+    TableManageButtons.init();
+}
+
+$(document).ready(function() {
+    // Llama a la función adaptada para la primera tabla (existente)
+    init_DataTables();
+
+    // Llama a la función adaptada para la segunda tabla
+    init_DataTablesForSecondTable();
+});
 
 /* CHART - MORRIS  */
 
