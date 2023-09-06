@@ -6,14 +6,17 @@
             <!-- top navigation -->
             <?php
 
-            use App\Http\Models\carteraModel;
+            use App\Http\Models\cajaModel;
 
             $i = 1;
-            $cartera = new carteraModel();
-            $rows = $cartera->getCartera();
-            // $valorAdeudado=0;
-            $valorAdeudado = $rows[count($rows) - 1]['valor_restante'];
-            // print_r($rows);
+            $caja = new cajaModel();
+
+            $rowsPedidos = $caja->getCajaPedidos();
+            $rowsIngresos = $caja->getCajaIngresos();
+
+            $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
+            $totalIngresos = $rowsIngresos[count($rowsIngresos) - 1]['valor'];
+            // print_r($rowsPedidos);
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -45,18 +48,18 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Codigo pedido</th>
-                                                    <th>Valor restante</th>
+                                                    <th>Total Abonado</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                                <?php foreach ($rows as $row) : ?>
+                                                <?php foreach ($rowsPedidos as $row) : ?>
                                                     <?php #$valorAdeudado+=$row["valor_restante"] 
                                                     ?>
-                                                    <?php if ($row['id'] != null) : ?>
+                                                    <?php if ( is_numeric($row['id_pedido']) ) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
-                                                            <td><?= numberFormat($row["valor_restante"]) ?></td>
+                                                            <td><?= base64_encode($row["id_pedido"]) . bin2hex($row["id_pedido"]) ?></td>
+                                                            <td><?= numberFormat($row["total_abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
@@ -65,8 +68,8 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Se registra un valor adeudado de:</h3>
-                                            <h3 class="red"><?= numberFormat($valorAdeudado) ?></h3>
+                                            <h3>Se registra un valor en caja (pedidos):</h3>
+                                            <h3 class="green"><?= numberFormat($totalAbonos) ?></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -76,19 +79,19 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Codigo pedido</th>
-                                                    <th>Valor restante</th>
+                                                    <th>Codigo ingreso</th>
+                                                    <th>Valor</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                                <?php foreach ($rows as $row) : ?>
+                                                <?php foreach ($rowsIngresos as $row) : ?>
                                                     <?php #$valorAdeudado+=$row["valor_restante"] 
                                                     ?>
-                                                    <?php if ($row['id'] != null) : ?>
+                                                    <?php if ( is_numeric($row['id']) ) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
                                                             <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
-                                                            <td><?= numberFormat($row["valor_restante"]) ?></td>
+                                                            <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
@@ -97,15 +100,15 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Se registra un valor adeudado de:</h3>
-                                            <h3 class="red"><?= numberFormat($valorAdeudado) ?></h3>
+                                            <h3>Se registra en caja un valor de (Ingresos):</h3>
+                                            <h3 class="green"><?= numberFormat($totalIngresos) ?></h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row align-items-center justify-content-center">
-                                <h3>Se registra un valor adeudado de:</h3>
-                                <h3 class="red"><?= numberFormat($valorAdeudado) ?></h3>
+                                <h3>Se registra en caja un valor total de: </h3>
+                                <h3 class="green"><?= numberFormat($totalAbonos+$totalIngresos) ?></h3>
                             </div>
                         </div>
                     </div>
