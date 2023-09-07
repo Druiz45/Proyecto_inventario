@@ -9,12 +9,12 @@
             use App\Http\Models\cajaModel;
 
             $i = 1;
-            $caja = new cajaModel();
+            $caja = new cajaModel(null, null);
 
-            $rowsPedidos = $caja->getCajaPedidos();
+            // $rowsPedidos = $caja->getCajaPedidos();
             $rowsIngresos = $caja->getCajaIngresos();
 
-            $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
+            // $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
             $totalIngresos = $rowsIngresos[count($rowsIngresos) - 1]['valor'];
             // print_r($rowsPedidos);
             ?>
