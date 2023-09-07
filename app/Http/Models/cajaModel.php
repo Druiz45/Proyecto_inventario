@@ -23,7 +23,7 @@ class cajaModel{
 
         $fechaActual = date('Y-m-d');
 
-        if( isset($_GET['startDate']) && isset($_GET['finalDate']) ){
+        if( ( isset($_GET['startDate']) && trim($_GET['startDate']) ) && (isset($_GET['finalDate']) && $_GET['finalDate']) ){
 
             if(!strtotime($_GET['startDate']) || !strtotime($_GET['finalDate'])){
                 header("Location: /".getUrl($_SERVER['SERVER_NAME'])."/caja/consultar");

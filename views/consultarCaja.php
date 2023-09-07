@@ -11,10 +11,10 @@
             $i = 1;
             $caja = new cajaModel(null, null);
 
-            // $rowsPedidos = $caja->getCajaPedidos();
+            $rowsPedidos = $caja->getCajaPedidos();
             $rowsIngresos = $caja->getCajaIngresos();
 
-            // $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
+            $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
             $totalIngresos = $rowsIngresos[count($rowsIngresos) - 1]['valor'];
             // print_r($rowsPedidos);
             ?>
@@ -33,11 +33,11 @@
                             <div class="row justify-content-center">
                                 <div class="form-group row col-md-4 col-sm-6">
                                     <label>Fecha incio:</label>
-                                    <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>">
+                                    <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
                                 </div>
                                 <div class="form-group row col-md-4 col-sm-6">
                                     <label>Fecha Final:</label>
-                                    <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>">
+                                    <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                                 </div>
                                 <div class="actionBar">
                                     <input type="submit" class="buttonNext btn btn-success" value="Filtrar">
