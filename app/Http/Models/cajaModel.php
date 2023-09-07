@@ -7,6 +7,14 @@ use Exception;
 
 class cajaModel{
 
+    protected $fechaActual;
+
+    public function __construct() {
+        
+        $this->fechaActual = date('Y-m-d');
+
+    }
+
 
     public function getCajaPedidos(){
 

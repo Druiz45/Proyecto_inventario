@@ -62,7 +62,10 @@
                                                             <td><?= numberFormat($row["total_abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
-                                                <?php endforeach; ?>
+                                                <?php 
+                                                    endforeach;
+                                                    $i=1; 
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
