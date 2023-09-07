@@ -42,36 +42,36 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="documento" name="documento"  placeholder="Documento">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="email" class="form-control has-feedback-left" id="email" name="email"  placeholder="Email">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="celular" name="celular"  placeholder="Celular">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion"  placeholder="Direccion">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center" id="input-hidden" hidden>
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="nombre-empresa" name="nombre-empresa"  placeholder="Nombre de empresa" disabled>
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="nit-empresa" name="nit-empresa" placeholder="Nit de la empresa" disabled>
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-building form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 

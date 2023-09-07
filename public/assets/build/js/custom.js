@@ -2561,6 +2561,8 @@ function init_DataTables() {
 
 };
 
+/* DATA TABLES2 */
+
 function init_DataTablesForSecondTable() {
     console.log('run_datatables');
     if (typeof ($.fn.DataTable) === 'undefined') { return; }
@@ -2606,17 +2608,12 @@ function init_DataTablesForSecondTable() {
         };
     }();
 
-    // Puedes mantener las demás configuraciones aquí
-    // ...
-
     TableManageButtons.init();
 }
 
 $(document).ready(function() {
-    // Llama a la función adaptada para la primera tabla (existente)
     init_DataTables();
 
-    // Llama a la función adaptada para la segunda tabla
     init_DataTablesForSecondTable();
 });
 
