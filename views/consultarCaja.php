@@ -43,7 +43,6 @@
                                     <input type="submit" class="buttonNext btn btn-success" value="Filtrar">
                                 </div>
                             </div>
-
                         </form>
                         <div class="x_content">
                             <div class="row">

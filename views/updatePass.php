@@ -33,21 +33,37 @@
                                     <br />
                                     <form class="form-label-left input_mask align-items-center" id="formPass">
                                         <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="newPass" name="newPass" placeholder="Nueva constraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            <div class="form-group col-md-3 col-sm-6">
+                                                <input class="form-control pass" type="password" id="newPass" name="newPass" placeholder="Nueva contraseña">
+                                                <span style="position: absolute; right: 15px; top: 7px;" class="ver">
+                                                    <i class="fa fa-eye-slash" style="display: none;"></i>
+                                                    <i class="fa fa-eye" style="display: block;"></i>
+                                                </span>
                                             </div>
-
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="newPassConfirm" name="newPassConfirm" placeholder="Confirmar nueva contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            <div class="form-group col-md-3 col-sm-6">
+                                                <input class="form-control pass" type="password" id="newPassConfirm" name="newPassConfirm" placeholder="Confirmar nueva contraseña">
+                                                <span style="position: absolute; right: 15px; top: 7px;" class="ver">
+                                                    <i class="fa fa-eye-slash" style="display: none;"></i>
+                                                    <i class="fa fa-eye" style="display: block;"></i>
+                                                </span>
                                             </div>
                                         </div>
 
+                                        <!-- <div class="form-group col-md-3 col-sm-6">
+                                                <input class="form-control" type="password" id="newPassConfirm" name="newPassConfirm" placeholder="Confirmar nueva contraseña">
+                                                <span style="position: absolute;right:15px;top:7px;" id="ver">
+                                                    <i id="slash" class="fa fa-eye-slash" style="display: none;"></i>
+                                                    <i id="eye" class="fa fa-eye" style="display: block;"></i>
+                                                </span>
+                                            </div> -->
+
                                         <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="passActual" name="passActual" placeholder="Contraseña actual">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                            <div class="form-group col-md-3 col-sm-6">
+                                                <input class="form-control pass" type="password" id="passActual" name="passActual" placeholder="Contraseña actual">
+                                                <span style="position: absolute; right: 15px; top: 7px;" class="ver">
+                                                    <i class="fa fa-eye-slash" style="display: none;"></i>
+                                                    <i class="fa fa-eye" style="display: block;"></i>
+                                                </span>
                                             </div>
                                         </div>
 

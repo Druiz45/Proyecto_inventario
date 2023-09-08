@@ -5,10 +5,12 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\UsuarioModel;
-        $i = 1;
-        $user = new UsuarioModel();
-        $rows = $user->getUsers();
+
+      use App\Http\Models\UsuarioModel;
+
+      $i = 1;
+      $user = new UsuarioModel();
+      $rows = $user->getUsers();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -42,6 +44,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th></th>
                           <th>Nombres</th>
                           <th>Apellidos</th>
                           <th>Documento</th>
@@ -60,6 +63,19 @@
                         <?php foreach ($rows as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
+                            <td>
+                              <li class="media event">
+                                <a class="pull-left border-aero profile_thumb">
+                                  <i class="fa fa-user aero"></i>
+                                </a>
+                                <div class="media-body">
+                                  <a class="title" href="#">Ms. Mary Jane</a>
+                                  <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                  <p> <small>12 Sales Today</small>
+                                  </p>
+                                </div>
+                              </li>
+                            </td>
                             <td><?= $row["nombres"] ?></td>
                             <td><?= $row["apellidos"] ?></td>
                             <td><?= $row["documento"] ?></td>
@@ -70,8 +86,8 @@
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td><?= $row["perfil"] ?></td>
                             <td>
-                              <?php if ($row["estado"] == 1):  ?> <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>, 0)">Deshabilitar</button>
-                              <?php else: ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)">Habilitar</button>
+                              <?php if ($row["estado"] == 1) :  ?> <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>, 0)">Deshabilitar</button>
+                              <?php else : ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)">Habilitar</button>
                               <?php endif; ?>
                             </td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>

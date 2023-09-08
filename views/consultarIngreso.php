@@ -41,6 +41,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Codigo</th>
                           <th>Valor</th>
                           <th>Tipo de gasto</th>
                           <th>Descripcion</th>
@@ -53,6 +54,7 @@
                         <?php foreach ($ingresos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
+                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
                             <td><?= $row["tipoIngreso"] ?></td>
                             <td><?= $row["descripcion"] ?></td>

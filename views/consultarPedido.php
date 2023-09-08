@@ -5,10 +5,12 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\PedidoModel;
-        $i = 1;
-        $pedido = new PedidoModel();
-        $rows = $pedido->getPedidos();
+
+      use App\Http\Models\PedidoModel;
+
+      $i = 1;
+      $pedido = new PedidoModel();
+      $rows = $pedido->getPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -19,25 +21,27 @@
           <div class="x_panel">
             <div class="x_title">
               <h2>Informacion de pedidos<small>Pedidos</small></h2>
-              <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                    </ul> -->
               <div class="clearfix"></div>
             </div>
+            <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar/?" method="get">
+              <div class="row justify-content-center">
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha incio:</label>
+                  <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
+                </div>
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha Final:</label>
+                  <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
+                </div>
+                <div class="actionBar">
+                  <input type="submit" class="buttonNext btn btn-success" value="Filtrar">
+                </div>
+              </div>
+            </form>
             <div class="x_content">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
-                    <!-- <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p> -->
-
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
@@ -60,15 +64,15 @@
                         </tr>
                       </thead>
                       <tbody id="tbody">
-                        <?php foreach ($rows as $row): ?>
-                          <?php 
-                            $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
-                            $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]); 
-                            $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
+                        <?php foreach ($rows as $row) : ?>
+                          <?php
+                          $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
+                          $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
+                          $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
                           ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= base64_encode($row["id"]).bin2hex($row["id"]) ?></td>
+                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
@@ -84,27 +88,59 @@
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
 
-                              <?php if ($row["estadoPedido"]==1): ?>
-                                
+                              <?php if ($row["estadoPedido"] == 1) : ?>
+
                                 <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
-                                
-                                <?php if ($_SESSION["idPerfil"]==3): ?>
+
+                                <?php if ($_SESSION["idPerfil"] == 3) : ?>
                                   <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Aprobacion</button>
                                 <?php endif; ?>
 
-                                <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal']-$row['abonoTotal']) ?>)">Estado</button>
+                                <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)">Estado</button>
 
-                              <?php elseif ($row["comisionPaga"]==0 && $row["estadoPedido"]==2 && $_SESSION["idPerfil"]==3): ?>
-                                  <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)">Comision</button>
+                              <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
+                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)">Comision</button>
                               <?php endif; ?>
 
-                              <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal']-$row['abonoTotal']) ?>)">Abonos</button>
+                              <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)">Abonos</button>
 
                             </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
                     </table>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="display: inline-block;">
+                <div class="tile_count">
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-clock-o"></i>Valor total</span>
+                    <div class="count">123.50</div>
+                  </div>
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-clock-o"></i>Abono total</span>
+                    <div class="count">123.50</div>
+                  </div>
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i>En cartera</span>
+                    <div class="count green">2,500</div>
+                  </div>
+                  <div class="col-md-2 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i>Entregados</span>
+                    <div class="count red">4,567</div>
+                  </div>
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i>Pedientes</span>
+                    <div class="count">2,315</div>
+                  </div>
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i>Aprobados</span>
+                    <div class="count">7,325</div>
+                  </div>
+                  <div class="col-md-3 col-sm-4  tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i>No aprobados</span>
+                    <div class="count">7,325</div>
                   </div>
                 </div>
               </div>

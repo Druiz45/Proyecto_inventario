@@ -88,10 +88,10 @@ export class User {
 
   }
 
-  eventInputsHidden(){
+  eventInputsHidden() {
     const formCreate = document.getElementById('form-create-user')
 
-    if(formCreate){
+    if (formCreate) {
 
       const select = document.getElementById('select-perfiles');
       const nombreEmpresa = document.getElementById('nombre-empresa');
@@ -100,11 +100,11 @@ export class User {
 
       select.addEventListener('input', () => {
 
-        if(select.value == 2){
+        if (select.value == 2) {
           inputHidden.hidden = false;
           nombreEmpresa.disabled = false;
           nitEmpresa.disabled = false;
-        }else{
+        } else {
           inputHidden.hidden = true;
           nombreEmpresa.disabled = true;
           nitEmpresa.disabled = true;
@@ -317,7 +317,7 @@ export class User {
               })
               formPass.reset();
             }
-            else if (data=="Error"){
+            else if (data == "Error") {
               Swal.fire({
                 icon: "error",
                 text: "Error al actualizar la contraseña",
@@ -329,12 +329,35 @@ export class User {
                 text: data,
               })
             }
-            
+
           })
       });
     }
 
   }
+
+  showPass() {
+    let verIcons = document.querySelectorAll(".ver");
+
+    verIcons.forEach(function (verIcon) {
+      let passwordInput = verIcon.previousElementSibling;
+      let slash = verIcon.querySelector(".fa-eye-slash");
+      let eye = verIcon.querySelector(".fa-eye");
+
+      verIcon.addEventListener("click", () => {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = "text";
+          slash.style.display = "block";
+          eye.style.display = "none";
+        } else {
+          passwordInput.type = "password";
+          slash.style.display = "none";
+          eye.style.display = "block";
+        }
+      });
+    });
+  }
+
 
 }
 
@@ -426,6 +449,6 @@ export function validateDoc(input) {
     // }, 100);
 
   });
-  
+
 }
 

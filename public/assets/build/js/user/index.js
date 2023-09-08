@@ -10,6 +10,7 @@ user.updateUser(url);
 user.logOut(url);
 user.getDataFormUpdate(url);
 user.updatePass(url);
+user.showPass();
 
 // setTimeout(function() {
 //     console.clear();

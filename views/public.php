@@ -1,6 +1,7 @@
 <?php
-   validateLogOut();
+validateLogOut();
 ?>
+
 <body class="login">
     <div>
         <a class="hiddenanchor" id="signup"></a>
@@ -11,11 +12,15 @@
                 <section class="login_content">
                     <form id="form-login">
                         <h1>Inicio de sesion</h1>
-                        <div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Username"/>
+                        <div class="col-md-12 col-sm-6">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Usuario" />
                         </div>
-                        <div>
-                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password"/>
+                        <div class="form-group col-md-12 col-sm-6">
+                            <input class="form-control pass" type="password" id="pass" name="pass" placeholder="Contraseña">
+                            <span style="position: absolute; right: 15px; top: 7px;" class="ver">
+                                <i class="fa fa-eye-slash" style="display: none;"></i>
+                                <i class="fa fa-eye" style="display: block;"></i>
+                            </span>
                         </div>
                         <div>
                             <button class="btn btn-dark" type="submit">Iniciar sesion</button>
@@ -42,6 +47,7 @@
             </div>
         </div>
     </div>
+
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/sweetAlert.js"></script>
     <script>
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
