@@ -32,11 +32,6 @@
                 <div class="x_content">
                   <div class="col-md-12 col-sm-12">
 
-
-                    <!-- start of user-activity-graph -->
-
-                    <!-- end of user-activity-graph -->
-
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
 
                       <div id="myTabContent" class="tab-content">
@@ -54,6 +49,7 @@
                                   </div>
                                   <div class="ln_solid"></div>
                                   <form class="form-label-left input_mask align-items-center" id="form-update-cliente">
+
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="nombres" name="nombres" placeholder="Nombres">
@@ -69,38 +65,26 @@
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                       </div>
 
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="email" class="form-control has-feedback-left" id="email" name="email" placeholder="Email">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                       </div>
                                     </div>
 
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="celular" name="celular" placeholder="Celular">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
                                       </div>
 
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion" placeholder="Direccion">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                                       </div>
                                     </div>
-
-                                    <!-- <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                        </div> -->
 
                                 </div>
 
@@ -108,7 +92,7 @@
 
                                 <div class="form-group row justify-content-end">
                                   <div class="col-md-0 col-sm-0  offset-md-1">
-                                    <button type="submit" class="btn btn-xm btn-success">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-xm btn-success"><i class="fa fa-floppy-o"></i> Guardar Cambios</button>
                                   </div>
                                 </div>
                                 </form>

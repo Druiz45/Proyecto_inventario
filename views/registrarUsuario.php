@@ -79,16 +79,14 @@
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <select class="select2_single form-control" tabindex="-1" id="select-perfiles" name="select-perfiles">
                                                     <option value="">Seleccione el rol del usuario</option>
-                                                    <!-- <option value="HI">Hawaii</option>
-                                                    <option value="CA">California</option> -->
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="ln_solid"></div>
                                         <div class="form-group row justify-content-end">
-                                            <div class="col-md-2 col-sm-3  offset-md-0">
-                                                <button type="submit" class="btn btn-lg btn-success">Registrar Usuario</button>
+                                            <div class="col-md-0 col-sm-0  offset-md-1">
+                                                <button type="submit" class="btn btn-xm btn-success"><i class="fa fa-arrow-down"></i> Registrar Usuario</button>
                                             </div>
                                         </div>
                                     </form>

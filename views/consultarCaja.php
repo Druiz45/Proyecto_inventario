@@ -16,7 +16,6 @@
 
             $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
             $totalIngresos = $rowsIngresos[count($rowsIngresos) - 1]['valor'];
-            // print_r($rowsPedidos);
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -27,6 +26,10 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Informacion de cartera<small>Cartera</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
                             <div class="clearfix"></div>
                         </div>
                         <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/caja/consultar/?" method="get">
@@ -40,7 +43,7 @@
                                     <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                                 </div>
                                 <div class="actionBar">
-                                    <input type="submit" class="buttonNext btn btn-success" value="Filtrar">
+                                    <button class="buttonNext btn btn-success"><i class="fa fa-filter"></i> Filtrar</button>
                                 </div>
                             </div>
                         </form>
@@ -115,10 +118,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row align-items-center justify-content-center">
-                                <h3>Se registra en caja un valor total de: </h3>
-                                <h3 class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></h3>
-                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-center">
+                            <h3>Se registra en caja un valor total de: </h3>
+                            <h3 class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></h3>
                         </div>
                     </div>
                 </div>

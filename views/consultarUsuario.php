@@ -22,40 +22,36 @@
             <div class="x_title">
               <h2>Informacion de usuarios<small>Usuarios</small></h2>
               <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                    </ul> -->
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Settings 1</a>
+                    <a class="dropdown-item" href="#">Settings 2</a>
+                  </div>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul> -->
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
-                    <!-- <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p> -->
-
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
                           <th>#</th>
                           <th></th>
-                          <th>Nombres</th>
-                          <th>Apellidos</th>
-                          <th>Documento</th>
                           <th>Celular</th>
                           <th>Email</th>
                           <th>Direccion</th>
                           <th>Empresa</th>
                           <th>Nit</th>
-                          <th>Pefil</th>
                           <th>Operaciones</th>
-                          <th>Ultima sesion</th>
+                          <th>Ultimo Log</th>
                           <th>Fecha de creacion</th>
                         </tr>
                       </thead>
@@ -69,25 +65,20 @@
                                   <i class="fa fa-user aero"></i>
                                 </a>
                                 <div class="media-body">
-                                  <a class="title" href="#">Ms. Mary Jane</a>
-                                  <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                  <p> <small>12 Sales Today</small>
-                                  </p>
+                                  <p><strong>Nombre: </strong><?= $row["nombres"] . " " . $row["apellidos"] ?></p>
+                                  <p><strong>Documento: </strong><?= $row["documento"] ?></p>
+                                  <p><strong>Perfil: </strong><?= $row["perfil"] ?></p>
                                 </div>
                               </li>
                             </td>
-                            <td><?= $row["nombres"] ?></td>
-                            <td><?= $row["apellidos"] ?></td>
-                            <td><?= $row["documento"] ?></td>
                             <td><?= $row["telefono"] ?></td>
                             <td><?= $row["email"] ?></td>
                             <td><?= $row["direccion"] ?></td>
                             <td><?= $row["empresa"] == null ? "No Aplica" : $row["empresa"] ?></td>
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
-                            <td><?= $row["perfil"] ?></td>
                             <td>
-                              <?php if ($row["estado"] == 1) :  ?> <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>, 0)">Deshabilitar</button>
-                              <?php else : ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)">Habilitar</button>
+                              <?php if ($row["estado"] == 1) :  ?> <button type="button" class="btn btn-danger btn-round" onclick="return updateEstado(<?= $row['id'] ?>, 0)"><i class="fa fa-close"></i> Deshabilitar</button>
+                              <?php else : ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)"><i class="fa fa-check"></i> Habilitar</button>
                               <?php endif; ?>
                             </td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>

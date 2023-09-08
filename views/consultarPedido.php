@@ -21,6 +21,10 @@
           <div class="x_panel">
             <div class="x_title">
               <h2>Informacion de pedidos<small>Pedidos</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+              </ul>
               <div class="clearfix"></div>
             </div>
             <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar/?" method="get">
@@ -34,7 +38,7 @@
                   <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                 </div>
                 <div class="actionBar">
-                  <input type="submit" class="buttonNext btn btn-success" value="Filtrar">
+                  <button class="buttonNext btn btn-success"><i class="fa fa-filter"></i> Filtrar</button>
                 </div>
               </div>
             </form>
@@ -90,19 +94,19 @@
 
                               <?php if ($row["estadoPedido"] == 1) : ?>
 
-                                <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                <a href="./editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
 
                                 <?php if ($_SESSION["idPerfil"] == 3) : ?>
-                                  <button type="button" class="btn btn-success" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)">Aprobacion</button>
+                                  <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
                                 <?php endif; ?>
 
-                                <button type="button" class="btn btn-info" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)">Estado</button>
+                                <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-retweet"></i> Estado</button>
 
                               <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
                                 <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)">Comision</button>
                               <?php endif; ?>
 
-                              <button type="button" class="btn btn-dark" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)">Abonos</button>
+                              <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>
 
                             </td>
                           </tr>
@@ -112,36 +116,36 @@
                   </div>
                 </div>
               </div>
-              <div class="row" style="display: inline-block;">
-                <div class="tile_count">
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i>Valor total</span>
-                    <div class="count">123.50</div>
-                  </div>
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i>Abono total</span>
-                    <div class="count">123.50</div>
-                  </div>
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>En cartera</span>
-                    <div class="count green">2,500</div>
-                  </div>
-                  <div class="col-md-2 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>Entregados</span>
-                    <div class="count red">4,567</div>
-                  </div>
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>Pedientes</span>
-                    <div class="count">2,315</div>
-                  </div>
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>Aprobados</span>
-                    <div class="count">7,325</div>
-                  </div>
-                  <div class="col-md-3 col-sm-4  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>No aprobados</span>
-                    <div class="count">7,325</div>
-                  </div>
+            </div>
+            <div class="row" style="display: inline-block;">
+              <div class="tile_count">
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
+                  <div class="count">$123.50</div>
+                </div>
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-money"></i> Abono total</span>
+                  <div class="count">$123.50</div>
+                </div>
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
+                  <div class="count green">$2,500</div>
+                </div>
+                <div class="col-md-2 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
+                  <div class="count red">4</div>
+                </div>
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-spinner"></i> Pedientes</span>
+                  <div class="count">2</div>
+                </div>
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-check"></i> Aprobados</span>
+                  <div class="count">7</div>
+                </div>
+                <div class="col-md-3 col-sm-4  tile_stats_count">
+                  <span class="count_top"><i class="fa fa-close"></i> No aprobados</span>
+                  <div class="count">7</div>
                 </div>
               </div>
             </div>

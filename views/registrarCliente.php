@@ -34,61 +34,38 @@
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="apellidos" name="apellidos"  placeholder="Apellidos">
+                                                <input type="text" class="form-control has-feedback-left" id="apellidos" name="apellidos" placeholder="Apellidos">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento"  placeholder="Documento">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento">
+                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="email" class="form-control has-feedback-left" id="email" name="email"  placeholder="Email">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <input type="email" class="form-control has-feedback-left" id="email" name="email" placeholder="Email">
+                                                <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="celular" name="celular"  placeholder="Celular">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <input type="text" class="form-control has-feedback-left" id="celular" name="celular" placeholder="Celular">
+                                                <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion"  placeholder="Direccion">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion" placeholder="Direccion">
+                                                <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                        </div> -->
-
-                                        <!-- <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <select class="select2_single form-control" tabindex="-1" id="select-perfiles" name="select-perfiles">
-                                                    <option value="">Seleccione el rol del usuario</option>
-                                                    <option value="HI">Hawaii</option>
-                                                    <option value="CA">California</option>
-                                                </select>
-                                            </div>
-                                        </div> -->
-
                                         <div class="ln_solid"></div>
                                         <div class="form-group row justify-content-end">
-                                            <div class="col-md-2 col-sm-3  offset-md-0">
-                                                <button type="submit" class="btn btn-lg btn-success">Registrar Usuario</button>
+                                            <div class="col-md-0 col-sm-0  offset-md-1">
+                                                <button type="submit" class="btn btn-xm btn-success"><i class="fa fa-arrow-down"></i> Registrar cliente</button>
                                             </div>
                                         </div>
                                     </form>
