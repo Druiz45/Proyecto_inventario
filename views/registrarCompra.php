@@ -29,15 +29,15 @@
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="docProveedor" name="docProveedor" placeholder="Documento del proveedor" autocomplete="off">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" autocomplete="off">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-archive form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="docCliente" name="docCliente" placeholder="Documento del cliente" autocomplete="off">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -57,13 +57,13 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="valorProducto" name="valorProducto" placeholder="Valor del producto" autocomplete="off">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
                                         <div class="form-group row">
                                             <div class="col-md-8 col-sm-8  offset-md-0">
-                                                <button type="submit" class="btn btn-success">Registrar pedido</button>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-arrow-down"></i> Registrar pedido</button>
                                             </div>
                                         </div>
                                     </div>
@@ -78,13 +78,12 @@
                                     <div class="x_content">
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
                                             <input type="text" class="form-control has-feedback-left" id="abonoProducto" name="abonoProducto" placeholder="Abono inicial" autocomplete="off">
-                                            <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                            <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                         </div>
                                         <br>
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
                                             <label for="fechaLimite">Fecha limite de entrega: </label>
                                             <input type="date" class="form-control has-feedback-left" id="fechaLimite" name="fechaLimite" autocomplete="off">
-                                            <!-- <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span> -->
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12">

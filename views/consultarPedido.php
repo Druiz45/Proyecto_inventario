@@ -132,7 +132,7 @@
                   <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
                   <div class="count green"> <?= numberFormat(($reumen[0]['total_pedidos'] - $reumen[0]['total_abonos'] )) ?> </div>
                 </div>
-                <div class="col-md-2 col-sm-4  tile_stats_count">
+                <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
                   <div class="count red"><?= number_format($reumen[0]['pedidos_entregados'], 0, '.', '.') ?></div>
                 </div>

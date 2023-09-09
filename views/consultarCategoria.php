@@ -53,7 +53,7 @@
                   </div>
                   <br>
                   <div class="col-md-3 col-sm-6  form-group has-feedback">
-                    <button type="button" class="btn btn-success" id="btn-crear-categoria"><i class="fa fa-arrow-down"></i> Añadir categoria</button>
+                    <button type="button" class="btn btn-success" id="btn-crear-categoria"><i class="fa fa-plus"></i> Añadir categoria</button>
                   </div>
                 </div>
               </div>

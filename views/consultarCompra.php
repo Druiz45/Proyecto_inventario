@@ -21,25 +21,32 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Informacion orden de compra<small>Ordenes de compra</small></h2>
-                            <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                    </ul> -->
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
                             <div class="clearfix"></div>
                         </div>
+                        <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/consultar/?" method="get">
+                            <div class="row justify-content-center">
+                                <div class="form-group row col-md-4 col-sm-6">
+                                    <label>Fecha incio:</label>
+                                    <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
+                                </div>
+                                <div class="form-group row col-md-4 col-sm-6">
+                                    <label>Fecha Final:</label>
+                                    <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
+                                </div>
+                                <div class="actionBar">
+                                    <button class="buttonNext btn btn-success"><i class="fa fa-filter"></i> Filtrar</button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="x_content">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card-box table-responsive">
-                                        <!-- <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p> -->
-
                                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
@@ -73,7 +80,7 @@
                                                         <td><?= $i++ ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= $row["proveedor"] ?></td>
-                                                            <td><?= $row["cliente"]==0 ? "No Aplica" : $row["cliente"] ?></td>
+                                                            <td><?= $row["cliente"] == 0 ? "No Aplica" : $row["cliente"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
                                                         <td><?= $row["producto"] ?></td>
@@ -98,9 +105,9 @@
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>
                                                                     <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
                                                                 <?php endif; ?>
-                                                                <?php if($row['estado_inventario'] != 1): ?>
+                                                                <?php if ($row['estado_inventario'] != 1) : ?>
                                                                     <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>
-                                                                <?php elseif ($row['estado_orden'] == 2 && $row['agregado_stock'] == 0): ?>
+                                                                <?php elseif ($row['estado_orden'] == 2 && $row['agregado_stock'] == 0) : ?>
                                                                     <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>', '<?= $row['id'] ?>')">Añadir al stock</button>
                                                                 <?php endif; ?>
                                                             </td>
@@ -110,6 +117,42 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display: inline-block;">
+                            <div class="tile_count">
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
+                                    <div class="count"><?= 1 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-money"></i> Abono total</span>
+                                    <div class="count"><?= 2 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
+                                    <div class="count green"> <?= 3 ?> </div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
+                                    <div class="count red"><?= 4 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-spinner"></i> Pedientes</span>
+                                    <div class="count"><?= 5 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-check"></i> Aprobados</span>
+                                    <div class="count"><?= 6 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-close"></i> No aprobados</span>
+                                    <div class="count"><?= 7 ?></div>
+                                </div>
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-minus"></i> Anulados</span>
+                                    <div class="count"><?= 8 ?></div>
                                 </div>
                             </div>
                         </div>
