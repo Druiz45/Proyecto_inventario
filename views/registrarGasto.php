@@ -30,7 +30,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="valorGasto" name="valorGasto" placeholder="Valor del gasto">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
@@ -42,7 +42,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row">
                                             <div class="col-md-8 col-sm-8  offset-md-0">
-                                                <button type="submit" class="btn btn-success">Registrar Gasto</button>
+                                                <button type="submit" class="btn btn-success"><i class="fa fa-arrow-down"></i> Registrar Gasto</button>
                                             </div>
                                         </div>
                                     </div>

@@ -1,8 +1,9 @@
-function abonos(compra, restante) {
+function abonos(compra, restante, estado) {
     let botonAbonar = true;
-    if (restante == 0) {
+    if (restante == 0 || estado==4) {
         botonAbonar = false;
     }
+    
 
     Swal.fire({
         icon: 'question',

@@ -62,12 +62,12 @@
                                                     <?php endif; ?>
                                                     <th>Se compro por</th>
                                                     <th>Abono</th>
-                                                    <th>Anotacion</th>
-                                                    <th>Fecha limite</th>
                                                     <th>Estado orden</th>
+                                                    <th>Fecha limite</th>
+                                                    <th>Anotacion</th>
                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                         <th>Fecha del pedido</th>
-                                                        <th>Operaciones</th>
+                                                        <th>Operaciones </th>
                                                     <?php endif; ?>
                                                 </tr>
                                             </thead>
@@ -89,21 +89,21 @@
                                                         <?php endif; ?>
                                                         <td><?= numberFormat($row["valor"]) ?></td>
                                                         <td><?= numberFormat($row["abono"]) ?></td>
-                                                        <td><?= $row["anotacion"] ?></td>
-                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
                                                         <td bgcolor="<?= $infoEstadoOrdenDeCompra['fondo'] ?>"><?= $infoEstadoOrdenDeCompra['estado'] ?></td>
+                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
+                                                        <td><?= $row["anotacion"] ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                             <td>
                                                                 <?php if ($row['estado_orden'] == 3) : ?>
-                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-success">Recibir</button>
+                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-dark"><i class="fa fa-arrow-down"></i> Recibir</button>
                                                                 <?php endif; ?>
 
-                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor'] - $row['abono']) ?>)" class="btn btn-dark">Abonos</button>
+                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor'] - $row['abono']) ?>, <?= $row['estado_orden'] ?>)" class="btn btn-success"><i class="fa fa-money"></i> Abonos</button>
 
                                                                 <?php if ($row['estado_orden'] == 1) : ?>
-                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning">Anular</button>
-                                                                    <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                                                                    <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning"><i class="fa fa-minus"></i> Anular</button>
+                                                                    <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                                                                 <?php endif; ?>
                                                                 <?php if ($row['estado_inventario'] != 1) : ?>
                                                                     <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>
