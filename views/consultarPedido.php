@@ -78,7 +78,7 @@
                           <tr>
                             <td><?= $i++ ?></td>
                             <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
-                            <td><?= $row["producto"] ?></td>
+                            <td><?= base64_encode($row["idProducto"]) . bin2hex($row["idProducto"])." - ".$row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>

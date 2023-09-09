@@ -41,6 +41,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Codigo</th>
                           <th>Producto</th>
                           <th>Precio</th>
                           <th>Categoria</th>
@@ -54,6 +55,7 @@
                         <?php foreach ($rows as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
+                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
                             <td><?= $row["categoria"] ?></td>
