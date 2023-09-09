@@ -54,15 +54,15 @@
                         <?php foreach ($ingresos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
+                            <td><?= encrypt($row["id"]) ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
                             <td><?= $row["tipoIngreso"] ?></td>
                             <td><?= $row["descripcion"] ?></td>
                             <td><?= $row["usuario"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                             <td>
-                              <a href="./editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info">Editar</button></a>
-                              <button type="button" class="btn btn-danger" onclick="">Deshabilitar</button>
+                              <a href="./editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                              <button type="button" class="btn btn-danger" onclick=""><i class="fa fa-close"></i> Deshabilitar</button>
                             </td>
                           </tr>
                         <?php endforeach; ?>

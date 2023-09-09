@@ -55,7 +55,7 @@
                         <?php foreach ($rows as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
+                            <td><?= encrypt($row["id"])  ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
                             <td><?= $row["categoria"] ?></td>
@@ -64,13 +64,13 @@
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>
                               <?php if ($row["estado"]==1): ?>
-                                <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>, 'deshabilitar', 'deshabilito')">Deshabilitar</button>
+                                <button type="button" class="btn btn-danger" onclick="return eliminar(<?= $row['id'] ?>, 'deshabilitar', 'deshabilito')"><i class="fa fa-close"></i> Deshabilitar</button>
                               <?php else: ?>
-                                <button type="button" class="btn btn-success" onclick="return eliminar(<?= $row['id'] ?>, 'habilitar', 'habilito')">Habilitar</button>
+                                <button type="button" class="btn btn-success" onclick="return eliminar(<?= $row['id'] ?>, 'habilitar', 'habilito')"><i class="fa fa-check"></i> Habilitar</button>
                               <?php endif; ?>
-                              <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info">Editar</button></a>
+                              <a href="./editar/?producto=<?= $row['id'] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                               <?php if ($row["estado_inventario"]==0): ?>
-                                <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= htmlspecialchars($row['producto']) ?>')">Añadir a inventario</button>
+                                <button type="button" class="btn btn-dark" onclick="return agregarInventario(<?= $row['id'] ?>, '<?= htmlspecialchars($row['producto']) ?>')"><i class="fa fa-plus"></i> Añadir a inventario</button>
                               <?php endif; ?>
                             </td>
                           </tr>

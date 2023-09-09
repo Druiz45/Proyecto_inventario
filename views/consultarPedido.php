@@ -77,7 +77,7 @@
                           ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
+                            <td><?= encrypt($row["id"]) ?></td>
                             <td><?= base64_encode($row["idProducto"]) . bin2hex($row["idProducto"])." - ".$row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
@@ -104,7 +104,7 @@
                                 <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-retweet"></i> Estado</button>
 
                               <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
-                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)">Comision</button>
+                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
                               <?php endif; ?>
 
                               <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>

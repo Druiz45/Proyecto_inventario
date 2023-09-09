@@ -41,6 +41,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Codigo</th>
                           <th>Valor</th>
                           <th>Tipo de gasto</th>
                           <th>Descripcion</th>
@@ -53,6 +54,7 @@
                         <?php foreach ($gastos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
+                            <td><?= encrypt($row["id"]) ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
                             <td><?= $row["tipoGasto"] ?></td>
                             <td><?= $row["descripcion"] ?></td>

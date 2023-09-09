@@ -47,7 +47,7 @@
                                                     <?php if ($row['id'] != null) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
+                                                            <td><?= encrypt($row["id"]) ?></td>
                                                             <td><?= numberFormat($row["valor_restante"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>

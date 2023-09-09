@@ -54,6 +54,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>Codigo</th>
                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                         <th>Proveedor</th>
                                                         <th>Cliente</th>
@@ -81,12 +82,13 @@
                                                     ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
+                                                        <td><?= encrypt($row["id"]) ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= $row["proveedor"] ?></td>
                                                             <td><?= $row["cliente"] == 0 ? "No Aplica" : $row["cliente"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
-                                                        <td><?= $row["producto"] ?></td>
+                                                        <td><?= encrypt($row["idProducto"])." - ".$row["producto"] ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= numberFormat($row["precio"]) ?></td>
                                                         <?php endif; ?>
@@ -151,7 +153,7 @@
                                 </div>
                                 <!-- <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-close"></i> No pagadas</span>
-                                    <div class="count"><?= numberFormat($resumen[0]['total_pagadas']) ?></div>
+                                    <div class="count"><?php // numberFormat($resumen[0]['total_pagadas']) ?></div>
                                 </div> -->
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-minus"></i> Anuladas</span>

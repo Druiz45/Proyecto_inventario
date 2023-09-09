@@ -30,7 +30,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-6 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="valorIngreso" name="valorIngreso" placeholder="Valor del ingreso">
-                                                <span class="fa fa-cart-plus form-control-feedback left" aria-hidden="true"></span>
+                                                <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                             </div>
 
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">

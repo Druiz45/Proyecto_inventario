@@ -67,7 +67,7 @@
                                                     <?php if (is_numeric($row['id_pedido'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= base64_encode($row["id_pedido"]) . bin2hex($row["id_pedido"]) ?></td>
+                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
                                                             <td><?= numberFormat($row["total_abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
@@ -102,7 +102,7 @@
                                                     <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= base64_encode($row["id"]) . bin2hex($row["id"]) ?></td>
+                                                            <td><?= encrypt($row["id"]) ?></td>
                                                             <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>

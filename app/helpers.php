@@ -256,3 +256,21 @@ if(!function_exists('getEstadoOrdenCompra')){
     }
 
 }
+
+if(!function_exists('encrypt')){
+    function encrypt($data){
+        $bin=bin2hex($data);
+        $json=json_encode($bin);
+        $base64=base64_encode($json);
+        return $base64;
+    }
+}
+
+if (!function_exists('decrypt')){
+    function decrypt($dataEncrypt){
+        $json=base64_decode($dataEncrypt);
+        $cadena=json_decode($json);
+        $data=hex2bin($cadena);
+        return $data;
+    }
+}

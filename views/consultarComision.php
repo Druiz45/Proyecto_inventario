@@ -52,7 +52,7 @@
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= $row["usuario"] ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
-                            <td><?= base64_encode($row["pedido"]).bin2hex($row["pedido"]) ?></td>
+                            <td><?= encrypt($row["pedido"]) ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                           </tr>
                         <?php endforeach; ?>

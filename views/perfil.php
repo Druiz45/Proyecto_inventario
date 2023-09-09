@@ -93,6 +93,7 @@
                                   </div>
                                   <div class="ln_solid"></div>
                                   <form class="form-label-left input_mask align-items-center" id="form-update-user">
+
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="nombres" name="nombres" placeholder="Nombres">
@@ -108,38 +109,26 @@
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="documento" name="documento" placeholder="Documento">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                       </div>
 
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="email" class="form-control has-feedback-left" id="email" name="email" placeholder="Email">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                       </div>
                                     </div>
 
                                     <div class="form-group row align-items-center justify-content-center">
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="celular" name="celular" placeholder="Celular">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
                                       </div>
 
                                       <div class="col-md-3 col-sm-6  form-group has-feedback">
                                         <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion" placeholder="Direccion">
-                                        <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                        <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                                       </div>
                                     </div>
-
-                                    <!-- <div class="form-group row align-items-center justify-content-center">
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="pass" name="pass"  placeholder="Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                                <input type="password" class="form-control has-feedback-left" id="confirmPass" name="confirmPass" placeholder="Confirmar Contraseña">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                        </div> -->
 
                                 </div>
 

@@ -36,10 +36,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="card-box table-responsive">
-                                        <!-- <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p> -->
-
                                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
@@ -57,7 +53,7 @@
                                                         <td><?= $row["producto"] ?></td>
                                                         <td><?= $row["stock"] ?></td>
                                                         <td><?= getFecha($row["fecha_sys"]) ?></td>
-                                                        <td> <button type="button" class="btn btn-primary" onclick="return editarProductoInventario('<?= $row['stock'] ?>', '<?= $row['id'] ?>')">Editar</button> </td>
+                                                        <td> <button type="button" class="btn btn-primary" onclick="return editarProductoInventario('<?= $row['stock'] ?>', '<?= $row['id'] ?>')"><i class="fa fa-pencil"></i> Editar</button> </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
