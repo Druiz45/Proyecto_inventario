@@ -134,19 +134,19 @@
                 </div>
                 <div class="col-md-2 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
-                  <div class="count red"><?= numberFormat($reumen[0]['pedidos_entregados']) ?></div>
+                  <div class="count red"><?= number_format($reumen[0]['pedidos_entregados'], 0, '.', '.') ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-spinner"></i> Pedientes</span>
-                  <div class="count"><?= numberFormat($reumen[0]['pedidos_pendientes']) ?></div>
+                  <div class="count"><?= number_format($reumen[0]['pedidos_pendientes'], 0, '.', '.') ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-check"></i> Aprobados</span>
-                  <div class="count"><?= numberFormat($reumen[0]['pedidos_aprobados']) ?></div>
+                  <div class="count"><?= number_format($reumen[0]['pedidos_aprobados'], 0, '.', '.') ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-close"></i> No aprobados</span>
-                  <div class="count"><?= numberFormat($reumen[0]['pedidos_no_aprobados']) ?></div>
+                  <div class="count"><?= number_format($reumen[0]['pedidos_no_aprobados'], 0, '.', '.') ?></div>
                 </div>
               </div>
             </div>
