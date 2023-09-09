@@ -6,11 +6,12 @@
       <!-- top navigation -->
       <?php
 
-      use App\Http\Models\PedidoModel;
+        use App\Http\Models\PedidoModel;
 
-      $i = 1;
-      $pedido = new PedidoModel();
-      $rows = $pedido->getPedidos();
+        $i = 1;
+        $pedido = new PedidoModel();
+        $rows = $pedido->getPedidos();
+        $reumen = $pedido->getResumenPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -121,31 +122,31 @@
               <div class="tile_count">
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
-                  <div class="count">$123.50</div>
+                  <div class="count"><?= numberFormat($reumen[0]['total_pedidos']) ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-money"></i> Abono total</span>
-                  <div class="count">$123.50</div>
+                  <div class="count"><?= numberFormat($reumen[0]['total_abonos']) ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
-                  <div class="count green">$2,500</div>
+                  <div class="count green"> <?= numberFormat(($reumen[0]['total_pedidos'] - $reumen[0]['total_abonos'] )) ?> </div>
                 </div>
                 <div class="col-md-2 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
-                  <div class="count red">4</div>
+                  <div class="count red"><?= numberFormat($reumen[0]['pedidos_entregados']) ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-spinner"></i> Pedientes</span>
-                  <div class="count">2</div>
+                  <div class="count"><?= numberFormat($reumen[0]['pedidos_pendientes']) ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-check"></i> Aprobados</span>
-                  <div class="count">7</div>
+                  <div class="count"><?= numberFormat($reumen[0]['pedidos_aprobados']) ?></div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-close"></i> No aprobados</span>
-                  <div class="count">7</div>
+                  <div class="count"><?= numberFormat($reumen[0]['pedidos_no_aprobados']) ?></div>
                 </div>
               </div>
             </div>

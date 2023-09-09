@@ -423,6 +423,37 @@ class PedidoModel {
         }
    }
 
+   public function getResumenPedidos(){
+
+    $pdo = new Conexion();
+    $con = $pdo->conexion();
+
+    try {
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        $select = $con->prepare("CALL resumenPedidos(?)");
+        $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+
+        $select->execute();
+
+        $resumen=$select->fetchAll(PDO::FETCH_ASSOC);
+
+        $select->closeCursor();
+
+        if(!$select){
+            throw new Exception("Error");
+        }
+
+        return $resumen;
+
+    } catch (Exception $e) {
+        return $e->getMessage();
+        die;
+    }
+
+   }
+
    public function getPedido($idPedido){
     $pdo = new Conexion();
     $con = $pdo->conexion();
