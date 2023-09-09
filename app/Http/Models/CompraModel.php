@@ -343,4 +343,35 @@ class CompraModel extends PedidoModel{
         }
     }
 
+    public function getResumenOrdenesCompra(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+
+                $select = $con->prepare("CALL resumenOrdenCompras(?)");
+                $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+
+            $select->execute();
+
+            $compras=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error al consultar compras");
+            }
+
+           return $compras;
+
+        } catch (Exception $e) {
+            return ($e->getMessage());
+            die;
+        }
+
+    }
+
 }

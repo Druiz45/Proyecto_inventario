@@ -6,11 +6,14 @@
             <!-- top navigation -->
             <?php
 
-            use App\Http\Models\CompraModel;
+                use App\Http\Models\CompraModel;
 
-            $i = 1;
-            $compra = new CompraModel();
-            $rows = $compra->getCompras();
+                $i = 1;
+                $compra = new CompraModel();
+                $rows = $compra->getCompras();
+                $resumen = $compra->getResumenOrdenesCompra();
+
+
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -124,35 +127,35 @@
                             <div class="tile_count">
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
-                                    <div class="count"><?= 1 ?></div>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_ordenes_compra']) ?></div>
                                 </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-money"></i> Abono total</span>
-                                    <div class="count"><?= 2 ?></div>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_abonos_ordenes_compra']) ?></div>
                                 </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
-                                    <div class="count green"> <?= 3 ?> </div>
+                                    <span class="count_top"><i class="fa fa-money"></i> Por pagar</span>
+                                    <div class="count green"> <?= numberFormat( ($resumen[0]['total_ordenes_compra']-$resumen[0]['total_abonos_ordenes_compra']) ) ?> </div>
                                 </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>
-                                    <div class="count red"><?= 4 ?></div>
+                                    <span class="count_top"><i class="fa fa-truck"></i> Recibidos </span>
+                                    <div class="count red"><?= numberFormat($resumen[0]['total_recibidos'])  ?></div>
                                 </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-spinner"></i> Pedientes</span>
-                                    <div class="count"><?= 5 ?></div>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_pendientes']) ?></div>
                                 </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-check"></i> Aprobados</span>
-                                    <div class="count"><?= 6 ?></div>
+                                    <span class="count_top"><i class="fa fa-check"></i> Pagadas</span>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_pagadas']) ?></div>
                                 </div>
+                                <!-- <div class="col-md-3 col-sm-4  tile_stats_count">
+                                    <span class="count_top"><i class="fa fa-close"></i> No pagadas</span>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_pagadas']) ?></div>
+                                </div> -->
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-close"></i> No aprobados</span>
-                                    <div class="count"><?= 7 ?></div>
-                                </div>
-                                <div class="col-md-3 col-sm-4  tile_stats_count">
-                                    <span class="count_top"><i class="fa fa-minus"></i> Anulados</span>
-                                    <div class="count"><?= 8 ?></div>
+                                    <span class="count_top"><i class="fa fa-minus"></i> Anuladas</span>
+                                    <div class="count"><?= numberFormat($resumen[0]['total_anuladas']) ?></div>
                                 </div>
                             </div>
                         </div>
