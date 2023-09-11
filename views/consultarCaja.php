@@ -22,14 +22,11 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <div class="col-md-12 col-sm-12 ">
+
+                <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Informacion de cartera<small>Cartera</small></h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                            </ul>
                             <div class="clearfix"></div>
                         </div>
                         <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/caja/consultar/?" method="get">
@@ -47,6 +44,18 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up" id="block"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
                         <div class="x_content">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -80,8 +89,7 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Se registra un valor en caja (pedidos):</h3>
-                                            <h3 class="green"><?= numberFormat($totalAbonos) ?></h3>
+                                            <h3>Total pedidos: <i class="green"><?= numberFormat($totalAbonos) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -112,19 +120,165 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Se registra en caja un valor de (Ingresos):</h3>
-                                            <h3 class="green"><?= numberFormat($totalIngresos) ?></h3>
+                                            <h3>Total ingresos: <i class="green"><?= numberFormat($totalIngresos) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-center">
-                            <h3>Se registra en caja un valor total de: </h3>
-                            <h3 class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></h3>
+                            <h3>Se registra un ingreso general de: <i class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></i></h3>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up" id="block"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-6">
+                                    <div class="card-box table-responsive">
+                                        <!-- TableManageButtons -->
+                                        <table id="datatable3-responsive3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Codigo gasto</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody">
+                                                <?php foreach ($rowsPedidos as $row) : ?>
+                                                    <?php if (is_numeric($row['id_pedido'])) : ?>
+                                                        <tr>
+                                                            <td><?= $i++ ?></td>
+                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
+                                                            <td><?= numberFormat($row["total_abono"]) ?></td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php
+                                                endforeach;
+                                                $i = 1;
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tile_count">
+                                        <div class="col-md-12 col-sm-12  tile_stats_count">
+                                            <h3>Total gastos: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card-box table-responsive">
+                                        <table id="datatable4-responsive4" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Codigo orden</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody">
+                                                <?php foreach ($rowsIngresos as $row) : ?>
+                                                    <?php if (is_numeric($row['id'])) : ?>
+                                                        <tr>
+                                                            <td><?= $i++ ?></td>
+                                                            <td><?= encrypt($row["id"]) ?></td>
+                                                            <td><?= numberFormat($row["valor"]) ?></td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tile_count">
+                                        <div class="col-md-12 col-sm-12  tile_stats_count">
+                                            <h3>Total ordenes de compra: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card-box table-responsive">
+                                        <!-- TableManageButtons -->
+                                        <table id="datatable5-responsive5" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Codigo comision</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody">
+                                                <?php foreach ($rowsPedidos as $row) : ?>
+                                                    <?php if (is_numeric($row['id_pedido'])) : ?>
+                                                        <tr>
+                                                            <td><?= $i++ ?></td>
+                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
+                                                            <td><?= numberFormat($row["total_abono"]) ?></td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php
+                                                endforeach;
+                                                $i = 1;
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tile_count">
+                                        <div class="col-md-12 col-sm-12  tile_stats_count">
+                                            <h3>Total comisiones: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-center">
+                            <h3>Se registra un gasto general de: <i class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></i></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up" id="block"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="justify-content-center">
+                                <div class="tile_count">
+                                    <div class="col-md-4 col-sm-4  tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-money"></i> Total cartera</span>
+                                        <div class="count"><?= numberFormat(23434234) ?></div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-money"></i> Total ordenes de compra</span>
+                                        <div class="count"><?= numberFormat(22342344) ?></div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  tile_stats_count">
+                                        <span class="count_top"><i class="fa fa-money"></i> Ganancias pedidos</span>
+                                        <div class="count green"> <?= numberFormat(32342342) ?> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-center">
+                            <h3>Se registra un ganancia total de: <i class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></i></h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /page content -->
 
@@ -138,5 +292,4 @@
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
     <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/user/index.js" type="module"></script>
-    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/pedido/operaciones.js"></script>
 </body>

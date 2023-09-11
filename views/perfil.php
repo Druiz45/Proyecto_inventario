@@ -136,7 +136,7 @@
 
                                 <div class="form-group row justify-content-end">
                                   <div class="col-md-0 col-sm-0  offset-md-1">
-                                    <button type="submit" class="btn btn-xm btn-success">Guardar Cambios</button>
+                                    <button type="submit" class="btn btn-xm btn-success"><i class="fa fa-save"></i> Guardar Cambios</button>
                                   </div>
                                 </div>
                                 </form>

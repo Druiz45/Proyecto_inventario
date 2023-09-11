@@ -12,6 +12,11 @@ user.getDataFormUpdate(url);
 user.updatePass(url);
 user.showPass();
 
-// setTimeout(function() {
-//     console.clear();
-//   }, 10);
+setTimeout(() => {
+    let blocks = document.querySelectorAll("#block");   
+    blocks.forEach(function (block) {
+        block.dispatchEvent(new Event('click', { bubbles: true }));
+    });
+}, 1);
+
+

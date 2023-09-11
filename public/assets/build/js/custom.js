@@ -2561,62 +2561,6 @@ function init_DataTables() {
 
 };
 
-/* DATA TABLES2 */
-
-function init_DataTablesForSecondTable() {
-    console.log('run_datatables');
-    if (typeof ($.fn.DataTable) === 'undefined') { return; }
-    console.log('init_DataTables');
-
-    var handleDataTableButtons = function () {
-        if ($("#datatable2-responsive2").length) {
-            $("#datatable2-responsive2").DataTable({
-                dom: "Blfrtip",
-                buttons: [
-                    {
-                        extend: "copy",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "csv",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "excel",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "pdfHtml5",
-                        className: "btn-sm"
-                    },
-                    {
-                        extend: "print",
-                        className: "btn-sm"
-                    },
-                ],
-                responsive: true
-            });
-        }
-    };
-
-    TableManageButtons = function () {
-        "use strict";
-        return {
-            init: function () {
-                handleDataTableButtons();
-            }
-        };
-    }();
-
-    TableManageButtons.init();
-}
-
-$(document).ready(function() {
-    init_DataTables();
-
-    init_DataTablesForSecondTable();
-});
-
 /* CHART - MORRIS  */
 
 function init_morris_charts() {

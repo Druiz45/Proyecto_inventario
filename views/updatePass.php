@@ -48,15 +48,6 @@
                                                 </span>
                                             </div>
                                         </div>
-
-                                        <!-- <div class="form-group col-md-3 col-sm-6">
-                                                <input class="form-control" type="password" id="newPassConfirm" name="newPassConfirm" placeholder="Confirmar nueva contraseña">
-                                                <span style="position: absolute;right:15px;top:7px;" id="ver">
-                                                    <i id="slash" class="fa fa-eye-slash" style="display: none;"></i>
-                                                    <i id="eye" class="fa fa-eye" style="display: block;"></i>
-                                                </span>
-                                            </div> -->
-
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="form-group col-md-3 col-sm-6">
                                                 <input class="form-control pass" type="password" id="passActual" name="passActual" placeholder="Contraseña actual">
@@ -70,7 +61,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row justify-content-center">
                                             <div class="col-md-0 col-sm-0  offset-md-0">
-                                                <button type="submit" class="btn btn-lg btn-success">Actualizar contraseña</button>
+                                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i> Actualizar contraseña</button>
                                             </div>
                                         </div>
                                     </form>
