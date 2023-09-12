@@ -125,7 +125,7 @@ function aprobacion(pedido, aprobacion) {
         })
 }
 
-function estado(pedido, aprobacion, restante) {
+function estado(pedido, aprobacion, restante, producto) {
 
     Swal.fire({
         icon: 'question',
@@ -153,7 +153,7 @@ function estado(pedido, aprobacion, restante) {
                         throw new Error("No es posible entregar el producto sin antes pagarlo por completo");
                     }
 
-                   updateEstate(pedido, "entregado", "cambiarEstado");
+                   updateEstate(pedido, "entregado", "cambiarEstado", producto);
                 } catch (error) {
                     Swal.fire({
                         icon: 'warning',
@@ -167,7 +167,7 @@ function estado(pedido, aprobacion, restante) {
         })
 }
 
-function updateEstate(pedido, mensaje, ruta) {
+function updateEstate(pedido, mensaje, ruta, producto = "") {
     Swal.fire({
         title: `¿Esta seguro de cambiar el pedido a ${mensaje}?`,
         showCancelButton: true,
@@ -178,6 +178,9 @@ function updateEstate(pedido, mensaje, ruta) {
     }).then((result) => {
         if (result.isConfirmed) {
             const formData = new FormData();
+            if(producto != ""){
+                formData.append('producto', producto);
+            }
             formData.append("pedido", pedido);
             formData.append((ruta == "cambiarEstado") ? "estado" : "aprobacion", mensaje);
             fetch(`/${url}/pedido/${ruta}`, {
@@ -186,6 +189,7 @@ function updateEstate(pedido, mensaje, ruta) {
             })
                 .then(respuesta => respuesta.json())
                 .then(data => {
+                    console.log(data);
                     if (data == "pedido") {
                         Swal.fire({
                             icon: 'success',

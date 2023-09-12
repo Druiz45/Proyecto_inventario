@@ -13,6 +13,12 @@
 
             $rowsPedidos = $caja->getCajaPedidos();
             $rowsIngresos = $caja->getCajaIngresos();
+            $rowsGastos = $caja->getCajaGastos();
+            $rowsOrdenesCompra = $caja->getOrdenesCompra();
+            $rowsComisiones = $caja->getComisiones();
+
+
+            $resumenGastos = $caja->getResumenGastos();
 
             $totalAbonos = $rowsPedidos[count($rowsPedidos) - 1]['total_abono'];
             $totalIngresos = $rowsIngresos[count($rowsIngresos) - 1]['valor'];
@@ -127,7 +133,7 @@
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-center">
-                            <h3>Se registra un ingreso general de: <i class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></i></h3>
+                            <h3>Se registra un ingreso general de: <i class="green"><?= numberFormat($ingresos = $totalAbonos + $totalIngresos) ?></i></h3>
                         </div>
                     </div>
                 </div>
@@ -155,12 +161,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                                <?php foreach ($rowsPedidos as $row) : ?>
-                                                    <?php if (is_numeric($row['id_pedido'])) : ?>
+                                                <?php foreach ($rowsGastos as $row) : ?>
+                                                    <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
-                                                            <td><?= numberFormat($row["total_abono"]) ?></td>
+                                                            <td><?= encrypt($row["id"])  ?></td>
+                                                            <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 <?php
@@ -172,7 +178,7 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Total gastos: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                            <h3>Total gastos: <i class="red"><?= numberFormat($resumenGastos[0]['total_gastos']) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -187,12 +193,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                                <?php foreach ($rowsIngresos as $row) : ?>
+                                                <?php foreach ($rowsOrdenesCompra as $row) : ?>
                                                     <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
                                                             <td><?= encrypt($row["id"]) ?></td>
-                                                            <td><?= numberFormat($row["valor"]) ?></td>
+                                                            <td><?= numberFormat($row["abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
@@ -201,7 +207,7 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Total ordenes de compra: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                            <h3>Total ordenes de compra: <i class="red"><?= numberFormat($resumenGastos[0]['total_abono_ordenes_compra']) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -217,12 +223,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody">
-                                                <?php foreach ($rowsPedidos as $row) : ?>
+                                                <?php foreach ($rowsComisiones as $row) : ?>
                                                     <?php if (is_numeric($row['id_pedido'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
                                                             <td><?= encrypt($row["id_pedido"])  ?></td>
-                                                            <td><?= numberFormat($row["total_abono"]) ?></td>
+                                                            <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
                                                 <?php
@@ -234,14 +240,17 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Total comisiones: <i class="green"><?= numberFormat(0) ?></i></h3>
+                                            <h3>Total comisiones: <i class="red"><?= numberFormat($resumenGastos[0]['total_comisiones_pagadas']) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row align-items-center justify-content-center">
-                            <h3>Se registra un gasto general de: <i class="green"><?= numberFormat($totalAbonos + $totalIngresos) ?></i></h3>
+                            <h3>Se registra un gasto general de: <i class="red"><?= numberFormat(
+                                    $gastos = ($resumenGastos[0]['total_gastos'] + $resumenGastos[0]['total_abono_ordenes_compra'] + $resumenGastos[0]['total_comisiones_pagadas'])
+                                ) ?>
+                                </i></h3>
                         </div>
                     </div>
                 </div>

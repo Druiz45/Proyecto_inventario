@@ -106,4 +106,140 @@ class cajaModel{
 
     }
 
+    public function getCajaGastos(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $caja = $this->validateDate();
+
+        try {
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL getCajaGastos(?,?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $caja->fechaInicio, PDO::PARAM_STR);
+            $select->bindParam(3, $caja->fechaFinal, PDO::PARAM_STR);
+
+            $select->execute();
+
+            $pedidos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            return $pedidos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+
+    }
+
+    public function getResumenGastos(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $caja = $this->validateDate();
+
+        try {
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL resumenGastos(?,?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $caja->fechaInicio, PDO::PARAM_STR);
+            $select->bindParam(3, $caja->fechaFinal, PDO::PARAM_STR);
+
+            $select->execute();
+
+            $pedidos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            return $pedidos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+
+    }
+
+    public function getOrdenesCompra(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $caja = $this->validateDate();
+
+        try {
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL getCajaOrdenesCompra(?,?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $caja->fechaInicio, PDO::PARAM_STR);
+            $select->bindParam(3, $caja->fechaFinal, PDO::PARAM_STR);
+
+            $select->execute();
+
+            $abonos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            return $abonos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+
+    }
+
+    public function getComisiones(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $caja = $this->validateDate();
+
+        try {
+            $idPerfil=$_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL getCajaComisiones(?,?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $caja->fechaInicio, PDO::PARAM_STR);
+            $select->bindParam(3, $caja->fechaFinal, PDO::PARAM_STR);
+
+            $select->execute();
+
+            $abonos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            return $abonos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+
+    }
+
 }

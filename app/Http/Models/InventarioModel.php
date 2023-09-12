@@ -165,4 +165,33 @@ class InventarioModel{
 
     }
 
+    public function restarStock(){
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+
+            $update = $con->prepare("CALL restarStock(?,?)");
+            $update->bindParam(1, $this->producto, PDO::PARAM_INT);
+            $update->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            $update->execute();
+
+            $update->closeCursor();
+
+            if(!$update || !$update->rowCount() > 0){
+                throw new Exception("error");
+            }
+
+            // echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
 }

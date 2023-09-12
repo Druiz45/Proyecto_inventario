@@ -260,13 +260,15 @@ class PedidoModel {
         }
     }
 
-    public function updateEstado($estado, $idPedido){
+    public function updateEstado($estado, $idPedido, InventarioModel $inventario){
+
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         $estate = ($estado=="entregado") ? 2 : 3;
         
         try {
+
             $update = $con->prepare("CALL updateEstadoPedido(?,?)");
             $update->bindParam(1, $idPedido, PDO::PARAM_INT);
             $update->bindParam(2, $estate, PDO::PARAM_INT);
@@ -275,8 +277,15 @@ class PedidoModel {
             $update->closeCursor();
 
             if(!$update || !$update->rowCount() > 0){
-                throw new Exception("error ");
+                throw new Exception("error");
             }
+
+            if($estate == 2){
+                $inventario->restarStock();
+                // echo json_encode("s,ss");
+            }
+
+
 
             echo json_encode("pedido");
 
@@ -455,31 +464,33 @@ class PedidoModel {
    }
 
    public function getPedido($idPedido){
-    $pdo = new Conexion();
-    $con = $pdo->conexion();
+    
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
 
-    try {
-        $idPerfil=$_SESSION["idPerfil"];
+        try {
+            
+            $idPerfil=$_SESSION["idPerfil"];
 
-        $select = $con->prepare("CALL getPedido(?,?)");
-        $select->bindParam(1, $idPedido, PDO::PARAM_INT);
-        $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
-        $select->execute();
+            $select = $con->prepare("CALL getPedido(?,?)");
+            $select->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
 
-        $pedido=$select->fetchAll(PDO::FETCH_ASSOC);
+            $pedido=$select->fetchAll(PDO::FETCH_ASSOC);
 
-        $select->closeCursor();
+            $select->closeCursor();
 
-        if(!$select){
-            throw new Exception("Error");
+            if(!$select){
+                throw new Exception("Error");
+            }
+
+            echo json_encode($pedido);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
         }
-
-        echo json_encode($pedido);
-
-    } catch (Exception $e) {
-        echo json_encode($e->getMessage());
-        die;
     }
-}
 
 }

@@ -101,7 +101,7 @@
                                   <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
                                 <?php endif; ?>
 
-                                <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-retweet"></i> Estado</button>
+                                <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>, <?= $row['idProducto'] ?>)"><i class="fa fa-retweet"></i> Estado</button>
 
                               <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
                                 <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
