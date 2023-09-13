@@ -23,7 +23,7 @@
               <h2>Informacion de comisiones<small>Comisiones</small></h2>
               <div class="clearfix"></div>
             </div>
-            <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/caja/consultar/?" method="get">
+            <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/comision/consultar/?" method="get">
               <div class="row justify-content-center">
                 <div class="form-group row col-md-4 col-sm-6">
                   <label>Fecha incio:</label>

@@ -51,7 +51,39 @@ class ComisionModel{
 
     }
 
+    public function validateDate(): array{
+
+        date_default_timezone_set('America/Bogota');
+
+        $fechaActual = date('Y-m-d');
+
+        if( ( isset($_GET['startDate']) && trim($_GET['startDate']) ) 
+             && (isset($_GET['finalDate']) && trim($_GET['finalDate'])) ){
+
+            if(!strtotime($_GET['startDate']) || !strtotime($_GET['finalDate'])){
+                header("Location: /".getUrl($_SERVER['SERVER_NAME'])."/comision/consultar");
+            }
+
+            return [
+
+                'startDate' => $_GET['startDate'], 
+                'finalDate' => $_GET['finalDate'],
+                
+            ];
+
+        }else{
+
+                return [
+                'startDate' => $fechaActual, 
+                'finalDate' => $fechaActual,
+            ];
+
+        }
+
+    }
+
     public function getComisiones(){
+
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
@@ -59,8 +91,12 @@ class ComisionModel{
 
             $idPerfil=$_SESSION["idPerfil"];
 
-            $select = $con->prepare("CALL getComisiones(?)");
+            $rango = $this->validateDate();
+
+            $select = $con->prepare("CALL getComisiones(?,?,?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $rango['startDate'], PDO::PARAM_STR);
+            $select->bindParam(3, $rango['finalDate'], PDO::PARAM_STR);
             $select->execute();
 
             $comisiones=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -74,7 +110,8 @@ class ComisionModel{
             return $comisiones;
 
         } catch (Exception $e) {
-            return $e->getMessage();
+            // return $e->getMessage();
+            return [];
             die;
         }
     }
