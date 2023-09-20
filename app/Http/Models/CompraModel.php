@@ -307,6 +307,32 @@ class CompraModel extends PedidoModel{
         }
     }
 
+    public function validateDate(): array{
+
+        date_default_timezone_set('America/Bogota');
+
+        $fechaActual = date('Y-m-d');
+
+        if( ( isset($_GET['startDate']) && trim($_GET['startDate']) ) && (isset($_GET['finalDate']) && $_GET['finalDate']) ){
+
+            if(!strtotime($_GET['startDate']) || !strtotime($_GET['finalDate'])){
+                header("Location: /".getUrl($_SERVER['SERVER_NAME'])."/compra/consultar");
+            }
+
+            return [
+                'fechaInicio' => $_GET['startDate'], 
+                'fechaFinal' => $_GET['finalDate'],
+            ];
+
+        }else{
+            return [
+                'fechaInicio' => $fechaActual, 
+                'fechaFinal' => $fechaActual,
+            ];
+        }
+
+    }
+
     public function getCompras(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -321,8 +347,11 @@ class CompraModel extends PedidoModel{
                 $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
             }
             else {
-                $select = $con->prepare("CALL getCompras(?)");
+                $rango = $this->validateDate();
+                $select = $con->prepare("CALL getCompras(?,?,?)");
                 $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+                $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+                $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
             }
 
             $select->execute();
