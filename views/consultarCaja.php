@@ -7,9 +7,17 @@
             <?php
 
             use App\Http\Models\cajaModel;
+            use App\Http\Models\carteraModel;
 
             $i = 1;
             $caja = new cajaModel(null, null);
+            $cartera = new carteraModel();
+
+            $rowsCartera = $cartera->getCartera();
+
+            $totalCartera = $rowsCartera[count($rowsCartera) - 1]['valor_restante'];
+
+            // print_r($totalCartera);
 
             $rowsPedidos = $caja->getCajaPedidos();
             $rowsIngresos = $caja->getCajaIngresos();
@@ -273,7 +281,7 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Total cartera</span>
-                                        <div class="count"><?= numberFormat(0) ?></div>
+                                        <div class="count"><?= numberFormat($totalCartera) ?></div>
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Total ordenes de compra</span>
