@@ -39,14 +39,15 @@
                             <div class="row justify-content-center">
                                 <div class="form-group row col-md-4 col-sm-6">
                                     <label>Fecha incio:</label>
-                                    <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
+                                    <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" require>
                                 </div>
                                 <div class="form-group row col-md-4 col-sm-6">
                                     <label>Fecha Final:</label>
-                                    <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
+                                    <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" require>
                                 </div>
                                 <div class="actionBar">
-                                    <button class="buttonNext btn btn-success"><i class="fa fa-filter"></i> Filtrar</button>
+                                    <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/caja/consultar/" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                                    <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
                                 </div>
                             </div>
                         </form>

@@ -54,7 +54,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row">
                                             <div class="col-md-8 col-sm-8  offset-md-0">
-                                                <button type="submit" class="btn btn-success" id="btn-registrar-pedido"><i class="fa fa-arrow-down"></i> Registrar pedido</button>
+                                                <button type="submit" class="btn btn-success btn-round" id="btn-registrar-pedido"><i class="fa fa-arrow-down"></i> Registrar pedido</button>
                                             </div>
                                         </div>
                                     </div>

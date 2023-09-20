@@ -44,7 +44,8 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th></th>
+                          <th>Usuario</th>
+                          <th>Informacion</th>
                           <th>Celular</th>
                           <th>Email</th>
                           <th>Direccion</th>
@@ -58,7 +59,8 @@
                       <tbody id="tbody">
                         <?php foreach ($rows as $row) : ?>
                           <tr>
-                            <td><?= $i++ ?></td>
+                            <td><?= $i ?></td>
+                            <td><?= $row["id"] ?></td>
                             <td>
                               <li class="media event">
                                 <a class="pull-left border-aero profile_thumb">
@@ -78,7 +80,7 @@
                             <td><?= $row["nit"] == null ? "No Aplica" : $row["nit"] ?></td>
                             <td>
                               <?php if ($row["estado"] == 1) :  ?> <button type="button" class="btn btn-danger btn-round" onclick="return updateEstado(<?= $row['id'] ?>, 0)"><i class="fa fa-close"></i> Deshabilitar</button>
-                              <?php else : ?> <button type="button" class="btn btn-success" onclick="return updateEstado(<?= $row['id'] ?>, 1)"><i class="fa fa-check"></i> Habilitar</button>
+                              <?php else : ?> <button type="button" class="btn btn-success btn-round" onclick="return updateEstado(<?= $row['id'] ?>, 1)"><i class="fa fa-check"></i> Habilitar</button>
                               <?php endif; ?>
                             </td>
                             <td><?= $row["ultimoLog"] == null ? "Nunca" : getFecha($row["ultimoLog"]) ?></td>
