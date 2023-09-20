@@ -47,7 +47,7 @@
                                                     <?php if ($row['id'] != null) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id"]) ?></td>
+                                                            <td><?= $row["id"] ?></td>
                                                             <td><?= numberFormat($row["valor_restante"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>

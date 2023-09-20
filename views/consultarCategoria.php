@@ -43,8 +43,8 @@
                             <td><?= $row["categoria"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                             <td>
-                              <button type="button" class="btn btn-danger" onclick="return updateEstado(<?= $row['id'] ?>)"><i class="fa fa-close"></i> Deshabilitar</button>
-                              <button type="button" class="btn btn-info" onclick="return editar('<?= $row['categoria'] ?>', <?= $row['id'] ?>)"><i class="fa fa-pencil"></i> Editar</button>
+                              <button type="button" class="btn btn-danger btn-round" onclick="return updateEstado(<?= $row['id'] ?>)"><i class="fa fa-close"></i> Deshabilitar</button>
+                              <button type="button" class="btn btn-info btn-round" onclick="return editar('<?= $row['categoria'] ?>', <?= $row['id'] ?>)"><i class="fa fa-pencil"></i> Editar</button>
                             </td>
                           </tr>
                         <?php endforeach; ?>

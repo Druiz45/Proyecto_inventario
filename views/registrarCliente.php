@@ -65,7 +65,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group row justify-content-end">
                                             <div class="col-md-0 col-sm-0  offset-md-1">
-                                                <button type="submit" class="btn btn-xm btn-success"><i class="fa fa-arrow-down"></i> Registrar cliente</button>
+                                                <button type="submit" class="btn btn-xm btn-success btn-round"><i class="fa fa-arrow-down"></i> Registrar cliente</button>
                                             </div>
                                         </div>
                                     </form>
