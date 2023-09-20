@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="tile_count">
                                         <div class="col-md-12 col-sm-12  tile_stats_count">
-                                            <h3>Total pedidos: <i class="green"><?= numberFormat($totalAbonos) ?></i></h3>
+                                            <h3>Total pedidos: <i class="green"><?=  numberFormat($ingresosPedidos = $totalAbonos) ?></i></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -269,16 +269,20 @@
                             <div class="justify-content-center">
                                 <div class="tile_count">
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
+                                            <span class="count_top"><i class="fa fa-money"></i> Total ganancias</span>
+                                            <div class="count"><?= numberFormat($ingresos-$gastos) ?></div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Total cartera</span>
-                                        <div class="count"><?= numberFormat(23434234) ?></div>
+                                        <div class="count"><?= numberFormat(0) ?></div>
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Total ordenes de compra</span>
-                                        <div class="count"><?= numberFormat(22342344) ?></div>
+                                        <div class="count"><?= numberFormat(0) ?></div>
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Ganancias pedidos</span>
-                                        <div class="count green"> <?= numberFormat(32342342) ?> </div>
+                                        <div class="count green"> <?= numberFormat(($ingresosPedidos-$resumenGastos[0]['total_abono_ordenes_compra'])) ?> </div>
                                     </div>
                                 </div>
                             </div>
