@@ -8,10 +8,14 @@
 
             use App\Http\Models\cajaModel;
             use App\Http\Models\carteraModel;
+            use App\Http\Models\CompraModel;
 
             $i = 1;
             $caja = new cajaModel(null, null);
             $cartera = new carteraModel();
+            $ordenesCompra = new CompraModel();
+
+            $resumenOrdenesCompra = $ordenesCompra->getResumenOrdenesCompra();
 
             $rowsCartera = $cartera->getCartera();
 
@@ -286,7 +290,7 @@
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Total ordenes de compra</span>
-                                        <div class="count"><?= numberFormat(0) ?></div>
+                                        <div class="count"><?= numberFormat($resumenOrdenesCompra[0]['total_ordenes_compra']) ?></div>
                                     </div>
                                     <div class="col-md-4 col-sm-4  tile_stats_count">
                                         <span class="count_top"><i class="fa fa-money"></i> Ganancias pedidos</span>

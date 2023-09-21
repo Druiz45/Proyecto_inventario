@@ -378,11 +378,14 @@ class CompraModel extends PedidoModel{
         $con = $pdo->conexion();
 
         $idPerfil=$_SESSION["idPerfil"];
+        $rango = $this->validateDate();
 
         try {
 
-                $select = $con->prepare("CALL resumenOrdenCompras(?)");
+                $select = $con->prepare("CALL resumenOrdenCompras(?,?,?)");
                 $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+                $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+                $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
 
             $select->execute();
 
