@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Models;
+
 use config\Conexion;
 use PDO;
 use Exception;
 
-class PedidoModel {
+class PedidoModel
+{
 
     protected $documento;
     protected $nombreProducto;
@@ -16,10 +18,18 @@ class PedidoModel {
     protected $fechaLimite;
     protected $pedido;
 
-    public function __construct($documento="", $nombreProducto="", $cliente="", $producto="", $abono="",
-    $anotacion="", $fechaLimite="", $pedido=""){
-        $this->documento=$documento;
-        $this->nombreProducto=$nombreProducto;
+    public function __construct(
+        $documento = "",
+        $nombreProducto = "",
+        $cliente = "",
+        $producto = "",
+        $abono = "",
+        $anotacion = "",
+        $fechaLimite = "",
+        $pedido = ""
+    ) {
+        $this->documento = $documento;
+        $this->nombreProducto = $nombreProducto;
         $this->cliente = $cliente;
         $this->producto = $producto;
         $this->abono = $abono;
@@ -28,70 +38,65 @@ class PedidoModel {
         $this->pedido = $pedido;
     }
 
-    public function validateData(){
+    public function validateData()
+    {
 
         try {
 
             $pattern = "/^[0-9]{1,5}+$/";
 
-            if( !preg_match($pattern, trim($this->cliente)) ){
+            if (!preg_match($pattern, trim($this->cliente))) {
 
                 throw new Exception("Porfavor revise el cliente seleccionado");
-
             }
 
             $pattern = "/^[0-9]{1,4}+$/";
 
-            if( !preg_match($pattern, trim($this->producto)) ){
+            if (!preg_match($pattern, trim($this->producto))) {
 
                 throw new Exception("Porfavor revise el producto seleccionado");
-
             }
 
-            $this->abono = str_replace(['.','$'],"",$this->abono);
+            $this->abono = str_replace(['.', '$'], "", $this->abono);
 
             $pattern = "/^[0-9]{1,8}+$/";
 
-            if( !preg_match($pattern, trim($this->abono)) ){
+            if (!preg_match($pattern, trim($this->abono))) {
 
                 throw new Exception("El valor del abono no es valido");
-
             }
 
             $timeStamp = strtotime($this->fechaLimite);
 
-            if(!$timeStamp){
+            if (!$timeStamp) {
                 throw new Exception("La fecha no es valida");
             }
 
             $fecha_convertida = date('Y-m-d', $timeStamp);
 
-            if($fecha_convertida != $this->fechaLimite){
+            if ($fecha_convertida != $this->fechaLimite) {
 
                 throw new Exception("La fecha no es valida");
-
             }
 
             $pattern = "/^.{0,100}+$/";
 
-            if( !preg_match($pattern, trim($this->anotacion)) ){
+            if (!preg_match($pattern, trim($this->anotacion))) {
 
                 throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
-
             }
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
-
     }
 
-    public function createAbonoPedido(){
+    public function createAbonoPedido()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        
-        $vendedor=$_SESSION["idUser"];
+
+        $vendedor = $_SESSION["idUser"];
 
         try {
             $insert = $con->prepare("CALL createAbono(?,?,?)");
@@ -102,23 +107,23 @@ class PedidoModel {
 
             $insert->closeCursor();
 
-            if(!$insert || !$insert->rowCount() > 0){
+            if (!$insert || !$insert->rowCount() > 0) {
                 throw new Exception("error");
             }
-
         } catch (Exception $e) {
             echo json_encode("error");
             die;
         }
     }
 
-    public function savePedido(){
+    public function savePedido()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         $precio = $this->getDataProducto();
         $vendedor = $_SESSION['idUser'];
-        
+
         try {
             $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?)");
             $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
@@ -130,8 +135,8 @@ class PedidoModel {
             $insert->execute();
 
             $insert->closeCursor();
-            
-            if(!$insert || !$insert->rowCount() > 0){
+
+            if (!$insert || !$insert->rowCount() > 0) {
                 throw new Exception("Error al registrar el pedido");
             }
 
@@ -140,19 +145,19 @@ class PedidoModel {
             $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function updatePedido($idPedido){
+    public function updatePedido($idPedido)
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         $precio = $this->getDataProducto();
-        
+
         try {
             $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?)");
             $update->bindParam(1, $this->producto, PDO::PARAM_INT);
@@ -165,52 +170,52 @@ class PedidoModel {
 
             $update->closeCursor();
 
-            if(!$update){
+            if (!$update) {
                 throw new Exception("Error al actualizar el pedido");
             }
 
-            if(!$update->rowCount() > 0){
+            if (!$update->rowCount() > 0) {
                 throw new Exception("No se hicieron cambios");
             }
 
             echo json_encode("Pedido actualizado con exito!");
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function validateDataEstado($estado, $pedido){
+    public function validateDataEstado($estado, $pedido)
+    {
 
-        $estate = ($estado=="aprobado") ? 2 : 3;
+        $estate = ($estado == "aprobado") ? 2 : 3;
 
-        $mensaje = ($estado=="aprobado") ? "La aprobacion no es valida" : "El estado no es valido";
+        $mensaje = ($estado == "aprobado") ? "La aprobacion no es valida" : "El estado no es valido";
 
         try {
 
             $pattern = "/^[0-9]{1,1}+$/";
-            if(!preg_match($pattern, trim($estate)) ){
+            if (!preg_match($pattern, trim($estate))) {
                 throw new Exception($mensaje);
             }
 
             $pattern = "/^[0-9]{1,6}+$/";
-            if(!preg_match($pattern, trim($pedido)) ){
+            if (!preg_match($pattern, trim($pedido))) {
                 throw new Exception("El pedido no es valido");
             }
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function updateAprobacion($estado, $pedido){
+    public function updateAprobacion($estado, $pedido)
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $aprobacion = ($estado=="aprobado") ? 2 : 3;
-        
+        $aprobacion = ($estado == "aprobado") ? 2 : 3;
+
         try {
             $update = $con->prepare("CALL updateAprobacionPedido(?,?)");
             $update->bindParam(1, $pedido, PDO::PARAM_INT);
@@ -219,22 +224,22 @@ class PedidoModel {
 
             $update->closeCursor();
 
-            if(!$update || !$update->rowCount() > 0){
+            if (!$update || !$update->rowCount() > 0) {
                 throw new Exception("error");
             }
 
             echo json_encode("pedido");
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function updatePagoComision($idPedido, ComisionModel $comision){
+    public function updatePagoComision($idPedido, ComisionModel $comision)
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        
+
         try {
             $update = $con->prepare("CALL updatePagoComision(?)");
             $update->bindParam(1, $idPedido, PDO::PARAM_INT);
@@ -244,29 +249,29 @@ class PedidoModel {
 
             $comision->create();
 
-            if(!$update){
+            if (!$update) {
                 throw new Exception("error");
             }
 
-            if(!$update->rowCount() > 0){
+            if (!$update->rowCount() > 0) {
                 throw new Exception("No se ha realizado ningun cambio en el estado del pago");
             }
 
             echo json_encode("pedido");
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function updateEstado($estado, $idPedido, InventarioModel $inventario){
+    public function updateEstado($estado, $idPedido, InventarioModel $inventario)
+    {
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $estate = ($estado=="entregado") ? 2 : 3;
-        
+        $estate = ($estado == "entregado") ? 2 : 3;
+
         try {
 
             $update = $con->prepare("CALL updateEstadoPedido(?,?)");
@@ -276,11 +281,11 @@ class PedidoModel {
 
             $update->closeCursor();
 
-            if(!$update || !$update->rowCount() > 0){
+            if (!$update || !$update->rowCount() > 0) {
                 throw new Exception("error");
             }
 
-            if($estate == 2){
+            if ($estate == 2) {
                 $inventario->restarStock();
                 // echo json_encode("s,ss");
             }
@@ -288,19 +293,19 @@ class PedidoModel {
 
 
             echo json_encode("pedido");
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function getDataProducto(){
+    public function getDataProducto()
+    {
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        
+
         try {
             $select = $con->prepare("CALL getDataProducto(?)");
             $select->bindParam(1, $this->producto, PDO::PARAM_INT);
@@ -310,187 +315,212 @@ class PedidoModel {
 
             $select->closeCursor();
 
-            if(!$select || !$select->rowCount() > 0){
+            if (!$select || !$select->rowCount() > 0) {
 
                 throw new Exception("No se encontro el producto");
-
             }
 
             return $row[0]['precio'];
-
         } catch (Exception $e) {
-                return [];
+            return [];
             die;
         }
     }
 
-   public function getInfoFormCreate() {
+    public function getInfoFormCreate()
+    {
 
         try {
 
-            if(!trim($this->documento) || !trim($this->nombreProducto)){
+            if (!trim($this->documento) || !trim($this->nombreProducto)) {
                 throw new Exception("No hay resultados");
             }
 
-            if ($this->documento!="vacio"){
+            if ($this->documento != "vacio") {
                 echo json_encode($this->getClienteForDoc());
-            }
-            elseif ($this->nombreProducto!="vacio") {
+            } elseif ($this->nombreProducto != "vacio") {
                 echo json_encode($this->getProductForCoincidencia());
             }
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
+    }
 
-   }
-
-   public function getClienteForDoc(){
+    public function getClienteForDoc()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        
+
         try {
             $select = $con->prepare("CALL getClienteForDoc(?)");
             $select->bindParam(1, $this->documento, PDO::PARAM_STR);
             $select->execute();
 
-            $clientes=$select->fetchAll(PDO::FETCH_ASSOC);
+            $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
-            if(!$select || !$select->rowCount() > 0){
+            if (!$select || !$select->rowCount() > 0) {
                 throw new Exception("No se encontraron clientes");
             }
 
             return $clientes;
-
         } catch (Exception $e) {
             return $e->getMessage();
             die;
         }
-   }
+    }
 
-   public function getProductForCoincidencia(){
+    public function getProductForCoincidencia()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
-        
+
         try {
             $select = $con->prepare("CALL getProductForCoincidencia(?)");
             $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
             $select->execute();
 
-            $products=$select->fetchAll(PDO::FETCH_ASSOC);
+            $products = $select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
-            if(!$select || !$select->rowCount() > 0){
+            if (!$select || !$select->rowCount() > 0) {
                 throw new Exception("No se encontraron productos");
             }
 
             return $products;
-
         } catch (Exception $e) {
             return $e->getMessage();
             die;
         }
-   }
+    }
 
-   public function getPedidos(){
+    public function validateDate(): array
+    {
+
+        date_default_timezone_set('America/Bogota');
+
+        $fechaActual = date('Y-m-d');
+
+        if ((isset($_GET['startDate']) && trim($_GET['startDate'])) && (isset($_GET['finalDate']) && $_GET['finalDate'])) {
+
+            if (!strtotime($_GET['startDate']) || !strtotime($_GET['finalDate'])) {
+                header("Location: /" . getUrl($_SERVER['SERVER_NAME']) . "/compra/consultar");
+            }
+
+            return [
+                'fechaInicio' => $_GET['startDate'],
+                'fechaFinal' => $_GET['finalDate'],
+            ];
+        } else {
+            return [
+                'fechaInicio' => $fechaActual,
+                'fechaFinal' => $fechaActual,
+            ];
+        }
+    }
+
+    public function getPedidos()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
-            $idUser=$_SESSION["idUser"];
-            $idPerfil=$_SESSION["idPerfil"];
+            $idUser = $_SESSION["idUser"];
+            $idPerfil = $_SESSION["idPerfil"];
 
-            if ($idPerfil==1){
+            if ($idPerfil == 1) {
                 $select = $con->prepare("CALL getPedidosVendedor(?,?)");
                 $select->bindParam(1, $idUser, PDO::PARAM_INT);
                 $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
-            }
-            else if ($idPerfil==3){
-                $select = $con->prepare("CALL getPedidos(?)");
+            } else if ($idPerfil == 3) {
+                $rango = $this->validateDate();
+                $select = $con->prepare("CALL getPedidos(?,?,?)");
                 $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+                $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+                $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
             }
 
             $select->execute();
 
-            $pedidos=$select->fetchAll(PDO::FETCH_ASSOC);
+            $pedidos = $select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
-            if(!$select){
+            if (!$select) {
                 throw new Exception("Error");
             }
 
             return $pedidos;
-
         } catch (Exception $e) {
             return $e->getMessage();
             die;
         }
-   }
-
-   public function getResumenPedidos(){
-
-    $pdo = new Conexion();
-    $con = $pdo->conexion();
-
-    try {
-
-        $idPerfil=$_SESSION["idPerfil"];
-
-        $select = $con->prepare("CALL resumenPedidos(?)");
-        $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
-
-        $select->execute();
-
-        $resumen=$select->fetchAll(PDO::FETCH_ASSOC);
-
-        $select->closeCursor();
-
-        if(!$select){
-            throw new Exception("Error");
-        }
-
-        return $resumen;
-
-    } catch (Exception $e) {
-        return $e->getMessage();
-        die;
     }
 
-   }
+    public function getResumenPedidos()
+    {
 
-   public function getPedido($idPedido){
-    
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
-            
-            $idPerfil=$_SESSION["idPerfil"];
+
+            $rango = $this->validateDate();
+
+            $idPerfil = $_SESSION["idPerfil"];
+
+            $select = $con->prepare("CALL resumenPedidos(?,?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+            $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
+
+            $select->execute();
+
+            $resumen = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+                throw new Exception("Error");
+            }
+
+            return $resumen;
+        } catch (Exception $e) {
+            return $e->getMessage();
+            die;
+        }
+    }
+
+    public function getPedido($idPedido)
+    {
+
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        try {
+
+            $idPerfil = $_SESSION["idPerfil"];
 
             $select = $con->prepare("CALL getPedido(?,?)");
             $select->bindParam(1, $idPedido, PDO::PARAM_INT);
             $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
             $select->execute();
 
-            $pedido=$select->fetchAll(PDO::FETCH_ASSOC);
+            $pedido = $select->fetchAll(PDO::FETCH_ASSOC);
 
             $select->closeCursor();
 
-            if(!$select){
+            if (!$select) {
                 throw new Exception("Error");
             }
 
             echo json_encode($pedido);
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
-
 }
