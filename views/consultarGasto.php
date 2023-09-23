@@ -5,10 +5,12 @@
       <?php require_once("./../views/includes/barraLateral.php"); ?>
       <!-- top navigation -->
       <?php
-        use App\Http\Models\GastoModel;
-        $i = 1;
-        $gasto = new GastoModel();
-        $gastos = $gasto->getGastos();
+
+      use App\Http\Models\GastoModel;
+
+      $i = 1;
+      $gasto = new GastoModel();
+      $gastos = $gasto->getGastos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -29,6 +31,22 @@
               </ul>
               <div class="clearfix"></div>
             </div>
+            <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/consultar/?" method="get">
+              <div class="row justify-content-center">
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha incio:</label>
+                  <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
+                </div>
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha Final:</label>
+                  <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
+                </div>
+                <div class="actionBar">
+                  <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/consultar/" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                  <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
+                </div>
+              </div>
+            </form>
             <div class="x_content">
               <div class="row">
                 <div class="col-sm-12">
