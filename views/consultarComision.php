@@ -61,7 +61,7 @@
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= $row["usuario"] ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
-                            <td><?= encrypt($row["pedido"]) ?></td>
+                            <td><?= $row["pedido"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                           </tr>
                         <?php endforeach; ?>

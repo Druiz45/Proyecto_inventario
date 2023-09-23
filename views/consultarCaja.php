@@ -83,7 +83,7 @@
                                                     <?php if (is_numeric($row['id_pedido'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
+                                                            <td><?= $row["id_pedido"]  ?></td>
                                                             <td><?= numberFormat($row["total_abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
@@ -117,11 +117,13 @@
                                                     <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id"]) ?></td>
+                                                            <td><?= $row["id"] ?></td>
                                                             <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
-                                                <?php endforeach; ?>
+                                                <?php endforeach; 
+                                                $i=1;
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -166,7 +168,7 @@
                                                     <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id"])  ?></td>
+                                                            <td><?= $row["id"]  ?></td>
                                                             <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
@@ -198,11 +200,13 @@
                                                     <?php if (is_numeric($row['id'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id"]) ?></td>
+                                                            <td><?= $row["id"] ?></td>
                                                             <td><?= numberFormat($row["abono"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>
-                                                <?php endforeach; ?>
+                                                <?php endforeach; 
+                                                $i=1;
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -228,7 +232,7 @@
                                                     <?php if (is_numeric($row['id_pedido'])) : ?>
                                                         <tr>
                                                             <td><?= $i++ ?></td>
-                                                            <td><?= encrypt($row["id_pedido"])  ?></td>
+                                                            <td><?= $row["id_pedido"]  ?></td>
                                                             <td><?= numberFormat($row["valor"]) ?></td>
                                                         </tr>
                                                     <?php endif; ?>

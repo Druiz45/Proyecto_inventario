@@ -54,7 +54,7 @@
                         <?php foreach ($ingresos as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= encrypt($row["id"]) ?></td>
+                            <td><?= $row["id"] ?></td>
                             <td><?= numberFormat($row["valor"]) ?></td>
                             <td><?= $row["tipoIngreso"] ?></td>
                             <td><?= $row["descripcion"] ?></td>

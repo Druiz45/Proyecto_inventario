@@ -82,13 +82,13 @@
                                                     ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
-                                                        <td><?= encrypt($row["id"]) ?></td>
+                                                        <td><?= $row["id"] ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= $row["proveedor"] ?></td>
                                                             <td><?= $row["cliente"] == 0 ? "No Aplica" : $row["cliente"] ?></td>
                                                         <?php endif; ?>
                                                         <td><?= $row["vendedor"] ?></td>
-                                                        <td><?= encrypt($row["idProducto"])." - ".$row["producto"] ?></td>
+                                                        <td><?= $row["idProducto"]." - ".$row["producto"] ?></td>
                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                             <td><?= numberFormat($row["precio"]) ?></td>
                                                         <?php endif; ?>

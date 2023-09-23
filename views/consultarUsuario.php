@@ -44,7 +44,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Usuario</th>
+                          <th>Codigo</th>
                           <th>Informacion</th>
                           <th>Celular</th>
                           <th>Email</th>

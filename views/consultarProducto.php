@@ -55,7 +55,7 @@
                         <?php foreach ($rows as $row) : ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= encrypt($row["id"])  ?></td>
+                            <td><?= $row["id"]  ?></td>
                             <td><?= $row["producto"] ?></td>
                             <td><?= "$".number_format($row["precio"] , 0, '.', '.') ?></td>
                             <td><?= $row["categoria"] ?></td>

@@ -52,7 +52,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Codigo pedido</th>
+                          <th>Codigo</th>
                           <th>Producto</th>
                           <th>Cliente</th>
                           <th>Vendedor</th>
@@ -78,8 +78,8 @@
                           ?>
                           <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= encrypt($row["id"]) ?></td>
-                            <td><?= base64_encode($row["idProducto"]) . bin2hex($row["idProducto"])." - ".$row["producto"] ?></td>
+                            <td><?= $row["id"] ?></td>
+                            <td><?= $row["idProducto"]." - ".$row["producto"] ?></td>
                             <td><?= $row["cliente"] ?></td>
                             <td><?= $row["vendedor"] ?></td>
                             <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>

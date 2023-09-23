@@ -29,7 +29,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Cliente</th>
+                          <th>Codigo</th>
                           <th>Informacion</th>
                           <th>Email</th>
                           <th>Direccion</th>
