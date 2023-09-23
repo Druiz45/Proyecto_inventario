@@ -91,16 +91,44 @@ class IngresoModel{
         }
     }
 
+    public function validateDate(): array
+    {
+
+        date_default_timezone_set('America/Bogota');
+
+        $fechaActual = date('Y-m-d');
+
+        if ((isset($_GET['startDate']) && trim($_GET['startDate'])) && (isset($_GET['finalDate']) && $_GET['finalDate'])) {
+
+            if (!strtotime($_GET['startDate']) || !strtotime($_GET['finalDate'])) {
+                header("Location: /" . getUrl($_SERVER['SERVER_NAME']) . "/ingreso/consultar");
+            }
+
+            return [
+                'fechaInicio' => $_GET['startDate'],
+                'fechaFinal' => $_GET['finalDate'],
+            ];
+        } else {
+            return [
+                'fechaInicio' => $fechaActual,
+                'fechaFinal' => $fechaActual,
+            ];
+        }
+    }
+
     public function getIngresos(){
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         $idPerfil=$_SESSION["idPerfil"];
+        $rango = $this->validateDate();
 
         try {
-            $select = $con->prepare("CALL getIngresos(?)");
+            $select = $con->prepare("CALL getIngresos(?,?,?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+            $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
             $select->execute();
 
             $ingresos=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -111,9 +139,9 @@ class IngresoModel{
                 throw new Exception("error");
             }
 
-            if(!$select->rowCount() > 0){
-                throw new Exception("No se encontraron resultados");
-            }
+            // if(!$select->rowCount() > 0){
+            //     throw new Exception("No se encontraron resultados");
+            // }
 
             return $ingresos;
 

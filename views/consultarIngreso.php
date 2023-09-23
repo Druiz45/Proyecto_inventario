@@ -29,6 +29,22 @@
               </ul>
               <div class="clearfix"></div>
             </div>
+            <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/ingreso/consultar/?" method="get">
+              <div class="row justify-content-center">
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha incio:</label>
+                  <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
+                </div>
+                <div class="form-group row col-md-4 col-sm-6">
+                  <label>Fecha Final:</label>
+                  <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
+                </div>
+                <div class="actionBar">
+                  <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/ingreso/consultar" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                  <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
+                </div>
+              </div>
+            </form>
             <div class="x_content">
               <div class="row">
                 <div class="col-sm-12">
@@ -61,7 +77,7 @@
                             <td><?= $row["usuario"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                             <td>
-                              <a href="./editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                              <a href="./../editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                               <button type="button" class="btn btn-danger" onclick=""><i class="fa fa-close"></i> Deshabilitar</button>
                             </td>
                           </tr>
