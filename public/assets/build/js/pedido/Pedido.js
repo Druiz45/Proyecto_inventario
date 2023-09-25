@@ -4,10 +4,9 @@ import { number_format } from "./../producto/Producto.js";
 export class Pedido {
 
     getDataFormCreate() {
-
         getClienteForDoc();
         getProductForCoincidencia();
-
+        getBancos();
     }
 
     updatePedido() {
@@ -40,7 +39,6 @@ export class Pedido {
                             })
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
-                            console.log(data);
                             Swal.fire({
                                 icon: 'warning',
                                 title: data,
@@ -98,6 +96,7 @@ export class Pedido {
         const spanValorProducto = document.getElementById('valor-producto');
         const fechaLimite = document.getElementById("fecha-limite");
         const anotacion = document.getElementById("anotacion");
+        const banco = document.getElementById("banco");
         docCliente.value = data[0].documento;
         docCliente.dispatchEvent(new Event('input', { bubbles: true }));
         setTimeout(() => {
@@ -111,6 +110,7 @@ export class Pedido {
         spanValorProducto.innerText = `Valor del producto: $${number_format(data[0].precio)}`;
         fechaLimite.value = data[0].fecha_limite;
         anotacion.value = data[0].anotacion;
+        banco.value = data[0].id_banco;
     }
 
     getPrecio(producto, data, spanValorProducto) {
@@ -127,10 +127,8 @@ export class Pedido {
     }
 
     savePedido() {
-        const formCreatePedido = document.getElementById('form-create-pedido');
-
+        const formCreatePedido = document.getElementById('form-create-pedido')
         if (formCreatePedido) {
-
             formCreatePedido.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const formData = new FormData(formCreatePedido);
@@ -144,7 +142,6 @@ export class Pedido {
                             Swal.fire({
                                 icon: 'success',
                                 title: data,
-                                // text: data,
                             })
                             formCreatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
@@ -156,11 +153,9 @@ export class Pedido {
                             formCreatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
-                            console.log(data);
                             Swal.fire({
                                 icon: 'warning',
                                 title: data,
-                                // text: data,
                             })
                         }
                     })
@@ -266,6 +261,32 @@ export function getProductForCoincidencia() {
         }
 
     })
+}
+
+export function getBancos() {
+    const banco = document.getElementById('banco');
+    if (banco) {
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch(`/${url}/pedido/getDataFormRegistrar`, {
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    if (banco) {
+                        const opciones = document.createDocumentFragment();
+                        const option = document.createElement('option');
+                        option.textContent = "Seleccione el banco";
+                        opciones.appendChild(option);
+                        for (const info of data) {
+                            const option = document.createElement('option');
+                            option.value = info.id;
+                            option.textContent = info.banco;
+                            opciones.appendChild(option);
+                        }
+                        banco.appendChild(opciones);
+                    }
+                })
+        });
+    }
 }
 
 export function getClienteForDoc() {

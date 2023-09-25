@@ -17,9 +17,11 @@ class CompraModel extends PedidoModel{
     protected $anotacion;
     protected $cliente;
     protected $compra;
+    protected $banco;
 
     public function __construct($documento = "", $nombreProducto = "", $proveedor = "", $producto = "",
-    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = "", $cliente="", $compra=""){
+    $valorProducto = "", $abonoProducto = "", $fechaLimite = "", $anotacion = "", $cliente="", $compra="",
+    $banco = ""){
         $this->documento = $documento;
         $this->nombreProducto = $nombreProducto;
         $this->proveedor = $proveedor;
@@ -30,6 +32,7 @@ class CompraModel extends PedidoModel{
         $this->anotacion = $anotacion;
         $this->cliente = $cliente;
         $this->compra = $compra;
+        $this->banco = $banco;
     }
 
     public function validateDataCompra(){
@@ -186,18 +189,19 @@ class CompraModel extends PedidoModel{
         }
     }
 
-    public function updateCompra($compra){
+    public function updateCompra(){
         $pdo = new Conexion();
         $con = $pdo->conexion();
         
         try {
-            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?)");
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?,?)");
             $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
             $update->bindParam(2, $this->producto, PDO::PARAM_INT);
             $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
             $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
             $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-            $update->bindParam(6, $compra, PDO::PARAM_INT);
+            $update->bindParam(6, $this->compra, PDO::PARAM_INT);
+            $update->bindParam(7, $this->banco, PDO::PARAM_INT);
             $update->execute();
 
             $update->closeCursor();
@@ -279,7 +283,12 @@ class CompraModel extends PedidoModel{
         $idUser=$_SESSION["idUser"];
 
         try {
-            $insert = $con->prepare("CALL createCompra(?,?,?,?,?,?,?)");
+
+            if($this->abonoProducto>$this->valorProducto){
+                throw new Exception("El abono no puede ser mayor al valor del producto");
+            }
+
+            $insert = $con->prepare("CALL createCompra(?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $idUser, PDO::PARAM_INT);
             $insert->bindParam(2, $this->proveedor, PDO::PARAM_INT);
             $insert->bindParam(3, $this->producto, PDO::PARAM_INT);
@@ -287,6 +296,7 @@ class CompraModel extends PedidoModel{
             $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
             $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
             $insert->bindParam(7, $this->cliente, PDO::PARAM_STR);
+            $insert->bindParam(8, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();

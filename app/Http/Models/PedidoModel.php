@@ -17,6 +17,7 @@ class PedidoModel
     protected $anotacion;
     protected $fechaLimite;
     protected $pedido;
+    protected $banco;
 
     public function __construct(
         $documento = "",
@@ -26,7 +27,8 @@ class PedidoModel
         $abono = "",
         $anotacion = "",
         $fechaLimite = "",
-        $pedido = ""
+        $pedido = "",
+        $banco = "",
     ) {
         $this->documento = $documento;
         $this->nombreProducto = $nombreProducto;
@@ -36,6 +38,7 @@ class PedidoModel
         $this->anotacion = $anotacion;
         $this->fechaLimite = $fechaLimite;
         $this->pedido = $pedido;
+        $this->banco = $banco;
     }
 
     public function validateData()
@@ -85,6 +88,7 @@ class PedidoModel
 
                 throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
             }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
@@ -125,13 +129,19 @@ class PedidoModel
         $vendedor = $_SESSION['idUser'];
 
         try {
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?)");
+
+            if ($this->abono>$precio) {
+                throw new Exception("El abono supera el precio del producto");
+            }
+
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
             $insert->bindParam(4, $precio, PDO::PARAM_INT);
             $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
             $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();
@@ -145,13 +155,14 @@ class PedidoModel
             $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
+            
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function updatePedido($idPedido)
+    public function updatePedido()
     {
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -159,13 +170,14 @@ class PedidoModel
         $precio = $this->getDataProducto();
 
         try {
-            $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?)");
+            $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?)");
             $update->bindParam(1, $this->producto, PDO::PARAM_INT);
             $update->bindParam(2, $this->cliente, PDO::PARAM_INT);
             $update->bindParam(3, $precio, PDO::PARAM_INT);
             $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
             $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-            $update->bindParam(6, $idPedido, PDO::PARAM_INT);
+            $update->bindParam(6, $this->pedido, PDO::PARAM_INT);
+            $update->bindParam(7, $this->banco, PDO::PARAM_INT);
             $update->execute();
 
             $update->closeCursor();
@@ -341,8 +353,39 @@ class PedidoModel
             } elseif ($this->nombreProducto != "vacio") {
                 echo json_encode($this->getProductForCoincidencia());
             }
+            else{
+                echo json_encode($this->getBancos());
+            }
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getBancos()
+    {
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $n=1;
+
+        try {
+            $select = $con->prepare("CALL getBancos(?)");
+            $select->bindParam(1, $n, PDO::PARAM_STR);
+            $select->execute();
+
+            $bancos = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select || !$select->rowCount() > 0) {
+                throw new Exception("No se encontraron bancos");
+            }
+
+            return $bancos;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
             die;
         }
     }

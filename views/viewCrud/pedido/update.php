@@ -12,10 +12,12 @@ $pedido = new PedidoModel(
     isset($_POST['abonoProducto']) ? $_POST['abonoProducto'] : 1,
     isset($_POST['anotacion']) ? $_POST['anotacion'] : "",
     isset($_POST['fecha-limite']) ? $_POST['fecha-limite'] : "",
+    isset($_POST['pedido']) ? $_POST['pedido'] : "",
+    isset($_POST['banco']) ? $_POST['banco'] : "",
 );
 
 $pedido->validateData();
 
-$pedido->updatePedido($_POST["pedido"]);
+$pedido->updatePedido();
 
 ?>

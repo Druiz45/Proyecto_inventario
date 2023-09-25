@@ -39,7 +39,7 @@
                   <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                 </div>
                 <div class="actionBar">
-                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar/" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
                   <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
                 </div>
               </div>
@@ -64,6 +64,7 @@
                           <th>Valor comision</th>
                           <th>Abono total</th>
                           <th>Valor restante</th>
+                          <th>Banco</th>
                           <th>Valor del producto</th>
                           <th>Fecha del pedio</th>
                           <th>Operaciones</th>
@@ -90,6 +91,7 @@
                             <td><?= numberFormat($row["valorComision"]) ?></td>
                             <td><?= numberFormat($row["abonoTotal"]) ?></td>
                             <td><?= numberFormat($row["valor_restante"]) ?></td>
+                            <td><?= $row["banco"] ?></td>
                             <td><?= numberFormat($row["valorTotal"]) ?></td>
                             <td><?= getFecha($row["fecha"]) ?></td>
                             <td>

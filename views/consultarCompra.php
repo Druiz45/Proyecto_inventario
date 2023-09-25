@@ -42,7 +42,8 @@
                                     <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                                 </div>
                                 <div class="actionBar">
-                                    <button class="buttonNext btn btn-success"><i class="fa fa-filter"></i> Filtrar</button>
+                                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/consultar" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                                    <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
                                 </div>
                             </div>
                         </form>

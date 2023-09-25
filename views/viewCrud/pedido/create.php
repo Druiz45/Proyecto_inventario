@@ -12,6 +12,8 @@ $pedido = new PedidoModel(
     isset($_POST['abonoProducto']) ? $_POST['abonoProducto'] : "",
     isset($_POST['anotacion']) ? $_POST['anotacion'] : "",
     isset($_POST['fecha-limite']) ? $_POST['fecha-limite'] : "",
+    "",
+    isset($_POST['banco']) ? $_POST['banco'] : "",
 );
 
 $pedido->validateData();

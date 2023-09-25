@@ -23,7 +23,7 @@
                                 <div class="x_panel">
                                     <div class="x_title">
                                         <h2>Informacion orden de compra</h2>
-                                            <div class="clearfix"></div>
+                                        <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
                                         <div class="form-group row">
@@ -76,6 +76,12 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
+                                        <div class="form-group row align-items-center justify-content-center">
+                                            <div class="col-md-11 col-sm-6  form-group has-feedback">
+                                                <select class="select2_single form-control" id="banco" name="banco" tabindex="-1">
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
                                             <input type="text" class="form-control has-feedback-left" id="abonoProducto" name="abonoProducto" placeholder="Abono inicial" autocomplete="off">
                                             <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>

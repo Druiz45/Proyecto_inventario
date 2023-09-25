@@ -14,6 +14,8 @@ $compra = new CompraModel(
     isset($_POST["fechaLimite"]) ? $_POST["fechaLimite"]: "vacio",
     isset($_POST["anotacion"]) ? $_POST["anotacion"]: "vacio",
     isset($_POST["cliente"]) ? $_POST["cliente"]: "vacio",
+    "",
+    isset($_POST["banco"]) ? $_POST["banco"]: "vacio",
 );
 
 $compra->validateDataCompra();

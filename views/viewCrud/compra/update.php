@@ -13,10 +13,13 @@ $compra = new CompraModel(
     isset($_POST["abonoProducto"]) ? $_POST["abonoProducto"]: 1,
     isset($_POST["fecha-limite"]) ? $_POST["fecha-limite"]: "vacio",
     isset($_POST["anotacion"]) ? $_POST["anotacion"]: "vacio",
+    "",
+    isset($_POST["compra"]) ? $_POST["compra"]: "vacio",
+    isset($_POST["banco"]) ? $_POST["banco"]: "vacio",
 );
 
 $compra->validateDataCompra();
 
-$compra->updateCompra($_POST["compra"]);
+$compra->updateCompra();
 
 ?>

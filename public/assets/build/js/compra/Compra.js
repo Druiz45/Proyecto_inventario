@@ -1,6 +1,6 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto, validatePrecio, number_format  } from "./../producto/Producto.js";
-import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
+import { validateAnotacion, getClienteForDoc, getProductForCoincidencia, getBancos } from "./../pedido/Pedido.js";
 
 export class Compra {
 
@@ -8,6 +8,7 @@ export class Compra {
         getClienteForDoc();
         getProductForCoincidencia();
         this.getProveedorForDoc();
+        getBancos();
     }
 
     getProveedorForDoc(){
@@ -133,6 +134,7 @@ export class Compra {
         const fechaLimite = document.getElementById("fecha-limite");
         const anotacion = document.getElementById("anotacion");
         const valorProducto=document.getElementById("valorProducto");
+        const banco=document.getElementById("banco");
         validatePrecio(valorProducto);
         docProveedor.value = data[0].documento;
         docProveedor.dispatchEvent(new Event('input', { bubbles: true }));
@@ -147,6 +149,7 @@ export class Compra {
         valorProducto.value = `$${number_format(data[0].valor_total)}`;
         fechaLimite.value = data[0].fecha_limite;
         anotacion.value = data[0].anotacion;
+        banco.value = data[0].id_banco;
     }
 
     updateCompra() {
