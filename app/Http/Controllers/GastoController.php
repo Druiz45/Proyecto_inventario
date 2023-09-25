@@ -12,6 +12,10 @@ class GastoController{
         return view('consultarGasto');
     }
 
+    public function editar(){
+        return view('editarGasto');
+    }
+
     public function dataFormCreate(){
         return view('viewsModels/modelGasto/formCreate');
     }

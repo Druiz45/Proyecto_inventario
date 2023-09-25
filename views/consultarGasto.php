@@ -79,7 +79,7 @@
                             <td><?= $row["usuario"] ?></td>
                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                             <td>
-                              <a href="./editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                              <a href="./../editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                               <button type="button" class="btn btn-danger" onclick=""><i class="fa fa-close"></i> Deshabilitar</button>
                             </td>
                           </tr>
