@@ -20,8 +20,16 @@ class GastoController{
         return view('viewsModels/modelGasto/formCreate');
     }
 
+    public function dataFormUpdate(){
+        return view('viewsModels/modelGasto/formUpdate');
+    }
+
     public function create(){
         return view('viewCrud/gasto/create');
+    }
+
+    public function update(){
+        return view('viewCrud/gasto/update');
     }
 
 }

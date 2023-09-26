@@ -91,6 +91,38 @@ class GastoModel{
         }
     }
 
+    public function getInfoFormUpdate($idGasto){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $select = $con->prepare("CALL getGastoToUpdate(?,?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $idGasto, PDO::PARAM_INT);
+            $select->execute();
+
+            $gastos=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("error");
+            }
+
+            if(!$select->rowCount() > 0){
+                throw new Exception("No se encontraron resultados");
+            }
+
+            echo json_encode($gastos);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
     public function validateDate(): array
     {
 
@@ -171,6 +203,39 @@ class GastoModel{
 
             if(!$insert || !$insert->rowCount() > 0){
                 throw new Exception("error");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function updateGasto($idGasto){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $insert = $con->prepare("CALL updateGasto(?,?,?,?,?)");
+            $insert->bindParam(1, $this->tipoGasto, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->valorGasto, PDO::PARAM_INT);
+            $insert->bindParam(3, $this->descripcion, PDO::PARAM_STR);
+            $insert->bindParam(4, $idGasto, PDO::PARAM_INT);
+            $insert->bindParam(5, $idPerfil, PDO::PARAM_INT);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if(!$insert){
+                throw new Exception("error");
+            }
+
+            if(!$insert->rowCount() > 0){
+                throw new Exception("No se han realizado cambios");
             }
 
             echo json_encode("exito");

@@ -35,7 +35,7 @@
 
                                             <div class="col-md-4 col-sm-6  form-group has-feedback">
                                                 <select class="select2_single form-control" id="tipoGasto" name="tipoGasto" tabindex="-1">
-                                                    <option value="AK">Seleccione el tipo de gasto</option>
+                                                    <option value="">Seleccione el tipo de gasto</option>
                                                 </select>
                                             </div>
                                         </div>
