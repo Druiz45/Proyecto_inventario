@@ -12,8 +12,16 @@ class IngresoController{
         return view('consultarIngreso');
     }
 
+    public function editar(){
+        return view('editarIngreso');
+    }
+
     public function dataFormCreate(){
         return view('viewsModels/modelIngreso/formCreate');
+    }
+
+    public function dataFormUpdate(){
+        return view('viewsModels/modelIngreso/formUpdate');
     }
 
     public function create(){

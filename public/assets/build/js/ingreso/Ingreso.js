@@ -13,6 +13,27 @@ export class Ingreso {
 
     }
 
+    getDataFormUpdate(url) {
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlActual = new URL(window.location.href);
+
+            const ingreso = urlActual.searchParams.get("ingreso");
+
+            const form = new FormData();
+            form.append('ingreso', ingreso);
+            fetch(`/${url}/ingreso/dataFormUpdate`, {
+                method: "POST",
+                body: form
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    console.log(data);
+                    // this.setDataFormCreate(data);
+                })
+        });
+
+    }
+
     setDataFormCreate(data) {
         const selectIngresos = document.getElementById('tipoIngreso');
         if (selectIngresos) {
@@ -32,8 +53,9 @@ export class Ingreso {
     validateFormData(){
 
         const formCreateIngreso = document.getElementById('formCreateIngreso');
+        const formUpdateIngreso = document.getElementById('formUpdateIngreso');
 
-        if(formCreateIngreso){
+        if(formCreateIngreso || formUpdateIngreso){
             const valorIngreso = document.getElementById('valorIngreso');
             const descripcioningreso = document.getElementById('descripcion');
             validatePrecio(valorIngreso);

@@ -91,6 +91,38 @@ class IngresoModel{
         }
     }
 
+    public function getInfoFormUpdate($idIngreso){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $select = $con->prepare("CALL getIngresoToUpdate(?,?)");
+            $select->bindParam(1, $idIngreso, PDO::PARAM_INT);
+            $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            $select->execute();
+
+            $ingreso=$select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if(!$select){
+                throw new Exception("error");
+            }
+
+            if(!$select->rowCount() > 0){
+                throw new Exception("No se encontraron resultados");
+            }
+
+            echo json_encode($ingreso);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
     public function validateDate(): array
     {
 
