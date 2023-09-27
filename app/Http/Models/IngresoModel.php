@@ -212,4 +212,37 @@ class IngresoModel{
         }
     }
 
+    public function updateIngreso($idIngreso){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        $idPerfil=$_SESSION["idPerfil"];
+
+        try {
+            $insert = $con->prepare("CALL updateIngreso(?,?,?,?,?)");
+            $insert->bindParam(1, $this->tipoIngreso, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->valorIngreso, PDO::PARAM_INT);
+            $insert->bindParam(3, $this->descripcion, PDO::PARAM_STR);
+            $insert->bindParam(4, $idIngreso, PDO::PARAM_INT);
+            $insert->bindParam(5, $idPerfil, PDO::PARAM_INT);
+            $insert->execute();
+
+            $insert->closeCursor();
+
+            if(!$insert){
+                throw new Exception("error");
+            }
+
+            if(!$insert->rowCount() > 0){
+                throw new Exception("No se han realizado cambios");
+            }
+
+            echo json_encode("exito");
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
 }

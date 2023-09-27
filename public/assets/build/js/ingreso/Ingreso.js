@@ -1,4 +1,4 @@
-import { validatePrecio, validateDescription } from "../producto/Producto.js";
+import { validatePrecio, validateDescription, number_format} from "../producto/Producto.js";
 export class Ingreso {
     getDataFormCreate(url) {
         document.addEventListener('DOMContentLoaded', () => {
@@ -27,8 +27,8 @@ export class Ingreso {
             })
                 .then(respuesta => respuesta.json())
                 .then(data => {
-                    console.log(data);
-                    // this.setDataFormCreate(data);
+                    // console.log(data);
+                    this.setDataFormUpdate(data);
                 })
         });
 
@@ -46,6 +46,23 @@ export class Ingreso {
                 opciones.appendChild(option);
             }
             selectIngresos.appendChild(opciones);
+        }
+
+    }
+
+    setDataFormUpdate(data){
+
+        const formUpdate = document.getElementById('formUpdateIngreso');
+        if (formUpdate) {
+            
+            const inputValorIngreso = document.getElementById('valorIngreso');
+            const descripcion = document.getElementById('descripcion');
+            const selectTipoIngreso = document.getElementById('tipoIngreso');
+
+            inputValorIngreso.value = `$${number_format(data[0].valor)}`;
+            selectTipoIngreso.value = data[0].id_tipo_ingreso;
+            descripcion.value = data[0].descripcion;
+
         }
 
     }
@@ -89,6 +106,45 @@ export class Ingreso {
                                 text: "Error al registrar el ingreso",
                             })
                             formCreateIngreso.reset();
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: data,
+                            })
+                        }
+                    })
+            });
+        }
+    }
+
+    updateIngreso(url) {
+        const formUpdateIngreso = document.getElementById('formUpdateIngreso');
+        if (formUpdateIngreso) {
+            formUpdateIngreso.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const urlActual = new URL(window.location.href);
+                const ingreso = urlActual.searchParams.get("ingreso");
+                const form = new FormData(formUpdateIngreso);
+                form.append('ingreso', ingreso);
+                fetch(`/${url}/ingreso/update`, {
+                    method: "POST",
+                    body: form
+                })
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        // console.log(data);
+                        if (data == "exito") {
+                            Swal.fire({
+                                icon: 'success',
+                                text: "Ingreso actualizado con exito",
+                            })
+
+                        } else if (data == "error") {
+                            Swal.fire({
+                                icon: 'error',
+                                text: "Error al intentar actualizar el ingreso",
+                            })
+
                         } else {
                             Swal.fire({
                                 icon: 'warning',

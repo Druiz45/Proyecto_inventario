@@ -6,3 +6,4 @@ ingreso.getDataFormCreate(url);
 ingreso.getDataFormUpdate(url);
 ingreso.validateFormData();
 ingreso.createIngreso(url);
+ingreso.updateIngreso(url);

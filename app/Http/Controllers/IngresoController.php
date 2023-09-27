@@ -28,4 +28,8 @@ class IngresoController{
         return view('viewCrud/ingreso/create');
     }
 
+    public function update(){
+        return view('viewCrud/ingreso/update');
+    }
+
 }
