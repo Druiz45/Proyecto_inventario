@@ -9,35 +9,39 @@ export class User {
 
     const formLogin = document.getElementById('form-login');
 
-    formLogin.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(formLogin);
-      fetch(`/${url}/index/login`, {
-        method: "POST",
-        body: formData
-      })
-        .then(respuesta => respuesta.json())
-        .then(data => {
-          if (Array.isArray(data)) {
-            window.location.assign(`/${url}/${data[0]}`);
-          } else if (data == "Porfavor Complete los campos") {
+    if(formLogin){
 
-            Swal.fire({
-              icon: 'warning',
-              title: data,
-              // text: data,
-            })
-
-          }
-          else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: data,
-            })
-          }
+      formLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(formLogin);
+        fetch(`/${url}/index/login`, {
+          method: "POST",
+          body: formData
         })
-    });
+          .then(respuesta => respuesta.json())
+          .then(data => {
+            if (Array.isArray(data)) {
+              window.location.assign(`/${url}/${data[0]}`);
+            } else if (data == "Porfavor Complete los campos") {
+  
+              Swal.fire({
+                icon: 'warning',
+                title: data,
+                // text: data,
+              })
+  
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data,
+              })
+            }
+          })
+      });
+
+    }
 
   }
 

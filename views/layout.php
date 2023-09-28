@@ -50,6 +50,8 @@
 
     <!-- Custom Theme Style -->
     <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/custom.min.css" rel="stylesheet">
+
+    <link href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/css/styles.css" rel="stylesheet">
   
     <link rel="shortcut icon" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/logo.png" type="image/x-icon">
   </head> 

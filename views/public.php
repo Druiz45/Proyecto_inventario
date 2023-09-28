@@ -10,7 +10,7 @@ validateLogOut();
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form id="form-recover-password">
+                    <form id="form-login">
                         <h1>Inicio de sesion</h1>
                         <div class="col-md-12 col-sm-6">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Usuario" />

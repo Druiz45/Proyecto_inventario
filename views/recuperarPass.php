@@ -10,10 +10,10 @@ validateLogOut();
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form id="form-login">
+                    <form id="form-recover-password">
                         <h1>Recuperar contraseña</h1>
                         <div style="text-align:center; font-size:large;">
-                            Para restablecer tu contraseña, por favor, introduce a continuación tu dirección de correo electrónico con la que inicias sesion normalmente
+                            Para restablecer tu contraseña, por favor, introduce a continuación tu dirección de correo electrónico con la que inicias sesion normalmente.
                         </div>
                         <div class="col-md-12 col-sm-6">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Correo" />
@@ -55,5 +55,5 @@ validateLogOut();
     <script>
         const url = JSON.parse('<?= json_encode(getUrl($_SERVER['SERVER_NAME'])) ?>');
     </script>
-    <script src="./assets/build/js/index.js" type="module"></script>
+    <script src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/build/js/index.js" type="module"></script>
 </body>
