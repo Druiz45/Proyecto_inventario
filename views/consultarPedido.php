@@ -98,7 +98,7 @@
 
                               <?php if ($row["estadoPedido"] == 1) : ?>
 
-                                <a href="./../editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
 
                                 <?php if ($_SESSION["idPerfil"] == 3) : ?>
                                   <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>

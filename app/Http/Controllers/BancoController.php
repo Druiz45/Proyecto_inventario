@@ -20,4 +20,8 @@ class BancoController{
         return view('viewCrud/banco/updateEstate');
     }
 
+    public function getDataFormCreate(){
+        return view('viewsModels/modelBanco/formCreate');
+    }
+
 }

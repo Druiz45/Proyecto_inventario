@@ -53,3 +53,29 @@ export class Banco {
         }
     }
 }
+
+export function getBancos() {
+    const banco = document.getElementById('banco');
+    if (banco) {
+        window.addEventListener("DOMContentLoaded", () => {
+            fetch(`/${url}/banco/getDataFormCreate`, {
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    if (banco) {
+                        const opciones = document.createDocumentFragment();
+                        const option = document.createElement('option');
+                        option.textContent = "Seleccione el banco";
+                        opciones.appendChild(option);
+                        for (const info of data) {
+                            const option = document.createElement('option');
+                            option.value = info.id;
+                            option.textContent = info.banco;
+                            opciones.appendChild(option);
+                        }
+                        banco.appendChild(opciones);
+                    }
+                })
+        });
+    }
+}

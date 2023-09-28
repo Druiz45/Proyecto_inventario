@@ -1,6 +1,7 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto } from "./../producto/Producto.js";
 import { number_format } from "./../producto/Producto.js";
+import { getBancos} from "./../banco/Banco.js";
 export class Pedido {
 
     getDataFormCreate() {
@@ -261,32 +262,6 @@ export function getProductForCoincidencia() {
         }
 
     })
-}
-
-export function getBancos() {
-    const banco = document.getElementById('banco');
-    if (banco) {
-        window.addEventListener("DOMContentLoaded", () => {
-            fetch(`/${url}/pedido/getDataFormRegistrar`, {
-            })
-                .then(respuesta => respuesta.json())
-                .then(data => {
-                    if (banco) {
-                        const opciones = document.createDocumentFragment();
-                        const option = document.createElement('option');
-                        option.textContent = "Seleccione el banco";
-                        opciones.appendChild(option);
-                        for (const info of data) {
-                            const option = document.createElement('option');
-                            option.value = info.id;
-                            option.textContent = info.banco;
-                            opciones.appendChild(option);
-                        }
-                        banco.appendChild(opciones);
-                    }
-                })
-        });
-    }
 }
 
 export function getClienteForDoc() {

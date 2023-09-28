@@ -1,7 +1,10 @@
 import { validatePrecio, validateDescription, number_format } from "../producto/Producto.js";
+import { getBancos} from "./../banco/Banco.js";
+
 export class Gasto {
 
     getDataFormCreate(url) {
+        getBancos();
         document.addEventListener('DOMContentLoaded', () => {
             fetch(`/${url}/gasto/dataFormCreate`, {
                 method: "POST",
@@ -11,7 +14,6 @@ export class Gasto {
                     this.setDataFormCreate(data);
                 })
         });
-
     }
 
     getDataFormUpdate(url) {
@@ -61,10 +63,12 @@ export class Gasto {
             const inputValorGasto = document.getElementById('valorGasto');
             const descripcion = document.getElementById('descripcion');
             const selectTipoGasto = document.getElementById('tipoGasto');
+            const banco = document.getElementById('banco');
 
             inputValorGasto.value = `$${number_format(data[0].valor)}`;
             selectTipoGasto.value = data[0].id_tipo_gasto;
             descripcion.value = data[0].descripcion;
+            banco.value = data[0].id_banco;
 
         }
 

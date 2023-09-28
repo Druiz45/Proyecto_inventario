@@ -10,11 +10,13 @@ class IngresoModel{
     protected $valorIngreso;
     protected $tipoIngreso;
     protected $descripcion;
+    protected $banco;
 
-    public function __construct($valorIngreso="", $tipoIngreso="", $descripcion=""){
+    public function __construct($valorIngreso="", $tipoIngreso="", $descripcion="", $banco=""){
         $this->valorIngreso = $valorIngreso;
         $this->tipoIngreso = $tipoIngreso;
         $this->descripcion = $descripcion;
+        $this->banco = $banco;
     }
 
     public function validateData(){
@@ -51,6 +53,12 @@ class IngresoModel{
 
                 throw new Exception("La descripcion puede contener un maximo de 100 carasteres");
 
+            }
+
+            $pattern = "/^.{0,20}+$/";
+
+            if (!preg_match($pattern, trim($this->banco))) {
+                throw new Exception("El nombre del banco no debe superar 20 caracteres.");
             }
             
         } catch (Exception $e) {
@@ -191,11 +199,12 @@ class IngresoModel{
         $idUser=$_SESSION["idUser"];
 
         try {
-            $insert = $con->prepare("CALL createIngreso(?,?,?,?)");
+            $insert = $con->prepare("CALL createIngreso(?,?,?,?,?)");
             $insert->bindParam(1, $idUser, PDO::PARAM_INT);
             $insert->bindParam(2, $this->tipoIngreso, PDO::PARAM_INT);
             $insert->bindParam(3, $this->valorIngreso, PDO::PARAM_INT);
             $insert->bindParam(4, $this->descripcion, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->banco, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
@@ -219,12 +228,13 @@ class IngresoModel{
         $idPerfil=$_SESSION["idPerfil"];
 
         try {
-            $insert = $con->prepare("CALL updateIngreso(?,?,?,?,?)");
+            $insert = $con->prepare("CALL updateIngreso(?,?,?,?,?,?)");
             $insert->bindParam(1, $this->tipoIngreso, PDO::PARAM_INT);
             $insert->bindParam(2, $this->valorIngreso, PDO::PARAM_INT);
             $insert->bindParam(3, $this->descripcion, PDO::PARAM_STR);
             $insert->bindParam(4, $idIngreso, PDO::PARAM_INT);
             $insert->bindParam(5, $idPerfil, PDO::PARAM_INT);
+            $insert->bindParam(6, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();

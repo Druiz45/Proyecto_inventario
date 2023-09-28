@@ -51,10 +51,14 @@
                             <div class="col-md-4">
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Descripcion del Gasto</h2>
+                                        <h2>Descripcion del gasto y banco</h2>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
+                                        <div class="col-md-12 col-sm-6  form-group has-feedback">
+                                            <select class="select2_single form-control" id="banco" name="banco" tabindex="-1">
+                                            </select>
+                                        </div>
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12">
                                                 <textarea class="resizable_textarea form-control" id="descripcion" name="descripcion" placeholder="Descripcion..."></textarea>

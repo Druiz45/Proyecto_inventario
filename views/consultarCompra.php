@@ -109,7 +109,7 @@
 
                                                                 <?php if ($row['estado_orden'] == 1) : ?>
                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning"><i class="fa fa-minus"></i> Anular</button>
-                                                                    <a href="./edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                                                                    <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                                                                 <?php endif; ?>
                                                                 <?php if ($row['estado_inventario'] != 1) : ?>
                                                                     <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>

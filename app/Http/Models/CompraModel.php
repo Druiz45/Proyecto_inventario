@@ -103,6 +103,12 @@ class CompraModel extends PedidoModel{
 
             }
 
+            $pattern = "/^.{0,20}+$/";
+
+            if (!preg_match($pattern, trim($this->banco))) {
+                throw new Exception("El nombre del banco no debe superar 20 caracteres.");
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

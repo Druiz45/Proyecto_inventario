@@ -50,7 +50,7 @@
                                                             <?php if($row["estado"]==1): ?>
                                                                 <button type="button" class="btn btn-danger btn-round" onclick="return updateEstate('Deshabilitar',<?= $row['id'] ?>)"><i class="fa fa-close"></i> Deshabilitar</button>
                                                             <?php else: ?>
-                                                                <button type="button" class="btn btn-success btn-round" onclick="return updateEstate('Habilitar',<?= $row['id'] ?>)"><i class="fa fa-close"></i> Habilitar</button>
+                                                                <button type="button" class="btn btn-success btn-round" onclick="return updateEstate('Habilitar',<?= $row['id'] ?>)"><i class="fa fa-check"></i> Habilitar</button>
                                                             <?php endif; ?>
                                                             <button type="button" class="btn btn-info" onclick="return updateBanco('<?= $row['banco'] ?>',<?= $row['id'] ?>)"><i class="fa fa-pencil"></i> Editar</button>
                                                         </td>

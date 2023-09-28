@@ -89,6 +89,12 @@ class PedidoModel
                 throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
             }
 
+            $pattern = "/^.{0,20}+$/";
+
+            if (!preg_match($pattern, trim($this->banco))) {
+                throw new Exception("El nombre del banco no debe superar 20 caracteres.");
+            }
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
@@ -341,51 +347,17 @@ class PedidoModel
 
     public function getInfoFormCreate()
     {
-
         try {
-
             if (!trim($this->documento) || !trim($this->nombreProducto)) {
                 throw new Exception("No hay resultados");
             }
-
             if ($this->documento != "vacio") {
                 echo json_encode($this->getClienteForDoc());
             } elseif ($this->nombreProducto != "vacio") {
                 echo json_encode($this->getProductForCoincidencia());
             }
-            else{
-                echo json_encode($this->getBancos());
-            }
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
-            die;
-        }
-    }
-
-    public function getBancos()
-    {
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
-
-        $n=1;
-
-        try {
-            $select = $con->prepare("CALL getBancos(?)");
-            $select->bindParam(1, $n, PDO::PARAM_STR);
-            $select->execute();
-
-            $bancos = $select->fetchAll(PDO::FETCH_ASSOC);
-
-            $select->closeCursor();
-
-            if (!$select || !$select->rowCount() > 0) {
-                throw new Exception("No se encontraron bancos");
-            }
-
-            return $bancos;
-
-        } catch (Exception $e) {
-            return $e->getMessage();
             die;
         }
     }

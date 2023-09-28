@@ -1,7 +1,7 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto, validatePrecio, number_format  } from "./../producto/Producto.js";
-import { validateAnotacion, getClienteForDoc, getProductForCoincidencia, getBancos } from "./../pedido/Pedido.js";
-
+import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
+import { getBancos} from "./../banco/Banco.js";
 export class Compra {
 
     getDataFormCreate() {
