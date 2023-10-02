@@ -89,10 +89,10 @@ class PedidoModel
                 throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
             }
 
-            $pattern = "/^.{0,20}+$/";
+            $pattern = "/^[0-9]{1,2}+$/";
 
             if (!preg_match($pattern, trim($this->banco))) {
-                throw new Exception("El nombre del banco no debe superar 20 caracteres.");
+                throw new Exception("Banco invalido");
             }
 
         } catch (Exception $e) {
@@ -265,8 +265,6 @@ class PedidoModel
 
             $update->closeCursor();
 
-            $comision->create();
-
             if (!$update) {
                 throw new Exception("error");
             }
@@ -274,6 +272,8 @@ class PedidoModel
             if (!$update->rowCount() > 0) {
                 throw new Exception("No se ha realizado ningun cambio en el estado del pago");
             }
+
+            $comision->create();
 
             echo json_encode("pedido");
         } catch (Exception $e) {

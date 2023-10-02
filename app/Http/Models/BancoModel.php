@@ -19,6 +19,12 @@ class BancoModel{
             if($this->banco==""){
                 throw new Exception("Complete el campo");
             }
+
+            $pattern = "/^.{0,20}+$/";
+
+            if (!preg_match($pattern, trim($this->banco))) {
+                throw new Exception("El nombre del Banco no debe superar los 20 caracteres.");
+            }
             
         } catch (Exception $e) {
             echo json_encode($e->getMessage());

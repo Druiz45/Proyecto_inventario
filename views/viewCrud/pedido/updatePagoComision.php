@@ -10,7 +10,10 @@ $comision = new ComisionModel(
     $_SESSION['idUser'],
     $_POST['valorComision'],
     $_POST['pedido'],
+    $_POST['banco'],
 );
+
+$comision->validateDates();
 
 $pedido = new PedidoModel();
 

@@ -1,12 +1,12 @@
 function abonos(pedido, estado, aprobacion, restante) {
-    let botonAbonar=false;
+    let botonAbonar = false;
     if (estado == 1 && aprobacion == 2) {
         botonAbonar = true;
     }
-    if (restante==0){
-        botonAbonar=false;
+    if (restante == 0) {
+        botonAbonar = false;
     }
-    
+
     Swal.fire({
         icon: 'question',
         title: `¿Que desea hacer?`,
@@ -39,15 +39,15 @@ function abonos(pedido, estado, aprobacion, restante) {
                         // Agregar el evento oninput
                         oninput: "number_format(this)",
                         style: 'text-align: center;'
-                      }
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         try {
 
-                            if (result.value.replace(/[.$]/g, "")>restante) {
+                            if (result.value.replace(/[.$]/g, "") > restante) {
                                 throw new Error("La cantidad de abono supera el precio maximo");
                             }
-        
+
                             abonar(result.value, pedido);
                         } catch (error) {
                             Swal.fire({
@@ -61,44 +61,58 @@ function abonos(pedido, estado, aprobacion, restante) {
         })
 }
 
-  function number_format(input, decimals = 0, decPoint = '.', thousandsSep = '.') {
+function number_format(input, decimals = 0, decPoint = '.', thousandsSep = '.') {
     valor = input.value.replace(/[^\d,-]/g, '');
     const valorParseado = parseInt(valor);
     number = parseInt(valorParseado.toFixed(decimals)); // Redondear el número a la cantidad de decimales deseada
     const [integerPart, decimalPart] = number.toFixed(decimals).split('.');
     const regex = /\B(?=(\d{3})+(?!\d))/g;
     const formattedIntegerPart = integerPart.replace(regex, thousandsSep);
-    input.value="$";
-    input.value+=decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
-  }
+    input.value = "$";
+    input.value += decimals > 0 ? formattedIntegerPart + decPoint + decimalPart : formattedIntegerPart;
+}
 
 function pagarComision(pedido, vendedor, numVendedor, valorComision) {
     Swal.fire({
-        icon: 'question',
-        title: `¿Desea pagar la comision al vendedor ${vendedor}?`,
-
+        icon: 'info',
+        title: `¿Se le pagara la comision al vendedor ${vendedor}?`,
+        html: `<select id="banco"></select>`,
+        focusConfirm: false,
         showCancelButton: true,
         cancelButtonColor: '#4A4A4A',
-        cancelButtonText: 'Calcelar',
-
+        cancelButtonText: 'Cancelar',
         confirmButtonColor: '#00794B',
         confirmButtonText: 'Pagar',
-
-    })
-        .then((result) => {
-            if (result.isConfirmed) {
-                pagar(pedido, numVendedor, valorComision);
-            }
-        })
+        inputAttributes: {
+            id: 'banco',
+            style: 'text-align: center; margin-left: auto; margin-right: auto; width: 300px;'
+        },
+        didOpen: () => {
+            const banco = document.getElementById('banco');
+            fetch(`/${url}/banco/getDataFormCreate`, {
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    banco.innerHTML += `<option value=''>Seleccione el banco</option>`;
+                    for (const info of data) {
+                        banco.innerHTML += `<option value='${info.id}'>${info.banco}</option>`;
+                    }
+                })
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            pagar(pedido, numVendedor, valorComision);
+        }
+    });
 }
 
 function aprobacion(pedido, aprobacion) {
-    let noAprobar=true, aprobar=true;
-    if (aprobacion==2){
-        aprobar=false;
+    let noAprobar = true, aprobar = true;
+    if (aprobacion == 2) {
+        aprobar = false;
     }
-    else if (aprobacion==3){
-        noAprobar=false;
+    else if (aprobacion == 3) {
+        noAprobar = false;
     }
     Swal.fire({
         icon: 'question',
@@ -144,23 +158,23 @@ function estado(pedido, aprobacion, restante, producto) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                
+
                 try {
-                    if (aprobacion!=2) {
+                    if (aprobacion != 2) {
                         throw new Error("No es posible cambiar el estado del pedido a entregado sin antes haberlo aprobado");
                     }
-                    if (restante!=0){
+                    if (restante != 0) {
                         throw new Error("No es posible entregar el producto sin antes pagarlo por completo");
                     }
 
-                   updateEstate(pedido, "entregado", "cambiarEstado", producto);
+                    updateEstate(pedido, "entregado", "cambiarEstado", producto);
                 } catch (error) {
                     Swal.fire({
                         icon: 'warning',
                         title: error.message,
                     })
                 }
-                   
+
             } else if (result.isDenied) {
                 updateEstate(pedido, "anulado", "cambiarEstado");
             }
@@ -178,7 +192,7 @@ function updateEstate(pedido, mensaje, ruta, producto = "") {
     }).then((result) => {
         if (result.isConfirmed) {
             const formData = new FormData();
-            if(producto != ""){
+            if (producto != "") {
                 formData.append('producto', producto);
             }
             formData.append("pedido", pedido);
@@ -214,10 +228,12 @@ function updateEstate(pedido, mensaje, ruta, producto = "") {
 }
 
 function pagar(pedido, numVendedor, valorComision) {
+    const banco = document.getElementById('banco'); 
     const formData = new FormData();
     formData.append("pedido", pedido);
     formData.append('numVendedor', numVendedor);
     formData.append('valorComision', valorComision);
+    formData.append('banco', banco.value);
     fetch(`/${url}/pedido/pagarComision`, {
         method: "POST",
         body: formData

@@ -55,10 +55,10 @@ class GastoModel{
 
             }
             
-            $pattern = "/^.{0,20}+$/";
+            $pattern = "/^[0-9]{1,2}+$/";
 
             if (!preg_match($pattern, trim($this->banco))) {
-                throw new Exception("El nombre del banco no debe superar 20 caracteres.");
+                throw new Exception("Banco invalido.");
             }
 
         } catch (Exception $e) {
