@@ -13,13 +13,16 @@ validateLogOut();
                     <!-- <div class="alert alert-success" role="alert">
                         <span style="font-size: large;">Se ha enviado un correo con la informacion para restablecer su contraseña.</span>
                     </div> -->
-                    <form id="form-recover-password">
-                        <h1>Recuperar contraseña</h1>
+                    <form id="form-change-password">
+                        <h1>Cambiar contraseña</h1>
                         <div style="text-align:center; font-size:large;">
-                            Para restablecer tu contraseña, por favor, introduce a continuación tu dirección de correo electrónico con la que inicias sesion normalmente.
+                            Para restablecer tu contraseña por favor complete los cambios y envie el formulario.
                         </div>
                         <div class="col-md-12 col-sm-6">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo" />
+                            <input type="password" class="form-control" id="new-password" name="new-password" placeholder="Nueva contraseña" />
+                        </div>
+                        <div class="col-md-12 col-sm-6">
+                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirmar contraseña" />
                         </div>
                         <!-- <div class="form-group col-md-12 col-sm-6">
                             <input class="form-control pass" type="password" id="pass" name="pass" placeholder="Contraseña">
@@ -29,7 +32,7 @@ validateLogOut();
                             </span>
                         </div> -->
                         <div>
-                            <button class="btn btn-dark" type="submit">Recuperar contraseña</button>
+                            <button class="btn btn-dark" type="submit">Cambiar contraseña</button>
                             <!-- <a class="btn btn-dark" href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/password/recoverPassword">Recuperar Contraseña</a> -->
                             <a class="reset_pass" href="./../">Iniciar Sesion</a>
                         </div>

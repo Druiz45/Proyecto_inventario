@@ -242,6 +242,20 @@ export class User {
 
   }
 
+  validateFormRecoverPass() {
+
+    const formRecoverPass = document.getElementById('form-recover-password');
+
+    if (formRecoverPass) {
+
+      const inputEmail = document.getElementById("email");
+
+      validateEmail(inputEmail);
+
+    }
+
+  }
+
   logOut(url) {
     const logOut = document.getElementById('logOut');
     logOut.addEventListener('click', (e) => {
@@ -360,6 +374,48 @@ export class User {
         }
       });
     });
+  }
+
+  recoverPass(){
+    const formRecoverPass = document.getElementById('form-recover-password');
+    if(formRecoverPass){
+      formRecoverPass.addEventListener('submit', (e) =>{
+        e.preventDefault();
+
+        const formData = new FormData(formRecoverPass);
+        fetch(`/${url}/password/recoverPassword`, {
+          method: "POST",
+          body: formData
+        })
+          .then(respuesta => respuesta.json())
+          .then(data => {
+            console.log(data);
+            if (data == 202) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Se ha enviado un e-mail con la informacion para restablecer su contraseña',
+                // text: data,
+              })
+            } else if (data == 401) {
+  
+              Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error',
+                // text: data,
+              })
+  
+            }
+            else {
+              Swal.fire({
+                icon: 'warning',
+                title: data,
+                // text: data,
+              })
+            }
+          })
+        
+      })
+    }
   }
 
 

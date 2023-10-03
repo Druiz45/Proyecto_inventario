@@ -5,6 +5,7 @@ namespace App\Http\Models;
 use config\Conexion;
 use Exception;
 use PDO;
+use \SendGrid\Mail\Mail;
 
 class UsuarioModel
 {
@@ -413,5 +414,111 @@ class UsuarioModel
             echo json_encode($e->getMessage());
             die;
         }
+    }
+
+    public function validateRecoverPass($email){
+        try {
+            if ( !trim($email) ) {
+
+                throw new Exception("Porfavor ingrese un email");
+            }
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+                throw new Exception("Este email no es valido");
+            }
+    
+            if (strlen($email) > 100) {
+                throw new Exception("El correo electrónico supera los 100 caracteres permitidos.");
+            }
+
+            $pdo = new Conexion();
+            $con = $pdo->conexion();
+
+            $select = $con->prepare("CALL getDataUserRecoverPass(?)");
+            $select->bindParam(1, $email, PDO::PARAM_STR);
+            $select->execute();
+
+            $dataUser = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+                throw new Exception("Ha ocurrido un error");
+            }
+
+            if (!$select->rowCount() > 0) {
+                throw new Exception("Este correo no se en cuentra registrado en nuestra base de datos");
+            }
+
+            if($dataUser[0]['estado'] != 1){
+                throw new Exception("El usuario al que pertenece este correo esta deshabilitado");
+            }
+
+            return $dataUser;
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+    public function getIdUserEncryp(UsuarioModel $user, array $dataUser){
+        $user->pass=$dataUser[0]['id'];
+        $user->documento = $dataUser[0]['documento'];
+        $user->encryptPass();
+        return $user->pass;
+        // echo json_encode($user->pass);
+    }
+
+    public function getTokenPass(array $dataUser){
+        return $dataUser[0]['uId'];
+        // echo json_encode($user->pass);
+    }
+
+    public function recoverPass($correo, $idUser, $token){
+
+        $urlLocal = getUrl($_SERVER['SERVER_NAME']);
+
+        $url = ($urlLocal == 'inventario/public') ? "http://{$_SERVER['SERVER_NAME']}/$urlLocal/password/change/?user=$idUser&token=$token":
+                                                    "https://{$_SERVER['SERVER_NAME']}/$urlLocal/password/change/?user=$idUser&token=$token";
+
+        $email = new Mail();
+        $email->setFrom("sisas@comunisoft.com", "Makfrio");
+        $email->setSubject("Recuperacion de contraseña");
+        $email->addTo("pruebascorreode484@gmail.com", "Correo De");
+        $email->addContent("text/plain", "Esto es una prueba para el software de inventario de Makfrio");
+        $email->addContent(
+            "text/html", "<strong>Porfavor ingrese al siguiente enlace para restablecer su contraseña: <a href='$url'>Cambiar contraseña</a> </strong>"
+        );
+        // $sendgrid = new \SendGrid(getenv('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'));
+        $sendgrid = new \SendGrid('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');
+        try {
+            // $response = $sendgrid->send($email);
+            // echo "<pre>";
+            // print $response->statusCode() . "\n";
+            // print_r($response->headers());
+            // print $response->body() . "\n";
+            // echo "<pre>";
+            $response = $sendgrid->send($email);
+            $statusCode = $response->statusCode();
+            $headers = $response->headers();
+            $body = $response->body();
+    
+            // Preparar una respuesta en formato JSON
+            $responseData = [
+                'statusCode' => $statusCode,
+                'headers' => $headers,
+                'body' => $body
+            ];
+    
+            // Establecer el encabezado de respuesta como JSON
+            // header('Content-Type: application/json');
+    
+            // Enviar la respuesta JSON al cliente
+            echo json_encode($responseData['statusCode']);
+        } catch (Exception $e) {
+            echo json_encode('Caught exception: '.  $e->getMessage(). "\n");
+        }
+        
     }
 }
