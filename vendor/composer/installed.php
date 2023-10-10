@@ -3,7 +3,7 @@
         'name' => 'user/inventario',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '44cd45ae8ea033c137c64c5f6ca22cae18f71794',
+        'reference' => 'fc83f0d2682245c41cb9e1a557270704a0cf9fed',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -46,7 +46,7 @@
         'user/inventario' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '44cd45ae8ea033c137c64c5f6ca22cae18f71794',
+            'reference' => 'fc83f0d2682245c41cb9e1a557270704a0cf9fed',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

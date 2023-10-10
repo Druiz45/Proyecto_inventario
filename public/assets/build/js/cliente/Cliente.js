@@ -100,6 +100,7 @@ export class Cliente{
           const inputDocumento = document.getElementById("documento");
           const inputEmail = document.getElementById("email");
           const inputCelular = document.getElementById("celular");
+          const inputCelularSecundario = document.getElementById("celularSecundario");
           const inputDireccion = document.getElementById("direccion");
 
           inputNombre.value = data[0].nombres;
@@ -108,6 +109,7 @@ export class Cliente{
           inputEmail.value = data[0].email;
           inputCelular.value = data[0].telefono;
           inputDireccion.value = data[0].direccion;
+          inputCelularSecundario.value = data[0].telefonoSecundario;
 
         }
     
