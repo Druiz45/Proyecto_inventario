@@ -6,12 +6,12 @@
       <!-- top navigation -->
       <?php
 
-        use App\Http\Models\PedidoModel;
+      use App\Http\Models\PedidoModel;
 
-        $i = 1;
-        $pedido = new PedidoModel();
-        $rows = $pedido->getPedidos();
-        $reumen = $pedido->getResumenPedidos();
+      $i = 1;
+      $pedido = new PedidoModel();
+      $rows = $pedido->getPedidos();
+      $reumen = $pedido->getResumenPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -39,84 +39,92 @@
                   <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                 </div>
                 <div class="actionBar">
-                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
+                  <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar" class="buttonNext btn btn-secondary btn-round"><i class="fa fa-minus"></i> Limpiar</a>
                   <button class="buttonNext btn btn-success btn-round"><i class="fa fa-filter"></i> Filtrar</button>
                 </div>
               </div>
             </form>
             <div class="x_content">
               <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Codigo</th>
-                          <th>Producto</th>
-                          <th>Cliente</th>
-                          <th>Vendedor</th>
-                          <th>Fecha limite</th>
-                          <th>Comision</th>
-                          <th>Estado del pedido</th>
-                          <th>Estado de aprobacion</th>
-                          <th>Anotacion</th>
-                          <th>Valor comision</th>
-                          <th>Abono total</th>
-                          <th>Valor restante</th>
-                          <th>Banco</th>
-                          <th>Valor del producto</th>
-                          <th>Fecha del pedio</th>
-                          <th>Operaciones</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tbody">
-                        <?php foreach ($rows as $row) : ?>
-                          <?php
-                          $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
-                          $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
-                          $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
-                          ?>
-                          <tr>
-                            <td><?= $i++ ?></td>
-                            <td><?= $row["id"] ?></td>
-                            <td><?= $row["idProducto"]." - ".$row["producto"] ?></td>
-                            <td><?= $row["cliente"] ?></td>
-                            <td><?= $row["vendedor"] ?></td>
-                            <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
-                            <td bgcolor="<?= $infoEstadoComision['fondo'] ?>"> <?= $infoEstadoComision['estado'] ?> </td>
-                            <td bgcolor="<?= $infoEstadoPedido['fondo'] ?>"> <?= $infoEstadoPedido['estado'] ?> </td>
-                            <td bgcolor="<?= $infoEstadoAprobacionPedido['fondo'] ?>"> <?= $infoEstadoAprobacionPedido['estado'] ?> </td>
-                            <td><?= $row["anotacion"] ?></td>
-                            <td><?= numberFormat($row["valorComision"]) ?></td>
-                            <td><?= numberFormat($row["abonoTotal"]) ?></td>
-                            <td><?= numberFormat($row["valor_restante"]) ?></td>
-                            <td><?= $row["banco"] ?></td>
-                            <td><?= numberFormat($row["valorTotal"]) ?></td>
-                            <td><?= getFecha($row["fecha"]) ?></td>
-                            <td>
+                <div class="col-md-12 col-sm-12 ">
+                  <div class="x_panel">
+                    <div class="x_content">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="card-box table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Codigo</th>
+                                  <th>Producto</th>
+                                  <th>Cliente</th>
+                                  <th>Vendedor</th>
+                                  <th>Fecha limite</th>
+                                  <th>Comision</th>
+                                  <th>Estado del pedido</th>
+                                  <th>Estado de aprobacion</th>
+                                  <th>Anotacion</th>
+                                  <th>Valor comision</th>
+                                  <th>Abono total</th>
+                                  <th>Valor restante</th>
+                                  <th>Banco</th>
+                                  <th>Valor del producto</th>
+                                  <th>Fecha del pedio</th>
+                                  <th>Operaciones</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tbody">
+                                <?php foreach ($rows as $row) : ?>
+                                  <?php
+                                  $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
+                                  $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
+                                  $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
+                                  ?>
+                                  <tr>
+                                    <td><?= $i++ ?></td>
+                                    <td><?= $row["id"] ?></td>
+                                    <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
+                                    <td><?= $row["cliente"] ?></td>
+                                    <td><?= $row["vendedor"] ?></td>
+                                    <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
+                                    <td bgcolor="<?= $infoEstadoComision['fondo'] ?>"> <?= $infoEstadoComision['estado'] ?> </td>
+                                    <td bgcolor="<?= $infoEstadoPedido['fondo'] ?>"> <?= $infoEstadoPedido['estado'] ?> </td>
+                                    <td bgcolor="<?= $infoEstadoAprobacionPedido['fondo'] ?>"> <?= $infoEstadoAprobacionPedido['estado'] ?> </td>
+                                    <td><?= $row["anotacion"] ?></td>
+                                    <td><?= numberFormat($row["valorComision"]) ?></td>
+                                    <td><?= numberFormat($row["abonoTotal"]) ?></td>
+                                    <td><?= numberFormat($row["valor_restante"]) ?></td>
+                                    <td><?= $row["banco"] ?></td>
+                                    <td><?= numberFormat($row["valorTotal"]) ?></td>
+                                    <td><?= getFecha($row["fecha"]) ?></td>
+                                    <td>
 
-                              <?php if ($row["estadoPedido"] == 1) : ?>
+                                      <?php if ($row["estadoPedido"] == 1) : ?>
 
-                                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                                        <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
 
-                                <?php if ($_SESSION["idPerfil"] == 3) : ?>
-                                  <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
-                                <?php endif; ?>
+                                        <?php if ($_SESSION["idPerfil"] == 3) : ?>
+                                          <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
+                                        <?php endif; ?>
 
-                                <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>, <?= $row['idProducto'] ?>)"><i class="fa fa-retweet"></i> Estado</button>
+                                        <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>, <?= $row['idProducto'] ?>)"><i class="fa fa-retweet"></i> Estado</button>
 
-                              <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
-                                <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
-                              <?php endif; ?>
+                                      <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
+                                        <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
+                                      <?php endif; ?>
 
-                              <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>
+                                      <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>
 
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
+                                    </td>
+                                  </tr>
+                                <?php endforeach; ?>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -133,7 +141,7 @@
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-money"></i> En cartera</span>
-                  <div class="count green"> <?= numberFormat(($reumen[0]['total_pedidos'] - $reumen[0]['total_abonos'] )) ?> </div>
+                  <div class="count green"> <?= numberFormat(($reumen[0]['total_pedidos'] - $reumen[0]['total_abonos'])) ?> </div>
                 </div>
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-truck"></i> Entregados</span>

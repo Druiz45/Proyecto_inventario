@@ -14,8 +14,10 @@ class ClienteModel{
     protected $email;
     protected $celular;
     protected $direccion;
+    protected $celularSecundario;
 
-    public function __construct($nombres = "", $apellidos = "", $documento = "", $email = "", $celular = "", $direccion = ""){
+    public function __construct($nombres = "", $apellidos = "", $documento = "", $email = "", $celular = "",
+     $direccion = "", $celularSecundario=""){
 
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -23,6 +25,7 @@ class ClienteModel{
         $this->email = $email;
         $this->celular = $celular;
         $this->direccion = $direccion;
+        $this->celularSecundario = $celularSecundario;
         
     }
 
@@ -73,6 +76,13 @@ class ClienteModel{
                 throw new Exception("El teléfono contiene caracteres no numéricos");
             }
 
+            $pattern = "/^[0-9]{10,10}+$/";
+
+            if (!preg_match($pattern, trim($this->celularSecundario))) {
+
+                throw new Exception("El teléfono secundario contiene caracteres no numéricos");
+            }
+
             $pattern = "/^[a-zA-ZáéíóúÁÉÍÓÚñÑ#\s0-9-]{1,100}+$/";
 
             if (!preg_match($pattern, trim($this->direccion))) {
@@ -94,13 +104,14 @@ class ClienteModel{
 
         try {
 
-            $insert = $con->prepare("CALL createCliente(?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createCliente(?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->documento, PDO::PARAM_STR);
             $insert->bindParam(2, $this->nombres, PDO::PARAM_STR);
             $insert->bindParam(3, $this->apellidos, PDO::PARAM_STR);
             $insert->bindParam(4, $this->email, PDO::PARAM_STR);
             $insert->bindParam(5, $this->celular, PDO::PARAM_STR);
             $insert->bindParam(6, $this->direccion, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->celularSecundario, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
@@ -128,7 +139,7 @@ class ClienteModel{
             // $idUser = $_SESSION['idUser'];
             $idPerfil = $_SESSION['idPerfil'];
 
-            $update = $con->prepare("CALL updateCliente(?,?,?,?,?,?,?,?)");
+            $update = $con->prepare("CALL updateCliente(?,?,?,?,?,?,?,?,?)");
             $update->bindParam(1, $this->documento, PDO::PARAM_STR);
             $update->bindParam(2, $this->nombres, PDO::PARAM_STR);
             $update->bindParam(3, $this->apellidos, PDO::PARAM_STR);
@@ -137,6 +148,7 @@ class ClienteModel{
             $update->bindParam(6, $this->direccion, PDO::PARAM_STR);
             $update->bindParam(7, $cliente, PDO::PARAM_INT);
             $update->bindParam(8, $idPerfil, PDO::PARAM_INT);
+            $update->bindParam(9, $this->celularSecundario, PDO::PARAM_STR);
             $update->execute();
 
             $update->closeCursor();

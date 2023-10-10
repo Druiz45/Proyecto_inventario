@@ -27,41 +27,50 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
+
                         <div class="x_content">
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card-box table-responsive">
-                                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Banco</th>
-                                                    <th>Fecha registro</th>
-                                                    <th>Operaciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbody">
-                                                <?php foreach ($rows as $row) : ?>
-                                                    <tr>
-                                                        <td><?= $i++ ?></td>
-                                                        <td><?= $row["banco"] ?></td>
-                                                        <td><?= getFecha($row["fecha_sys"]) ?></td>
-                                                        <td>
-                                                            <?php if($row["estado"]==1): ?>
-                                                                <button type="button" class="btn btn-danger btn-round" onclick="return updateEstate('Deshabilitar',<?= $row['id'] ?>)"><i class="fa fa-close"></i> Deshabilitar</button>
-                                                            <?php else: ?>
-                                                                <button type="button" class="btn btn-success btn-round" onclick="return updateEstate('Habilitar',<?= $row['id'] ?>)"><i class="fa fa-check"></i> Habilitar</button>
-                                                            <?php endif; ?>
-                                                            <button type="button" class="btn btn-info" onclick="return updateBanco('<?= $row['banco'] ?>',<?= $row['id'] ?>)"><i class="fa fa-pencil"></i> Editar</button>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <br>
-                                    <div class="col-md-3 col-sm-6  form-group has-feedback">
-                                        <button type="button" class="btn btn-success" id="addBanco"><i class="fa fa-plus"></i> Añadir banco</button>
+                                <div class="col-md-12 col-sm-12 ">
+                                    <div class="x_panel">
+                                        <div class="x_content">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="card-box table-responsive">
+                                                        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Banco</th>
+                                                                    <th>Fecha registro</th>
+                                                                    <th>Operaciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="tbody">
+                                                                <?php foreach ($rows as $row) : ?>
+                                                                    <tr>
+                                                                        <td><?= $i++ ?></td>
+                                                                        <td><?= $row["banco"] ?></td>
+                                                                        <td><?= getFecha($row["fecha_sys"]) ?></td>
+                                                                        <td>
+                                                                            <?php if ($row["estado"] == 1) : ?>
+                                                                                <button type="button" class="btn btn-danger btn-round" onclick="return updateEstate('Deshabilitar',<?= $row['id'] ?>)"><i class="fa fa-close"></i> Deshabilitar</button>
+                                                                            <?php else : ?>
+                                                                                <button type="button" class="btn btn-success btn-round" onclick="return updateEstate('Habilitar',<?= $row['id'] ?>)"><i class="fa fa-check"></i> Habilitar</button>
+                                                                            <?php endif; ?>
+                                                                            <button type="button" class="btn btn-info" onclick="return updateBanco('<?= $row['banco'] ?>',<?= $row['id'] ?>)"><i class="fa fa-pencil"></i> Editar</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <br>
+                                                    <div class="col-md-3 col-sm-6  form-group has-feedback">
+                                                        <button type="button" class="btn btn-success" id="addBanco"><i class="fa fa-plus"></i> Añadir banco</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

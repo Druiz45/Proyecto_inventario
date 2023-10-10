@@ -9,6 +9,7 @@ $cliente = new ClienteModel(
     $_POST['email'],
     $_POST['celular'],
     $_POST['direccion'],
+    $_POST['celularSecundario'],
 );
 
 $cliente->validateData();

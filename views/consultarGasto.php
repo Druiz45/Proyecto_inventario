@@ -49,45 +49,50 @@
             </form>
             <div class="x_content">
               <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                    <!-- <p class="text-muted font-13 m-b-30">
-                      Responsive is an extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
-                    </p> -->
 
-                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Codigo</th>
-                          <th>Banco</th>
-                          <th>Valor</th>
-                          <th>Tipo de gasto</th>
-                          <th>Descripcion</th>
-                          <th>Hecho por</th>
-                          <th>Fecha</th>
-                          <th>Operaciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php foreach ($gastos as $row) : ?>
-                          <tr>
-                            <td><?= $i++ ?></td>
-                            <td><?= $row["id"] ?></td>
-                            <td><?= $row["banco"] ?></td>
-                            <td><?= numberFormat($row["valor"]) ?></td>
-                            <td><?= $row["tipoGasto"] ?></td>
-                            <td><?= $row["descripcion"] ?></td>
-                            <td><?= $row["usuario"] ?></td>
-                            <td><?= getFecha($row["fecha_sys"]) ?></td>
-                            <td>
-                              <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
-                              <button type="button" class="btn btn-danger" onclick=""><i class="fa fa-close"></i> Deshabilitar</button>
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
+                <div class="col-md-12 col-sm-12 ">
+                  <div class="x_panel">
+                    <div class="x_content">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="card-box table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Codigo</th>
+                                  <th>Banco</th>
+                                  <th>Valor</th>
+                                  <th>Tipo de gasto</th>
+                                  <th>Descripcion</th>
+                                  <th>Hecho por</th>
+                                  <th>Fecha</th>
+                                  <th>Operaciones</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php foreach ($gastos as $row) : ?>
+                                  <tr>
+                                    <td><?= $i++ ?></td>
+                                    <td><?= $row["id"] ?></td>
+                                    <td><?= $row["banco"] ?></td>
+                                    <td><?= numberFormat($row["valor"]) ?></td>
+                                    <td><?= $row["tipoGasto"] ?></td>
+                                    <td><?= $row["descripcion"] ?></td>
+                                    <td><?= $row["usuario"] ?></td>
+                                    <td><?= getFecha($row["fecha_sys"]) ?></td>
+                                    <td>
+                                      <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/gasto/editar/?gasto=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
+                                      <button type="button" class="btn btn-danger" onclick=""><i class="fa fa-close"></i> Deshabilitar</button>
+                                    </td>
+                                  </tr>
+                                <?php endforeach; ?>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

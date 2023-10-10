@@ -58,6 +58,13 @@
                                             </div>
 
                                             <div class="col-md-3 col-sm-6  form-group has-feedback">
+                                                <input type="text" class="form-control has-feedback-left" id="celularSecundario" name="celularSecundario" placeholder="Celular secundario">
+                                                <span class="fa fa-mobile form-control-feedback left" aria-hidden="true"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row align-items-center justify-content-center">
+                                            <div class="col-md-3 col-sm-6  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion" placeholder="Direccion">
                                                 <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
                                             </div>
