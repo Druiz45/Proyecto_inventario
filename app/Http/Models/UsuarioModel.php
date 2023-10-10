@@ -5,7 +5,11 @@ namespace App\Http\Models;
 use config\Conexion;
 use Exception;
 use PDO;
-use \SendGrid\Mail\Mail;
+// use \SendGrid\Mail\Mail;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception as mailException;
 
 class UsuarioModel
 {
