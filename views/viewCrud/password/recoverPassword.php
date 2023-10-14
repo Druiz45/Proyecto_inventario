@@ -14,6 +14,6 @@ $idUserEncrypt = $user->getIdUserEncryp($user, $dataUser);
 
 $token = $user->getTokenPass($dataUser);
 
-// $user->recoverPass($_POST['email'], $idUserEncrypt, $token);
+$user->recoverPass($_POST['email'], $idUserEncrypt, $token);
 
 // echo json_encode($idUserDecryp);
