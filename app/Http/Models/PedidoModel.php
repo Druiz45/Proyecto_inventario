@@ -9,91 +9,134 @@ use Exception;
 class PedidoModel
 {
 
-    protected $documento;
-    protected $nombreProducto;
-    protected $cliente;
-    protected $producto;
-    protected $abono;
-    protected $anotacion;
-    protected $fechaLimite;
+    protected $remision;
+    protected $orden;
     protected $pedido;
-    protected $banco;
+    protected $factura;
+    protected $fecha;
+    protected $actaEntrega;
+    protected $nombreCliente;
+    protected $doc;
+    protected $direccion;
+    protected $telefono;
+    protected $ciudad;
+    protected $celular;
+    protected $email;
 
-    public function __construct(
-        $documento = "",
-        $nombreProducto = "",
-        $cliente = "",
-        $producto = "",
-        $abono = "",
-        $anotacion = "",
-        $fechaLimite = "",
+    protected $codigoVendedor;
+    protected $anotacion;
+
+     public function __construct(
+        $remision = "",
+        $orden = "",
         $pedido = "",
-        $banco = "",
+        $factura = "",
+        $fecha = "",
+        $actaEntrega = "",
+        $nombreCliente = "",
+        $doc = "",
+        $direccion = "",
+        $telefono = "",
+        $ciudad = "",
+        $celular = "",
+        $email = "",
+
+        $codigoVendedor = "",
+        $anotacion = "",
     ) {
-        $this->documento = $documento;
-        $this->nombreProducto = $nombreProducto;
-        $this->cliente = $cliente;
-        $this->producto = $producto;
-        $this->abono = $abono;
-        $this->anotacion = $anotacion;
-        $this->fechaLimite = $fechaLimite;
+        $this->remision = $remision;
+        $this->orden = $orden;
         $this->pedido = $pedido;
-        $this->banco = $banco;
+        $this->factura = $factura;
+        $this->fecha = $fecha;
+        $this->actaEntrega = $actaEntrega;
+        $this->nombreCliente = $nombreCliente;
+        $this->doc = $doc;
+        $this->direccion = $direccion;
+        $this->telefono = $telefono;
+        $this->ciudad = $ciudad;
+        $this->celular = $celular;
+        $this->email = $email;
+
+        $this->codigoVendedor = $codigoVendedor;
+        $this->anotacion = $anotacion;
     }
+
+    // public function __construct(
+    //     $documento = "",
+    //     $nombreProducto = "",
+    //     $cliente = "",
+    //     $producto = "",
+    //     $abono = "",
+    //     $anotacion = "",
+    //     $fechaLimite = "",
+    //     $pedido = "",
+    //     $banco = "",
+    // ) {
+    //     $this->documento = $documento;
+    //     $this->nombreProducto = $nombreProducto;
+    //     $this->cliente = $cliente;
+    //     $this->producto = $producto;
+    //     $this->abono = $abono;
+    //     $this->anotacion = $anotacion;
+    //     $this->fechaLimite = $fechaLimite;
+    //     $this->pedido = $pedido;
+    //     $this->banco = $banco;
+    // }
 
     public function validateData()
     {
 
         try {
 
-            $pattern = "/^[0-9]{1,5}+$/";
+            // $pattern = "/^[0-9]{1,5}+$/";
 
-            if (!preg_match($pattern, trim($this->cliente))) {
+            // if (!preg_match($pattern, trim($this->cliente))) {
 
-                throw new Exception("Porfavor revise el cliente seleccionado");
-            }
+            //     throw new Exception("Porfavor revise el cliente seleccionado");
+            // }
 
-            $pattern = "/^[0-9]{1,4}+$/";
+            // $pattern = "/^[0-9]{1,4}+$/";
 
-            if (!preg_match($pattern, trim($this->producto))) {
+            // if (!preg_match($pattern, trim($this->producto))) {
 
-                throw new Exception("Porfavor revise el producto seleccionado");
-            }
+            //     throw new Exception("Porfavor revise el producto seleccionado");
+            // }
 
-            $this->abono = str_replace(['.', '$'], "", $this->abono);
+            // $this->abono = str_replace(['.', '$'], "", $this->abono);
 
-            $pattern = "/^[0-9]{1,8}+$/";
+            // $pattern = "/^[0-9]{1,8}+$/";
 
-            if (!preg_match($pattern, trim($this->abono))) {
+            // if (!preg_match($pattern, trim($this->abono))) {
 
-                throw new Exception("El valor del abono no es valido");
-            }
+            //     throw new Exception("El valor del abono no es valido");
+            // }
 
-            $timeStamp = strtotime($this->fechaLimite);
+            // $timeStamp = strtotime($this->fechaLimite);
 
-            if (!$timeStamp) {
-                throw new Exception("La fecha no es valida");
-            }
+            // if (!$timeStamp) {
+            //     throw new Exception("La fecha no es valida");
+            // }
 
-            $fecha_convertida = date('Y-m-d', $timeStamp);
+            // $fecha_convertida = date('Y-m-d', $timeStamp);
 
-            if ($fecha_convertida != $this->fechaLimite) {
+            // if ($fecha_convertida != $this->fechaLimite) {
 
-                throw new Exception("La fecha no es valida");
-            }
+            //     throw new Exception("La fecha no es valida");
+            // }
 
-            $pattern = "/^.{0,100}+$/";
+            // $pattern = "/^.{0,100}+$/";
 
-            if (!preg_match($pattern, trim($this->anotacion))) {
+            // if (!preg_match($pattern, trim($this->anotacion))) {
 
-                throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
-            }
+            //     throw new Exception("La anotacion puede contener un maximo de 100 carasteres");
+            // }
 
-            $pattern = "/^[0-9]{1,2}+$/";
+            // $pattern = "/^[0-9]{1,2}+$/";
 
-            if (!preg_match($pattern, trim($this->banco))) {
-                throw new Exception("Banco invalido");
-            }
+            // if (!preg_match($pattern, trim($this->banco))) {
+            //     throw new Exception("Banco invalido");
+            // }
 
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
@@ -101,53 +144,71 @@ class PedidoModel
         }
     }
 
-    public function createAbonoPedido()
-    {
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
+    // public function createAbonoPedido()
+    // {
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
 
-        $vendedor = $_SESSION["idUser"];
+    //     $vendedor = $_SESSION["idUser"];
 
-        try {
-            $insert = $con->prepare("CALL createAbono(?,?,?)");
-            $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
-            $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
-            $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
-            $insert->execute();
+    //     try {
+    //         $insert = $con->prepare("CALL createAbono(?,?,?)");
+    //         $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
+    //         $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
+    //         $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+    //         $insert->execute();
 
-            $insert->closeCursor();
+    //         $insert->closeCursor();
 
-            if (!$insert || !$insert->rowCount() > 0) {
-                throw new Exception("error");
-            }
-        } catch (Exception $e) {
-            echo json_encode("error");
-            die;
-        }
-    }
+    //         if (!$insert || !$insert->rowCount() > 0) {
+    //             throw new Exception("error");
+    //         }
+    //     } catch (Exception $e) {
+    //         echo json_encode("error");
+    //         die;
+    //     }
+    // }
 
     public function savePedido()
     {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
-        $precio = $this->getDataProducto();
+        // $precio = $this->getDataProducto();
         $vendedor = $_SESSION['idUser'];
 
         try {
 
-            if ($this->abono>$precio) {
-                throw new Exception("El abono supera el precio del producto");
-            }
+            // if ($this->abono>$precio) {
+            //     throw new Exception("El abono supera el precio del producto");
+            // }
 
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?)");
-            $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
-            $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
-            $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
-            $insert->bindParam(4, $precio, PDO::PARAM_INT);
-            $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
-            $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
-            $insert->bindParam(7, $this->banco, PDO::PARAM_INT);
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
+            $insert->bindParam(2, $this->orden, PDO::PARAM_INT);
+            $insert->bindParam(3, $this->pedido, PDO::PARAM_INT);
+            $insert->bindParam(4, $this->factura, PDO::PARAM_STR);
+            $insert->bindParam(5, $this->fecha, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->actaEntrega, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->nombreCliente, PDO::PARAM_STR);
+            $insert->bindParam(8, $this->doc, PDO::PARAM_STR);
+            $insert->bindParam(9, $this->direccion, PDO::PARAM_STR);
+            $insert->bindParam(10, $this->telefono, PDO::PARAM_STR);
+            $insert->bindParam(11, $this->ciudad, PDO::PARAM_STR);
+            $insert->bindParam(12, $this->celular, PDO::PARAM_STR);
+            $insert->bindParam(13, $this->email, PDO::PARAM_STR);
+            $insert->bindParam(14, $this->codigoVendedor, PDO::PARAM_INT);
+            $insert->bindParam(15, $this->anotacion, PDO::PARAM_STR);
+
+            // $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
+            // $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
+            // $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            // $insert->bindParam(4, $precio, PDO::PARAM_INT);
+            // $insert->bindParam(5, $this->anotacion, PDO::PARAM_STR);
+            // $insert->bindParam(6, $this->fechaLimite, PDO::PARAM_STR);
+            // $insert->bindParam(7, $this->banco, PDO::PARAM_INT);
+
             $insert->execute();
 
             $insert->closeCursor();
@@ -156,9 +217,9 @@ class PedidoModel
                 throw new Exception("Error al registrar el pedido");
             }
 
-            $this->pedido = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
+            // $this->pedido = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
 
-            $this->createAbonoPedido();
+            // $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
             
@@ -168,40 +229,40 @@ class PedidoModel
         }
     }
 
-    public function updatePedido()
-    {
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
+    // public function updatePedido()
+    // {
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
 
-        $precio = $this->getDataProducto();
+    //     $precio = $this->getDataProducto();
 
-        try {
-            $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?)");
-            $update->bindParam(1, $this->producto, PDO::PARAM_INT);
-            $update->bindParam(2, $this->cliente, PDO::PARAM_INT);
-            $update->bindParam(3, $precio, PDO::PARAM_INT);
-            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
-            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-            $update->bindParam(6, $this->pedido, PDO::PARAM_INT);
-            $update->bindParam(7, $this->banco, PDO::PARAM_INT);
-            $update->execute();
+    //     try {
+    //         $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?)");
+    //         $update->bindParam(1, $this->producto, PDO::PARAM_INT);
+    //         $update->bindParam(2, $this->cliente, PDO::PARAM_INT);
+    //         $update->bindParam(3, $precio, PDO::PARAM_INT);
+    //         $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
+    //         $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
+    //         $update->bindParam(6, $this->pedido, PDO::PARAM_INT);
+    //         $update->bindParam(7, $this->banco, PDO::PARAM_INT);
+    //         $update->execute();
 
-            $update->closeCursor();
+    //         $update->closeCursor();
 
-            if (!$update) {
-                throw new Exception("Error al actualizar el pedido");
-            }
+    //         if (!$update) {
+    //             throw new Exception("Error al actualizar el pedido");
+    //         }
 
-            if (!$update->rowCount() > 0) {
-                throw new Exception("No se hicieron cambios");
-            }
+    //         if (!$update->rowCount() > 0) {
+    //             throw new Exception("No se hicieron cambios");
+    //         }
 
-            echo json_encode("Pedido actualizado con exito!");
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-    }
+    //         echo json_encode("Pedido actualizado con exito!");
+    //     } catch (Exception $e) {
+    //         echo json_encode($e->getMessage());
+    //         die;
+    //     }
+    // }
 
     public function validateDataEstado($estado, $pedido)
     {
@@ -317,100 +378,100 @@ class PedidoModel
         }
     }
 
-    public function getDataProducto()
-    {
+    // public function getDataProducto()
+    // {
 
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
 
 
-        try {
-            $select = $con->prepare("CALL getDataProducto(?)");
-            $select->bindParam(1, $this->producto, PDO::PARAM_INT);
-            $select->execute();
+    //     try {
+    //         $select = $con->prepare("CALL getDataProducto(?)");
+    //         $select->bindParam(1, $this->producto, PDO::PARAM_INT);
+    //         $select->execute();
 
-            $row = $select->fetchAll(PDO::FETCH_ASSOC);
+    //         $row = $select->fetchAll(PDO::FETCH_ASSOC);
 
-            $select->closeCursor();
+    //         $select->closeCursor();
 
-            if (!$select || !$select->rowCount() > 0) {
+    //         if (!$select || !$select->rowCount() > 0) {
 
-                throw new Exception("No se encontro el producto");
-            }
+    //             throw new Exception("No se encontro el producto");
+    //         }
 
-            return $row[0]['precio'];
-        } catch (Exception $e) {
-            return [];
-            die;
-        }
-    }
+    //         return $row[0]['precio'];
+    //     } catch (Exception $e) {
+    //         return [];
+    //         die;
+    //     }
+    // }
 
-    public function getInfoFormCreate()
-    {
-        try {
-            if (!trim($this->documento) || !trim($this->nombreProducto)) {
-                throw new Exception("No hay resultados");
-            }
-            if ($this->documento != "vacio") {
-                echo json_encode($this->getClienteForDoc());
-            } elseif ($this->nombreProducto != "vacio") {
-                echo json_encode($this->getProductForCoincidencia());
-            }
-        } catch (Exception $e) {
-            echo json_encode($e->getMessage());
-            die;
-        }
-    }
+    // public function getInfoFormCreate()
+    // {
+    //     try {
+    //         if (!trim($this->documento) || !trim($this->nombreProducto)) {
+    //             throw new Exception("No hay resultados");
+    //         }
+    //         if ($this->documento != "vacio") {
+    //             echo json_encode($this->getClienteForDoc());
+    //         } elseif ($this->nombreProducto != "vacio") {
+    //             echo json_encode($this->getProductForCoincidencia());
+    //         }
+    //     } catch (Exception $e) {
+    //         echo json_encode($e->getMessage());
+    //         die;
+    //     }
+    // }
 
-    public function getClienteForDoc()
-    {
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
+    // public function getClienteForDoc()
+    // {
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
 
-        try {
-            $select = $con->prepare("CALL getClienteForDoc(?)");
-            $select->bindParam(1, $this->documento, PDO::PARAM_STR);
-            $select->execute();
+    //     try {
+    //         $select = $con->prepare("CALL getClienteForDoc(?)");
+    //         $select->bindParam(1, $this->documento, PDO::PARAM_STR);
+    //         $select->execute();
 
-            $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
+    //         $clientes = $select->fetchAll(PDO::FETCH_ASSOC);
 
-            $select->closeCursor();
+    //         $select->closeCursor();
 
-            if (!$select || !$select->rowCount() > 0) {
-                throw new Exception("No se encontraron clientes");
-            }
+    //         if (!$select || !$select->rowCount() > 0) {
+    //             throw new Exception("No se encontraron clientes");
+    //         }
 
-            return $clientes;
-        } catch (Exception $e) {
-            return $e->getMessage();
-            die;
-        }
-    }
+    //         return $clientes;
+    //     } catch (Exception $e) {
+    //         return $e->getMessage();
+    //         die;
+    //     }
+    // }
 
-    public function getProductForCoincidencia()
-    {
-        $pdo = new Conexion();
-        $con = $pdo->conexion();
+    // public function getProductForCoincidencia()
+    // {
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
 
-        try {
-            $select = $con->prepare("CALL getProductForCoincidencia(?)");
-            $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
-            $select->execute();
+    //     try {
+    //         $select = $con->prepare("CALL getProductForCoincidencia(?)");
+    //         $select->bindParam(1, $this->nombreProducto, PDO::PARAM_STR);
+    //         $select->execute();
 
-            $products = $select->fetchAll(PDO::FETCH_ASSOC);
+    //         $products = $select->fetchAll(PDO::FETCH_ASSOC);
 
-            $select->closeCursor();
+    //         $select->closeCursor();
 
-            if (!$select || !$select->rowCount() > 0) {
-                throw new Exception("No se encontraron productos");
-            }
+    //         if (!$select || !$select->rowCount() > 0) {
+    //             throw new Exception("No se encontraron productos");
+    //         }
 
-            return $products;
-        } catch (Exception $e) {
-            return $e->getMessage();
-            die;
-        }
-    }
+    //         return $products;
+    //     } catch (Exception $e) {
+    //         return $e->getMessage();
+    //         die;
+    //     }
+    // }
 
     public function validateDate(): array
     {
