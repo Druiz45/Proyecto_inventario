@@ -4,11 +4,11 @@ import { number_format } from "./../producto/Producto.js";
 import { getBancos} from "./../banco/Banco.js";
 export class Pedido {
 
-    // getDataFormCreate() {
-    //     getClienteForDoc();
-    //     getProductForCoincidencia();
-    //     getBancos();
-    // }
+    getDataFormCreate() {
+        // getClienteForDoc();
+        // getProductForCoincidencia();
+        getBancos();
+    }
 
     // updatePedido() {
     //     const formUpdatePedido = document.getElementById('formUpdatePedido');
@@ -128,11 +128,14 @@ export class Pedido {
     // }
 
     savePedido() {
-        const formCreatePedido = document.getElementById('form-create-pedido')
+        const formCreatePedido = document.getElementById('form-create-pedido');
+            
         if (formCreatePedido) {
-            console.log("g");
+            
+            
+
             formCreatePedido.addEventListener('submit', (e) => {
-                console.log("g");
+               
                 e.preventDefault();
                 const formData = new FormData(formCreatePedido);
                 fetch(`/${url}/pedido/create`, {
@@ -146,14 +149,14 @@ export class Pedido {
                                 icon: 'success',
                                 title: data,
                             })
-                            formCreatePedido.reset();
+                            // formCreatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else if (data == "Error al registrar el pedido") {
                             Swal.fire({
                                 icon: 'error',
                                 text: data,
                             })
-                            formCreatePedido.reset();
+                            // formCreatePedido.reset();
                             document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
                             Swal.fire({

@@ -26,6 +26,23 @@ class PedidoModel
     protected $codigoVendedor;
     protected $anotacion;
 
+    protected $stock;
+    protected $almacen;
+    protected $fabrica;
+    protected $bandeja;
+    protected $braker;
+    protected $otros;
+    protected $efectivo;
+    protected $cheque;
+    protected $iva;
+    protected $total;
+    protected $banco;
+    protected $abono;
+    protected $saldo;
+    protected $vendedor;
+    protected $autorizo;
+    protected $verifico;
+
      public function __construct(
         $remision = "",
         $orden = "",
@@ -43,6 +60,24 @@ class PedidoModel
 
         $codigoVendedor = "",
         $anotacion = "",
+
+        $stock="",
+        $almacen="",
+        $fabrica="",
+        $bandeja="",
+        $braker="",
+        $otros="",
+        $efectivo="",
+        $cheque="",
+        $iva="",
+        $total="",
+        $banco="",
+        $abono="",
+        $saldo="",
+        $vendedor="",
+        $autorizo="",
+        $verifico="",
+
     ) {
         $this->remision = $remision;
         $this->orden = $orden;
@@ -60,6 +95,24 @@ class PedidoModel
 
         $this->codigoVendedor = $codigoVendedor;
         $this->anotacion = $anotacion;
+
+        $this->stock = $stock;
+        $this->almacen = $almacen;
+        $this->fabrica = $fabrica;
+        $this->bandeja = $bandeja;
+        $this->braker = $braker;
+        $this->otros = $otros;
+        $this->efectivo = $efectivo;
+        $this->cheque = $cheque;
+        $this->iva = $iva;
+        $this->total = $total;
+        $this->banco = $banco;
+        $this->abono = $abono;
+        $this->saldo = $saldo;
+        $this->vendedor = $vendedor;
+        $this->autorizo = $autorizo;
+        $this->verifico = $verifico;
+
     }
 
     // public function __construct(
@@ -183,8 +236,17 @@ class PedidoModel
             //     throw new Exception("El abono supera el precio del producto");
             // }
 
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $this->stock = (bool) $this->stock;
+            $this->almacen = (bool) $this->almacen;
+            $this->fabrica = (bool) $this->fabrica;
+            $this->bandeja = (bool) $this->bandeja;
+            $this->braker = (bool) $this->braker;
+            $this->otros = (bool) $this->otros;
+            $this->efectivo = (bool) $this->efectivo;
+            $this->cheque = (bool) $this->cheque;
+            $this->iva = (bool) $this->iva;
 
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
             $insert->bindParam(2, $this->orden, PDO::PARAM_INT);
             $insert->bindParam(3, $this->pedido, PDO::PARAM_INT);
@@ -200,6 +262,25 @@ class PedidoModel
             $insert->bindParam(13, $this->email, PDO::PARAM_STR);
             $insert->bindParam(14, $this->codigoVendedor, PDO::PARAM_INT);
             $insert->bindParam(15, $this->anotacion, PDO::PARAM_STR);
+
+            $insert->bindParam(16, $this->stock, PDO::PARAM_INT);
+            $insert->bindParam(17, $this->almacen, PDO::PARAM_INT);
+            $insert->bindParam(18, $this->fabrica, PDO::PARAM_INT);
+            $insert->bindParam(19, $this->bandeja, PDO::PARAM_INT);
+            $insert->bindParam(20, $this->braker, PDO::PARAM_INT);
+            $insert->bindParam(21, $this->otros, PDO::PARAM_INT);
+            $insert->bindParam(22, $this->efectivo, PDO::PARAM_INT);
+            $insert->bindParam(23, $this->cheque, PDO::PARAM_INT);
+            $insert->bindParam(24, $this->iva, PDO::PARAM_INT);
+
+            $insert->bindParam(25, $this->total, PDO::PARAM_INT);
+            $insert->bindParam(26, $this->banco, PDO::PARAM_INT);
+            // $insert->bindParam(27, $this->abono, PDO::PARAM_INT);
+            $insert->bindParam(27, $this->saldo, PDO::PARAM_INT);
+
+            $insert->bindParam(28, $this->vendedor, PDO::PARAM_STR);
+            $insert->bindParam(29, $this->autorizo, PDO::PARAM_STR);
+            $insert->bindParam(30, $this->verifico, PDO::PARAM_STR);
 
             // $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             // $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);

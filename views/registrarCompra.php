@@ -18,9 +18,9 @@
                     <div class="clearfix"></div>
 
                     <!-- <form class="form-label-left input_mask" id="formCreateCompra"> -->
-                    <div class="row">
+                    <div class="row align-items-center justify-content-center">
 
-                        <div class="col-md-12">
+                        <div class="col-md-10">
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>Informacion del pedido</h2>
@@ -132,9 +132,9 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
+                                                <td>2023-10-18 00:00:00</td>
+                                                <td>$500.000</td>
+                                                <td>Nequi</td>
                                             </tr>
                                         </tbody>
                                     </table>

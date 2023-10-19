@@ -131,28 +131,28 @@
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label class="">
-                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Stock
+                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="stock" name="stock" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Stock
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label class="">
-                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Almacen
+                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="almacen" name="almacen" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Almacen
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <div class="icheckbox_flat-green disabled" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Fabrica
+                                                                <div class="icheckbox_flat-green disabled" style="position: relative;"><input type="checkbox" id="fabrica" name="fabrica" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Fabrica
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <div class="icheckbox_flat-green checked disabled" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Bandeja
+                                                                <div class="icheckbox_flat-green checked disabled" style="position: relative;"><input type="checkbox" id="bandeja" name="bandeja" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Bandeja
                                                             </label>
                                                         </div>
                                                     </div>
@@ -162,28 +162,28 @@
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label class="">
-                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Braker´s
+                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="braker" name="braker" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Braker´s
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label class="">
-                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Otros
+                                                                <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="otros" name="otros" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Otros
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <div class="icheckbox_flat-green disabled" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Efectivo
+                                                                <div class="icheckbox_flat-green disabled" style="position: relative;"><input type="checkbox" id="efectivo" name="efectivo" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Efectivo
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <div class="icheckbox_flat-green checked disabled" style="position: relative;"><input type="checkbox" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Cheque
+                                                                <div class="icheckbox_flat-green checked disabled" style="position: relative;"><input type="checkbox" id="cheque" name="cheque" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Cheque
                                                             </label>
                                                         </div>
                                                     </div>
@@ -198,14 +198,14 @@
                                                     <div class="col-md-1 col-sm-1  form-group has-feedback">
                                                         <div class="radio">
                                                             <label class="">
-                                                                <div class="iradio_flat-green" style="position: relative;"><input type="radio" class="flat" name="iCheck" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Si
+                                                                <div class="iradio_flat-green" style="position: relative;"><input type="radio" class="flat" id="iva" name="iva" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Si
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1 col-sm-1  form-group has-feedback">
                                                         <div class="radio">
                                                             <label class="">
-                                                                <div class="iradio_flat-green" style="position: relative;"><input type="radio" class="flat" name="iCheck" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> No
+                                                                <div class="iradio_flat-green" style="position: relative;"><input type="radio" class="flat" id="iva" name="iva" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> No
                                                             </label>
                                                         </div>
                                                     </div>
@@ -222,15 +222,15 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="docCliente" name="docCliente" placeholder="Total" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="total" name="total" placeholder="Total" autocomplete="off">
                                                 <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Abono" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="abono" name="abono" placeholder="Abono" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Saldo" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
@@ -249,9 +249,9 @@
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
+                                                    <td>2023-10-18 00:00:00</td>
+                                                    <td>$500.000</td>
+                                                    <td>Nequi</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -260,15 +260,15 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="docCliente" name="docCliente" placeholder="Vendedor" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="vendedor" name="vendedor" placeholder="Vendedor" autocomplete="off">
                                                 <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Autorizo" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Verifico" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="verifico" name="verifico" placeholder="Verifico" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
