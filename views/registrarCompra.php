@@ -21,6 +21,18 @@
                     <div class="row align-items-center justify-content-center">
 
                         <div class="col-md-10">
+
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped bg-green" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>Informacion del pedido</h2>

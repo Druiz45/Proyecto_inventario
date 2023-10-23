@@ -19,8 +19,19 @@
 
                     <form class="form-label-left input_mask" id="form-create-pedido">
                         <div class="row align-items-center justify-content-center">
-
                             <div class="col-md-10">
+
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="x_panel">
                                     <div class="x_title">
                                         <h2>Informacion del pedido</h2>
