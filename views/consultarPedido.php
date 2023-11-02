@@ -11,7 +11,7 @@
       $i = 1;
       $pedido = new PedidoModel();
       $rows = $pedido->getPedidos();
-      $reumen = $pedido->getResumenPedidos();
+      // $reumen = $pedido->getResumenPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
       <!-- /top navigation -->
@@ -56,11 +56,11 @@
                               <thead>
                                 <tr>
                                   <th>#</th>
-                                  <th>Codigo</th>
-                                  <th>Producto</th>
-                                  <th>Cliente</th>
-                                  <th>Vendedor</th>
-                                  <th>Fecha limite</th>
+                                  <th>Codigo pedido</th>
+                                  <th>Codigo de orden</th>
+                                  <th>fecha</th>
+                                  <!-- <th>Vendedor</th> -->
+                                  <!-- <th>Fecha limite</th>
                                   <th>Comision</th>
                                   <th>Estado del pedido</th>
                                   <th>Estado de aprobacion</th>
@@ -70,21 +70,22 @@
                                   <th>Valor restante</th>
                                   <th>Banco</th>
                                   <th>Valor del producto</th>
-                                  <th>Fecha del pedio</th>
+                                  <th>Fecha del pedio</th> -->
                                   <th>Operaciones</th>
                                 </tr>
                               </thead>
                               <tbody id="tbody">
                                 <?php foreach ($rows as $row) : ?>
                                   <?php
-                                  $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
-                                  $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
-                                  $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
+                                  // $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
+                                  // $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
+                                  // $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
                                   ?>
                                   <tr>
                                     <td><?= $i++ ?></td>
                                     <td><?= $row["id"] ?></td>
-                                    <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
+                                    <td><?= $row["id_orden"] ?></td>
+                                    <!-- <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
                                     <td><?= $row["cliente"] ?></td>
                                     <td><?= $row["vendedor"] ?></td>
                                     <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
@@ -96,9 +97,10 @@
                                     <td><?= numberFormat($row["abonoTotal"]) ?></td>
                                     <td><?= numberFormat($row["valor_restante"]) ?></td>
                                     <td><?= $row["banco"] ?></td>
-                                    <td><?= numberFormat($row["valorTotal"]) ?></td>
+                                    <td><?= numberFormat($row["valorTotal"]) ?></td> -->
                                     <td><?= getFecha($row["fecha"]) ?></td>
-                                    <td>
+                                    <td> <a href="./resumen/?pedido=<?= $row['id'] ?>">Ver mas</a> </td>
+                                    <!-- <td>
 
                                       <?php if ($row["estadoPedido"] == 1) : ?>
 
@@ -116,7 +118,7 @@
 
                                       <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>
 
-                                    </td>
+                                    </td> -->
                                   </tr>
                                 <?php endforeach; ?>
                               </tbody>
@@ -129,7 +131,7 @@
                 </div>
               </div>
             </div>
-            <div class="row" style="display: inline-block;">
+            <!-- <div class="row" style="display: inline-block;">
               <div class="tile_count">
                 <div class="col-md-3 col-sm-4  tile_stats_count">
                   <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
@@ -160,7 +162,7 @@
                   <div class="count"><?= number_format($reumen[0]['pedidos_no_aprobados'], 0, '.', '.') ?></div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

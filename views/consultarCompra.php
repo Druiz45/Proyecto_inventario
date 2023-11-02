@@ -11,7 +11,7 @@
             $i = 1;
             $compra = new CompraModel();
             $rows = $compra->getCompras();
-            $resumen = $compra->getResumenOrdenesCompra();
+            // $resumen = $compra->getResumenOrdenesCompra();
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
@@ -58,53 +58,55 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>#</th>
-                                                                    <th>Codigo</th>
-                                                                    <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                                                                    <th>Codigo Orden</th>
+                                                                    <!-- <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                         <th>Proveedor</th>
                                                                         <th>Cliente</th>
-                                                                    <?php endif; ?>
-                                                                    <th>Vendedor</th>
-                                                                    <th>Producto</th>
+                                                                    <?php endif; ?> -->
+                                                                    <!-- <th>Vendedor</th> -->
+                                                                    <!-- <th>Producto</th>
                                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                         <th>Se vendera por</th>
-                                                                    <?php endif; ?>
-                                                                    <th>Abono</th>
-                                                                    <th>Valor restante</th>
-                                                                    <th>Se compro por</th>
-                                                                    <th>Utilidad</th>
-                                                                    <th>Estado orden</th>
-                                                                    <th>Fecha limite</th>
-                                                                    <th>Anotacion</th>
+                                                                    <?php endif; ?> -->
+                                                                    <!-- <th>Abono</th> -->
+                                                                    <th>Fecha</th>
+                                                                    <th>Fecha de entrega</th>
+                                                                    <th>Operaciones</th>
+                                                                    <!-- <th>Estado orden</th>
+                                                                    <th>Fecha limite</th> -->
+                                                                    <!-- <th>Anotacion</th>
                                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                         <th>Fecha del pedido</th>
                                                                         <th>Operaciones </th>
-                                                                    <?php endif; ?>
+                                                                    <?php endif; ?> -->
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="tbody">
                                                                 <?php foreach ($rows as $row) : ?>
                                                                     <?php
-                                                                    $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
+                                                                    // $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
                                                                     ?>
                                                                     <tr>
                                                                         <td><?= $i++ ?></td>
                                                                         <td><?= $row["id"] ?></td>
-                                                                        <?php if ($_SESSION["idPerfil"] != 2) : ?>
+                                                                        <!-- <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <td><?= $row["proveedor"] ?></td>
                                                                             <td><?= $row["cliente"] == 0 ? "No Aplica" : $row["cliente"] ?></td>
-                                                                        <?php endif; ?>
-                                                                        <td><?= $row["vendedor"] ?></td>
-                                                                        <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
+                                                                        <?php endif; ?> -->
+                                                                        <td><?= $row["fecha"] ?></td>
+                                                                        <td><?= $row["fecha_entrega"] ?></td>
+                                                                        <td> <a href="./resumen/?compra=<?= $row['id'] ?>">Ver más</a> </td>
+                                                                        <!-- <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <td><?= numberFormat($row["precio"]) ?></td>
-                                                                        <?php endif; ?>
-                                                                        <td><?= numberFormat($row["abono"]) ?></td>
+                                                                        <?php endif; ?> -->
+                                                                        <!-- <td><?= numberFormat($row["abono"]) ?></td>
                                                                         <td><?= numberFormat($row["valor_restante"]) ?></td>
                                                                         <td><?= numberFormat($row["valor"]) ?></td>
                                                                         <td><?= numberFormat($row["precio"] - $row["valor"]) ?></td>
                                                                         <td bgcolor="<?= $infoEstadoOrdenDeCompra['fondo'] ?>"><?= $infoEstadoOrdenDeCompra['estado'] ?></td>
-                                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td>
-                                                                        <td><?= $row["anotacion"] ?></td>
+                                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td> -->
+                                                                        <!-- <td><?= $row["anotacion"] ?></td>
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                                             <td>
@@ -124,7 +126,7 @@
                                                                                     <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>', '<?= $row['id'] ?>')">Añadir al stock</button>
                                                                                 <?php endif; ?>
                                                                             </td>
-                                                                        <?php endif; ?>
+                                                                        <?php endif; ?> -->
                                                                     </tr>
                                                                 <?php endforeach; ?>
                                                             </tbody>
@@ -137,7 +139,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="display: inline-block;">
+                        <!-- <div class="row" style="display: inline-block;">
                             <div class="tile_count">
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-money"></i> Valor total</span>
@@ -163,17 +165,17 @@
                                     <span class="count_top"><i class="fa fa-check"></i> Pagadas</span>
                                     <div class="count"><?= numberFormat($resumen[0]['total_pagadas']) ?></div>
                                 </div>
-                                <!-- <div class="col-md-3 col-sm-4  tile_stats_count">
+                                <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-close"></i> No pagadas</span>
-                                    <div class="count"><?php // numberFormat($resumen[0]['total_pagadas']) 
+                                    <div class="count"><?php // numberFormat($resumen[0]['total_pagadas'])
                                                         ?></div>
-                                </div> -->
+                                </div>
                                 <div class="col-md-3 col-sm-4  tile_stats_count">
                                     <span class="count_top"><i class="fa fa-minus"></i> Anuladas</span>
                                     <div class="count"><?= numberFormat($resumen[0]['total_anuladas']) ?></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

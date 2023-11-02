@@ -4,6 +4,21 @@
 
             <?php require_once("./../views/includes/barraLateral.php"); ?>
             <!-- top navigation -->
+
+            <?php
+
+            use App\Http\Models\AbonoCompraModel;
+            // use App\Http\Models\CompraModel;
+
+            $i = 1;
+            $abonosCompra = new AbonoCompraModel();
+            $abonos = $abonosCompra->getAbonos($_GET['compra']);
+            
+            // $compra = new CompraModel();
+            // $rows = $compra->getCompras();
+            // $resumen = $compra->getResumenOrdenesCompra();
+            ?>
+
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
             <!-- /top navigation -->
 
@@ -156,18 +171,20 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Fecha</th>
                                                     <th>Abono</th>
-                                                    <th>Banco</th>
+                                                    <th>Fecha</th>
+                                                    <!-- <th>Banco</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach($abonos as $abono): ?>
                                                 <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>2023-10-18 00:00:00</td>
-                                                    <td>$500.000</td>
-                                                    <td>Nequi</td>
+                                                    <th scope="row"><?= $i++ ?></th>
+                                                    <td><?= $abono['abono'] ?></td>
+                                                    <td><?= getFecha($abono['fecha_sys']) ?></td>
+                                                    <!-- <td>Nequi</td> -->
                                                 </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
 

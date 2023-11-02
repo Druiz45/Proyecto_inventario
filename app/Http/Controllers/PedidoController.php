@@ -20,6 +20,10 @@ class PedidoController{
         return view('consultarPedido');
     }
 
+    public function resumen(){
+        return view('resumenPedido');
+    }
+
     public function editar(){
         return view('editarPedido');
     }

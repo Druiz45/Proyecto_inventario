@@ -1,13 +1,13 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto, validatePrecio, number_format  } from "./../producto/Producto.js";
-import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
+// import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
 import { getBancos} from "./../banco/Banco.js";
 export class Compra {
 
     getDataFormCreate() {
-        getClienteForDoc();
-        getProductForCoincidencia();
-        this.getProveedorForDoc();
+        // getClienteForDoc();
+        // getProductForCoincidencia();
+        // this.getProveedorForDoc();
         getBancos();
     }
 
@@ -58,6 +58,7 @@ export class Compra {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
+                        console.log(data);
                         if (Array.isArray(data)) {
                             Swal.fire({
                                 icon: data[1],

@@ -150,14 +150,14 @@ export class Pedido {
                                 title: data,
                             })
                             // formCreatePedido.reset();
-                            document.getElementById('valor-producto').innerText = "Valor del producto:";
+                            // document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else if (data == "Error al registrar el pedido") {
                             Swal.fire({
                                 icon: 'error',
                                 text: data,
                             })
                             // formCreatePedido.reset();
-                            document.getElementById('valor-producto').innerText = "Valor del producto:";
+                            // document.getElementById('valor-producto').innerText = "Valor del producto:";
                         } else {
                             Swal.fire({
                                 icon: 'warning',

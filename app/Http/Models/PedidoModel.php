@@ -43,7 +43,7 @@ class PedidoModel
     protected $autorizo;
     protected $verifico;
 
-     public function __construct(
+    public function __construct(
         $remision = "",
         $orden = "",
         $pedido = "",
@@ -61,22 +61,22 @@ class PedidoModel
         $codigoVendedor = "",
         $anotacion = "",
 
-        $stock="",
-        $almacen="",
-        $fabrica="",
-        $bandeja="",
-        $braker="",
-        $otros="",
-        $efectivo="",
-        $cheque="",
-        $iva="",
-        $total="",
-        $banco="",
-        $abono="",
-        $saldo="",
-        $vendedor="",
-        $autorizo="",
-        $verifico="",
+        $stock = "",
+        $almacen = "",
+        $fabrica = "",
+        $bandeja = "",
+        $braker = "",
+        $otros = "",
+        $efectivo = "",
+        $cheque = "",
+        $iva = "",
+        $total = "",
+        $banco = "",
+        $abono = "",
+        $saldo = "",
+        $vendedor = "",
+        $autorizo = "",
+        $verifico = "",
 
     ) {
         $this->remision = $remision;
@@ -112,7 +112,6 @@ class PedidoModel
         $this->vendedor = $vendedor;
         $this->autorizo = $autorizo;
         $this->verifico = $verifico;
-
     }
 
     // public function __construct(
@@ -228,7 +227,7 @@ class PedidoModel
         $con = $pdo->conexion();
 
         // $precio = $this->getDataProducto();
-        $vendedor = $_SESSION['idUser'];
+        // $vendedor = $_SESSION['idUser'];
 
         try {
 
@@ -303,7 +302,6 @@ class PedidoModel
             // $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
-            
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
@@ -585,20 +583,23 @@ class PedidoModel
         $con = $pdo->conexion();
 
         try {
-            $idUser = $_SESSION["idUser"];
+            // $idUser = $_SESSION["idUser"];
             $idPerfil = $_SESSION["idPerfil"];
 
-            if ($idPerfil == 1) {
-                $select = $con->prepare("CALL getPedidosVendedor(?,?)");
-                $select->bindParam(1, $idUser, PDO::PARAM_INT);
-                $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
-            } else if ($idPerfil == 3) {
-                $rango = $this->validateDate();
-                $select = $con->prepare("CALL getPedidos(?,?,?)");
-                $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
-                $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
-                $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
-            }
+            // if ($idPerfil == 1) {
+            //     $select = $con->prepare("CALL getPedidosVendedor(?,?)");
+            //     $select->bindParam(1, $idUser, PDO::PARAM_INT);
+            //     $select->bindParam(2, $idPerfil, PDO::PARAM_INT);
+            // } else if ($idPerfil == 3) {
+            //     $rango = $this->validateDate();
+            //     $select = $con->prepare("CALL getPedidos(?,?,?)");
+            //     $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            //     $select->bindParam(2, $rango['fechaInicio'], PDO::PARAM_STR);
+            //     $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
+            // }
+
+            $select = $con->prepare("CALL getPedidos(?)");
+            $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
 
             $select->execute();
 
