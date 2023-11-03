@@ -10,7 +10,12 @@
 
       $i = 1;
       $pedido = new PedidoModel();
-      $rows = $pedido->getPedidos();
+      date_default_timezone_set('America/Bogota');
+
+      $rows = $pedido->getPedidos(
+        isset($_GET["startDate"]) ? $_GET["startDate"] : date('Y-m-d'),
+        isset($_GET["finalDate"]) ? $_GET["finalDate"] : date('Y-m-d')
+      );
       // $reumen = $pedido->getResumenPedidos();
       ?>
       <?php require_once("./../views/includes/barraSuperior.php"); ?>
@@ -31,11 +36,11 @@
             <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/consultar/?" method="get">
               <div class="row justify-content-center">
                 <div class="form-group row col-md-4 col-sm-6">
-                  <label>Fecha incio:</label>
+                  <label>Fecha inicio:</label>
                   <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
                 </div>
                 <div class="form-group row col-md-4 col-sm-6">
-                  <label>Fecha Final:</label>
+                  <label>Fecha final:</label>
                   <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                 </div>
                 <div class="actionBar">
@@ -99,26 +104,27 @@
                                     <td><?= $row["banco"] ?></td>
                                     <td><?= numberFormat($row["valorTotal"]) ?></td> -->
                                     <td><?= getFecha($row["fecha"]) ?></td>
-                                    <td> <a href="./resumen/?pedido=<?= $row['id'] ?>">Ver mas</a> </td>
-                                    <!-- <td>
+                                    <td>
 
-                                      <?php if ($row["estadoPedido"] == 1) : ?>
+                                      <a href="./resumen/?pedido=<?= $row['id'] ?>"><button type="button" class="btn">Ver mas</button></a>
+
+                                      <?php if ($row["estado_pedido"] == 1) : ?>
 
                                         <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/editar/?pedido=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
 
                                         <?php if ($_SESSION["idPerfil"] == 3) : ?>
-                                          <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
+                                          <button type="button" class="btn btn-dark" id="estadoAprobacion" onclick="return aprobacion(<?= $row['id'] ?>, <?= $row['estado_aprobado'] ?>)"><i class="fa fa-check"></i> <i class="fa fa-close"></i> Aprobacion</button>
                                         <?php endif; ?>
 
-                                        <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>, <?= $row['idProducto'] ?>)"><i class="fa fa-retweet"></i> Estado</button>
+                                        <button type="button" class="btn btn-primary" onclick="return estado(<?= $row['id'] ?>, <?= $row['estado_aprobado'] ?>, <?= ($row['total'] - $row['abono_total']) ?>)"><i class="fa fa-retweet"></i> Estado</button>
 
-                                      <?php elseif ($row["comisionPaga"] == 0 && $row["estadoPedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
-                                        <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['idVendedor'] ?>, <?= $row['valorComision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
+                                      <?php elseif ($row["comision_pagada"] == 0 && $row["estado_pedido"] == 2 && $_SESSION["idPerfil"] == 3) : ?>
+                                        <button type="button" class="btn btn-warning" onclick="return pagarComision('<?= $row['id'] ?>', '<?= $row['vendedor'] ?>', <?= $row['id_usuario_vendedor'] ?>, <?= $row['valor_comision'] ?>)"><i class="fa fa-usd"></i> Comision</button>
                                       <?php endif; ?>
 
-                                      <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estadoPedido'] ?>, <?= $row['estadoAprobacion'] ?>, <?= ($row['valorTotal'] - $row['abonoTotal']) ?>)"><i class="fa fa-money"></i> Abonos</button>
+                                      <button type="button" class="btn btn-success" onclick="return abonos(<?= $row['id'] ?>, <?= $row['estado_pedido'] ?>, <?= $row['estado_aprobado'] ?>, <?= ($row['total'] - $row['abono_total']) ?>)"><i class="fa fa-money"></i> Abonos</button>
 
-                                    </td> -->
+                                    </td>
                                   </tr>
                                 <?php endforeach; ?>
                               </tbody>

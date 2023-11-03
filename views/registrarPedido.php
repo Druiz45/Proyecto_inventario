@@ -44,17 +44,20 @@
                                                 <img src="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/assets/images/logo.png" width="250" height="150">
                                             </div>
 
-                                            <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="remision" name="remision" placeholder="Remision" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
+                                            <div class="col-md-3 col-sm-3 form-group has-feedback">
+                                                <label for="heard">Remision: </label>
+                                                <input type="text" class="form-control" id="remision" name="remision" placeholder="Remision" autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="orden" name="orden" placeholder="Orden de produccion" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Orden: </label>
+                                                <input type="text" class="form-control" id="orden" name="orden" placeholder="Orden de produccion" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Pedido: </label>
+                                                <input type="text" class="form-control" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
@@ -62,8 +65,9 @@
 
                                         <div class="form-group row align-items-center justify-content-end">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="factura" name="factura" placeholder="Factura" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Factura: </label>
+                                                <input type="text" class="form-control" id="factura" name="factura" placeholder="Factura" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
@@ -71,57 +75,68 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="date" class="form-control has-feedback-left" id="fecha" name="fecha" placeholder="Fecha" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Fecha: </label>
+                                                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha" autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="date" class="form-control has-feedback-left" id="fechaEntrega" name="fechaEntrega" placeholder="Fecha de entrega" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Fecha entrega: </label>
+                                                <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder="Fecha de entrega" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="actaEntrega" name="actaEntrega" placeholder="Acta de entrega" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Acta entrega: </label>
+                                                <input type="text" class="form-control" id="actaEntrega" name="actaEntrega" placeholder="Acta de entrega" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Nombre cliente: </label>
+                                                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="doc" name="doc" placeholder="NIT/CC" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="direccion" name="direccion" placeholder="Direccion" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="telefono" name="telefono" placeholder="Telefono" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
-                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="ciudad" name="ciudad" placeholder="Ciudad" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Documento: </label>
+                                                <input type="text" class="form-control" id="doc" name="doc" placeholder="NIT/CC" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="celular" name="celular" placeholder="Celular" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Direccion: </label>
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="email" name="email" placeholder="Email" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Telefono: </label>
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="codigoVendedor" name="codigoVendedor" placeholder="Vendedor codigo" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Ciudad: </label>
+                                                <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                                <label for="heard">Celular: </label>
+                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
+                                            </div>
+                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                                <label for="heard">Email: </label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                                            </div>
+                                            <div class="col-md-4 col-sm-4  form-group has-feedback">
+                                                <label for="heard">Codigo vendedor: </label>
+                                                <input type="text" class="form-control" id="codigoVendedor" name="codigoVendedor" value="<?= $_SESSION["idUser"] ?>" placeholder="Vendedor codigo" readonly autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
@@ -129,6 +144,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-12 col-sm-12">
+                                                <label for="heard">Anotacion: </label>
                                                 <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)"></textarea>
                                             </div>
                                         </div>
@@ -229,58 +245,44 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
+                                                <label for="heard">Banco: </label>
                                                 <select class="select2_single form-control" id="banco" name="banco" tabindex="-1">
                                                 </select>
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="total" name="total" placeholder="Total" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Total: </label>
+                                                <input type="text" class="form-control" id="total" name="total" placeholder="Total" autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="abono" name="abono" placeholder="Abono" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Abono: </label>
+                                                <input type="text" class="form-control" id="abono" name="abono" placeholder="Abono" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Saldo: </label>
+                                                <input type="text" class="form-control" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
                                         <div class="ln_solid"></div>
 
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Fecha</th>
-                                                    <th>Abono</th>
-                                                    <th>Banco</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>2023-10-18 00:00:00</td>
-                                                    <td>$500.000</td>
-                                                    <td>Nequi</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <div class="ln_solid"></div>
-
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="vendedor" name="vendedor" placeholder="Vendedor" autocomplete="off">
-                                                <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Vendedor: </label>
+                                                <input type="text" class="form-control" id="vendedor" name="vendedor" placeholder="Vendedor" value="<?= $_SESSION["user"] ?>" readonly autocomplete="off">
+                                                <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Autorizo: </label>
+                                                <input type="text" class="form-control" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="verifico" name="verifico" placeholder="Verifico" autocomplete="off">
-                                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                                <label for="heard">Verifico: </label>
+                                                <input type="text" class="form-control" id="verifico" name="verifico" placeholder="Verifico" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
@@ -304,11 +306,11 @@
                                     <div class="x_content">
                                         <div class="form-group row">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="docCliente" name="docCliente" placeholder="Documento del cliente" autocomplete="off">
+                                                <input type="text" class="form-control" id="docCliente" name="docCliente" placeholder="Documento del cliente" autocomplete="off">
                                                 <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" autocomplete="off">
+                                                <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" placeholder="Nombre del producto" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
@@ -324,7 +326,7 @@
                                         </div>
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-5 col-sm-6  form-group has-feedback">
-                                                <span class="form-control has-feedback-left" id="valor-producto">Valor del producto:</span>
+                                                <span class="form-control" id="valor-producto">Valor del producto:</span>
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
@@ -350,13 +352,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
-                                            <input type="text" class="form-control has-feedback-left" id="abonoProducto" name="abonoProducto" placeholder="Abono inicial" autocomplete="off">
+                                            <input type="text" class="form-control" id="abonoProducto" name="abonoProducto" placeholder="Abono inicial" autocomplete="off">
                                             <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                         </div>
                                         <br>
                                         <div class="col-md-12 col-sm-6  form-group has-feedback">
                                             <label for="fecha-limite">Fecha limite de entrega: </label>
-                                            <input type="date" class="form-control has-feedback-left" id="fecha-limite" name="fecha-limite" autocomplete="off">
+                                            <input type="date" class="form-control" id="fecha-limite" name="fecha-limite" autocomplete="off">
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12 col-sm-12">

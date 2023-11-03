@@ -196,30 +196,30 @@ class PedidoModel
         }
     }
 
-    // public function createAbonoPedido()
-    // {
-    //     $pdo = new Conexion();
-    //     $con = $pdo->conexion();
+    public function createAbonoPedido()
+    {
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
 
-    //     $vendedor = $_SESSION["idUser"];
+        $vendedor = $_SESSION["idUser"];
 
-    //     try {
-    //         $insert = $con->prepare("CALL createAbono(?,?,?)");
-    //         $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
-    //         $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
-    //         $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
-    //         $insert->execute();
+        try {
+            $insert = $con->prepare("CALL createAbono(?,?,?)");
+            $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
+            $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
+            $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->execute();
 
-    //         $insert->closeCursor();
+            $insert->closeCursor();
 
-    //         if (!$insert || !$insert->rowCount() > 0) {
-    //             throw new Exception("error");
-    //         }
-    //     } catch (Exception $e) {
-    //         echo json_encode("error");
-    //         die;
-    //     }
-    // }
+            if (!$insert || !$insert->rowCount() > 0) {
+                throw new Exception("error");
+            }
+        } catch (Exception $e) {
+            echo json_encode("error");
+            die;
+        }
+    }
 
     public function savePedido()
     {
@@ -245,7 +245,7 @@ class PedidoModel
             $this->cheque = (bool) $this->cheque;
             $this->iva = (bool) $this->iva;
 
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
             $insert->bindParam(2, $this->orden, PDO::PARAM_INT);
             $insert->bindParam(3, $this->pedido, PDO::PARAM_INT);
@@ -297,9 +297,9 @@ class PedidoModel
                 throw new Exception("Error al registrar el pedido");
             }
 
-            // $this->pedido = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
+            $this->pedido = $con->query("SELECT LAST_INSERT_ID()")->fetchColumn();
 
-            // $this->createAbonoPedido();
+            $this->createAbonoPedido();
 
             echo json_encode("Pedido registrado con exito!");
         } catch (Exception $e) {
@@ -443,10 +443,10 @@ class PedidoModel
                 throw new Exception("error");
             }
 
-            if ($estate == 2) {
-                $inventario->restarStock();
-                // echo json_encode("s,ss");
-            }
+            // if ($estate == 2) {
+            //     $inventario->restarStock();
+            //     // echo json_encode("s,ss");
+            // }
 
 
 
@@ -577,12 +577,13 @@ class PedidoModel
         }
     }
 
-    public function getPedidos()
+    public function getPedidos($startDate, $finalDate)
     {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
+
             // $idUser = $_SESSION["idUser"];
             $idPerfil = $_SESSION["idPerfil"];
 
@@ -598,8 +599,10 @@ class PedidoModel
             //     $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
             // }
 
-            $select = $con->prepare("CALL getPedidos(?)");
+            $select = $con->prepare("CALL getPedidos(?,?,?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $startDate, PDO::PARAM_STR);
+            $select->bindParam(3, $finalDate, PDO::PARAM_STR);
 
             $select->execute();
 
@@ -675,7 +678,8 @@ class PedidoModel
                 throw new Exception("Error");
             }
 
-            echo json_encode($pedido);
+           return ($pedido[0]);
+
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

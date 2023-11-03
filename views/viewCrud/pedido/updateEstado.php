@@ -7,7 +7,7 @@ use App\Http\Models\InventarioModel;
 
 $pedido = new PedidoModel();
 
-$inventario = new InventarioModel(null, $_POST['producto']);
+$inventario = new InventarioModel(null, isset($_POST['producto']) ? $_POST['producto'] : "");
 
 $pedido->validateDataEstado($_POST["estado"], $_POST["pedido"]);
 
