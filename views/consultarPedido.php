@@ -106,7 +106,7 @@
                                     <td><?= getFecha($row["fecha"]) ?></td>
                                     <td>
 
-                                      <a href="./resumen/?pedido=<?= $row['id'] ?>"><button type="button" class="btn">Ver mas</button></a>
+                                      <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/resumen/?pedido=<?= $row['id'] ?>"><button type="button" class="btn">Ver mas</button></a>
 
                                       <?php if ($row["estado_pedido"] == 1) : ?>
 

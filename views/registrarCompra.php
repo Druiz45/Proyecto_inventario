@@ -109,7 +109,7 @@
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="vendedor-codigo" name="vendedor-codigo" placeholder="Vendedor codigo" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="vendedor-codigo" name="vendedor-codigo" value="<?= $_SESSION["idUser"] ?>" readonly placeholder="Vendedor codigo" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@
                                                 <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
-                                                <input type="text" class="form-control has-feedback-left" id="vendedor" name="vendedor" placeholder="Vendedor" autocomplete="off">
+                                                <input type="text" class="form-control has-feedback-left" id="vendedor" name="vendedor" placeholder="Vendedor" value="<?= $_SESSION["user"] ?>" readonly autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
