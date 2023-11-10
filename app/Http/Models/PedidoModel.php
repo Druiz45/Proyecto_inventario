@@ -204,10 +204,11 @@ class PedidoModel
         $vendedor = $_SESSION["idUser"];
 
         try {
-            $insert = $con->prepare("CALL createAbono(?,?,?)");
+            $insert = $con->prepare("CALL createAbono(?,?,?,?)");
             $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
             $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->bindParam(4, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();
@@ -245,7 +246,7 @@ class PedidoModel
             $this->cheque = (bool) $this->cheque;
             $this->iva = (bool) $this->iva;
 
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
             $insert->bindParam(2, $this->orden, PDO::PARAM_INT);
             $insert->bindParam(3, $this->pedido, PDO::PARAM_INT);
@@ -273,13 +274,12 @@ class PedidoModel
             $insert->bindParam(24, $this->iva, PDO::PARAM_INT);
 
             $insert->bindParam(25, $this->total, PDO::PARAM_INT);
-            $insert->bindParam(26, $this->banco, PDO::PARAM_INT);
             // $insert->bindParam(27, $this->abono, PDO::PARAM_INT);
-            $insert->bindParam(27, $this->saldo, PDO::PARAM_INT);
+            $insert->bindParam(26, $this->saldo, PDO::PARAM_INT);
 
-            $insert->bindParam(28, $this->vendedor, PDO::PARAM_STR);
-            $insert->bindParam(29, $this->autorizo, PDO::PARAM_STR);
-            $insert->bindParam(30, $this->verifico, PDO::PARAM_STR);
+            $insert->bindParam(27, $this->vendedor, PDO::PARAM_STR);
+            $insert->bindParam(28, $this->autorizo, PDO::PARAM_STR);
+            $insert->bindParam(29, $this->verifico, PDO::PARAM_STR);
 
             // $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             // $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);

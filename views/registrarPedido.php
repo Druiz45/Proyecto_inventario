@@ -255,13 +255,13 @@
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Abono: </label>
+                                                <label for="heard">Abono inicial: </label>
                                                 <input type="text" class="form-control" id="abono" name="abono" placeholder="Abono" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Saldo: </label>
-                                                <input type="text" class="form-control" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
+                                                <input type="text" readonly class="form-control" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>

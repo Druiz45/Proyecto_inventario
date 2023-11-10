@@ -24,7 +24,7 @@ function abonos(pedido, estado, aprobacion, restante) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                window.location.assign(`../abono/consultar/?pedido=${pedido}`);
+                window.location.assign("/"+url+`/abono/consultar/?pedido=${pedido}`);
             } else if (result.isDenied) {
                 Swal.fire({
                     icon: 'question',

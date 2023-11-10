@@ -10,7 +10,10 @@
 
             $i = 1;
             $compra = new CompraModel();
-            $rows = $compra->getCompras();
+            $rows = $compra->getCompras(
+                isset($_GET["startDate"]) ? $_GET["startDate"] : date('Y-m-d'),
+                isset($_GET["finalDate"]) ? $_GET["finalDate"] : date('Y-m-d')
+            );
             // $resumen = $compra->getResumenOrdenesCompra();
             ?>
             <?php require_once("./../views/includes/barraSuperior.php"); ?>
@@ -32,11 +35,11 @@
                         <form action="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/consultar/?" method="get">
                             <div class="row justify-content-center">
                                 <div class="form-group row col-md-4 col-sm-6">
-                                    <label>Fecha incio:</label>
+                                    <label>Fecha inicio:</label>
                                     <input class="form-control" type="date" name="startDate" value="<?= isset($_GET["startDate"]) ? $_GET["startDate"] : "" ?>" required>
                                 </div>
                                 <div class="form-group row col-md-4 col-sm-6">
-                                    <label>Fecha Final:</label>
+                                    <label>Fecha final:</label>
                                     <input class="form-control" type="date" name="finalDate" value="<?= isset($_GET["finalDate"]) ? $_GET["finalDate"] : "" ?>" required>
                                 </div>
                                 <div class="actionBar">
@@ -71,9 +74,9 @@
                                                                     <!-- <th>Abono</th> -->
                                                                     <th>Fecha</th>
                                                                     <th>Fecha de entrega</th>
+                                                                    <th>Estado orden</th>
                                                                     <th>Operaciones</th>
-                                                                    <!-- <th>Estado orden</th>
-                                                                    <th>Fecha limite</th> -->
+                                                                    <!-- <th>Fecha limite</th> -->
                                                                     <!-- <th>Anotacion</th>
                                                                     <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                         <th>Fecha del pedido</th>
@@ -84,7 +87,7 @@
                                                             <tbody id="tbody">
                                                                 <?php foreach ($rows as $row) : ?>
                                                                     <?php
-                                                                    // $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
+                                                                    $infoEstadoOrdenDeCompra = getEstadoOrdenCompra($row["estado_orden"]);
                                                                     ?>
                                                                     <tr>
                                                                         <td><?= $i++ ?></td>
@@ -95,7 +98,6 @@
                                                                         <?php endif; ?> -->
                                                                         <td><?= $row["fecha"] ?></td>
                                                                         <td><?= $row["fecha_entrega"] ?></td>
-                                                                        <td> <a href="./resumen/?compra=<?= $row['id'] ?>">Ver más</a> </td>
                                                                         <!-- <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <td><?= numberFormat($row["precio"]) ?></td>
@@ -103,30 +105,33 @@
                                                                         <!-- <td><?= numberFormat($row["abono"]) ?></td>
                                                                         <td><?= numberFormat($row["valor_restante"]) ?></td>
                                                                         <td><?= numberFormat($row["valor"]) ?></td>
-                                                                        <td><?= numberFormat($row["precio"] - $row["valor"]) ?></td>
+                                                                        <td><?= numberFormat($row["precio"] - $row["valor"]) ?></td> -->
                                                                         <td bgcolor="<?= $infoEstadoOrdenDeCompra['fondo'] ?>"><?= $infoEstadoOrdenDeCompra['estado'] ?></td>
-                                                                        <td><?= getFechaSinHora($row["fecha_limite"]) ?></td> -->
-                                                                        <!-- <td><?= $row["anotacion"] ?></td>
+                                                                        <!-- <td><?= getFechaSinHora($row["fecha_limite"]) ?></td> -->
+                                                                        <!-- <td><?= $row["anotacion"] ?></td> -->
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
-                                                                            <td><?= getFecha($row["fecha_sys"]) ?></td>
+                                                                            <!-- <td><?= getFecha($row["fecha_sys"]) ?></td> -->
                                                                             <td>
+                                                                                <a href="./resumen/?compra=<?= $row['id'] ?>" class="btn">Ver más</a>
+
                                                                                 <?php if ($row['estado_orden'] == 3) : ?>
                                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-dark"><i class="fa fa-arrow-down"></i> Recibir</button>
                                                                                 <?php endif; ?>
 
-                                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['valor'] - $row['abono']) ?>, <?= $row['estado_orden'] ?>)" class="btn btn-success"><i class="fa fa-money"></i> Abonos</button>
+                                                                                <button type="button" onclick="return abonos(<?= $row['id'] ?>, <?= ($row['total'] - $row['abono']) ?>, <?= $row['estado_orden'] ?>)" class="btn btn-success"><i class="fa fa-money"></i> Abonos</button>
 
                                                                                 <?php if ($row['estado_orden'] == 1) : ?>
                                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Anular', 'Anulado' )" class="btn btn-warning"><i class="fa fa-minus"></i> Anular</button>
                                                                                     <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/edit/?compra=<?= $row["id"] ?>"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i> Editar</button></a>
                                                                                 <?php endif; ?>
-                                                                                <?php if ($row['estado_inventario'] != 1) : ?>
-                                                                                    <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>
-                                                                                <?php elseif ($row['estado_orden'] == 2 && $row['agregado_stock'] == 0) : ?>
-                                                                                    <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>', '<?= $row['id'] ?>')">Añadir al stock</button>
-                                                                                <?php endif; ?>
+
+                                                                                <!-- <?php if ($row['estado_inventario'] != 1) : ?>
+                                                                                <strong style="background-color: red; color:white"> Este poducto no esta disponible en inventario </strong>
+                                                                            <?php elseif ($row['estado_orden'] == 2 && $row['agregado_stock'] == 0) : ?>
+                                                                                <button type="button" class="btn btn-success" onclick="return agregarAlStock('<?= $row['id_producto'] ?>', '<?= $row['id'] ?>')">Añadir al stock</button>
+                                                                            <?php endif; ?> -->
                                                                             </td>
-                                                                        <?php endif; ?> -->
+                                                                        <?php endif; ?>
                                                                     </tr>
                                                                 <?php endforeach; ?>
                                                             </tbody>

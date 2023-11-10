@@ -264,13 +264,8 @@
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Abono: </label>
-                                                <input type="text" class="form-control" id="abono" name="abono" value="<?= empty($rows["abono"]) ? "" : "" ?>" placeholder="Abono" autocomplete="off">
-                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
-                                            </div>
-                                            <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Saldo: </label>
-                                                <input type="text" class="form-control" id="saldo" name="saldo" value="<?= $rows["saldo"] ?>" placeholder="Saldo" autocomplete="off">
+                                                <label for="heard">Abono incial: </label>
+                                                <input type="text" class="form-control" id="abono" name="abono" value="<?=  $abonos[0]["abono"] ?>" placeholder="Abono" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -284,7 +279,6 @@
                                                     <th>Fecha</th>
                                                     <th>Abono</th>
                                                     <th>Banco</th>
-                                                    <th>Operaciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -292,12 +286,19 @@
                                                         <td><?= $i++ ?></td>
                                                         <td><?= getFecha($row["fecha_sys"]) ?></td>
                                                         <td><?= $row["abono"] ?></td>
-                                                        <td><?= "" ?></td>
-                                                        <td> <button type="button" class="btn btn-primary" onclick=""><i class="fa fa-pencil"></i> Editar</button> </td>
+                                                        <td><?= $row["banco"] ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
+
+                                        <div class="form-group row align-items-center justify-content-center">
+                                            <div class="col-md-3 col-sm-3  form-group has-feedback">
+                                                <label for="heard">Saldo: </label>
+                                                <input type="text" class="form-control" id="saldo" name="saldo" value="<?= $rows["saldo"] ?>" placeholder="Saldo" autocomplete="off">
+                                                <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
+                                            </div>
+                                        </div>
 
                                         <div class="ln_solid"></div>
 
