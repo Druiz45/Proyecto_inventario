@@ -1,8 +1,21 @@
 import { validateDoc } from "./../user/User.js";
 import { validateNameProducto } from "./../producto/Producto.js";
 import { number_format } from "./../producto/Producto.js";
-import { getBancos} from "./../banco/Banco.js";
+import { getBancos } from "./../banco/Banco.js";
 export class Pedido {
+
+    setSaldo() {
+        let total = document.getElementById("total");
+        let abono = document.getElementById("abono");
+
+        abono.addEventListener("input", () => {
+            setTimeout(function() {
+                let saldo = document.getElementById("saldo");
+                saldo.value=total.value-abono.value;
+              }, 1000);
+
+        })
+    }
 
     getDataFormCreate() {
         // getClienteForDoc();
@@ -129,13 +142,13 @@ export class Pedido {
 
     savePedido() {
         const formCreatePedido = document.getElementById('form-create-pedido');
-            
+
         if (formCreatePedido) {
-            
-            
+
+
 
             formCreatePedido.addEventListener('submit', (e) => {
-               
+
                 e.preventDefault();
                 const formData = new FormData(formCreatePedido);
                 fetch(`/${url}/pedido/create`, {

@@ -467,7 +467,7 @@ class CompraModel extends PedidoModel
         }
     }
 
-    public function getCompras()
+    public function getCompras($startDate, $finalDate)
     {
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -489,8 +489,10 @@ class CompraModel extends PedidoModel
             //     $select->bindParam(3, $rango['fechaFinal'], PDO::PARAM_STR);
             // }
 
-            $select = $con->prepare("CALL getCompras(?)");
+            $select = $con->prepare("CALL getCompras(?,?,?)");
             $select->bindParam(1, $idPerfil, PDO::PARAM_INT);
+            $select->bindParam(2, $startDate, PDO::PARAM_STR);
+            $select->bindParam(3, $finalDate, PDO::PARAM_STR);
 
             $select->execute();
 
