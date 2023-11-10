@@ -300,6 +300,31 @@ class CompraModel extends PedidoModel
         }
     }
 
+    // public function getCompra($compra)
+    // {
+    //     $pdo = new Conexion();
+    //     $con = $pdo->conexion();
+
+    //     try {
+    //         $select = $con->prepare("CALL getCompra(?)");
+    //         $select->bindParam(1, $compra, PDO::PARAM_STR);
+    //         $select->execute();
+
+    //         $compra = $select->fetchAll(PDO::FETCH_ASSOC);
+
+    //         $select->closeCursor();
+
+    //         if (!$select || !$select->rowCount() > 0) {
+    //             throw new Exception("No encontrado");
+    //         }
+
+    //         echo json_encode($compra);
+    //     } catch (Exception $e) {
+    //         json_encode($e->getMessage());
+    //         die;
+    //     }
+    // }
+
     public function getCompra($compra)
     {
         $pdo = new Conexion();
@@ -318,9 +343,10 @@ class CompraModel extends PedidoModel
                 throw new Exception("No encontrado");
             }
 
-            echo json_encode($compra);
+            return $compra;
+            
         } catch (Exception $e) {
-            json_encode($e->getMessage());
+            return [];
             die;
         }
     }
