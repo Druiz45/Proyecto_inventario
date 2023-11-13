@@ -202,10 +202,10 @@
                                                 <input type="text" class="form-control has-feedback-left" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                             </div>
-                                            <div class="col-md-2 col-sm-2  form-group has-feedback">
+                                            <!-- <div class="col-md-2 col-sm-2  form-group has-feedback">
                                                 <input type="text" class="form-control has-feedback-left" id="nombreProducto" name="nombreProducto" placeholder="---" autocomplete="off">
                                                 <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                     </div>

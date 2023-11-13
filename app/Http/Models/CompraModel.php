@@ -26,24 +26,31 @@ class CompraModel extends PedidoModel
     protected $pedido;
     protected $fecha;
     protected $fechaEntrega;
+
     protected $actaEntrega;
     protected $fabricante;
     protected $remision;
+
     protected $direccion;
     protected $telefono;
     protected $ciudad;
+
     protected $celular;
     protected $email;
     protected $vendedorCodigo;
+
     protected $descripcion;
     protected $banco;
     protected $total;
+
     protected $abonoOrden;
     protected $saldo;
     protected $observacion;
+
     protected $fabricante2;
     protected $vendedor;
     protected $recibe;
+
     protected $despacho;
     protected $autorizo;
 
@@ -67,26 +74,33 @@ class CompraModel extends PedidoModel
         $pedido = "",
         $fecha = "",
         $fechaEntrega = "",
+
         $actaEntrega = "",
         $fabricante = "",
         $remision = "",
+
         $direccion = "",
         $telefono = "",
         $ciudad = "",
+        
         $celular = "",
         $email = "",
         $vendedorCodigo = "",
+
         $descripcion = "",
         $banco = "",
         $total = "",
+
         $abonoOrden = "",
         $saldo = "",
         $observacion = "",
+
         $fabricante2 = "",
         $vendedor = "",
         $recibe = "",
+
         $despacho = "",
-        $autorizo = ""
+        $autorizo = "",
     ) {
         $this->pedido = $pedido;
         $this->fecha = $fecha;
@@ -332,7 +346,7 @@ class CompraModel extends PedidoModel
 
         try {
             $select = $con->prepare("CALL getCompra(?)");
-            $select->bindParam(1, $compra, PDO::PARAM_STR);
+            $select->bindParam(1, $compra, PDO::PARAM_INT);
             $select->execute();
 
             $compra = $select->fetchAll(PDO::FETCH_ASSOC);
@@ -359,11 +373,12 @@ class CompraModel extends PedidoModel
         $user = $_SESSION["idUser"];
 
         try {
-            $insert = $con->prepare("CALL createAbonoCompra(?,?,?)");
+            $insert = $con->prepare("CALL createAbonoCompra(?,?,?,?)");
             // $insert->bindParam(1, $this->abonoProducto, PDO::PARAM_INT);
             $insert->bindParam(1, $this->abonoOrden, PDO::PARAM_INT);
             $insert->bindParam(2, $this->compra, PDO::PARAM_INT);
             $insert->bindParam(3, $user, PDO::PARAM_INT);
+            $insert->bindParam(4, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();
@@ -399,7 +414,7 @@ class CompraModel extends PedidoModel
                 throw new Exception("El abono no puede ser mayor al valor del producto");
             }
 
-            $insert = $con->prepare("CALL createCompra(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createCompra(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->pedido, PDO::PARAM_INT);
             $insert->bindParam(2, $this->fecha, PDO::PARAM_STR);
             $insert->bindParam(3, $this->fechaEntrega, PDO::PARAM_STR);
@@ -413,16 +428,16 @@ class CompraModel extends PedidoModel
             $insert->bindParam(11, $this->email, PDO::PARAM_STR);
             $insert->bindParam(12, $this->vendedorCodigo, PDO::PARAM_INT);
             $insert->bindParam(13, $this->descripcion, PDO::PARAM_STR);
-            $insert->bindParam(14, $this->banco, PDO::PARAM_INT);
-            $insert->bindParam(15, $this->total, PDO::PARAM_INT);
-            $insert->bindParam(16, $this->abonoOrden, PDO::PARAM_INT);
-            $insert->bindParam(17, $this->saldo, PDO::PARAM_INT);
-            $insert->bindParam(18, $this->observacion, PDO::PARAM_STR);
-            $insert->bindParam(19, $this->fabricante2, PDO::PARAM_STR);
-            $insert->bindParam(20, $this->vendedor, PDO::PARAM_STR);
-            $insert->bindParam(21, $this->recibe, PDO::PARAM_STR);
-            $insert->bindParam(22, $this->despacho, PDO::PARAM_STR);
-            $insert->bindParam(23, $this->autorizo, PDO::PARAM_STR);
+            // $insert->bindParam(14, $this->banco, PDO::PARAM_INT);
+            $insert->bindParam(14, $this->total, PDO::PARAM_INT);
+            $insert->bindParam(15, $this->abonoOrden, PDO::PARAM_INT);
+            $insert->bindParam(16, $this->saldo, PDO::PARAM_INT);
+            $insert->bindParam(17, $this->observacion, PDO::PARAM_STR);
+            $insert->bindParam(18, $this->fabricante2, PDO::PARAM_STR);
+            $insert->bindParam(19, $this->vendedor, PDO::PARAM_STR);
+            $insert->bindParam(20, $this->recibe, PDO::PARAM_STR);
+            $insert->bindParam(21, $this->despacho, PDO::PARAM_STR);
+            $insert->bindParam(22, $this->autorizo, PDO::PARAM_STR);
             $insert->execute();
 
             $insert->closeCursor();
@@ -436,6 +451,7 @@ class CompraModel extends PedidoModel
             $this->createAbonoCompra();
 
             echo json_encode(["Orden de compra registrada con exito", "success"]);
+            // echo json_encode($_POST);
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

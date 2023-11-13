@@ -112,7 +112,7 @@
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <!-- <td><?= getFecha($row["fecha_sys"]) ?></td> -->
                                                                             <td>
-                                                                                <a href="./resumen/?compra=<?= $row['id'] ?>" class="btn">Ver más</a>
+                                                                                <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/compra/resumen/?compra=<?= $row['id'] ?>" class="btn">Ver más</a>
 
                                                                                 <?php if ($row['estado_orden'] == 3) : ?>
                                                                                     <button type="button" onclick="return updateEstate(<?= $row['id'] ?>, 'Recibir', 'Recibido' )" class="btn btn-dark"><i class="fa fa-arrow-down"></i> Recibir</button>

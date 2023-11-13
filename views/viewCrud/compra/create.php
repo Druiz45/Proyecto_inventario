@@ -6,12 +6,12 @@ use App\Http\Models\CompraModel;
 
 $compra = new CompraModel(
     isset($_POST["pedido"]) ? $_POST["pedido"]: "vacio",
-    isset($_POST["orden-produccion"]) ? $_POST["orden-produccion"]: "vacio",
     isset($_POST["fecha"]) ? $_POST["fecha"]: "vacio",
-
     isset($_POST["fecha-entrega"]) ? $_POST["fecha-entrega"]: "vacio",
+
     isset($_POST["acta-entrega"]) ? $_POST["acta-entrega"]: "vacio",
     isset($_POST["fabricante"]) ? $_POST["fabricante"]: "vacio",
+    isset($_POST["remision"]) ? $_POST["remision"]: "vacio",
 
     isset($_POST["direccion"]) ? $_POST["direccion"]: "vacio",
     isset($_POST["telefono"]) ? $_POST["telefono"]: "vacio",

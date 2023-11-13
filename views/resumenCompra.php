@@ -16,6 +16,8 @@
             $abonos = $abonosCompra->getAbonos($_GET['compra']);
             $ordenCompra = $compra->getCompra($_GET['compra']);
 
+            // print_r($ordenCompra);
+
             // $compra = new CompraModel();
             // $rows = $compra->getCompras();
             // $resumen = $compra->getResumenOrdenesCompra();
@@ -189,8 +191,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Abono</th>
                                                     <th>Fecha</th>
+                                                    <th>Abono</th>
+                                                    <th>Banco</th>
                                                     <!-- <th>Banco</th> -->
                                                 </tr>
                                             </thead>
@@ -198,8 +201,9 @@
                                                 <?php foreach ($abonos as $abono) : ?>
                                                     <tr>
                                                         <th scope="row"><?= $i++ ?></th>
-                                                        <td><?= $abono['abono'] ?></td>
                                                         <td><?= getFecha($abono['fecha_sys']) ?></td>
+                                                        <td><?= $abono['abono'] ?></td>
+                                                        <td><?= $abono['banco'] ?></td>
                                                         <!-- <td>Nequi</td> -->
                                                     </tr>
                                                 <?php endforeach; ?>
