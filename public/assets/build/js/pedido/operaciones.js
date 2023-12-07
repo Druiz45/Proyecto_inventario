@@ -48,14 +48,21 @@ function showRegisterAbono(restante = "", pedido = "", banco = "", abono = "") {
         cancelButtonText: 'Cancelar',
         confirmButtonColor: '#0067AE',
         confirmButtonText: 'Abonar',
-        inputAttributes: {
-            // Agregar el evento oninput
-            oninput: "number_format(this)",
-            style: 'text-align: center;'
-        },
+        // inputAttributes: {
+        //     // Agregar el evento oninput
+        //     oninput: "number_format(this)",
+        //     style: 'text-align: center;'
+        // },
         footer: '<a href="./" target="_blank" id="url-banco">Ir al banco</a>',
         didOpen: () => {
+            
             const banco = document.getElementById('banco');
+            const abono = document.getElementById('abono');
+
+            abono.addEventListener('input', () => {
+                number_format(abono);
+            });
+
             fetch(`/${url}/banco/getDataFormCreate`, {
             })
                 .then(respuesta => respuesta.json())
