@@ -223,6 +223,41 @@ class ClienteModel{
 
     }
 
+    public function getDataClienteForDocOrName($nameOrDoc){
+
+        
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        // $idUser = $_SESSION["idUser"];
+        // $idPerfil = $_SESSION['idPerfil'];
+        try {
+            $select = $con->prepare("CALL getClientesForNameOrDoc(?)");
+            $select->bindParam(1, $nameOrDoc, PDO::PARAM_STR);
+            $select->execute();
+
+            $dataCliente = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+
+                throw new Exception("Error al consultar los datos del cliente");
+            }
+
+            if(!$select->rowCount() > 0){
+                throw new Exception("No se encontraron coincidencias");
+            }
+
+            echo json_encode($dataCliente);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+
+    }
+
 
 
     public function actualizarEstadoCliente($clienteToUpdate, $estado){

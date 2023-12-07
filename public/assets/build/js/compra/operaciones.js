@@ -22,47 +22,85 @@ function abonos(compra, restante, estado) {
     })
         .then((result) => {
             if (result.isConfirmed) {
-                window.location.assign(`../abonoCompra/consultar/?compra=${compra}`);
+                window.location.assign(`/${url}/abonoCompra/consultar/?compra=${compra}`);
             } else if (result.isDenied) {
-                Swal.fire({
-                    icon: 'question',
-                    title: `¿Cuánto desea abonar?`,
-                    input: 'text',
-                    showCancelButton: true,
-                    cancelButtonColor: '#4A4A4A',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonColor: '#0067AE',
-                    confirmButtonText: 'Abonar',
-                    inputAttributes: {
-                        oninput: "number_format(this)",
-                        style: 'text-align: center;'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        try {
-
-                            if (result.value.replace(/[.$]/g, "") > restante) {
-                                throw new Error("La cantidad de abono supera el precio maximo");
-                            }
-
-                            abonar(compra, result.value, restante);
-                        } catch (error) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: error.message,
-                            })
-                        }
-                    }
-                });
+                showRegisterAbono(restante, compra);
             }
         })
 }
 
-function abonar(compra, abono, restante) {
+function showRegisterAbono(restante = "", compra = "", banco = "", abono = ""){
+    Swal.fire({
+        icon: 'question',
+        title: `¿Cuánto desea abonar?`,
+        // input: 'text',
+        html:
+        '<div>' +
+        `<select name="banco" id="banco" class="swal2-input" value="${banco}">
+    </select>`+
+        `<input id="abono" class="swal2-input" value="${abono}" placeholder="Abono">` +
+        '</div>',
+        showCancelButton: true,
+        cancelButtonColor: '#4A4A4A',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#0067AE',
+        confirmButtonText: 'Abonar',
+        inputAttributes: {
+            oninput: "number_format(this)",
+            style: 'text-align: center;'
+        },
+        footer: '<a href="./" target="_blank" id="url-banco">Ir al banco</a>',
+        didOpen: () => {
+            const banco = document.getElementById('banco');
+            fetch(`/${url}/banco/getDataFormCreate`, {
+            })
+                .then(respuesta => respuesta.json())
+                .then(data => {
+                    banco.innerHTML += `<option value=''>Seleccione el banco</option>`;
+                    for (const info of data) {
+                        banco.innerHTML += `<option value='${info.id}'>${info.banco}</option>`;
+                    }
+
+                    banco.addEventListener('input', () => {
+                        // console.log(data);
+                        let opcion = Array.from(banco.options).indexOf(banco.querySelector(`option[value="${banco.value}"]`));
+                        let url = document.getElementById('url-banco');
+                        url.href = data[opcion - 1].url;
+                        // console.log(opcion);
+                    });
+                })
+
+        },
+        preConfirm: () => {
+            const banco = document.getElementById('banco').value;
+            const abono = document.getElementById('abono').value;
+            return [banco, abono];
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            try {
+
+                if (result.value[1].replace(/[.$]/g, "") > restante) {
+                    throw new Error("La cantidad de abono supera el precio maximo");
+                }
+
+                abonar(result.value[1], compra, result.value[0], restante);
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: error.message,
+                })
+            }
+        }
+    });
+}
+
+function abonar(abono, compra, banco, restante) {
     const formData = new FormData();
     formData.append("compra", compra);
     formData.append("abono", abono);
     formData.append("restante", restante);
+    formData.append("banco", banco);
     fetch(`/${url}/AbonoCompra/create`, {
         method: "POST",
         body: formData

@@ -15,6 +15,7 @@
             $abono = new AbonoModel();
             $rows = $pedido->getPedido($_GET["pedido"]);
             $abonos = $abono->getAbonos($_GET["pedido"]);
+            $totalAbonos = 0;
             // $resumen = $compra->getResumenOrdenesCompra();
             ?>
 
@@ -60,17 +61,17 @@
 
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Remision: </label>
-                                                <input type="text" class="form-control" id="remision" name="remision" placeholder="Remision" value="<?= $rows["remision"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="remision" name="remision" placeholder="Remision" value="<?= $rows["remision"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Orden: </label>
-                                                <input type="text" class="form-control" id="orden" name="orden" placeholder="Orden de produccion" value="<?= $rows["id_orden"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="orden" name="orden" placeholder="Orden de produccion" value="<?= $rows["id_orden"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Pedido: </label>
-                                                <input type="text" class="form-control" id="pedido" name="pedido" placeholder="Pedido" value="<?= $rows["id_pedido"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="pedido" name="pedido" placeholder="Pedido" value="<?= $rows["id_pedido"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -80,7 +81,7 @@
                                         <div class="form-group row align-items-center justify-content-end">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Factura: </label>
-                                                <input type="text" class="form-control" id="factura" name="factura" placeholder="Factura" value="<?= $rows["factura"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="factura" name="factura" placeholder="Factura" value="<?= $rows["factura"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -90,17 +91,17 @@
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Fecha: </label>
-                                                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha" value="<?= substr($rows["fecha"], 0, 10) ?>" autocomplete="off">
+                                                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha" value="<?= substr($rows["fecha"], 0, 10) ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Fecha entrega: </label>
-                                                <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder="Fecha de entrega" value="<?= substr($rows["fecha_entrega"], 0, 10) ?>" autocomplete="off">
+                                                <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder="Fecha de entrega" value="<?= substr($rows["fecha_entrega"], 0, 10) ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Acta entrega: </label>
-                                                <input type="text" class="form-control" id="actaEntrega" name="actaEntrega" placeholder="Acta de entrega" value="<?= $rows["acta_entrega"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="actaEntrega" name="actaEntrega" placeholder="Acta de entrega" value="<?= $rows["acta_entrega"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -108,12 +109,12 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Nombre cliente: </label>
-                                                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" value="<?= $rows["nombre_cliente"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" value="<?= $rows["nombre_cliente"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Documento: </label>
-                                                <input type="text" class="form-control" id="doc" name="doc" placeholder="NIT/CC" value="<?= $rows["NIT_CC"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="doc" name="doc" placeholder="NIT/CC" value="<?= $rows["NIT_CC"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -121,17 +122,17 @@
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Direccion: </label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="<?= $rows["direccion"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" value="<?= $rows["direccion"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Telefono: </label>
-                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?= $rows["telefono"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?= $rows["telefono"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Ciudad: </label>
-                                                <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<?= $rows["ciudad"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="<?= $rows["ciudad"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -139,17 +140,17 @@
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Celular: </label>
-                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" value="<?= $rows["celular"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" value="<?= $rows["celular"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Email: </label>
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= $rows["email"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= $rows["email"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Codigo vendedor: </label>
-                                                <input type="text" class="form-control" id="codigoVendedor" name="codigoVendedor" placeholder="Vendedor codigo" value="<?= $rows["id_usuario_vendedor"] ?>" autocomplete="off">
+                                                <input type="text" class="form-control" id="codigoVendedor" name="codigoVendedor" placeholder="Vendedor codigo" value="<?= $rows["id_usuario_vendedor"] ?>" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -159,7 +160,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12 col-sm-12">
                                                 <label for="heard">Anotacion: </label>
-                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)"><?= $rows["anotacion"] ?></textarea>
+                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)" readonly><?= $rows["anotacion"] ?></textarea>
                                             </div>
                                         </div>
 
@@ -260,12 +261,12 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Total: </label>
-                                                <input type="text" class="form-control" id="total" name="total" value="<?= $rows["total"] ?>" placeholder="Total" autocomplete="off">
+                                                <input type="text" class="form-control" id="total" name="total" value="<?= number_format($rows["total"], 0, '.', '.') ?>" placeholder="Total" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Abono incial: </label>
-                                                <input type="text" class="form-control" id="abono" name="abono" value="<?=  $abonos[0]["abono"] ?>" placeholder="Abono" autocomplete="off">
+                                                <input type="text" class="form-control" id="abono" name="abono" value="<?= number_format($abonos[0]["abono"] , 0, '.', '.') ?>" placeholder="Abono" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -283,9 +284,10 @@
                                             </thead>
                                             <tbody>
                                                 <?php foreach ($abonos as $row) : ?> <tr>
+                                                        <?php $totalAbonos += $row['abono'];  ?>
                                                         <td><?= $i++ ?></td>
                                                         <td><?= getFecha($row["fecha_sys"]) ?></td>
-                                                        <td><?= $row["abono"] ?></td>
+                                                        <td><?= number_format($row["abono"], 0, '.', '.')?></td>
                                                         <td><?= $row["banco"] ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -295,7 +297,7 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="heard">Saldo: </label>
-                                                <input type="text" class="form-control" id="saldo" name="saldo" value="<?= $rows["saldo"] ?>" placeholder="Saldo" autocomplete="off">
+                                                <input type="text" class="form-control" id="saldo" name="saldo" value="<?= number_format( ($rows["total"]-$totalAbonos), 0, '.', '.' ) ?>" placeholder="Saldo" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -305,17 +307,17 @@
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Vendedor: </label>
-                                                <input type="text" class="form-control" id="vendedor" name="vendedor" value="<?= $rows["vendedor"] ?>" placeholder="Vendedor" autocomplete="off">
+                                                <input type="text" class="form-control" id="vendedor" name="vendedor" value="<?= $rows["vendedor"] ?>" placeholder="Vendedor" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Autorizo: </label>
-                                                <input type="text" class="form-control" id="autorizo" name="autorizo" value="<?= $rows["autorizo"] ?>" placeholder="Autorizo" autocomplete="off">
+                                                <input type="text" class="form-control" id="autorizo" name="autorizo" value="<?= $rows["autorizo"] ?>" placeholder="Autorizo" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="heard">Verifico: </label>
-                                                <input type="text" class="form-control" id="verifico" name="verifico" value="<?= $rows["verifico"] ?>" placeholder="Verifico" autocomplete="off">
+                                                <input type="text" class="form-control" id="verifico" name="verifico" value="<?= $rows["verifico"] ?>" placeholder="Verifico" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>

@@ -9,11 +9,13 @@ class AbonoCompraModel extends CompraModel{
 
     protected $abono;
     protected $compra;
+    protected $banco;
 
 
-    public function __construct($abono="", $compra=""){
+    public function __construct($abono="", $compra="", $banco = ""){
         $this->abono=$abono;
         $this->compra=$compra;
+        $this->banco = $banco;
     }
 
     public function validateData(){
@@ -44,11 +46,14 @@ class AbonoCompraModel extends CompraModel{
     
     $user=$_SESSION["idUser"];
 
+    // $banco = 1;
+
     try {
-        $insert = $con->prepare("CALL createAbonoCompra(?,?,?)");
+        $insert = $con->prepare("CALL createAbonoCompra(?,?,?,?)");
         $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
         $insert->bindParam(2, $this->compra, PDO::PARAM_INT);
         $insert->bindParam(3, $user, PDO::PARAM_INT);
+        $insert->bindParam(4, $this->banco, PDO::PARAM_INT);
         $insert->execute();
 
         $insert->closeCursor();

@@ -45,18 +45,18 @@
                                             </div>
 
                                             <div class="col-md-3 col-sm-3 form-group has-feedback">
-                                                <label for="heard">Remision: </label>
-                                                <input type="text" class="form-control" id="remision" name="remision" placeholder="Remision" autocomplete="off">
+                                                <label for="remision">Remision: </label>
+                                                <input type="text" class="form-control" id="remision" name="remision" placeholder="Remision" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Orden: </label>
+                                                <label for="orden">Orden: </label>
                                                 <input type="text" class="form-control" id="orden" name="orden" placeholder="Orden de produccion" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Pedido: </label>
-                                                <input type="text" class="form-control" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off">
+                                                <label for="pedido">Pedido: </label>
+                                                <input type="text" class="form-control" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -65,7 +65,7 @@
 
                                         <div class="form-group row align-items-center justify-content-end">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Factura: </label>
+                                                <label for="factura">Factura: </label>
                                                 <input type="text" class="form-control" id="factura" name="factura" placeholder="Factura" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
@@ -75,17 +75,17 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Fecha: </label>
+                                                <label for="fecha">Fecha: </label>
                                                 <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha" autocomplete="off">
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Fecha entrega: </label>
+                                                <label for="fechaEntrega">Fecha entrega: </label>
                                                 <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder="Fecha de entrega" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Acta entrega: </label>
+                                                <label for="actaEntrega">Acta entrega: </label>
                                                 <input type="text" class="form-control" id="actaEntrega" name="actaEntrega" placeholder="Acta de entrega" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
@@ -93,30 +93,33 @@
 
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Nombre cliente: </label>
-                                                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" autocomplete="off">
+                                                <label for="nombreCliente">Nombre cliente: </label>
+                                                <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" placeholder="Nombre cliente" autocomplete="off" list="clientes">
+                                                <datalist id="clientes">
+
+                                                </datalist>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Documento: </label>
-                                                <input type="text" class="form-control" id="doc" name="doc" placeholder="NIT/CC" autocomplete="off">
+                                                <label for="doc">Documento: </label>
+                                                <input type="text" class="form-control" id="doc" name="doc" placeholder="NIT/CC" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Direccion: </label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" autocomplete="off">
+                                                <label for="direccion">Direccion: </label>
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Telefono: </label>
-                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" autocomplete="off">
+                                                <label for="telefono">Telefono: </label>
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Ciudad: </label>
+                                                <label for="ciudad">Ciudad: </label>
                                                 <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
@@ -124,17 +127,17 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Celular: </label>
-                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" autocomplete="off">
+                                                <label for="celular">Celular: </label>
+                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Email: </label>
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+                                                <label for="email">Email: </label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off" readonly>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Codigo vendedor: </label>
+                                                <label for="codigoVendedor">Codigo vendedor: </label>
                                                 <input type="text" class="form-control" id="codigoVendedor" name="codigoVendedor" value="<?= $_SESSION["idUser"] ?>" placeholder="Vendedor codigo" readonly autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
@@ -144,7 +147,7 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-12 col-sm-12">
-                                                <label for="heard">Anotacion: </label>
+                                                <label for="anotacion">Anotacion: </label>
                                                 <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)"></textarea>
                                             </div>
                                         </div>
@@ -245,22 +248,22 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Banco: </label>
+                                                <label for="banco">Banco: </label>
                                                 <select class="select2_single form-control" id="banco" name="banco" tabindex="-1">
                                                 </select>
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Total: </label>
+                                                <label for="total">Total: </label>
                                                 <input type="text" class="form-control" id="total" name="total" placeholder="Total" autocomplete="off">
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Abono inicial: </label>
+                                                <label for="abono">Abono inicial: </label>
                                                 <input type="text" class="form-control" id="abono" name="abono" placeholder="Abono" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                                <label for="heard">Saldo: </label>
+                                                <label for="saldo">Saldo: </label>
                                                 <input type="text" readonly class="form-control" id="saldo" name="saldo" placeholder="Saldo" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
@@ -270,17 +273,17 @@
 
                                         <div class="form-group row">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Vendedor: </label>
+                                                <label for="vendedor">Vendedor: </label>
                                                 <input type="text" class="form-control" id="vendedor" name="vendedor" placeholder="Vendedor" value="<?= $_SESSION["user"] ?>" readonly autocomplete="off">
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Autorizo: </label>
+                                                <label for="autorizo">Autorizo: </label>
                                                 <input type="text" class="form-control" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
-                                                <label for="heard">Verifico: </label>
+                                                <label for="verifico">Verifico: </label>
                                                 <input type="text" class="form-control" id="verifico" name="verifico" placeholder="Verifico" autocomplete="off">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>

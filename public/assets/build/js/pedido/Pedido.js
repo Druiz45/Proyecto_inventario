@@ -4,65 +4,53 @@ import { number_format } from "./../producto/Producto.js";
 import { getBancos } from "./../banco/Banco.js";
 export class Pedido {
 
-    setSaldo() {
-        let total = document.getElementById("total");
-        let abono = document.getElementById("abono");
-
-        abono.addEventListener("input", () => {
-            setTimeout(function() {
-                let saldo = document.getElementById("saldo");
-                saldo.value=total.value-abono.value;
-              }, 1000);
-
-        })
-    }
-
     getDataFormCreate() {
         // getClienteForDoc();
         // getProductForCoincidencia();
         getBancos();
     }
 
-    // updatePedido() {
-    //     const formUpdatePedido = document.getElementById('formUpdatePedido');
+    updatePedido() {
+        const formUpdatePedido = document.getElementById('form-update-pedido');
 
-    //     if (formUpdatePedido) {
-    //         formUpdatePedido.addEventListener('submit', (e) => {
-    //             e.preventDefault();
-    //             const formData = new FormData(formUpdatePedido);
-    //             const gets = window.location.search;
-    //             const params = new URLSearchParams(gets);
-    //             const pedido = params.get('pedido');
-    //             formData.append("pedido", pedido);
-    //             fetch(`/${url}/pedido/update`, {
-    //                 method: "POST",
-    //                 body: formData
-    //             })
-    //                 .then(respuesta => respuesta.json())
-    //                 .then(data => {
-    //                     if (data == "Pedido actualizado con exito!") {
-    //                         Swal.fire({
-    //                             icon: 'success',
-    //                             title: data,
-    //                         })
-    //                         document.getElementById('valor-producto').innerText = "Valor del producto:";
-    //                     } else if (data == "Error al actualizar el pedido") {
-    //                         Swal.fire({
-    //                             icon: 'error',
-    //                             text: data,
-    //                         })
-    //                         document.getElementById('valor-producto').innerText = "Valor del producto:";
-    //                     } else {
-    //                         Swal.fire({
-    //                             icon: 'warning',
-    //                             title: data,
-    //                         })
-    //                     }
-    //                 })
-    //         })
+        if (formUpdatePedido) {
+            formUpdatePedido.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(formUpdatePedido);
+                const gets = window.location.search;
+                const params = new URLSearchParams(gets);
+                const pedido = params.get('pedido');
+                formData.append("pedido", pedido);
+                fetch(`/${url}/pedido/update`, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(respuesta => respuesta.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data == "Pedido actualizado con exito!") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data,
+                            })
+                            // document.getElementById('valor-producto').innerText = "Valor del producto:";
+                        } else if (data == "Error al actualizar el pedido") {
+                            Swal.fire({
+                                icon: 'error',
+                                text: data,
+                            })
+                            // document.getElementById('valor-producto').innerText = "Valor del producto:";
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: data,
+                            })
+                        }
+                    })
+            })
 
-    //     }
-    // }
+        }
+    }
 
     // validateFormData() {
 
@@ -320,4 +308,35 @@ export class Pedido {
 //     }
 
 // }
+
+export function setSaldo() {
+    let total = document.getElementById("total");
+    let abono = document.getElementById("abono");
+
+    abono.addEventListener("input", () => {
+        setTimeout(function () {
+            let saldo = document.getElementById("saldo");
+            saldo.value = number_format(total.value.replace(/[^\d,-]/g, '') - abono.value.replace(/[^\d,-]/g, ''));
+        }, 1000);
+
+    })
+}
+
+
+export function formatTotalAndAbono() {
+
+    let total = document.getElementById("total");
+    let abono = document.getElementById("abono");
+
+    total.addEventListener('input', () => {
+        let valor = parseInt(total.value.replace(/[^\d,-]/g, ''));
+        total.value = number_format(valor, 0, '.', '.');
+    })
+
+    abono.addEventListener('input', () => {
+        let valor = parseInt(abono.value.replace(/[^\d,-]/g, ''));
+        abono.value = number_format(valor, 0, '.', '.');
+    })
+
+}
 

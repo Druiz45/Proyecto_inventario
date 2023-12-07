@@ -9,10 +9,12 @@ class AbonoModel{
 
     protected $abono;
     protected $pedido;
+    protected $banco;
 
-    public function __construct($abono = "", $pedido = "",){
+    public function __construct($abono = "", $pedido = "", $banco = ""){
         $this->abono = $abono;
         $this->pedido = $pedido;
+        $this->banco = $banco;
     }
 
     public function validateData(){
@@ -43,11 +45,14 @@ class AbonoModel{
 
         $vendedor=$_SESSION["idUser"];
 
+        // $banco = 1;
+
         try {
-            $insert = $con->prepare("CALL createAbono(?,?,?)");
+            $insert = $con->prepare("CALL createAbono(?,?,?,?)");
             $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
             $insert->bindParam(2, $this->pedido, PDO::PARAM_INT);
             $insert->bindParam(3, $vendedor, PDO::PARAM_INT);
+            $insert->bindParam(4, $this->banco, PDO::PARAM_INT);
             $insert->execute();
 
             $insert->closeCursor();

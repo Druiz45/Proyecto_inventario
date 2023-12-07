@@ -281,20 +281,32 @@ class CompraModel extends PedidoModel
         }
     }
 
-    public function updateCompra()
+    public function updateCompra($idCompra)
     {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
         try {
-            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?,?)");
-            $update->bindParam(1, $this->proveedor, PDO::PARAM_INT);
-            $update->bindParam(2, $this->producto, PDO::PARAM_INT);
-            $update->bindParam(3, $this->valorProducto, PDO::PARAM_INT);
-            $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
-            $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-            $update->bindParam(6, $this->compra, PDO::PARAM_INT);
-            $update->bindParam(7, $this->banco, PDO::PARAM_INT);
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $update->bindParam(1, $this->pedido, PDO::PARAM_INT);
+            $update->bindParam(2, $this->fecha, PDO::PARAM_STR);
+            $update->bindParam(3, $this->fechaEntrega, PDO::PARAM_STR);
+            $update->bindParam(4, $this->actaEntrega, PDO::PARAM_STR);
+            $update->bindParam(5, $this->fabricante, PDO::PARAM_STR);
+            $update->bindParam(6, $this->remision, PDO::PARAM_STR);
+            $update->bindParam(7, $this->direccion, PDO::PARAM_STR);
+            $update->bindParam(8, $this->telefono, PDO::PARAM_STR);
+            $update->bindParam(9, $this->ciudad, PDO::PARAM_STR);
+            $update->bindParam(10, $this->celular, PDO::PARAM_STR);
+            $update->bindParam(11, $this->email, PDO::PARAM_STR);
+            $update->bindParam(12, $this->descripcion, PDO::PARAM_STR);
+            $update->bindParam(13, $this->observacion, PDO::PARAM_STR);
+            $update->bindParam(14, $this->fabricante2, PDO::PARAM_STR);
+            $update->bindParam(15, $this->vendedor, PDO::PARAM_STR);
+            $update->bindParam(16, $this->recibe, PDO::PARAM_STR);
+            $update->bindParam(17, $this->despacho, PDO::PARAM_STR);
+            $update->bindParam(18, $this->autorizo, PDO::PARAM_STR);
+            $update->bindParam(19, $idCompra, PDO::PARAM_INT);
             $update->execute();
 
             $update->closeCursor();
@@ -409,6 +421,10 @@ class CompraModel extends PedidoModel
             // if($this->abonoProducto>$this->valorProducto){
             //     throw new Exception("El abono no puede ser mayor al valor del producto");
             // }
+
+            $this->total = str_replace(['.'], "", $this->total);
+            $this->abonoOrden = str_replace(['.'], "", $this->abonoOrden);
+            $this->saldo = str_replace(['.'], "", $this->saldo);
 
             if ($this->abonoOrden > $this->total) {
                 throw new Exception("El abono no puede ser mayor al valor del producto");

@@ -22,15 +22,25 @@ class UsuarioModel
     protected $celular;
     protected $direccion;
     protected $pass;
-    protected $newPass; 
-    protected $newPassConfirm; 
+    protected $newPass;
+    protected $newPassConfirm;
     protected $passActual;
     protected $nombreEmpresa;
     protected $nitEmpresa;
 
-    public function __construct($nombres = "", $apellidos = "", $documento = "",  $email = "", $celular = "",
-    $direccion = "", $perfil = "", $pass = "", $nombreEmpresa = null, $nitEmpresa = null,
-    /*$newPass = "", $newPassConfirm = "", $passActual = "",*/){
+    public function __construct(
+        $nombres = "",
+        $apellidos = "",
+        $documento = "",
+        $email = "",
+        $celular = "",
+        $direccion = "",
+        $perfil = "",
+        $pass = "",
+        $nombreEmpresa = null,
+        $nitEmpresa = null,
+        /*$newPass = "", $newPassConfirm = "", $passActual = "",*/
+    ) {
 
         $this->nombres = $nombres;
         $this->apellidos = $apellidos;
@@ -48,7 +58,8 @@ class UsuarioModel
 
     }
 
-    public function getPerfiles(){
+    public function getPerfiles()
+    {
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -66,9 +77,10 @@ class UsuarioModel
         echo json_encode($registros);
     }
 
-    public function validateData(){
+    public function validateData()
+    {
         try {
-            
+
             if (
                 !trim($this->nombres) || !trim($this->apellidos) || !trim($this->documento) || !trim($this->perfil)
                 || !trim($this->email) || !trim($this->celular) || !trim($this->direccion)
@@ -77,8 +89,8 @@ class UsuarioModel
                 throw new Exception("Porfavor complete todos los campos");
             }
 
-            if(isset($_POST['nombre-empresa']) && isset($_POST['nit-empresa'])){
-                if(!trim($this->nombreEmpresa) || !trim($this->nitEmpresa)){
+            if (isset($_POST['nombre-empresa']) && isset($_POST['nit-empresa'])) {
+                if (!trim($this->nombreEmpresa) || !trim($this->nitEmpresa)) {
                     throw new Exception("Porfavor complete todos los campos");
                 }
             }
@@ -137,7 +149,8 @@ class UsuarioModel
         }
     }
 
-    public function createUser(){
+    public function createUser()
+    {
 
         $pdo = new Conexion();
         $con = $pdo->conexion();
@@ -168,7 +181,7 @@ class UsuarioModel
         } catch (Exception $e) {
             if ($e->getCode() == 23000) {
                 echo "Error: El valor ya existe en la base de datos.";
-            }else{
+            } else {
                 echo json_encode($e->getMessage());
             }
         }
@@ -177,7 +190,8 @@ class UsuarioModel
 
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
@@ -204,8 +218,44 @@ class UsuarioModel
         }
     }
 
+    public function getProvedoresForDocOrName($nameOrDoc)
+    {
 
-    public function updateUser(){
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
+
+        // $idUser = $_SESSION["idUser"];
+        // $idPerfil = $_SESSION['idPerfil'];
+
+        try {
+            $select = $con->prepare("CALL getProvedoresForDocOrName(?)");
+            $select->bindParam(1, $nameOrDoc, PDO::PARAM_STR);
+            $select->execute();
+
+            $usuarios = $select->fetchAll(PDO::FETCH_ASSOC);
+
+            $select->closeCursor();
+
+            if (!$select) {
+
+                throw new Exception("Error al consultar los usuarios");
+            }
+
+            if(!$select->rowCount() > 0){
+                throw new Exception("No se encontraron fabricantes");
+            }
+
+            echo json_encode($usuarios);
+
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
+
+
+    public function updateUser()
+    {
 
         try {
 
@@ -244,7 +294,8 @@ class UsuarioModel
     }
 
 
-    public function actualizarEstadoUser($userToUpdate, $estado){
+    public function actualizarEstadoUser($userToUpdate, $estado)
+    {
 
         try {
 
@@ -275,15 +326,14 @@ class UsuarioModel
             }
 
             echo json_encode("El usuario se $message correctamente");
-            
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
-
     }
 
-    public function getDataUserLog(){
+    public function getDataUserLog()
+    {
         try {
 
             $pdo = new Conexion();
@@ -310,7 +360,8 @@ class UsuarioModel
         }
     }
 
-    public function decryptPass() {
+    public function decryptPass()
+    {
         $key = hex2bin($this->getStrPar()); //Llave de encriptacion
         $cipher = 'aes-256-gcm';
         $decoded = base64_decode($this->pass); //Cadena a desencriptar
@@ -331,10 +382,11 @@ class UsuarioModel
     }
 
 
-    public function encryptPass(){
+    public function encryptPass()
+    {
         $key = hex2bin($this->getStrPar()); //Llave de encriptacion
-        $cipher = 'aes-256-gcm'; 
-        $tag = null; 
+        $cipher = 'aes-256-gcm';
+        $tag = null;
         $nonceSize = openssl_cipher_iv_length($cipher);
         $nonce = openssl_random_pseudo_bytes($nonceSize);
         $ciphertext = openssl_encrypt(
@@ -348,13 +400,15 @@ class UsuarioModel
         $this->pass = base64_encode($nonce . $ciphertext . $tag);
     }
 
-    public function logOut(){
+    public function logOut()
+    {
         session_start();
         session_destroy();
         echo json_encode("./");
     }
 
-    public function getStrPar(){
+    public function getStrPar()
+    {
         if (strlen($this->documento) % 2 != 0) {
             $strPar = $this->documento . "a";
         } else {
@@ -363,14 +417,15 @@ class UsuarioModel
         return $strPar;
     }
 
-    public function updatePass(){
+    public function updatePass()
+    {
         try {
 
             $pdo = new Conexion();
             $con = $pdo->conexion();
 
             $idUser = $_SESSION['idUser'];
-            $this->pass=$this->newPass;
+            $this->pass = $this->newPass;
             $this->encryptPass();
 
             $update = $con->prepare("CALL updatePass(?,?)");
@@ -391,20 +446,21 @@ class UsuarioModel
         }
     }
 
-    public function validateNewPass(){
+    public function validateNewPass()
+    {
         try {
 
-            if (!trim($this->newPass) || !trim($this->newPassConfirm) || !trim($this->passActual)){
+            if (!trim($this->newPass) || !trim($this->newPassConfirm) || !trim($this->passActual)) {
                 throw new Exception("Completa los campos");
             }
 
             $this->decryptPass();
 
-            if ($this->passActual!=$this->pass) {
+            if ($this->passActual != $this->pass) {
                 throw new Exception("La contraseña actual no corresponde");
             }
 
-            if ($this->newPass!=$this->newPassConfirm) {
+            if ($this->newPass != $this->newPassConfirm) {
                 throw new Exception("La contraseña de confirmacion es distintan");
             }
 
@@ -413,16 +469,16 @@ class UsuarioModel
             if (!preg_match($patron, $this->newPass)) {
                 throw new Exception("La nueva contraseña debe contener de 10 a 15 caracteres, al menos una letra mayúscula y una minuscula, un caracter especial, un numero y ningun espacio en blanco.");
             }
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function validateRecoverPass($email){
+    public function validateRecoverPass($email)
+    {
         try {
-            if ( !trim($email) ) {
+            if (!trim($email)) {
 
                 throw new Exception("Porfavor ingrese un email");
             }
@@ -430,7 +486,7 @@ class UsuarioModel
 
                 throw new Exception("Este email no es valido");
             }
-    
+
             if (strlen($email) > 100) {
                 throw new Exception("El correo electrónico supera los 100 caracteres permitidos.");
             }
@@ -454,29 +510,29 @@ class UsuarioModel
                 throw new Exception("Este correo no se en cuentra registrado en nuestra base de datos");
             }
 
-            if($dataUser[0]['estado'] != 1){
+            if ($dataUser[0]['estado'] != 1) {
                 throw new Exception("El usuario al que pertenece este correo esta deshabilitado");
             }
 
             return $dataUser;
-
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;
         }
     }
 
-    public function getIdUserEncryp(UsuarioModel $user, array $dataUser){
-        $user->pass=$dataUser[0]['id'];
+    public function getIdUserEncryp(UsuarioModel $user, array $dataUser)
+    {
+        $user->pass = $dataUser[0]['id'];
         $user->documento = $dataUser[0]['documento'];
         $user->encryptPass();
         return $user->pass;
         // echo json_encode($user->pass);
     }
 
-    public function getTokenPass(array $dataUser){
+    public function getTokenPass(array $dataUser)
+    {
         return $dataUser[0]['uId'];
         // echo json_encode($user->pass);
     }
-
 }

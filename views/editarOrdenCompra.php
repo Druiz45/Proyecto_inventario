@@ -32,12 +32,12 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Registro orden de compra</h3>
+                            <h3>Editar orden de compra</h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
 
-                    <form class="form-label-left input_mask" id="formCreateCompra">
+                    <form class="form-label-left input_mask" id="formUpdateCompra">
                         <div class="row align-items-center justify-content-center">
 
                             <div class="col-md-10">
@@ -67,7 +67,7 @@
 
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="pedido">Pedido: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off" value="<?= $ordenCompra[0]['pedido'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="pedido" name="pedido" placeholder="Pedido" autocomplete="off" value="<?= $ordenCompra[0]['pedido'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
@@ -82,16 +82,16 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="fecha">Fecha: </label>
-                                                <input type="date" class="form-control has-feedback-left" id="fecha" name="fecha" value="<?= $ordenCompra[0]['fecha'] ?>" readonly>
+                                                <input type="date" class="form-control has-feedback-left" id="fecha" name="fecha" value="<?= $ordenCompra[0]['fecha'] ?>">
                                             </div>
 
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="fecha-entrega">Fecha entrega: </label>
-                                                <input type="date" class="form-control has-feedback-left" id="fecha-entrega" name="fecha-entrega" value="<?= $ordenCompra[0]['fecha_entrega'] ?>" readonly>
+                                                <input type="date" class="form-control has-feedback-left" id="fecha-entrega" name="fecha-entrega" value="<?= $ordenCompra[0]['fecha_entrega'] ?>">
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="acta-entrega">Acta de entrega: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="acta-entrega" name="acta-entrega" placeholder="Acta de entrega" autocomplete="off" value="<?= $ordenCompra[0]['acta_entrega'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="acta-entrega" name="acta-entrega" placeholder="Acta de entrega" autocomplete="off" value="<?= $ordenCompra[0]['acta_entrega'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -99,12 +99,15 @@
                                         <div class="form-group row align-items-center justify-content-center">
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="fabricante">Fabricante: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="fabricante" name="fabricante" placeholder="Fabricante" autocomplete="off" value="<?= $ordenCompra[0]['fabricante'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="fabricante" name="fabricante" placeholder="Fabricante" autocomplete="off" value="<?= $ordenCompra[0]['fabricante'] ?>" list="proveedores">
+                                                <datalist id="proveedores">
+                                                    <!-- <option value="Prueba"></option> -->
+                                                </datalist>
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="remision">Remision: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="remision" name="remision" placeholder="Remision" autocomplete="off" value="<?= $ordenCompra[0]['remision'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="remision" name="remision" placeholder="Remision" autocomplete="off" value="<?= $ordenCompra[0]['remision'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -122,7 +125,7 @@
                                             </div>
                                             <div class="col-md-4 col-sm-4  form-group has-feedback">
                                                 <label for="ciudad">Ciudad: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="ciudad" name="ciudad" placeholder="Ciudad" autocomplete="off" value="<?= $ordenCompra[0]['ciudad'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="ciudad" name="ciudad" placeholder="Ciudad" autocomplete="off" value="<?= $ordenCompra[0]['ciudad'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                         </div>
@@ -150,7 +153,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12 col-sm-12">
                                                 <label for="anotacion">Descripcion: </label>
-                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)" readonly>
+                                                <textarea class="resizable_textarea form-control" id="anotacion" name="anotacion" placeholder="Anotacion: (opcional)">
                                                     <?= $ordenCompra[0]['descripcion'] ?>
                                                 </textarea>
                                             </div>
@@ -225,7 +228,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-12 col-sm-12">
                                                 <label for="observacion">Observacion: </label>
-                                                <textarea class="resizable_textarea form-control" id="observacion" name="observacion" placeholder="Observacion:" readonly>
+                                                <textarea class="resizable_textarea form-control" id="observacion" name="observacion" placeholder="Observacion:">
                                                     <?= $ordenCompra[0]['observacion'] ?>
                                                 </textarea>
                                             </div>
@@ -236,7 +239,7 @@
                                         <div class="form-group row">
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
                                                 <label for="fabricante">Fabricante: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="Fabricante2" name="Fabricante2" placeholder="Fabricante" autocomplete="off" value="<?= $ordenCompra[0]['fabricante2'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="Fabricante2" name="Fabricante2" placeholder="Fabricante" autocomplete="off" value="<?= $ordenCompra[0]['fabricante2'] ?>">
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
@@ -246,17 +249,17 @@
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
                                                 <label for="recibe">Recibe: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="recibe" name="recibe" placeholder="Recibe" autocomplete="off" value="<?= $ordenCompra[0]['recibe'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="recibe" name="recibe" placeholder="Recibe" autocomplete="off" value="<?= $ordenCompra[0]['recibe'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
                                                 <label for="despacho">Despacho: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="despacho" name="despacho" placeholder="Despacho" autocomplete="off" value="<?= $ordenCompra[0]['despacho'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="despacho" name="despacho" placeholder="Despacho" autocomplete="off" value="<?= $ordenCompra[0]['despacho'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-2 col-sm-2  form-group has-feedback">
                                                 <label for="autorizo">Autorizo: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off" value="<?= $ordenCompra[0]['autorizo'] ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="autorizo" name="autorizo" placeholder="Autorizo" autocomplete="off" value="<?= $ordenCompra[0]['autorizo'] ?>">
                                                 <!-- <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <!-- <div class="col-md-2 col-sm-2  form-group has-feedback">
@@ -268,11 +271,11 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="form-group row align-items-center justify-content-end">
+                                <div class="form-group row align-items-center justify-content-end">
                                     <div class="col-md-3 col-sm-3  form-group has-feedback">
-                                        <button type="submit" class="btn btn-success btn-round" id="btn-registrar-orden-compra"><i class="fa fa-arrow-down"></i> Registrar orden de compra</button>
+                                        <button type="submit" class="btn btn-primary btn-round" id="btn-editar-orden-compra"><i class="fa fa-arrow-down"></i> Editar orden de compra</button>
                                     </div>
-                                </div> -->
+                                </div>
 
                             </div>
                             <!-- </form> -->

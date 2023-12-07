@@ -96,8 +96,8 @@
                                                                             <td><?= $row["proveedor"] ?></td>
                                                                             <td><?= $row["cliente"] == 0 ? "No Aplica" : $row["cliente"] ?></td>
                                                                         <?php endif; ?> -->
-                                                                        <td><?= $row["fecha"] ?></td>
-                                                                        <td><?= $row["fecha_entrega"] ?></td>
+                                                                        <td><?= getFechaSinHora($row["fecha"]) ?></td>
+                                                                        <td><?= getFechaSinHora($row["fecha_entrega"]) ?></td>
                                                                         <!-- <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
                                                                         <?php if ($_SESSION["idPerfil"] != 2) : ?>
                                                                             <td><?= numberFormat($row["precio"]) ?></td>

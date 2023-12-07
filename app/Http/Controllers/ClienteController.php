@@ -32,4 +32,8 @@ class ClienteController{
         return view('viewsModels/modelCliente/formUpdate');
     }
 
+    public function getClientesForDocOrName(){
+        return view('viewCrud/cliente/readClientesForNameOrDoc');
+    }
+
 }

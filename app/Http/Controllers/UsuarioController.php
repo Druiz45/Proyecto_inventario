@@ -13,6 +13,10 @@ class UsuarioController{
         return view('consultarUsuario');
     }
 
+    public function readProveedores(){
+        return view('viewCrud/usuario/readProveedores');
+    }
+
     public function dataFormRegistrar(){
         return view('viewsModels/modelUser/formCreate');
     }

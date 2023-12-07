@@ -14,6 +14,7 @@ class PedidoModel
     protected $pedido;
     protected $factura;
     protected $fecha;
+    protected $fechaEntrega;
     protected $actaEntrega;
     protected $nombreCliente;
     protected $doc;
@@ -49,6 +50,7 @@ class PedidoModel
         $pedido = "",
         $factura = "",
         $fecha = "",
+        $fechaEntrega = "",
         $actaEntrega = "",
         $nombreCliente = "",
         $doc = "",
@@ -84,6 +86,7 @@ class PedidoModel
         $this->pedido = $pedido;
         $this->factura = $factura;
         $this->fecha = $fecha;
+        $this->fechaEntrega = $fechaEntrega;
         $this->actaEntrega = $actaEntrega;
         $this->nombreCliente = $nombreCliente;
         $this->doc = $doc;
@@ -246,40 +249,41 @@ class PedidoModel
             $this->cheque = (bool) $this->cheque;
             $this->iva = (bool) $this->iva;
 
-            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
             $insert->bindParam(2, $this->orden, PDO::PARAM_INT);
             $insert->bindParam(3, $this->pedido, PDO::PARAM_INT);
             $insert->bindParam(4, $this->factura, PDO::PARAM_STR);
             $insert->bindParam(5, $this->fecha, PDO::PARAM_STR);
-            $insert->bindParam(6, $this->actaEntrega, PDO::PARAM_STR);
-            $insert->bindParam(7, $this->nombreCliente, PDO::PARAM_STR);
-            $insert->bindParam(8, $this->doc, PDO::PARAM_STR);
-            $insert->bindParam(9, $this->direccion, PDO::PARAM_STR);
-            $insert->bindParam(10, $this->telefono, PDO::PARAM_STR);
-            $insert->bindParam(11, $this->ciudad, PDO::PARAM_STR);
-            $insert->bindParam(12, $this->celular, PDO::PARAM_STR);
-            $insert->bindParam(13, $this->email, PDO::PARAM_STR);
-            $insert->bindParam(14, $this->codigoVendedor, PDO::PARAM_INT);
-            $insert->bindParam(15, $this->anotacion, PDO::PARAM_STR);
+            $insert->bindParam(6, $this->fechaEntrega, PDO::PARAM_STR);
+            $insert->bindParam(7, $this->actaEntrega, PDO::PARAM_STR);
+            $insert->bindParam(8, $this->nombreCliente, PDO::PARAM_STR);
+            $insert->bindParam(9, $this->doc, PDO::PARAM_STR);
+            $insert->bindParam(10, $this->direccion, PDO::PARAM_STR);
+            $insert->bindParam(11, $this->telefono, PDO::PARAM_STR);
+            $insert->bindParam(12, $this->ciudad, PDO::PARAM_STR);
+            $insert->bindParam(13, $this->celular, PDO::PARAM_STR);
+            $insert->bindParam(14, $this->email, PDO::PARAM_STR);
+            $insert->bindParam(15, $this->codigoVendedor, PDO::PARAM_INT);
+            $insert->bindParam(16, $this->anotacion, PDO::PARAM_STR);
 
-            $insert->bindParam(16, $this->stock, PDO::PARAM_INT);
-            $insert->bindParam(17, $this->almacen, PDO::PARAM_INT);
-            $insert->bindParam(18, $this->fabrica, PDO::PARAM_INT);
-            $insert->bindParam(19, $this->bandeja, PDO::PARAM_INT);
-            $insert->bindParam(20, $this->braker, PDO::PARAM_INT);
-            $insert->bindParam(21, $this->otros, PDO::PARAM_INT);
-            $insert->bindParam(22, $this->efectivo, PDO::PARAM_INT);
-            $insert->bindParam(23, $this->cheque, PDO::PARAM_INT);
-            $insert->bindParam(24, $this->iva, PDO::PARAM_INT);
+            $insert->bindParam(17, $this->stock, PDO::PARAM_INT);
+            $insert->bindParam(18, $this->almacen, PDO::PARAM_INT);
+            $insert->bindParam(19, $this->fabrica, PDO::PARAM_INT);
+            $insert->bindParam(20, $this->bandeja, PDO::PARAM_INT);
+            $insert->bindParam(21, $this->braker, PDO::PARAM_INT);
+            $insert->bindParam(22, $this->otros, PDO::PARAM_INT);
+            $insert->bindParam(23, $this->efectivo, PDO::PARAM_INT);
+            $insert->bindParam(24, $this->cheque, PDO::PARAM_INT);
+            $insert->bindParam(25, $this->iva, PDO::PARAM_INT);
 
-            $insert->bindParam(25, $this->total, PDO::PARAM_INT);
+            $insert->bindParam(26, $this->total, PDO::PARAM_INT);
             // $insert->bindParam(27, $this->abono, PDO::PARAM_INT);
-            $insert->bindParam(26, $this->saldo, PDO::PARAM_INT);
+            $insert->bindParam(27, $this->saldo, PDO::PARAM_INT);
 
-            $insert->bindParam(27, $this->vendedor, PDO::PARAM_STR);
-            $insert->bindParam(28, $this->autorizo, PDO::PARAM_STR);
-            $insert->bindParam(29, $this->verifico, PDO::PARAM_STR);
+            $insert->bindParam(28, $this->vendedor, PDO::PARAM_STR);
+            $insert->bindParam(29, $this->autorizo, PDO::PARAM_STR);
+            $insert->bindParam(30, $this->verifico, PDO::PARAM_STR);
 
             // $insert->bindParam(1, $this->producto, PDO::PARAM_INT);
             // $insert->bindParam(2, $this->cliente, PDO::PARAM_INT);
@@ -308,40 +312,72 @@ class PedidoModel
         }
     }
 
-    // public function updatePedido()
-    // {
-    //     $pdo = new Conexion();
-    //     $con = $pdo->conexion();
+    public function updatePedido($idPedido)
+    {
+        $pdo = new Conexion();
+        $con = $pdo->conexion();
 
-    //     $precio = $this->getDataProducto();
+        // $precio = $this->getDataProducto();
 
-    //     try {
-    //         $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?)");
-    //         $update->bindParam(1, $this->producto, PDO::PARAM_INT);
-    //         $update->bindParam(2, $this->cliente, PDO::PARAM_INT);
-    //         $update->bindParam(3, $precio, PDO::PARAM_INT);
-    //         $update->bindParam(4, $this->anotacion, PDO::PARAM_STR);
-    //         $update->bindParam(5, $this->fechaLimite, PDO::PARAM_STR);
-    //         $update->bindParam(6, $this->pedido, PDO::PARAM_INT);
-    //         $update->bindParam(7, $this->banco, PDO::PARAM_INT);
-    //         $update->execute();
+        $this->stock = (bool) $this->stock;
+        $this->almacen = (bool) $this->almacen;
+        $this->fabrica = (bool) $this->fabrica;
+        $this->bandeja = (bool) $this->bandeja;
+        $this->braker = (bool) $this->braker;
+        $this->otros = (bool) $this->otros;
+        $this->efectivo = (bool) $this->efectivo;
+        $this->cheque = (bool) $this->cheque;
+        $this->iva = (bool) $this->iva;
 
-    //         $update->closeCursor();
+        try {
+            $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $update->bindParam(1, $this->remision, PDO::PARAM_STR);
+            $update->bindParam(2, $this->orden, PDO::PARAM_INT);
+            $update->bindParam(3, $this->factura, PDO::PARAM_STR);
+            $update->bindParam(4, $this->fecha, PDO::PARAM_STR);
+            $update->bindParam(5, $this->fechaEntrega, PDO::PARAM_STR);
+            $update->bindParam(6, $this->actaEntrega, PDO::PARAM_STR);
+            $update->bindParam(7, $this->nombreCliente, PDO::PARAM_STR);
+            $update->bindParam(8, $this->doc, PDO::PARAM_STR);
+            $update->bindParam(9, $this->direccion, PDO::PARAM_STR);
+            $update->bindParam(10, $this->telefono, PDO::PARAM_STR);
+            $update->bindParam(11, $this->ciudad, PDO::PARAM_STR);
+            $update->bindParam(12, $this->celular, PDO::PARAM_STR);
+            $update->bindParam(13, $this->email, PDO::PARAM_STR);
+            $update->bindParam(14, $this->anotacion, PDO::PARAM_STR);
 
-    //         if (!$update) {
-    //             throw new Exception("Error al actualizar el pedido");
-    //         }
+            $update->bindParam(15, $this->stock, PDO::PARAM_INT);
+            $update->bindParam(16, $this->almacen, PDO::PARAM_INT);
+            $update->bindParam(17, $this->fabrica, PDO::PARAM_INT);
+            $update->bindParam(18, $this->bandeja, PDO::PARAM_INT);
+            $update->bindParam(19, $this->braker, PDO::PARAM_INT);
+            $update->bindParam(20, $this->otros, PDO::PARAM_INT);
+            $update->bindParam(21, $this->efectivo, PDO::PARAM_INT);
+            $update->bindParam(22, $this->cheque, PDO::PARAM_INT);
+            $update->bindParam(23, $this->iva, PDO::PARAM_INT);
+            $update->bindParam(24, $this->vendedor, PDO::PARAM_STR);
+            $update->bindParam(25, $this->autorizo, PDO::PARAM_STR);
+            $update->bindParam(26, $this->verifico, PDO::PARAM_STR);
+            $update->bindParam(27, $idPedido, PDO::PARAM_INT);
 
-    //         if (!$update->rowCount() > 0) {
-    //             throw new Exception("No se hicieron cambios");
-    //         }
+            $update->execute();
 
-    //         echo json_encode("Pedido actualizado con exito!");
-    //     } catch (Exception $e) {
-    //         echo json_encode($e->getMessage());
-    //         die;
-    //     }
-    // }
+            $update->closeCursor();
+
+            if (!$update) {
+                throw new Exception("Error al actualizar el pedido");
+            }
+
+            if (!$update->rowCount() > 0) {
+                throw new Exception("No se hicieron cambios");
+            }
+
+            echo json_encode("Pedido actualizado con exito!");
+        } catch (Exception $e) {
+            echo json_encode($e->getMessage());
+            die;
+        }
+    }
 
     public function validateDataEstado($estado, $pedido)
     {
@@ -678,8 +714,7 @@ class PedidoModel
                 throw new Exception("Error");
             }
 
-           return ($pedido[0]);
-
+            return ($pedido[0]);
         } catch (Exception $e) {
             echo json_encode($e->getMessage());
             die;

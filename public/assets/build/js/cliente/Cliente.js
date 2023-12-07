@@ -166,3 +166,77 @@ export class Cliente{
       }
 
 }
+
+export function getDataClienteForNameOrDoc(){
+
+  const inputCliente = document.getElementById('nombreCliente');
+  // const inputProveedor2 = document.getElementById('Fabricante2');
+  const dataList = document.getElementById('clientes');
+
+  inputCliente.addEventListener('input', () => {
+
+    if (inputCliente.value.trim() != "") {
+
+      // inputProveedor2.value = inputProveedor.value;
+
+      const formData = new FormData();
+      formData.append('nameOrDocCliente', inputCliente.value);
+
+      fetch(`/${url}/cliente/getClientesForDocOrName`, {
+        method: "POST",
+        body: formData
+      })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+
+          console.log(data);
+
+          dataList.innerHTML = "";
+
+          for (const dato of data) {
+            dataList.innerHTML += `
+              <option value="${dato.nombres} ${dato.apellidos}"></option>
+            `;
+          }
+
+          setDataClienteForNameOrDoc(data);
+
+        })
+
+    } else {
+      // inputProveedor2.value = "";
+      dataList.innerHTML = "";
+    }
+
+  });
+
+}
+
+export function setDataClienteForNameOrDoc(data) {
+
+  const inputCliente = document.getElementById('nombreCliente');
+  const dataList = document.getElementById('clientes');
+
+  const inputDocumento = document.getElementById('doc'); 
+  const inputTelefono = document.getElementById('telefono');
+  const inputDireccion = document.getElementById('direccion');
+  const inputCelular = document.getElementById('celular');
+  const inputEmail = document.getElementById('email');
+
+  inputCliente.addEventListener('change', () => {
+
+    let opcion = Array.from(dataList.options).indexOf(dataList.querySelector(`option[value="${inputCliente.value}"]`));
+
+    if (opcion !== undefined) {
+
+      inputDocumento.value = data[opcion].documento;
+      inputDireccion.value = data[opcion].direccion;
+      inputCelular.value = data[opcion].telefono;
+      inputEmail.value = data[opcion].email;
+      inputTelefono.value = data[opcion].telefonoSecundario;
+
+      // console.log(opcion);
+    }
+
+  });
+}

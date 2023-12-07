@@ -1,7 +1,7 @@
 import { validateDoc } from "./../user/User.js";
-import { validateNameProducto, validatePrecio, number_format  } from "./../producto/Producto.js";
+import { validateNameProducto, validatePrecio, number_format } from "./../producto/Producto.js";
 // import { validateAnotacion, getClienteForDoc, getProductForCoincidencia } from "./../pedido/Pedido.js";
-import { getBancos} from "./../banco/Banco.js";
+import { getBancos } from "./../banco/Banco.js";
 export class Compra {
 
     getDataFormCreate() {
@@ -11,7 +11,7 @@ export class Compra {
         getBancos();
     }
 
-    getProveedorForDoc(){
+    getProveedorForDoc() {
         const docProveedor = document.getElementById("docProveedor");
         const proveedor = document.getElementById("proveedor");
         docProveedor.addEventListener("input", () => {
@@ -107,10 +107,10 @@ export class Compra {
 
     }
 
-    getDataFormUpdate(){
-        const formUpdateCompra=document.getElementById("formUpdateCompra");
+    getDataFormUpdate() {
+        const formUpdateCompra = document.getElementById("formUpdateCompra");
 
-        if (formUpdateCompra){
+        if (formUpdateCompra) {
             const gets = window.location.search;
             const params = new URLSearchParams(gets);
             const compra = params.get('compra');
@@ -134,8 +134,8 @@ export class Compra {
     setDataFormUpdate(data) {
         const fechaLimite = document.getElementById("fecha-limite");
         const anotacion = document.getElementById("anotacion");
-        const valorProducto=document.getElementById("valorProducto");
-        const banco=document.getElementById("banco");
+        const valorProducto = document.getElementById("valorProducto");
+        const banco = document.getElementById("banco");
         validatePrecio(valorProducto);
         docProveedor.value = data[0].documento;
         docProveedor.dispatchEvent(new Event('input', { bubbles: true }));

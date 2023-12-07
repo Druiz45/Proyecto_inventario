@@ -10,6 +10,7 @@ $pedido = new PedidoModel(
     isset($_POST['pedido']) ? $_POST['pedido'] : "", 
     isset($_POST['factura']) ? $_POST['factura'] : "",
     isset($_POST['fecha']) ? $_POST['fecha'] : "",
+    isset($_POST['fechaEntrega']) ? $_POST['fechaEntrega'] : "",
     isset($_POST['actaEntrega']) ? $_POST['actaEntrega'] : "",
     isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : "",
     isset($_POST["doc"]) ? $_POST["doc"]: "",

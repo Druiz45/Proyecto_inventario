@@ -9,7 +9,7 @@ export class User {
 
     const formLogin = document.getElementById('form-login');
 
-    if(formLogin){
+    if (formLogin) {
 
       formLogin.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -23,13 +23,13 @@ export class User {
             if (Array.isArray(data)) {
               window.location.assign(`/${url}/${data[0]}`);
             } else if (data == "Porfavor Complete los campos") {
-  
+
               Swal.fire({
                 icon: 'warning',
                 title: data,
                 // text: data,
               })
-  
+
             }
             else {
               Swal.fire({
@@ -376,10 +376,10 @@ export class User {
     });
   }
 
-  recoverPass(){
+  recoverPass() {
     const formRecoverPass = document.getElementById('form-recover-password');
-    if(formRecoverPass){
-      formRecoverPass.addEventListener('submit', (e) =>{
+    if (formRecoverPass) {
+      formRecoverPass.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(formRecoverPass);
@@ -397,13 +397,13 @@ export class User {
                 // text: data,
               })
             } else if (data == 401) {
-  
+
               Swal.fire({
                 icon: 'error',
                 title: 'Ha ocurrido un error',
                 // text: data,
               })
-  
+
             }
             else {
               Swal.fire({
@@ -413,7 +413,7 @@ export class User {
               })
             }
           })
-        
+
       })
     }
   }
@@ -510,5 +510,75 @@ export function validateDoc(input) {
 
   });
 
+}
+
+export function getDataProveedorForNameOrDoc() {
+
+  const inputProveedor = document.getElementById('fabricante');
+  const inputProveedor2 = document.getElementById('Fabricante2');
+  const dataList = document.getElementById('proveedores');
+
+  inputProveedor.addEventListener('input', () => {
+
+    if (inputProveedor.value.trim() != "") {
+
+      inputProveedor2.value = inputProveedor.value;
+
+      const formData = new FormData();
+      formData.append('nameOrDocProveedor', inputProveedor.value);
+
+      fetch(`/${url}/usuario/readProveedores`, {
+        method: "POST",
+        body: formData
+      })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+
+          // console.log(data);
+
+          dataList.innerHTML = "";
+
+          for (const dato of data) {
+            dataList.innerHTML += `
+              <option value="${dato.nombres} ${dato.apellidos}"></option>
+            `;
+          }
+
+          setDataProveedorForNameOrDoc(data);
+
+        })
+
+    } else {
+      inputProveedor2.value = "";
+      dataList.innerHTML = "";
+    }
+
+  });
+
+}
+
+export function setDataProveedorForNameOrDoc(data) {
+
+  const inputProveedor = document.getElementById('fabricante');
+  const dataList = document.getElementById('proveedores');
+
+  const inputDireccion = document.getElementById('direccion');
+  const inputCelular = document.getElementById('celular');
+  const inputEmail = document.getElementById('email');
+
+  inputProveedor.addEventListener('change', () => {
+
+    let opcion = Array.from(dataList.options).indexOf(dataList.querySelector(`option[value="${inputProveedor.value}"]`));
+
+    if (opcion !== undefined) {
+
+      inputDireccion.value = data[opcion].direccion;
+      inputCelular.value = data[opcion].telefono;
+      inputEmail.value = data[opcion].email;
+
+      // console.log(opcion);
+    }
+
+  });
 }
 
