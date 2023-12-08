@@ -286,8 +286,10 @@ class CompraModel extends PedidoModel
         $pdo = new Conexion();
         $con = $pdo->conexion();
 
+        $this->total = str_replace(['.', '$'], "", $this->total);
+
         try {
-            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $update = $con->prepare("CALL updateCompra(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $update->bindParam(1, $this->pedido, PDO::PARAM_INT);
             $update->bindParam(2, $this->fecha, PDO::PARAM_STR);
             $update->bindParam(3, $this->fechaEntrega, PDO::PARAM_STR);
@@ -307,6 +309,7 @@ class CompraModel extends PedidoModel
             $update->bindParam(17, $this->despacho, PDO::PARAM_STR);
             $update->bindParam(18, $this->autorizo, PDO::PARAM_STR);
             $update->bindParam(19, $idCompra, PDO::PARAM_INT);
+            $update->bindParam(20, $this->total, PDO::PARAM_INT);
             $update->execute();
 
             $update->closeCursor();

@@ -26,7 +26,9 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Informacion de pedidos<small>Pedidos</small></h2>
+              <div class="title_left">
+                <h3 class="dark"><strong>Consultar pedidos</strong></h3>
+              </div>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -65,26 +67,26 @@
                                   <th>Codigo de orden</th>
                                   <th>fecha</th>
                                   <!-- <th>Vendedor</th> -->
-                                  <!-- <th>Fecha limite</th>
+                                  <!-- <th>Fecha limite</th> -->
                                   <th>Comision</th>
                                   <th>Estado del pedido</th>
                                   <th>Estado de aprobacion</th>
-                                  <th>Anotacion</th>
+                                  <!-- <th>Anotacion</th>
                                   <th>Valor comision</th>
                                   <th>Abono total</th>
                                   <th>Valor restante</th>
                                   <th>Banco</th>
-                                  <th>Valor del producto</th>
-                                  <th>Fecha del pedio</th> -->
+                                  <th>Valor del producto</th> -->
+                                  <!-- <th>Fecha del pedio</th> -->
                                   <th>Operaciones</th>
                                 </tr>
                               </thead>
                               <tbody id="tbody">
                                 <?php foreach ($rows as $row) : ?>
                                   <?php
-                                  // $infoEstadoComision = getEstadoComision($row["comisionPaga"]);
-                                  // $infoEstadoPedido = getEstadoPedido($row["estadoPedido"]);
-                                  // $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estadoAprobacion"]);
+                                  $infoEstadoComision = getEstadoComision($row["comision_pagada"]);
+                                  $infoEstadoPedido = getEstadoPedido($row["estado_pedido"]);
+                                  $infoEstadoAprobacionPedido = getEstadoAprobacionPedido($row["estado_aprobado"]);
                                   ?>
                                   <tr>
                                     <td><?= $i++ ?></td>
@@ -93,17 +95,17 @@
                                     <!-- <td><?= $row["idProducto"] . " - " . $row["producto"] ?></td>
                                     <td><?= $row["cliente"] ?></td>
                                     <td><?= $row["vendedor"] ?></td>
-                                    <td><?= getFechaSinHora($row["fechaLimite"]) ?></td>
+                                    <td><?= getFechaSinHora($row["fechaLimite"]) ?></td> -->
+                                    <td><?= getFecha($row["fecha"]) ?></td>
                                     <td bgcolor="<?= $infoEstadoComision['fondo'] ?>"> <?= $infoEstadoComision['estado'] ?> </td>
                                     <td bgcolor="<?= $infoEstadoPedido['fondo'] ?>"> <?= $infoEstadoPedido['estado'] ?> </td>
                                     <td bgcolor="<?= $infoEstadoAprobacionPedido['fondo'] ?>"> <?= $infoEstadoAprobacionPedido['estado'] ?> </td>
-                                    <td><?= $row["anotacion"] ?></td>
+                                    <!-- <td><?= $row["anotacion"] ?></td>
                                     <td><?= numberFormat($row["valorComision"]) ?></td>
                                     <td><?= numberFormat($row["abonoTotal"]) ?></td>
                                     <td><?= numberFormat($row["valor_restante"]) ?></td>
                                     <td><?= $row["banco"] ?></td>
                                     <td><?= numberFormat($row["valorTotal"]) ?></td> -->
-                                    <td><?= getFecha($row["fecha"]) ?></td>
                                     <td>
 
                                       <a href="/<?= getUrl($_SERVER['SERVER_NAME']) ?>/pedido/resumen/?pedido=<?= $row['id'] ?>"><button type="button" class="btn">Ver mas</button></a>

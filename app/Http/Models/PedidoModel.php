@@ -249,6 +249,8 @@ class PedidoModel
             $this->cheque = (bool) $this->cheque;
             $this->iva = (bool) $this->iva;
 
+            $this->total= str_replace(['.', '$'], "", $this->total);
+
             $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
             $insert->bindParam(2, $this->orden, PDO::PARAM_INT);

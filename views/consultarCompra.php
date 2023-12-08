@@ -10,6 +10,7 @@
 
             $i = 1;
             $compra = new CompraModel();
+            date_default_timezone_set('America/Bogota');
             $rows = $compra->getCompras(
                 isset($_GET["startDate"]) ? $_GET["startDate"] : date('Y-m-d'),
                 isset($_GET["finalDate"]) ? $_GET["finalDate"] : date('Y-m-d')
@@ -24,7 +25,9 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Informacion orden de compra<small>Ordenes de compra</small></h2>
+                            <div class="title_left">
+                                <h3 class="dark"><strong>Consultar ordenes de compra</strong></h3>
+                            </div>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
                                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

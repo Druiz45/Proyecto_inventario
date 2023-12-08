@@ -32,7 +32,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Editar orden de compra</h3>
+                            <h3 class="dark"><strong>Editar orden de compra</strong></h3>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -55,7 +55,7 @@
 
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Informacion del pedido</h2>
+                                        <h2 class="dark"><strong>Informacion orden de compra</strong></h2>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
@@ -177,7 +177,7 @@
                                             </div> -->
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
                                                 <label for="total">Total: </label>
-                                                <input type="text" class="form-control has-feedback-left" id="total" name="total" placeholder="Total" autocomplete="off" value="<?= number_format($ordenCompra[0]['total'], 0, '.', '.') ?>" readonly>
+                                                <input type="text" class="form-control has-feedback-left" id="total" name="total" placeholder="Total" autocomplete="off" value="<?= number_format($ordenCompra[0]['total'], 0, '.', '.') ?>">
                                                 <!-- <span class="fa fa-credit-card form-control-feedback left" aria-hidden="true"></span> -->
                                             </div>
                                             <div class="col-md-3 col-sm-3  form-group has-feedback">
