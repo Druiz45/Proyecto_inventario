@@ -96,7 +96,7 @@
                                     <td><?= $row["cliente"] ?></td>
                                     <td><?= $row["vendedor"] ?></td>
                                     <td><?= getFechaSinHora($row["fechaLimite"]) ?></td> -->
-                                    <td><?= getFecha($row["fecha"]) ?></td>
+                                    <td><?= getFechaSinHora($row["fecha"]) ?></td>
                                     <td bgcolor="<?= $infoEstadoComision['fondo'] ?>"> <?= $infoEstadoComision['estado'] ?> </td>
                                     <td bgcolor="<?= $infoEstadoPedido['fondo'] ?>"> <?= $infoEstadoPedido['estado'] ?> </td>
                                     <td bgcolor="<?= $infoEstadoAprobacionPedido['fondo'] ?>"> <?= $infoEstadoAprobacionPedido['estado'] ?> </td>

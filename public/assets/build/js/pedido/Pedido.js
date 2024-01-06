@@ -27,7 +27,7 @@ export class Pedido {
                 })
                     .then(respuesta => respuesta.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         if (data == "Pedido actualizado con exito!") {
                             Swal.fire({
                                 icon: 'success',

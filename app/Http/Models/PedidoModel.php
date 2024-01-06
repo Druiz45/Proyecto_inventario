@@ -206,6 +206,8 @@ class PedidoModel
 
         $vendedor = $_SESSION["idUser"];
 
+        $this->abono= str_replace(['.', '$'], "", $this->abono);
+
         try {
             $insert = $con->prepare("CALL createAbono(?,?,?,?)");
             $insert->bindParam(1, $this->abono, PDO::PARAM_INT);
@@ -250,6 +252,7 @@ class PedidoModel
             $this->iva = (bool) $this->iva;
 
             $this->total= str_replace(['.', '$'], "", $this->total);
+            $this->abono= str_replace(['.', '$'], "", $this->abono);
 
             $insert = $con->prepare("CALL createPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $insert->bindParam(1, $this->remision, PDO::PARAM_STR);
@@ -330,6 +333,9 @@ class PedidoModel
         $this->efectivo = (bool) $this->efectivo;
         $this->cheque = (bool) $this->cheque;
         $this->iva = (bool) $this->iva;
+
+        // echo json_encode($this->autorizo);
+        // die;
 
         try {
             $update = $con->prepare("CALL updatePedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
